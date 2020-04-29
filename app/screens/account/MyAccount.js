@@ -3,6 +3,10 @@ import { Text, View } from 'react-native';
 import * as firebase from 'firebase';
 
 import Loading from '../../components/Loading'
+import UserGuest from './UserGuest'
+import UserLogged from './UserLogged'
+
+
 /**
  * Account of user
  * 
@@ -22,6 +26,8 @@ const MyAccount = () => {
             <Loading text="Cargando..." isVisible={true}/>
 		);
     }
+
+    return login ? <UserLogged/> : <UserGuest/>
     
     if (login){
         return (
