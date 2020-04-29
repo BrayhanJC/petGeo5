@@ -13,7 +13,7 @@ function PetCenterStack() {
 	return (
         <Stack.Navigator>
             <Stack.Screen
-                name="Centros Tab"
+                name="CenterStack"
                 component={PetCenterScreen}
             />
         </Stack.Navigator>

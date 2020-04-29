@@ -29,20 +29,6 @@ const MyAccount = () => {
 
     return login ? <UserLogged/> : <UserGuest/>
     
-    if (login){
-        return (
-            <View>
-                <Text> Usuario Logueado </Text>
-            </View>
-        );
-    }else{
-        return (
-            <View>
-                <Text> Usuario no Logueado </Text>
-            </View>
-        );
-    }
-
 
 };
 

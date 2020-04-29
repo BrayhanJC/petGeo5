@@ -18,8 +18,6 @@ const Tab = createBottomTabNavigator();
 function MenuStacks() {
 	return (
 		<Tab.Navigator
-
-            
             activeColor="#e91e63"
             style={{ backgroundColor: 'tomato' }}
       
@@ -62,6 +60,7 @@ function MenuStacks() {
 			<Tab.Screen
 				name="profile"
 				component={MyAccountStack}
+			
 				options={{
 					tabBarLabel: 'Perfil',
 					tabBarIcon: ({ color, size }) => (
