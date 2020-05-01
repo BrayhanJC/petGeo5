@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import PetCenterScreen from '../screens/PetCenters';
+import PetCenterScreen from '../../screens/veterinaryCenter/CenterVeterinary';
 
 const Stack = createStackNavigator()
 
@@ -9,7 +9,7 @@ const Stack = createStackNavigator()
  * Create stack nav pets center
  * show all pets controls register by user
  */
-function PetCenterStack() {
+function PetCenterTab() {
 	return (
         <Stack.Navigator>
             <Stack.Screen
@@ -20,4 +20,4 @@ function PetCenterStack() {
 	);
 }
 
-export default PetCenterStack;
+export default PetCenterTab;

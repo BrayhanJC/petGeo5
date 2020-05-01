@@ -2,7 +2,7 @@ import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 
-import PetControlScreen from '../screens/PetControls';
+import PetControlScreen from '../../screens/petControl/PetControl';
 
 const Stack = createStackNavigator()
 

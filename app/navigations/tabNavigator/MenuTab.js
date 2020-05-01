@@ -4,19 +4,23 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 
-import PetCenterStack from './PetCenterStack';
-import PetsStack from './PetsStack';
-import PetControlStack from './PetControlStack';
-import MyAccountStack from './MyAccountStack';
+import PetCenterStack from './PetCenterTab';
+import PetsStack from './PetsTab';
+import PetControlStack from './PetControlTab';
+import MyAccountStack from './MyAccountTab';
 
 const Tab = createBottomTabNavigator();
+import NavigationDrawer from '../drawerNavigator/NavigationDrawer'
 
 /***
  * Create stack nav pets center
  * show all pets controls register by user
  */
-function MenuStacks() {
+function MenuTabs() {
+
+	
 	return (
+
 		<Tab.Navigator
             activeColor="#e91e63"
             style={{ backgroundColor: 'tomato' }}
@@ -60,7 +64,6 @@ function MenuStacks() {
 			<Tab.Screen
 				name="profile"
 				component={MyAccountStack}
-			
 				options={{
 					tabBarLabel: 'Perfil',
 					tabBarIcon: ({ color, size }) => (
@@ -70,16 +73,26 @@ function MenuStacks() {
 			/>
 			<Tab.Screen
 				name="settings"
-				component={PetsStack}
+				component={NavigationDrawer}
 				options={{
-					tabBarLabel: '',
+					tabBarLabel: 'fdfgd',
 					tabBarIcon: ({ color, size }) => (
 						<MaterialCommunityIcons name="view-list" color={color} size={size} />
 					)
 				}}
-			/>
+			>
+
+
+
+					
+
+
+				</Tab.Screen>
 		</Tab.Navigator>
+
+				
+	
 	);
 }
 
-export default MenuStacks;
+export default MenuTabs;

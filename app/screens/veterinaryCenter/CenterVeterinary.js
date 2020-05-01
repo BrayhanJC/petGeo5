@@ -4,7 +4,7 @@ import { Text, View } from 'react-native'
 /**
  * allows to see the veterinary centers and animal foundations
  */
-function PetCenter () {
+function CenterVeterinary () {
     return (
         <View>
             <Text> Centros veterinarios de Mascotas y fundaciones animalistas</Text>
@@ -12,4 +12,4 @@ function PetCenter () {
     )
 }
 
-export default PetCenter
+export default CenterVeterinary
