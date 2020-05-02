@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Button } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { useNavigation } from "@react-navigation/native";
@@ -9,20 +9,45 @@ import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import PetControlDrawer from './PetControlDrawer';
 import PetDrawer from './PetDrawer'
 import MyAccountDrawer from './MyAccountDrawer'
-
+import MenuTab from '../tabNavigator/MenuTab'
 const Drawer = createDrawerNavigator();
 
-// function HomeScreen({ navigation }) {
+ function HomeScreen({ navigation }) {
+   return (
+     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+       <Button
+         onPress={() => navigation.navigate('Profile')}
+         title="Te extraño mucho mi cielo lindo"
+       />
+     </View>
+   );
+ }
+
+ function HomeScreenn({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button
+        onPress={() => navigation.navigate('Profile')}
+        title="Te extrañfghfghfghdo"
+      />
+    </View>
+  );
+}
+ // function CustomDrawerContent(props) {
 //   return (
-//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//       <Button
-//         onPress={() => navigation.navigate('Notifications')}
-//         title="Te extraño mucho mi cielo lindo"
+//     <DrawerContentScrollView {...props}>
+//       <DrawerItemList {...props} />
+//       <DrawerItem
+//         label="Close drawerdsf"
+//         onPress={() => props.navigation.dispatch(DrawerActions.closeDrawer())}
 //       />
-//     </View>
+//       <DrawerItem
+//         label="Toggle drawer"
+//         onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
+//       />
+//     </DrawerContentScrollView>
 //   );
 // }
-
 // function NotificationsScreen({ navigation }) {
 //   return (
 //     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -41,22 +66,17 @@ function LogoTitle() {
 }
 
 function NavigatorDrawer() {
-
-      
-  const navigation = useNavigation()
-  console.log(navigation)
+  
   return (
+      <Drawer.Navigator initialRouteName='Pets'>
 
-      <Drawer.Navigator initialRouteName="Home">
- 
-
-        <Drawer.Screen name="Profile" component={MyAccountDrawer} options={{
-					title: 'Perfil',  drawerIcon: () => <LogoTitle />
-					}}/>
-        <Drawer.Screen name="Pets" component={PetDrawer} options={{
-					title: 'Mascotas',}}/>
-          <Drawer.Screen name="PetControls" component={PetControlDrawer} options={{
-					title: 'Controles',}}/>
+        <Drawer.Screen name="Home" component={MenuTab} options={{
+					title: 'Inicio'
+				}}/>
+        <Drawer.Screen name="ProfileDrawer" component={MyAccountDrawer} options={{
+					title: 'Perfil'
+				}}/>
+          
       </Drawer.Navigator>
    
   );

@@ -17,6 +17,13 @@ function UserGuest(){
                 source={require('../../../assets/img/user-guest.jpg')}
                 style={styles.image}
                 resizeMode="contain"
+                onPress =  {
+                    () => {
+                        console.log('estamos en el perfil')
+                        navigation.goBack()
+
+                    }
+                }
             />
             <Text style={styles.title}>
                 Consulta tu perfil en geoPet5
@@ -25,6 +32,8 @@ function UserGuest(){
                 ¿Como encontrarías tu mascotas si es extraviada? Buscala y administra los datos de tu mascota
             </Text>
             <View style={styles.viewBtn}>
+
+
                 <Button
                 buttonStyle={styles.btnStyle}
                 containerStyle={styles.btnContainer}
@@ -34,6 +43,7 @@ function UserGuest(){
                     () => {
                         console.log('estamos en el perfil')
                         navigation.navigate('Login')
+
                     }
                 }>
 

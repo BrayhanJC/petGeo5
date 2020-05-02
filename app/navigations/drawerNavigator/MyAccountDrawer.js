@@ -1,10 +1,16 @@
 import * as React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Button } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import MyAccountScreen from '../../screens/account/MyAccount';
 import LoginScreen from '../../screens/account/Login';
 import RegisterScreen from '../../screens/account/Register';
+
+
+import { useNavigation } from '@react-navigation/native';
+
+
+import { DrawerActions } from '@react-navigation/native';
 
 /***
  * Create stack nav my account
@@ -13,19 +19,40 @@ import RegisterScreen from '../../screens/account/Register';
 const Stack = createStackNavigator();
 
 function LogoTitle(props) {
+    const navigation = useNavigation()
+	console.log(navigation)
+	console.log('estamos por aca')
 	const { title } = props;
 	return (
-		<View>
+		<View  style={{ flex: 1, justifyContent: 'left', alignItems: 'center' }}>
 			<Image style={{ width: 50, height: 50, marginTop: -10 }} source={require('../../../assets/img/icon.png')} />
-			<Text>{title}</Text>
+			
+			
+		
+		
+			<Button title="dsf" onPress={() => 
+			{
+			//navigation.navigate('centerPet')
+			navigation.dispatch(DrawerActions.openDrawer());
+			}
+	}>
+		
+    
+		
+	</Button>
+    
 		</View>
 	);
 }
 
 function MyAccountStack() {
+	const navigation = useNavigation()
+	console.log(navigation)
 	return (
 		<Stack.Navigator>
-			<Stack.Screen name="Profile" component={MyAccountScreen} options={{ title: 'Perfil' }} />
+			<Stack.Screen name="Profile" component={MyAccountScreen} options={{ title: 'Perfil',
+				headerRight: (props) => <LogoTitle title="Cuenta" />,
+				headerLeft: ({ color, size }) => <MaterialCommunityIcons name="chevron-left" color={color} size={32} onPress={() => navigation.goBack()}/> }} />
 			<Stack.Screen
 				name="Login"
 				component={LoginScreen}

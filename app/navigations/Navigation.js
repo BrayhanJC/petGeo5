@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 
 import MenuStack from './tabNavigator/MenuTab';
+import Menu from './drawerNavigator/NavigationDrawer'
 
 
 
@@ -18,7 +19,7 @@ const Tab = createBottomTabNavigator();
 function Navigation() {
 	return (
 		<NavigationContainer>
-			<MenuStack />
+			<Menu />
 		</NavigationContainer>
 	);
 }

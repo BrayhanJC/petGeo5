@@ -4,54 +4,91 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 
-import PetCenterStack from './PetCenterTab';
-import PetsStack from './PetsTab';
+import PetCenterStack from './CenterVeterinaryTab';
+import PetsStack from './PetsStack';
 import PetControlStack from './PetControlTab';
 import MyAccountStack from './MyAccountTab';
 
+//estos son los buenos
+import NewsStack from './NewsStack';
+import ComedgosStack from './ComedogsStack';
+import MissingPetsStack from './MissingPetsStack';
+import LocalizationMapStack from './LocalizationMapStack';
+
 const Tab = createBottomTabNavigator();
-import NavigationDrawer from '../drawerNavigator/NavigationDrawer'
+import NavigationDrawer from '../drawerNavigator/NavigationDrawer';
+import { useNavigation } from '@react-navigation/native';
 
 /***
  * Create stack nav pets center
  * show all pets controls register by user
  */
 function MenuTabs() {
-
-	
+	const navigation = useNavigation();
+	console.log(navigation);
 	return (
-
 		<Tab.Navigator
-            activeColor="#e91e63"
-            style={{ backgroundColor: 'tomato' }}
-      
-                
+			activeColor="#e91e63"
+			style={{ backgroundColor: 'tomato' }}
 			tabBarOptions={{
-                
 				activeTintColor: '#1A89E7',
-                inactiveTintColor: '#BED9EF',
-           
+				inactiveTintColor: '#BED9EF'
 			}}
 		>
 			<Tab.Screen
-				name="centerPet"
+				name="HomeTab"
+				component={NewsStack}
+				options={{
+					tabBarLabel: 'Inicio',
+					tabBarIcon: ({ color, size }) => (
+						<MaterialCommunityIcons name="home-outline" color={color} size={size} />
+					)
+				}}
+			/>
+
+			<Tab.Screen
+				name="centerVeterinaryTab"
 				component={PetCenterStack}
 				options={{
 					tabBarLabel: 'Centros',
 					tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="domain" color={color} size={size} />
 				}}
 			/>
+
 			<Tab.Screen
-				name="Pets"
-				component={PetsStack}
+				name="ComedogsTab"
+				component={ComedgosStack}
 				options={{
-					tabBarLabel: 'Mascotas',
+					tabBarLabel: 'Comedogs',
 					tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="paw" color={color} size={size} />
 				}}
 			/>
 
 			<Tab.Screen
-				name="controls"
+				name="MissingPetsTab"
+				component={MissingPetsStack}
+				options={{
+					tabBarLabel: 'Extraviados',
+					tabBarIcon: ({ color, size }) => (
+						<MaterialCommunityIcons name="compass-outline" color={color} size={size} />
+					)
+				}}
+			/>
+
+			<Tab.Screen
+				name="LocalizationMapTab"
+				component={LocalizationMapStack}
+				options={{
+					tabBarLabel: 'Mapa',
+					tabBarIcon: ({ color, size }) => (
+						<MaterialCommunityIcons name="earth" color={color} size={size} />
+					)
+				}}
+			/>
+
+			{/* 
+			<Tab.Screen
+				name="controlsTab"
 				component={PetControlStack}
 				options={{
 					tabBarLabel: 'Controles',
@@ -71,6 +108,7 @@ function MenuTabs() {
 					)
 				}}
 			/>
+
 			<Tab.Screen
 				name="settings"
 				component={NavigationDrawer}
@@ -80,18 +118,8 @@ function MenuTabs() {
 						<MaterialCommunityIcons name="view-list" color={color} size={size} />
 					)
 				}}
-			>
-
-
-
-					
-
-
-				</Tab.Screen>
+			> */}
 		</Tab.Navigator>
-
-				
-	
 	);
 }
 

@@ -7,7 +7,7 @@ import { Text, View } from 'react-native'
 function CenterVeterinary () {
     return (
         <View>
-            <Text> Centros veterinarios de Mascotas y fundaciones animalistas</Text>
+            <Text> Ver los centros veterinarios de Mascotas y fundaciones animalistas</Text>
         </View>
     )
 }
