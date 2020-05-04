@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { View, Text, } from 'react-native';
+import { View, Text } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { Avatar } from 'react-native-elements';
-
 
 /***
  * Create un avatar in stack nav 
@@ -20,13 +19,14 @@ function AvatarIcon() {
 			<Avatar
 				size="small"
 				rounded
-				title="AV"
+				raised
+				icon={{ name: 'user', type: 'font-awesome', color: 'white'  }}
 				onPress={() => {
-					console.log('Works!');
 					navigation.dispatch(DrawerActions.openDrawer());
 				}}
-                activeOpacity={0.7}
-                containerStyle={{marginLeft: 10}}
+				activeOpacity={0.7}
+				containerStyle={{ marginLeft: 10 }}
+				overlayContainerStyle={{ backgroundColor: '#1A89E7' }}
 			/>
 		</View>
 	);
@@ -39,4 +39,4 @@ function AvatarIcon() {
 		</View>
 	);
 } */
-export default AvatarIcon
+export default AvatarIcon;

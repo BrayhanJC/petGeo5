@@ -23,6 +23,8 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "Aplicación móvil hecha en react native para la geolocalización y administración de información de mascotas",
+    "githubUrl": "https://github.com/BrayhanJC/petGeo5"
   }
 }

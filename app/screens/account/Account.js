@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Text, View } from 'react-native';
 import * as firebase from 'firebase';
 
-import Loading from '../../components/Loading'
-import UserGuest from './UserGuest'
-import UserLogged from './UserLogged'
-
+import Loading from '../../components/Loading';
+import UserGuest from './UserGuest';
+import UserLogged from './UserLogged';
 
 /**
  * Account of user
@@ -22,14 +21,10 @@ const MyAccount = () => {
 	}, []);
 
 	if (login === null) {
-		return (
-            <Loading text="Cargando..." isVisible={true}/>
-		);
-    }
+		return <Loading text="Cargando..." isVisible={true} />;
+	}
 
-    return login ? <UserLogged/> : <UserGuest/>
-    
-
+	return login ? <UserLogged /> : <UserGuest />;
 };
 
 export default MyAccount;

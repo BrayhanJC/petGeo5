@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useNavigation } from '@react-navigation/native';
 
 import MissingPetsScreen from '../../screens/missingPets/MissingPets';
 import AvatarIcon from '../../components/AvatarIcon'

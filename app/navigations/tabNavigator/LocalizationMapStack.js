@@ -2,7 +2,7 @@ import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 
-import LocalizationMapScreen from '../../screens/localization/LocalizationMap';
+import LocalizationMapScreen from '../../screens/localizationMap/LocalizationMap';
 import AvatarIcon from '../../components/AvatarIcon'
 
 const Stack = createStackNavigator();

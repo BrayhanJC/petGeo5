@@ -4,20 +4,49 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 
-import PetCenterStack from './CenterVeterinaryTab';
-import PetsStack from './PetsStack';
-import PetControlStack from './PetControlTab';
-import MyAccountStack from './MyAccountTab';
 
-//estos son los buenos
+
+
+//importando stacks
 import NewsStack from './NewsStack';
+import PetCenterStack from './CenterVeterinaryStack';
 import ComedgosStack from './ComedogsStack';
 import MissingPetsStack from './MissingPetsStack';
 import LocalizationMapStack from './LocalizationMapStack';
 
+
 const Tab = createBottomTabNavigator();
-import NavigationDrawer from '../drawerNavigator/NavigationDrawer';
+
 import { useNavigation } from '@react-navigation/native';
+import { Icon } from 'react-native-elements';
+
+/***
+ * Funcion que permite cargar los iconos de cada item del menu tab
+ */
+function screenOptions(route, color) {
+	let iconName;
+	switch (route.name) {
+		case 'HomeTab':
+			iconName = 'home-outline';
+			break;
+		case 'centerVeterinaryTab':
+			iconName = 'domain';
+			break;
+		case 'ComedogsTab':
+			iconName = 'dog';
+			break;
+		case 'MissingPetsTab':
+			iconName = 'compass-outline';
+			break;
+		case 'LocalizationMapTab':
+			iconName = 'earth';
+			break;
+		default:
+			break;
+	}
+
+	return <Icon type="material-community" name={iconName} size={28} color={color} />;
+}
 
 /***
  * Create stack nav pets center
@@ -34,15 +63,15 @@ function MenuTabs() {
 				activeTintColor: '#1A89E7',
 				inactiveTintColor: '#BED9EF'
 			}}
+			screenOptions={({ route }) => ({
+				tabBarIcon: ({ color }) => screenOptions(route, color)
+			})}
 		>
 			<Tab.Screen
 				name="HomeTab"
 				component={NewsStack}
 				options={{
-					tabBarLabel: 'Inicio',
-					tabBarIcon: ({ color, size }) => (
-						<MaterialCommunityIcons name="home-outline" color={color} size={size} />
-					)
+					tabBarLabel: 'Inicio'
 				}}
 			/>
 
@@ -50,8 +79,7 @@ function MenuTabs() {
 				name="centerVeterinaryTab"
 				component={PetCenterStack}
 				options={{
-					tabBarLabel: 'Centros',
-					tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="domain" color={color} size={size} />
+					tabBarLabel: 'Centros'
 				}}
 			/>
 
@@ -59,8 +87,7 @@ function MenuTabs() {
 				name="ComedogsTab"
 				component={ComedgosStack}
 				options={{
-					tabBarLabel: 'Comedogs',
-					tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="paw" color={color} size={size} />
+					tabBarLabel: 'Comedogs'
 				}}
 			/>
 
@@ -68,10 +95,7 @@ function MenuTabs() {
 				name="MissingPetsTab"
 				component={MissingPetsStack}
 				options={{
-					tabBarLabel: 'Extraviados',
-					tabBarIcon: ({ color, size }) => (
-						<MaterialCommunityIcons name="compass-outline" color={color} size={size} />
-					)
+					tabBarLabel: 'Extraviados'
 				}}
 			/>
 
@@ -79,10 +103,7 @@ function MenuTabs() {
 				name="LocalizationMapTab"
 				component={LocalizationMapStack}
 				options={{
-					tabBarLabel: 'Mapa',
-					tabBarIcon: ({ color, size }) => (
-						<MaterialCommunityIcons name="earth" color={color} size={size} />
-					)
+					tabBarLabel: 'Mapa'
 				}}
 			/>
 
