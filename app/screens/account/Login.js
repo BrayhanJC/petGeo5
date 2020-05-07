@@ -1,21 +1,30 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
 import { Button, Divider } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
+import Toast from 'react-native-easy-toast'
+
 import LinkCreateAccount from './LinkCreateAccount';
+import LoginForm from '../../components/account/LoginForm'
+
+
 
 function Login() {
+
+	const toastRef = useRef()
+
 	return (
 		<ScrollView>
 			<Image source={require('../../../assets/img/logo.png')} style={styles.logo} resizeMode="contain" />
 			<View style={styles.viewContainer}>
-				<Text>Form Login...</Text>
+				<LoginForm toastRef={toastRef}/>
 				<LinkCreateAccount />
 			</View>
 			<Divider style={styles.divider} />
 			<View style={styles.viewContainer}>
 				<Text>Login Facebook...</Text>
 			</View>
+			<Toast ref={toastRef} position='center' opacity={0.9}/>
 		</ScrollView>
 	);
 }

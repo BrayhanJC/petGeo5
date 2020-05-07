@@ -1,0 +1,119 @@
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Icon, Button, Input } from 'react-native-elements';
+import { isEmpty } from 'lodash';
+import { useNavigation } from '@react-navigation/native';
+
+import { validateEmail } from '../../utils/validations';
+import * as firebase from 'firebase';
+
+import Loading from '../Loading';
+
+function defaultFormValue() {
+	return {
+		email: '',
+		password: ''
+	};
+}
+
+function LoginForm(props) {
+	const navigation = useNavigation();
+	const { toastRef } = props;
+	const [ showPassword, setshowPassword ] = useState(true);
+	const [ formData, setformData ] = useState(defaultFormValue);
+	const [ loading, setloading ] = useState(false);
+
+	var { email, password } = formData;
+
+	const onSubmit = () => {
+		if (isEmpty(email) || isEmpty(password)) {
+			toastRef.current.show('Los campos deben de estar diligenciados');
+		} else {
+			if (!validateEmail(email)) {
+				toastRef.current.show('El correo no es valido');
+			} else {
+				setloading(true);
+				firebase
+					.auth()
+					.signInWithEmailAndPassword(email, password)
+					.then((response) => {
+						console.log('iniciando sesion');
+						setloading(false);
+						navigation.navigate('Profile');
+					})
+					.catch((error) => {
+						setloading(false);
+						toastRef.current.show('Email o contraseña incorrecta');
+					});
+			}
+		}
+	};
+
+	const onChange = (even, type) => {
+		setformData({
+			...formData,
+			[type]: even.nativeEvent.text
+		});
+	};
+
+	return (
+		<View style={styles.formContainer}>
+			<Input
+				placeholder="Correo Electrónico"
+				containerStyle={styles.inputForm}
+				onChange={(even) => onChange(even, 'email')}
+				rightIcon={<Icon type="material-community" name="at" iconStyle={styles.iconRight} />}
+			/>
+
+			<Input
+				placeholder="Contraseña"
+				containerStyle={styles.inputForm}
+				password={true}
+				onChange={(even) => onChange(even, 'password')}
+				secureTextEntry={showPassword ? true : false}
+				rightIcon={
+					<Icon
+						type="material-community"
+						name={showPassword ? 'eye-off-outline' : 'eye-outline'}
+						iconStyle={styles.iconRight}
+						onPress={() => {
+							setshowPassword(!showPassword);
+						}}
+					/>
+				}
+			/>
+
+			<Button
+				title="Iniciar Sesión"
+				containerStyle={styles.btnContainerLogin}
+				buttonStyle={styles.btnLogin}
+				onPress={onSubmit}
+			/>
+			<Loading isVisible={loading} text="Iniciando sesion" />
+		</View>
+	);
+}
+
+const styles = StyleSheet.create({
+	formContainer: {
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center',
+		marginTop: 30
+	},
+	inputForm: {
+		width: '100%',
+		marginTop: 20
+	},
+	btnContainerLogin: {
+		marginTop: 20,
+		width: '95%'
+	},
+	btnLogin: {
+		backgroundColor: '#1A89E7'
+	},
+	iconRight: {
+		color: 'gray'
+	}
+});
+export default LoginForm;

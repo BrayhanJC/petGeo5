@@ -26,7 +26,9 @@ const styles = StyleSheet.create({
 
     btnRegister:{
         color: '#1A89E7',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        margin:5
+
     },
     textRegister:{
         marginTop:15,
