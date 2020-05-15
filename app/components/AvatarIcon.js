@@ -11,8 +11,6 @@ import { Avatar } from 'react-native-elements';
 
 function AvatarIcon() {
 	const navigation = useNavigation();
-	console.log(navigation);
-	console.log('estamos por aca');
 
 	return (
 		<View style={{ flex: 1, justifyContent: 'left', alignItems: 'center' }}>

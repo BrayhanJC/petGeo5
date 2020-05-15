@@ -1,16 +1,72 @@
-import React from 'react'
-import {View, Text, Button} from 'react-native'
-import * as firebase from 'firebase'
+import React, { useRef, useState, useEffect } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { Button } from 'react-native-elements';
+import * as firebase from 'firebase';
+import Toast from 'react-native-easy-toast';
+import Loading from '../../components/Loading';
 
-function UserLogged(){
-    return (
-        <View>
-            <Text>
-                UserLogged...
-            </Text>
-            <Button title="Cerrar Sesión" onPress={() => firebase.auth().signOut()}/>
-        </View>
-    )
+import InfoUser from '../../components/account/InfoUser'
+
+
+function UserLogged() {
+	const [ loading, setLoading ] = useState(false);
+    const [ loadingText, setLoadingText ] = useState('');
+    const [userInfo, setUserInfo] = useState(null)
+    const toastRef = useRef();
+    
+
+    //cargamos los datos del usuario 
+    useEffect(() => {
+        (async () => {
+            const user = await firebase.auth().currentUser
+            console.log(user)
+            //cargando datos al userInfo
+            setUserInfo(user)
+        })()
+    }, [])
+
+
+
+
+	return (
+		<View style={styles.viewUserInfo}>
+
+            {
+                //se valida que la varable userInfo sea diferente de {} o de null
+                userInfo && <InfoUser userInfo={userInfo} toastRef={toastRef}/>
+            }
+			
+			<Text> Account Options</Text>
+			<Button
+				title="Cerrar Sesión"
+				buttonStyle={styles.btnCloseSession}
+				titleStyle={styles.btnCloseSessionText}
+				onPress={() => firebase.auth().signOut()}
+			/>
+			<Toast ref={toastRef} position="center" opacity={0.9} />
+			<Loading text={loadingText} isVisible={loading} />
+		</View>
+	);
 }
 
-export default UserLogged
+export default UserLogged;
+
+const styles = StyleSheet.create({
+	viewUserInfo: {
+		minHeight: '100%',
+		backgroundColor: '#f2f2f2'
+	},
+	btnCloseSession: {
+		marginTop: 30,
+		borderRadius: 10,
+		backgroundColor: '#FFF',
+		borderTopColor: '#E3E3E3',
+		borderBottomWidth: 1,
+		borderBottomColor: '#E3E3E3',
+		paddingTop: 10,
+		paddingBottom: 10
+	},
+	btnCloseSessionText: {
+		color: '#1A89E7'
+	}
+});

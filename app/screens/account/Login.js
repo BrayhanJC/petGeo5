@@ -6,7 +6,7 @@ import Toast from 'react-native-easy-toast'
 
 import LinkCreateAccount from './LinkCreateAccount';
 import LoginForm from '../../components/account/LoginForm'
-
+import LoginFacebook from '../../components/account/LoginFacebook'
 
 
 function Login() {
@@ -22,7 +22,7 @@ function Login() {
 			</View>
 			<Divider style={styles.divider} />
 			<View style={styles.viewContainer}>
-				<Text>Login Facebook...</Text>
+				<LoginFacebook toastRef={toastRef}/>
 			</View>
 			<Toast ref={toastRef} position='center' opacity={0.9}/>
 		</ScrollView>

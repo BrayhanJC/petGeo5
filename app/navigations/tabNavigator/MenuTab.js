@@ -54,7 +54,7 @@ function screenOptions(route, color) {
  */
 function MenuTabs() {
 	const navigation = useNavigation();
-	console.log(navigation);
+
 	return (
 		<Tab.Navigator
 			activeColor="#e91e63"

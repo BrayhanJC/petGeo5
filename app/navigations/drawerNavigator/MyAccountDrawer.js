@@ -46,7 +46,6 @@ function MyAccountStack() {
 				component={MyAccountScreen}
 				options={{
 					title: 'Perfil',
-					headerRight: (props) => <LogoTitle title="Cuenta" />,
 					headerLeft: ({ color, size }) => (
 						<MaterialCommunityIcons
 							name="chevron-left"

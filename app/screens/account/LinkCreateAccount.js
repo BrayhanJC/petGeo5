@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 
 function LinkCreateAccount(){
     const navigation = useNavigation()
-    console.log(navigation)
+ 
     return (
         <Text style={styles.textRegister}>
             ¿Aún no tienes una cuenta?{""}
