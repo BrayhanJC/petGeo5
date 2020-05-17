@@ -33,7 +33,9 @@ function UserLogged() {
 
             {
                 //se valida que la varable userInfo sea diferente de {} o de null
-                userInfo && <InfoUser userInfo={userInfo} toastRef={toastRef}/>
+				//se pasan el setLoading para poder actualizar el avatar el tiempo real
+				//como tambien para reutilizarlo
+				userInfo && <InfoUser userInfo={userInfo} toastRef={toastRef} setLoading={setLoading} setLoadingText={setLoadingText}/>
             }
 			
 			<Text> Account Options</Text>
