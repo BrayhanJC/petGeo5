@@ -6,12 +6,15 @@ import Toast from 'react-native-easy-toast';
 import Loading from '../../components/Loading';
 
 import InfoUser from '../../components/account/InfoUser'
-
+import AccountOptions from '../../components/account/AccountOptions'
 
 function UserLogged() {
 	const [ loading, setLoading ] = useState(false);
     const [ loadingText, setLoadingText ] = useState('');
-    const [userInfo, setUserInfo] = useState(null)
+    const [userInfo, setUserInfo] = useState({
+		displayName: '',
+		email: ''
+	})
     const toastRef = useRef();
     
 
@@ -38,7 +41,7 @@ function UserLogged() {
 				userInfo && <InfoUser userInfo={userInfo} toastRef={toastRef} setLoading={setLoading} setLoadingText={setLoadingText}/>
             }
 			
-			<Text> Account Options</Text>
+			<AccountOptions userInfo={userInfo} toastRef={toastRef}/>
 			<Button
 				title="Cerrar Sesión"
 				buttonStyle={styles.btnCloseSession}

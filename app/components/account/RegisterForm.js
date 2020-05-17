@@ -26,7 +26,7 @@ function RegisterForm(props) {
 	const [loading, setloading] = useState(false)
 	const navigation = useNavigation()
 	const onSubmit = () => {
-		console.log(formData);
+		//console.log(formData);
 		var { email, password, repeatPassword } = formData;
 		if (isEmpty(email) || isEmpty(password) || isEmpty(repeatPassword)) {
 			console.log('Todos los campos son obligatorios');
@@ -42,18 +42,18 @@ function RegisterForm(props) {
 				console.log('las contraseñas deberian ser iguales');
 				toastRef.current.show('las contraseñas deberian ser iguales');
 			} else {
-				console.log('ok');
+				//console.log('ok');
 				setloading(true)
 				firebase
 					.auth()
 					.createUserWithEmailAndPassword(email, password)
 					.then((response) => {
-						console.log(response);
+						//console.log(response);
 						setloading(false)
 						navigation.navigate('Profile')
 					})
 					.catch((error) => {
-						console.log(error);
+						//console.log(error);
 						toastRef.current.show('Ya hay un usuario con este mismo email')
 						setloading(true)
 					});

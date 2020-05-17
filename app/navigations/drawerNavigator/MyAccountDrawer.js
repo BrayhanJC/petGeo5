@@ -18,8 +18,7 @@ const Stack = createStackNavigator();
 
 function LogoTitle(props) {
 	const navigation = useNavigation();
-	console.log(navigation);
-	console.log('estamos por aca');
+	//console.log(navigation);
 	const { title } = props;
 	return (
 		<View style={{ flex: 1, justifyContent: 'left', alignItems: 'center' }}>
@@ -38,7 +37,7 @@ function LogoTitle(props) {
 
 function MyAccountStack() {
 	const navigation = useNavigation();
-	console.log(navigation);
+	//console.log(navigation);
 	return (
 		<Stack.Navigator>
 			<Stack.Screen

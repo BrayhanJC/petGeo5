@@ -12,27 +12,7 @@ import MyAccountDrawer from './MyAccountDrawer'
 import MenuTab from '../tabNavigator/MenuTab'
 const Drawer = createDrawerNavigator();
 
- function HomeScreen({ navigation }) {
-   return (
-     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-       <Button
-         onPress={() => navigation.navigate('Profile')}
-         title="Te extraño mucho mi cielo lindo"
-       />
-     </View>
-   );
- }
 
- function HomeScreenn({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        onPress={() => navigation.navigate('Profile')}
-        title="Te extrañfghfghfghdo"
-      />
-    </View>
-  );
-}
  // function CustomDrawerContent(props) {
 //   return (
 //     <DrawerContentScrollView {...props}>

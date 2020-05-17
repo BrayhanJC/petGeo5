@@ -9,7 +9,7 @@ function InfoUser(props) {
 	//capturando datos del usuario
 	const { userInfo: { uid, photoURL, displayName, email }, toastRef, setLoading, setLoadingText } = props;
 
-	//console.log(props);
+	console.log(props);
 
 	const changeAvatar = async () => {
 		console.log('cambiando icono');
