@@ -6,6 +6,8 @@ import { map } from 'lodash';
 import Modal from '../Modal';
 import ChangeDisplayNameForm from './ChangeDisplayNameForm';
 import ChangeEmailForm from './ChangeEmailForm'
+import ChangePasswordForm from './ChangePasswordForm'
+
 /**
  * Funcion que permite crear una lista de las opciones disponibles 
  * en la edición de la informacioón del usuario (tambien para visualizarla)
@@ -66,6 +68,7 @@ function AccountOptions(props) {
 	const { userInfo, toastRef, setReloadUserInfo} = props;
 	const { userInfo: { displayName, email } } = props;
 	console.log('estamos en el account options');
+	console.log(props.userInfo)
 
 	// variables que nos permitiran la modificacion con un verdadero o un falso
 	// mostrar un modal para cambiar el nombre, email o contraseña
@@ -84,14 +87,14 @@ function AccountOptions(props) {
 		switch (key) {
 			case 'displayName':
 				setRenderComponent(
-					<ChangeDisplayNameForm displayName={displayName} setShowModal={setShowModal} setReloadUserInfo={setReloadUserInfo} />
+					<ChangeDisplayNameForm displayName={displayName} setShowModal={setShowModal} setReloadUserInfo={setReloadUserInfo} toastRef={toastRef}/>
 				);
 				break;
 			case 'email':
-				setRenderComponent(<ChangeEmailForm email={email} setShowModal={setShowModal} setReloadUserInfo={setReloadUserInfo}/>);
+				setRenderComponent(<ChangeEmailForm email={email} setShowModal={setShowModal} setReloadUserInfo={setReloadUserInfo} toastRef={toastRef}/>);
 				break;
 			case 'password':
-				setRenderComponent(<Text>Cambiando contraseña</Text>);
+				setRenderComponent(<ChangePasswordForm setShowModal={setShowModal} setReloadUserInfo={setReloadUserInfo} toastRef={toastRef}/>);
 				break;
 			default:
 				setRenderComponent(null);

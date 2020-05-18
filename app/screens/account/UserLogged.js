@@ -26,7 +26,7 @@ function UserLogged() {
         (async () => {
             const user = await firebase.auth().currentUser
             console.log(user)
-            //cargando datos al userInfo
+            //cargando datos al userInfo, contiene toda la informacion del usuario
             setUserInfo(user)
 		})()
 		setReloadUserInfo(false)

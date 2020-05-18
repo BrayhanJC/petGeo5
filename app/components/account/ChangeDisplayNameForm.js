@@ -3,7 +3,8 @@ import { StyleSheet, View, Text } from 'react-native';
 import { Input, Button, Card } from 'react-native-elements';
 import { isEmpty } from 'lodash';
 import * as firebase from 'firebase';
-import { styles } from '../../src/css/ModalProfile'
+import { styles } from '../../src/css/ModalProfile';
+//import {db} from '../../utils/FireBase'
 
 function defaultFormValue(displayName) {
 	return {
@@ -28,17 +29,17 @@ function ChangeDisplayNameForm(props) {
 
 	// const [newDisplayName, setNewDisplayName] = useState(null)
 
-    //variable que se utiliza para mostrar el error en el campo nombres
-    const [ errorNames, setErrorNames ] = useState(null);
-    
-    //variable que se utiliza para mostrar el error en el campo apellidos
-    const [ errorLastNames, setErrorLastNames ] = useState(null);
-    
-    //variable que se utiliza para mostrar el error en el campo displayName
-    const [ error, setError ] = useState(null);
-   
-    //variable que se utiliza para actualizar automaticamente despues de que se guarde el nuevo nombre
-    const [isLoading, setIsLoading] = useState(false)
+	//variable que se utiliza para mostrar el error en el campo nombres
+	const [ errorNames, setErrorNames ] = useState(null);
+
+	//variable que se utiliza para mostrar el error en el campo apellidos
+	const [ errorLastNames, setErrorLastNames ] = useState(null);
+
+	//variable que se utiliza para mostrar el error en el campo displayName
+	const [ error, setError ] = useState(null);
+
+	//variable que se utiliza para actualizar automaticamente despues de que se guarde el nuevo nombre
+	const [ isLoading, setIsLoading ] = useState(false);
 
 	//funcion que nos permite capturar lo que escribieron en los campos nombres y apellidos
 	const onChange = (even, type) => {
@@ -69,23 +70,35 @@ function ChangeDisplayNameForm(props) {
 			setErrorNames(null);
 			setErrorLastNames(null);
 			const update = {
-				displayName: newDisplayName
-            };
-            setIsLoading(true)
+				
+				displayName: newDisplayName,
+				type_user: 'person_normal'
+			};
+			setIsLoading(true);
 
+			// Add a new document with a generated id.
+			
+			// var newCityRef = db.collection('res_user').doc('doc_1');
+
+			// // later...
+			// newCityRef.set({
+			// 	sexo: 'M',
+			// 	type_user: 'person_normal'
+
+			// });
 
 			firebase
 				.auth()
 				.currentUser.updateProfile(update)
-				.then(() => {
-                    console.log('ok');
-                    setIsLoading(false)
-                    setReloadUserInfo(true)
-                    setShowModal(false)
+				.currentUser.up.then(() => {
+					console.log('ok');
+					setIsLoading(false);
+					setReloadUserInfo(true);
+					setShowModal(false);
 				})
 				.catch(() => {
-                    setError('Error al actualizar el nombre');
-                    setIsLoading(false)
+					setError('Error al actualizar el nombre');
+					setIsLoading(false);
 				});
 		}
 	};
@@ -130,8 +143,8 @@ function ChangeDisplayNameForm(props) {
 					title="Cambiar Nombre"
 					containerStyle={styles.btnContainer}
 					buttonStyle={styles.btnUpdate}
-                    onPress={onSubmit}
-                    loading={isLoading}
+					onPress={onSubmit}
+					loading={isLoading}
 				/>
 			</View>
 		</Card>
@@ -139,5 +152,3 @@ function ChangeDisplayNameForm(props) {
 }
 
 export default ChangeDisplayNameForm;
-
-
