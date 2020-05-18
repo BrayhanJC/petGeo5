@@ -15,7 +15,10 @@ function UserLogged() {
 		displayName: '',
 		email: ''
 	})
-    const toastRef = useRef();
+	const toastRef = useRef();
+	
+	//variable que nos sirve para actualizar la informacion del usuario
+	const [reloadUserInfo, setReloadUserInfo] = useState(false)
     
 
     //cargamos los datos del usuario 
@@ -25,8 +28,9 @@ function UserLogged() {
             console.log(user)
             //cargando datos al userInfo
             setUserInfo(user)
-        })()
-    }, [])
+		})()
+		setReloadUserInfo(false)
+    }, [reloadUserInfo])
 
 
 
@@ -41,7 +45,7 @@ function UserLogged() {
 				userInfo && <InfoUser userInfo={userInfo} toastRef={toastRef} setLoading={setLoading} setLoadingText={setLoadingText}/>
             }
 			
-			<AccountOptions userInfo={userInfo} toastRef={toastRef}/>
+			<AccountOptions userInfo={userInfo} toastRef={toastRef} setReloadUserInfo={setReloadUserInfo}/>
 			<Button
 				title="Cerrar Sesión"
 				buttonStyle={styles.btnCloseSession}

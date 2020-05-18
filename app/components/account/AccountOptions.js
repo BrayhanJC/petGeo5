@@ -5,6 +5,7 @@ import { map } from 'lodash';
 
 import Modal from '../Modal';
 import ChangeDisplayNameForm from './ChangeDisplayNameForm';
+import ChangeEmailForm from './ChangeEmailForm'
 /**
  * Funcion que permite crear una lista de las opciones disponibles 
  * en la edición de la informacioón del usuario (tambien para visualizarla)
@@ -12,7 +13,16 @@ import ChangeDisplayNameForm from './ChangeDisplayNameForm';
 function generateOptions(selectedComponent) {
 	return [
 		{
-			title: 'Cambiar Nombre y Apellidos',
+			title: 'Tipo Usuario',
+			iconType: 'material-community',
+			iconNameLeft: 'account-box-multiple',
+			iconNameRight: 'chevron-right',
+			iconColorLeft: '#1A89E7',
+			iconColorRight: '#CCC',
+			onPress: () => selectedComponent('password')
+		},
+		{
+			title: 'Nombre y Apellidos',
 			iconType: 'material-community',
 			iconNameLeft: 'account-circle',
 			iconNameRight: 'chevron-right',
@@ -21,7 +31,7 @@ function generateOptions(selectedComponent) {
 			onPress: () => selectedComponent('displayName')
 		},
 		{
-			title: 'Cambiar Email',
+			title: 'Email',
 			iconType: 'material-community',
 			iconNameLeft: 'at',
 			iconNameRight: 'chevron-right',
@@ -29,8 +39,19 @@ function generateOptions(selectedComponent) {
 			iconColorRight: '#CCC',
 			onPress: () => selectedComponent('email')
 		},
+
 		{
-			title: 'Cambiar contraseña',
+			title: 'Dirección',
+			iconType: 'material-community',
+			iconNameLeft: 'map-marker',
+			iconNameRight: 'chevron-right',
+			iconColorLeft: '#1A89E7',
+			iconColorRight: '#CCC',
+			onPress: () => selectedComponent('password')
+		},
+
+		{
+			title: 'Contraseña',
 			iconType: 'material-community',
 			iconNameLeft: 'lock-reset',
 			iconNameRight: 'chevron-right',
@@ -42,8 +63,7 @@ function generateOptions(selectedComponent) {
 }
 
 function AccountOptions(props) {
-	
-	const { userInfo, toastRef } = props;
+	const { userInfo, toastRef, setReloadUserInfo} = props;
 	const { userInfo: { displayName, email } } = props;
 	console.log('estamos en el account options');
 
@@ -64,11 +84,11 @@ function AccountOptions(props) {
 		switch (key) {
 			case 'displayName':
 				setRenderComponent(
-					<ChangeDisplayNameForm displayName={displayName} setShowModal={setShowModal} toastRef={toastRef} />
+					<ChangeDisplayNameForm displayName={displayName} setShowModal={setShowModal} setReloadUserInfo={setReloadUserInfo} />
 				);
 				break;
 			case 'email':
-				setRenderComponent(<Text>Cambiando email</Text>);
+				setRenderComponent(<ChangeEmailForm email={email} setShowModal={setShowModal} setReloadUserInfo={setReloadUserInfo}/>);
 				break;
 			case 'password':
 				setRenderComponent(<Text>Cambiando contraseña</Text>);
@@ -104,7 +124,6 @@ function AccountOptions(props) {
 			{renderComponent && (
 				<Modal isVisible={showModal} setIsVisible={setShowModal}>
 					{renderComponent}
-					
 				</Modal>
 			)}
 		</View>
