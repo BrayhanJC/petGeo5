@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import ComedogsScreen from '../../screens/comedog/Comedogs';
 import AvatarIcon from '../../components/AvatarIcon'
-
+import CreateComedog from '../../screens/comedog/CreateComedog'
 const Stack = createStackNavigator();
 
 /***
@@ -21,6 +21,14 @@ function ComedogsStack() {
 				options={{
 					title: 'Comedogs',
 					headerLeft: () => <AvatarIcon/>
+				}}
+			/>
+			<Stack.Screen
+				name="CreateComedog"
+				component={CreateComedog}
+				options={{
+					title: 'Crear Comedog',
+					headerRight: () => <AvatarIcon/>
 				}}
 			/>
 		</Stack.Navigator>

@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import NewsScreen from '../../screens/news/News';
 import AvatarIcon from '../../components/AvatarIcon'
+import CreateNews from '../../screens/news/CreateNews'
 
 const Stack = createStackNavigator();
 
@@ -24,6 +25,15 @@ function NewsStack() {
 					headerLeft: () => <AvatarIcon/>
 				}}
 			/>
+			<Stack.Screen
+				name="CreateNews"
+				component={CreateNews}
+				options={{
+					title: 'Añadir Nueva Noticia',
+					headerRight: () => <AvatarIcon/>
+				}}
+			/>
+
 		</Stack.Navigator>
 	);
 }

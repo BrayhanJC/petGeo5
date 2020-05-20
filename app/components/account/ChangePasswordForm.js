@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { Input, Button, Card } from 'react-native-elements';
 import { styles } from '../../src/css/ModalProfile';
 import { validateEmail } from '../../utils/validations';

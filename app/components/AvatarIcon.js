@@ -13,7 +13,7 @@ function AvatarIcon() {
 	const navigation = useNavigation();
 
 	return (
-		<View style={{ flex: 1, justifyContent: 'left', alignItems: 'center' }}>
+		<View style={{ flex: 1,  alignItems: 'center', margin:5 }}>
 			<Avatar
 				size="small"
 				rounded
