@@ -4,8 +4,8 @@ import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
 import { styleForm } from '../../src/css/AddForm';
 
 import { styleUploadImage } from '../../src/css/UploadImage';
-import AddForm from '../AddForm';
-import UploadImage from '../UploadImage';
+import AddForm from '../formImage/AddForm';
+import UploadImage from '../formImage/UploadImage';
 
 function CreateNewsForm(props) {
 	const { toastRef, setIsLoading, navigation } = props;
@@ -38,7 +38,7 @@ function CreateNewsForm(props) {
 					setDescription={setDescription}
 				/>
 
-				<Button buttonStyle={styleForm.btnCreateComedog} title="Crear Noticia" onPress={addNews} />
+				<Button buttonStyle={styleForm.btnCreate} title="Crear Noticia" onPress={addNews} />
 			</View>
 		</ScrollView>
 	);

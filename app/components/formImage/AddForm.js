@@ -17,11 +17,14 @@ function AddForm(props) {
 			<Input 
 			placeholder={title} 
 			containerStyle={styleForm.input} 
+			
+			inputContainerStyle={styleForm.inputForm}
 			errorStyle={{ color: 'red' }}
 			onChange={ even => setTitle(even.nativeEvent.text)} />
 			{addressVisible && <Input 
 			placeholder={address} 
 			containerStyle={styleForm.input} 
+			inputContainerStyle={styleForm.inputForm}
 			errorStyle={{ color: 'red' }} 
 			onChange={ even => setAddress(even.nativeEvent.text)}/>}
 			<View style={styleForm.textAreaContainer}>
@@ -32,6 +35,7 @@ function AddForm(props) {
 					placeholderTextColor="grey"
 					numberOfLines={10}
 					multiline={true}
+					
 					onChange={even => setDescription(even.nativeEvent.text)}
 				/>
 			</View>

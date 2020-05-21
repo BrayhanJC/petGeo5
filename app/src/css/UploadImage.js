@@ -10,10 +10,17 @@ export const uploadImage = {
 	containerIcon: {
 		alignItems: 'center',
 		justifyContent: 'center',
-		marginRight: 10,
+		marginRight: 20,
+		marginLeft: 10,
 		height: 70,
 		width: 70,
 		backgroundColor: '#E3E3E3'
+	},
+	miniatureAvatar: {
+		height: 70,
+		width: 70,
+		marginRight: 10,
+		marginLeft: 10,
 	}
 };
 

@@ -5,8 +5,8 @@ import { map } from 'lodash';
 
 import Modal from '../Modal';
 import ChangeDisplayNameForm from './ChangeDisplayNameForm';
-import ChangeEmailForm from './ChangeEmailForm'
-import ChangePasswordForm from './ChangePasswordForm'
+import ChangeEmailForm from './ChangeEmailForm';
+import ChangePasswordForm from './ChangePasswordForm';
 
 /**
  * Funcion que permite crear una lista de las opciones disponibles 
@@ -65,10 +65,10 @@ function generateOptions(selectedComponent) {
 }
 
 function AccountOptions(props) {
-	const { userInfo, toastRef, setReloadUserInfo} = props;
-	const { userInfo: { displayName, email } } = props;
+	const { userInfo, toastRef, setReloadUserInfo } = props;
+	const { userInfo: { displayName, email, providerId, uid } } = props;
 	console.log('estamos en el account options');
-	console.log(props.userInfo)
+	console.log(props.userInfo);
 
 	// variables que nos permitiran la modificacion con un verdadero o un falso
 	// mostrar un modal para cambiar el nombre, email o contraseña
@@ -87,14 +87,32 @@ function AccountOptions(props) {
 		switch (key) {
 			case 'displayName':
 				setRenderComponent(
-					<ChangeDisplayNameForm displayName={displayName} setShowModal={setShowModal} setReloadUserInfo={setReloadUserInfo} toastRef={toastRef}/>
+					<ChangeDisplayNameForm
+						displayName={displayName}
+						setShowModal={setShowModal}
+						setReloadUserInfo={setReloadUserInfo}
+						toastRef={toastRef}
+					/>
 				);
 				break;
 			case 'email':
-				setRenderComponent(<ChangeEmailForm email={email} setShowModal={setShowModal} setReloadUserInfo={setReloadUserInfo} toastRef={toastRef}/>);
+				setRenderComponent(
+					<ChangeEmailForm
+						email={email}
+						setShowModal={setShowModal}
+						setReloadUserInfo={setReloadUserInfo}
+						toastRef={toastRef}
+					/>
+				);
 				break;
 			case 'password':
-				setRenderComponent(<ChangePasswordForm setShowModal={setShowModal} setReloadUserInfo={setReloadUserInfo} toastRef={toastRef}/>);
+				setRenderComponent(
+					<ChangePasswordForm
+						setShowModal={setShowModal}
+						setReloadUserInfo={setReloadUserInfo}
+						toastRef={toastRef}
+					/>
+				);
 				break;
 			default:
 				setRenderComponent(null);
@@ -102,7 +120,16 @@ function AccountOptions(props) {
 		}
 	};
 
-	const menuOptions = generateOptions(selectedComponent);
+	var menuOptions = ''
+
+	if (props.userInfo.providerData){
+		if (props.userInfo.providerData[0].providerId){
+			console.log(props.userInfo.providerData[0].providerId)
+			menuOptions = [generateOptions(selectedComponent)[1]];
+		}else{
+			menuOptions = generateOptions(selectedComponent);
+		}
+	}
 
 	return (
 		<View>
