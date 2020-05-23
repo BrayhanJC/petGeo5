@@ -1,28 +1,20 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  ScrollView,
-  Alert,
-  TextInput,
-  Dimensions,
-} from "react-native";
-import { Icon, Avatar, Image, Input, Button } from "react-native-elements";
+import { ScrollView, Dimensions } from "react-native";
 import { styleForm } from "../../src/css/AddForm";
 import { styleUploadImage } from "../../src/css/UploadImage";
 import { styleImageMain } from "../../src/css/ImageMain";
+import { Button } from "react-native-elements";
 import AddForm from "../formMain/AddForm";
 import UploadImage from "../formMain/UploadImage";
 import ImageMain from "../formMain/ImageMain";
 
 import Map from "../formMain/Map";
 
-//devuelve el ancho de la screen
 const widhtScreen = Dimensions.get("window").width;
-function CreateComedogForm(props) {
+function AddMissinPetForm(props) {
   const { toastRef, setIsLoading, navigation } = props;
 
-  const addComedog = () => {
+  const addMissingPets = () => {
     console.log("ok");
     console.log(title);
   };
@@ -32,10 +24,7 @@ function CreateComedogForm(props) {
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
   const [imageSelected, setImageSelected] = useState([]);
-
   const [isVisibleMap, setIsVisibleMap] = useState(false);
-
-  //const {title, setTitle, address, setAddress, description, setDescription, btnName, addressVisible} = props
 
   return (
     <ScrollView style={styleForm.scrollView}>
@@ -47,10 +36,10 @@ function CreateComedogForm(props) {
       />
 
       <AddForm
-        title="Nombre Comedog"
+        title="Titulo Reporte"
         address="Dirección"
         addressVisible={true}
-        description="Describa en breves palabras donde se encuentra el actual comedog..."
+        description="Describa en breves palabras donde se encuentra la mascota"
         styleForm={styleForm}
         setTitle={setTitle}
         setAddress={setAddress}
@@ -66,8 +55,8 @@ function CreateComedogForm(props) {
 
       <Button
         buttonStyle={styleForm.btnCreate}
-        title="Crear Comedog"
-        onPress={addComedog}
+        title="Crear Reporte"
+        onPress={addMissingPets}
       />
 
       <Map
@@ -79,4 +68,4 @@ function CreateComedogForm(props) {
   );
 }
 
-export default CreateComedogForm;
+export default AddMissinPetForm;
