@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
-function Pet(){
+function Pets(){
     return (
         <View>
             <Text>
@@ -11,4 +11,4 @@ function Pet(){
     )
 }
 
-export default Pet
+export default Pets

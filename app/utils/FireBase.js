@@ -1,15 +1,14 @@
 import firebase from 'firebase/app';
 
 const firebaseConfig = {
-	apiKey: 'AIzaSyBl0foFZIoEj0lW-uszRVMvtBvU9zvfPWE',
-	authDomain: 'petgeo-cacec.firebaseapp.com',
-	databaseURL: 'https://petgeo-cacec.firebaseio.com',
-	projectId: 'petgeo-cacec',
-	storageBucket: 'petgeo-cacec.appspot.com',
-	messagingSenderId: '17591487987',
-	appId: '1:17591487987:web:7136184a56bf6d7f3e9686',
-	measurementId: 'G-1RE99FMEX1'
+	apiKey: 'AIzaSyAG_pvXXdZVfM1bHnkZSiX1V1StKGo_9Pg',
+	authDomain: 'petgeo-eb54d.firebaseapp.com',
+	databaseURL: 'https://petgeo-eb54d.firebaseio.com',
+	projectId: 'petgeo-eb54d',
+	storageBucket: 'petgeo-eb54d.appspot.com',
+	messagingSenderId: '564375723605',
+	appId: '1:564375723605:web:91b32fb1efc7eeb229fedc',
+	measurementId: 'G-WKQ58Z1YTK'
 };
 
 export const firebaseApp = firebase.initializeApp(firebaseConfig);
-//export const db = firebase.firestore(firebaseApp);
