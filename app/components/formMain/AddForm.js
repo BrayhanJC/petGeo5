@@ -53,7 +53,6 @@ function AddForm(props) {
 					underlineColorAndroid="transparent"
 					placeholder={description}
 					placeholderTextColor="grey"
-					numberOfLines={10}
 					multiline={true}
 					onChange={(even) => setDescription(even.nativeEvent.text)}
 				/>

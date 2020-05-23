@@ -6,11 +6,16 @@ import * as ImagePicker from 'expo-image-picker';
 import Modal from '../Modal';
 import { map, size, filter } from 'lodash';
 import * as Location from 'expo-location'
+import MapView from 'react-native-maps'
+import styleMapStyle from '../../src/css/MapView'
 
 
 function Map(props) {
     const { isVisibleMap, setIsVisibleMap, toastRef} = props;
     const [location, setLocation] = useState(null)
+
+    console.log('aca')
+    console.log(styleMapStyle)
 
     useEffect(() => {
 
@@ -27,6 +32,13 @@ function Map(props) {
                     
                 })
                 console.log(loc)
+                setLocation({
+                    latitude : loc.coords.latitude,
+                    longitude: loc.coords.longitude,
+                    latitudeDelta: 0.001,
+                    longitudeDelta: 0.001
+
+                })
             }
             
         })()
@@ -35,7 +47,23 @@ function Map(props) {
 
 	return (
 		<Modal isVisible={isVisibleMap} setIsVisible={setIsVisibleMap}>
-			<Text>Hola</Text>
+			<View>
+                {location && (
+                    <MapView
+                        style={{	
+
+                            width: '100%',
+                            height: 550
+                           
+                       
+                        }}
+                        initialRegion={location}
+                        showsUserLocation={true}
+                    >
+
+                    </MapView>
+                )}
+            </View>
 		</Modal>
 	);
 }
