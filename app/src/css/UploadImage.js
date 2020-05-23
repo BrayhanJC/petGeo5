@@ -18,10 +18,9 @@ export const uploadImage = {
     backgroundColor: "#E3E3E3",
   },
   miniatureAvatar: {
-    height: 70,
     width: 70,
+    height: 70,
     marginRight: 10,
-    marginLeft: 10,
   },
 };
 
