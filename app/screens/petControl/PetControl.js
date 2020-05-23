@@ -4,7 +4,7 @@ import { Text, View } from 'react-native'
 /***
  * Allows create controls of pets, to create controls
  */
-function PetControls () {
+function PetControl () {
     return (
         <View>
             <Text> Control de Mascotas que le haga el veterinario</Text>
@@ -12,4 +12,4 @@ function PetControls () {
     )
 }
 
-export default PetControls
+export default PetControl
