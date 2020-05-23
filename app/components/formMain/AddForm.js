@@ -10,7 +10,17 @@ import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
  * @param {*} props 
  */
 function AddForm(props) {
-	const { title, setTitle, address, setAddress, description, setDescription, addressVisible, styleForm } = props;
+	const {
+		title,
+		setTitle,
+		address,
+		setAddress,
+		description,
+		setDescription,
+		addressVisible,
+		styleForm,
+		setIsVisibleMap
+	} = props;
 
 	return (
 		<View style={styleForm.viewForm}>
@@ -29,10 +39,12 @@ function AddForm(props) {
 					errorStyle={{ color: 'red' }}
 					onChange={(even) => setAddress(even.nativeEvent.text)}
 					rightIcon={{
-						type:'material-community',
-						name:'google-maps',
-						color: '#C2C2C2'
+						type: 'material-community',
+						name: 'google-maps',
+						color: '#C2C2C2',
+						onPress: () => setIsVisibleMap(true)
 					}}
+					
 				/>
 			)}
 			<View style={styleForm.textAreaContainer}>

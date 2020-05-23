@@ -123,7 +123,7 @@ function AccountOptions(props) {
 	var menuOptions = ''
 
 	if (props.userInfo.providerData){
-		if (props.userInfo.providerData[0].providerId){
+		if (props.userInfo.providerData[0].providerId === 'facebook.com'){
 			console.log(props.userInfo.providerData[0].providerId)
 			menuOptions = [generateOptions(selectedComponent)[1]];
 		}else{

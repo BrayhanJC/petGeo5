@@ -21,7 +21,7 @@ function Comedogs(props) {
 	}, []);
 	return (
 		<View style={styles.viewBody}>
-			<Text>Aca aparecen todas los comedogs</Text>
+			<Text>Aca aparecen todas los comedogs si</Text>
 			{user && (
 				<Icon
 					type="material-community"

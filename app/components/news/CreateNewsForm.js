@@ -4,9 +4,9 @@ import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
 import { styleForm } from '../../src/css/AddForm';
 import { styleUploadImage } from '../../src/css/UploadImage';
 import { styleImageMain } from '../../src/css/ImageMain';
-import AddForm from '../formImage/AddForm';
-import UploadImage from '../formImage/UploadImage';
-import ImageMain from '../formImage/ImageMain'
+import AddForm from '../formMain/AddForm';
+import UploadImage from '../formMain/UploadImage';
+import ImageMain from '../formMain/ImageMain'
 
 
 

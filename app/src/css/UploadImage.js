@@ -5,7 +5,7 @@ export const uploadImage = {
 		flexDirection: 'row',
 		marginLeft: 20,
 		marginRight: 20,
-		marginTop: 30
+		marginTop: 10
 	},
 	containerIcon: {
 		alignItems: 'center',
