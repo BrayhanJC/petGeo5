@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, Alert, TextInput } from 'react-native';
+import { View, Text, ScrollView, Alert, Dimensions } from 'react-native';
 import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
 import { styleForm } from '../../src/css/AddForm';
-
 import { styleUploadImage } from '../../src/css/UploadImage';
+import { styleImageMain } from '../../src/css/ImageMain';
 import AddForm from '../formImage/AddForm';
 import UploadImage from '../formImage/UploadImage';
+import ImageMain from '../formImage/ImageMain'
 
+
+
+//devuelve el ancho de la screen 
+const widhtScreen= Dimensions.get('window').width
 function CreateNewsForm(props) {
 	const { toastRef, setIsLoading, navigation } = props;
 
@@ -19,14 +24,21 @@ function CreateNewsForm(props) {
 	const [ title, setTitle ] = useState('');
 	const [ address, setAddress ] = useState('');
 	const [ description, setDescription ] = useState('');
+	const [ imageSelected, setImageSelected ] = useState([]);
 
 	//const {title, setTitle, address, setAddress, description, setDescription, btnName, addressVisible} = props
 
 	return (
 		<ScrollView style={styleForm.scrollView}>
 			<View>
-				<UploadImage styleUploadImage={styleUploadImage} />
+				
 
+				<ImageMain 
+					styleImageMain={styleImageMain}
+					toastRef={toastRef}
+					widhtScreen={widhtScreen}
+					imageMain={imageSelected[0]}
+				/>
 				<AddForm
 					title="Titulo Noticia o Evento"
 					address="Dirección"
@@ -38,6 +50,13 @@ function CreateNewsForm(props) {
 					setDescription={setDescription}
 				/>
 
+
+				<UploadImage
+					styleUploadImage={styleUploadImage}
+					toastRef={toastRef}
+					imageSelected={imageSelected}
+					setImageSelected={setImageSelected}
+				/>
 				<Button buttonStyle={styleForm.btnCreate} title="Crear Noticia" onPress={addNews} />
 			</View>
 		</ScrollView>

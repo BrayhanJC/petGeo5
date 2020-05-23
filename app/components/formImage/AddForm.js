@@ -14,19 +14,27 @@ function AddForm(props) {
 
 	return (
 		<View style={styleForm.viewForm}>
-			<Input 
-			placeholder={title} 
-			containerStyle={styleForm.input} 
-			
-			inputContainerStyle={styleForm.inputForm}
-			errorStyle={{ color: 'red' }}
-			onChange={ even => setTitle(even.nativeEvent.text)} />
-			{addressVisible && <Input 
-			placeholder={address} 
-			containerStyle={styleForm.input} 
-			inputContainerStyle={styleForm.inputForm}
-			errorStyle={{ color: 'red' }} 
-			onChange={ even => setAddress(even.nativeEvent.text)}/>}
+			<Input
+				placeholder={title}
+				containerStyle={styleForm.input}
+				inputContainerStyle={styleForm.inputForm}
+				errorStyle={{ color: 'red' }}
+				onChange={(even) => setTitle(even.nativeEvent.text)}
+			/>
+			{addressVisible && (
+				<Input
+					placeholder={address}
+					containerStyle={styleForm.input}
+					inputContainerStyle={styleForm.inputForm}
+					errorStyle={{ color: 'red' }}
+					onChange={(even) => setAddress(even.nativeEvent.text)}
+					rightIcon={{
+						type:'material-community',
+						name:'google-maps',
+						color: '#C2C2C2'
+					}}
+				/>
+			)}
 			<View style={styleForm.textAreaContainer}>
 				<TextInput
 					style={styleForm.textArea}
@@ -35,8 +43,7 @@ function AddForm(props) {
 					placeholderTextColor="grey"
 					numberOfLines={10}
 					multiline={true}
-					
-					onChange={even => setDescription(even.nativeEvent.text)}
+					onChange={(even) => setDescription(even.nativeEvent.text)}
 				/>
 			</View>
 		</View>

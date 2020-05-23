@@ -8,8 +8,6 @@ import AddForm from '../formImage/AddForm';
 import UploadImage from '../formImage/UploadImage';
 import ImageMain from '../formImage/ImageMain'
 
-import * as Permissions from 'expo-permissions';
-import * as ImagePicker from 'expo-image-picker';
 
 //devuelve el ancho de la screen 
 const widhtScreen= Dimensions.get('window').width
