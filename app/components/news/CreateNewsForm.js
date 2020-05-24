@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { View, Text, ScrollView, Alert, Dimensions } from "react-native";
 import { Icon, Avatar, Image, Input, Button } from "react-native-elements";
+import { size } from "lodash";
+import firebase from "firebase/app";
+import { uploadImageStorage } from "../../utils/UploadImageStorage";
+import { saveCollection } from "../../utils/SaveRecord";
 import { styleForm } from "../../src/css/AddForm";
 import { styleUploadImage } from "../../src/css/UploadImage";
 import { styleImageMain } from "../../src/css/ImageMain";
@@ -21,12 +25,12 @@ function CreateNewsForm(props) {
   const [locationNew, setLocationNew] = useState(null);
 
   const addNews = () => {
-    setIsLoading(false);
+    setIsLoading(true);
     if (!title || !address || !description) {
       toastRef.current.show("Todos los campos del formulario son obligatorios");
     } else if (size(imageSelected) === 0) {
       toastRef.current.show("El evento debe de tener por lo menos una imagen");
-    } else if (!locationMissingPet) {
+    } else if (!locationNew) {
       toastRef.current.show("Debes localizar tu noticia o evento en el mapa");
     } else {
       uploadImageStorage(imageSelected, "news").then((response) => {

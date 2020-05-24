@@ -25,7 +25,7 @@ function AddMissinPetForm(props) {
   const [isVisibleMap, setIsVisibleMap] = useState(false);
 
   const addMissingPets = () => {
-    setIsLoading(false);
+    setIsLoading(true);
     if (!title || !address || !description) {
       toastRef.current.show("Todos los campos del formulario son obligatorios");
     } else if (size(imageSelected) === 0) {

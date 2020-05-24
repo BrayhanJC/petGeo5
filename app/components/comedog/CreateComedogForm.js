@@ -8,6 +8,10 @@ import {
   Dimensions,
 } from "react-native";
 import { Icon, Avatar, Image, Input, Button } from "react-native-elements";
+import { size } from "lodash";
+import firebase from "firebase/app";
+import { uploadImageStorage } from "../../utils/UploadImageStorage";
+import { saveCollection } from "../../utils/SaveRecord";
 import { styleForm } from "../../src/css/AddForm";
 import { styleUploadImage } from "../../src/css/UploadImage";
 import { styleImageMain } from "../../src/css/ImageMain";
@@ -35,16 +39,17 @@ function CreateComedogForm(props) {
       toastRef.current.show("Todos los campos del formulario son obligatorios");
     } else if (size(imageSelected) === 0) {
       toastRef.current.show("El comedog debe de tener por lo menos una imagen");
-    } else if (!locationMissingPet) {
+    } else if (!locationComeDog) {
       toastRef.current.show("Debes localizar el comedog en el mapa");
     } else {
+      setIsLoading(true);
       uploadImageStorage(imageSelected, "Comedogs").then((response) => {
         saveCollection(
           {
             name: title,
             address: address,
             description: description,
-            location: locationNew,
+            location: locationComeDog,
             image: response,
             createAt: new Date(),
             createBy: firebase.auth().currentUser.uid,
@@ -53,7 +58,7 @@ function CreateComedogForm(props) {
           navigation,
           "ComedogStack",
           toastRef,
-          setloading,
+          setIsLoading,
           "Error al subir el comedog"
         );
       });
