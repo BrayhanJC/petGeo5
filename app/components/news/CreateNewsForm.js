@@ -12,12 +12,6 @@ import Map from "../formMain/Map";
 const widhtScreen = Dimensions.get("window").width;
 function CreateNewsForm(props) {
   const { toastRef, setIsLoading, navigation } = props;
-
-  const addNews = () => {
-    console.log("ok");
-    console.log(title);
-  };
-
   const [loading, setloading] = useState(false);
   const [title, setTitle] = useState("");
   const [address, setAddress] = useState("");
@@ -25,6 +19,38 @@ function CreateNewsForm(props) {
   const [imageSelected, setImageSelected] = useState([]);
   const [isVisibleMap, setIsVisibleMap] = useState(false);
   const [locationNew, setLocationNew] = useState(null);
+
+  const addNews = () => {
+    setIsLoading(false);
+    if (!title || !address || !description) {
+      toastRef.current.show("Todos los campos del formulario son obligatorios");
+    } else if (size(imageSelected) === 0) {
+      toastRef.current.show("El evento debe de tener por lo menos una imagen");
+    } else if (!locationMissingPet) {
+      toastRef.current.show("Debes localizar tu noticia o evento en el mapa");
+    } else {
+      uploadImageStorage(imageSelected, "news").then((response) => {
+        saveCollection(
+          {
+            name: title,
+            address: address,
+            description: description,
+            location: locationNew,
+            image: response,
+            createAt: new Date(),
+            createBy: firebase.auth().currentUser.uid,
+          },
+          "news",
+          navigation,
+          "HomeStack",
+          toastRef,
+          setloading,
+          "Error al subir la noticia"
+        );
+      });
+    }
+  };
+
   //const {title, setTitle, address, setAddress, description, setDescription, btnName, addressVisible} = props
 
   return (

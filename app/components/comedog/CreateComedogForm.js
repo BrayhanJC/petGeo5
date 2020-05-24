@@ -21,12 +21,6 @@ import Map from "../formMain/Map";
 const widhtScreen = Dimensions.get("window").width;
 function CreateComedogForm(props) {
   const { toastRef, setIsLoading, navigation } = props;
-
-  const addComedog = () => {
-    console.log("ok");
-    console.log(title);
-  };
-
   const [loading, setloading] = useState(false);
   const [title, setTitle] = useState("");
   const [address, setAddress] = useState("");
@@ -34,6 +28,38 @@ function CreateComedogForm(props) {
   const [imageSelected, setImageSelected] = useState([]);
   const [isVisibleMap, setIsVisibleMap] = useState(false);
   const [locationComeDog, setLocationComeDog] = useState(null);
+
+  const addComedog = () => {
+    setIsLoading(false);
+    if (!title || !address || !description) {
+      toastRef.current.show("Todos los campos del formulario son obligatorios");
+    } else if (size(imageSelected) === 0) {
+      toastRef.current.show("El comedog debe de tener por lo menos una imagen");
+    } else if (!locationMissingPet) {
+      toastRef.current.show("Debes localizar el comedog en el mapa");
+    } else {
+      uploadImageStorage(imageSelected, "Comedogs").then((response) => {
+        saveCollection(
+          {
+            name: title,
+            address: address,
+            description: description,
+            location: locationNew,
+            image: response,
+            createAt: new Date(),
+            createBy: firebase.auth().currentUser.uid,
+          },
+          "comedogs",
+          navigation,
+          "ComedogStack",
+          toastRef,
+          setloading,
+          "Error al subir el comedog"
+        );
+      });
+    }
+  };
+
   //const {title, setTitle, address, setAddress, description, setDescription, btnName, addressVisible} = props
 
   return (
