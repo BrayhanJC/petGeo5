@@ -32,9 +32,8 @@ function CreateComedogForm(props) {
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
   const [imageSelected, setImageSelected] = useState([]);
-
   const [isVisibleMap, setIsVisibleMap] = useState(false);
-
+  const [locationComeDog, setLocationComeDog] = useState(null);
   //const {title, setTitle, address, setAddress, description, setDescription, btnName, addressVisible} = props
 
   return (
@@ -56,6 +55,7 @@ function CreateComedogForm(props) {
         setAddress={setAddress}
         setDescription={setDescription}
         setIsVisibleMap={setIsVisibleMap}
+        locationForm={locationComeDog}
       />
       <UploadImage
         styleUploadImage={styleUploadImage}
@@ -74,6 +74,7 @@ function CreateComedogForm(props) {
         isVisibleMap={isVisibleMap}
         setIsVisibleMap={setIsVisibleMap}
         toastRef={toastRef}
+        setLocationForms={setLocationComeDog}
       />
     </ScrollView>
   );

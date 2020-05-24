@@ -1,16 +1,32 @@
-import { StyleSheet, Icon } from 'react-native';
+import { StyleSheet } from "react-native";
 
-export const map = {
+export const styleMapForm = {
+  mapStyle: {
+    width: "100%",
+    height: 450,
+  },
 
-	mapStyle: {
+  viewMapBtn: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 10,
+  },
 
-        width: '100%',
-        height: 550
-       
-   
-    },
- 
+  viewMapBtnContainerCancel: {
+    paddingLeft: 5,
+  },
 
+  viewMapBtnCancel: {
+    backgroundColor: "#a60d0d",
+  },
+
+  viewMapBtnContainerSave: {
+    paddingRight: 5,
+  },
+
+  viewMapBtnSave: {
+    backgroundColor: "#1A89E7",
+  },
 };
 
-export const styleMapStyle = StyleSheet.create(map);
+export const styleMap = StyleSheet.create(styleMapForm);

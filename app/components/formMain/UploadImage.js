@@ -37,13 +37,9 @@ function UploadImage(props) {
     );
   };
   const imageSelect = async () => {
-    console.log("selecion imagen");
     const resultPermissions = await Permissions.askAsync(
       Permissions.CAMERA_ROLL
     );
-    //console.log(resultPermissions);
-    console.log("la imagen seria");
-    console.log(imageSelected);
 
     if (resultPermissions === "denied") {
       toastRef.current.show(
