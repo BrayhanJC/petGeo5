@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 
+import PetDoctorDrawer from './PetDoctorDrawer'
 import PetControlDrawer from './PetControlDrawer';
 import PetDrawer from './PetDrawer';
 import MyAccountDrawer from './MyAccountDrawer';
@@ -83,7 +84,20 @@ function NavigatorDrawer() {
 				component={PetControlDrawer}
 				options={{
 					title: 'Controles',
-					drawerIcon: ({ color, size }) => <MaterialCommunityIcons name="hospital-building" color="#1A89E7" size={24} />
+					drawerIcon: ({ color, size }) => (
+						<MaterialCommunityIcons name="hospital-building" color="#1A89E7" size={24} />
+					)
+				}}
+			/>
+
+			<Drawer.Screen
+				name="PetDoctorDrawer"
+				component={PetDoctorDrawer}
+				options={{
+					title: 'Veterinarios',
+					drawerIcon: ({ color, size }) => (
+						<MaterialCommunityIcons name="account-multiple" color="#1A89E7" size={27} />
+					)
 				}}
 			/>
 		</Drawer.Navigator>

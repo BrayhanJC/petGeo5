@@ -5,10 +5,11 @@ import { Dropdown } from 'react-native-material-dropdown';
 //import DateTimePicker from '@react-native-community/datetimepicker';
 
 import DatePicker from 'react-native-datepicker';
-import { stylePetForm } from '../../src/css/PetForm';
+import { styleCreateForm } from '../../src/css/CreateForm';
 
 function PetForm(props) {
 	const {
+		setImageSelected,
 		valueTypePet,
 		setValueTypePet,
 		valueTypeSex,
@@ -140,7 +141,7 @@ function PetForm(props) {
 		{ value: 'Yorkshire Terrier' }
 	];
 
-	console.log(stylePetForm);
+	console.log(styleCreateForm);
 
 	const onChange = (event, selectedDate) => {
 		const currentDate = selectedDate;
@@ -151,8 +152,8 @@ function PetForm(props) {
 		<View>
 			<Input
 				placeholder="Nombre de la mascota"
-				containerStyle={stylePetForm.input}
-				inputContainerStyle={stylePetForm.inputForm}
+				containerStyle={styleCreateForm.input}
+				inputContainerStyle={styleCreateForm.inputForm}
 				errorStyle={{ color: 'red' }}
                 onChange={(even) => setNamePet(even.nativeEvent.text)}
                 errorMessage={error}

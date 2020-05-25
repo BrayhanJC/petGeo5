@@ -2,10 +2,21 @@ import React, { useState } from 'react';
 import { View, Text, ScrollView, Alert, TextInput, StyleSheet, Picker } from 'react-native';
 import { Icon, Avatar, Image, Input, Button, Divider } from 'react-native-elements';
 import { Dropdown } from 'react-native-material-dropdown';
-import { stylePetControlForm } from '../../src/css/PetControlForm';
+import { styleCreateForm } from '../../src/css/CreateForm';
 
 function PetForm(props) {
-	const { setDescription, setNameControl, setPet, errorPet, errorName, errorDescription } = props;
+	const {
+		setDescription,
+		setNameControl,
+		setPet,
+		errorType,
+		setTypeControl,
+		setErrorType,
+		errorPet,
+		errorName,
+		errorDescription,
+		
+	} = props;
 
 	const PET_LOAD = [
 		{
@@ -19,13 +30,38 @@ function PetForm(props) {
 		}
 	];
 
-        console.log(setNameControl)
+	const TYPE_CONTROL = [
+		{
+			value: ''
+		},
+		{
+			value: 'Vacunación'
+		},
+		{
+			value: 'Baño'
+		},
+		{
+			value: 'Control'
+		},
+		{
+			value: 'Otro'
+		}
+	];
 
 	return (
 		<View>
 			<Dropdown
+				label="Tipo de Control"
+				data={TYPE_CONTROL}
+				//value=""
+				error={errorType}
+				onChangeText={(itemValue, itemIndex) => setTypeControl(itemValue)}
+			/>
+
+			<Dropdown
 				label="Mascota"
 				data={PET_LOAD}
+				error={errorPet}
 				//value={valueTypePet}
 				itemCount={3}
 				onChangeText={(itemValue, itemIndex) => setPet(itemValue)}
@@ -33,16 +69,16 @@ function PetForm(props) {
 
 			<Input
 				placeholder="Nombre Control"
-				containerStyle={stylePetControlForm.input}
-				inputContainerStyle={stylePetControlForm.inputForm}
+				containerStyle={styleCreateForm.input}
+				inputContainerStyle={styleCreateForm.inputForm}
 				errorStyle={{ color: 'red' }}
 				onChange={(even) => setNameControl(even.nativeEvent.text)}
 				errorMessage={errorName}
 			/>
 
-			<View style={stylePetControlForm.textAreaContainer}>
+			<View style={styleCreateForm.textAreaContainer}>
 				<TextInput
-					style={stylePetControlForm.textArea}
+					style={styleCreateForm.textArea}
 					underlineColorAndroid="transparent"
 					placeholder="Describa en breves palabras en que consistio el actual procedimiento que se le va a realizar a su mascota"
 					placeholderTextColor="grey"

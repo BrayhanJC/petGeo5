@@ -42,4 +42,4 @@ export const addForm = {
 	}
 };
 
-export const stylePetControlForm = StyleSheet.create(addForm);
+export const styleCreateForm = StyleSheet.create(addForm);

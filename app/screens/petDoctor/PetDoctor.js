@@ -5,7 +5,7 @@ import { firebaseApp } from '../../utils/FireBase';
 import firebase from 'firebase/app';
 import { styleFloatButton} from '../../src/css/FloatButton'
 
-function Pet(props) {
+function PetDoctor(props) {
 	//se puede obtener porque esta en la screen principal
 	const { navigation } = props;
 	const [ user, setUser ] = useState(null);
@@ -19,7 +19,7 @@ function Pet(props) {
 
 	return (
 		<View style={styleFloatButton.viewBody}>
-			<Text>Aca aparecen todas las mascotas registradas</Text>
+			<Text>Aca aparecen todas los veterinarios disponibles</Text>
 			{user && (
 				
 				<Icon
@@ -28,7 +28,7 @@ function Pet(props) {
 					color="#1A89E7"
 					reverse
                     containerStyle={styleFloatButton.btnContainer}
-                    onPress={ () => navigation.navigate('CreatePet')}
+                    onPress={ () => navigation.navigate('CreatePetDoctor')}
 				/>
 			
 			)}
@@ -36,4 +36,4 @@ function Pet(props) {
 	);
 }
 
-export default Pet;
+export default PetDoctor;

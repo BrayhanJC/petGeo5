@@ -34,7 +34,7 @@ function CreatePet(props) {
     
 	return (
 		<View>
-			<CreatePetForm toastRef={toastRef} setIsLoading={setIsLoading} userInfo={userInfo}/>
+			<CreatePetForm toastRef={toastRef} setIsLoading={setIsLoading} userInfo={userInfo} navigation={navigation}/>
 			<Toast ref={toastRef} position="center" opacity={0.9} />
 			<Loading isVisible={isLoading} text="Creando Mascota" />
 		</View>
