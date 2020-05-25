@@ -19,6 +19,7 @@ function News(props) {
 			setUser(userInfo);
 		});
 	}, []);
+	
 	return (
 		<View style={styles.viewBody}>
 			<Text>Aca aparecen todas las noticias asds</Text>
