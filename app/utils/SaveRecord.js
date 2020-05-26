@@ -4,6 +4,8 @@ import "firebase/storage";
 import "firebase/firestore";
 const db = firebase.firestore(firebaseApp);
 
+const limitRecords = 5;
+
 export const saveCollection = (
   collectionData,
   collectionName,
@@ -22,5 +24,65 @@ export const saveCollection = (
     .catch(() => {
       setIsLoading(false);
       toastRef.current.show(msgError);
+    });
+};
+
+export const listRecords = (
+  collectionName,
+  setTotalElements,
+  setElements,
+  setStartElement
+) => {
+  db.collection(collectionName)
+    .get()
+    .then((snap) => {
+      setTotalElements(snap.size);
+    });
+
+  const resultElements = [];
+
+  db.collection(collectionName)
+    .orderBy("createAt", "desc")
+    .limit(limitRecords)
+    .get()
+    .then((response) => {
+      setStartElement(response.docs[response.docs.length - 1]);
+      response.forEach((doc) => {
+        const element = doc.data();
+        element.id = doc.id;
+        resultElements.push(element);
+      });
+      setElements(resultElements);
+    });
+};
+
+export const handleLoadMore = (
+  collectionName,
+  element,
+  totalElement,
+  setIsLoading,
+  startElement,
+  setStartElement,
+  setElements
+) => {
+  const resultElements = [];
+  element.length < totalElement && setIsLoading(true);
+  db.collection(collectionName)
+    .orderBy("createAt", "desc")
+    .startAfter(startElement.data().createAt)
+    .limit(limitRecords)
+    .get()
+    .then((response) => {
+      if (response.docs.length > 0) {
+        setStartElement(response.docs[response.docs.length - 1]);
+      } else {
+        setIsLoading(false);
+      }
+      response.forEach((doc) => {
+        const elementDoc = doc.data();
+        elementDoc.id = doc.id;
+        resultElements.push(elementDoc);
+      });
+      setElements([...element, ...resultElements]);
     });
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ScrollView, Dimensions } from "react-native";
 import { styleForm } from "../../src/css/AddForm";
 import { styleUploadImage } from "../../src/css/UploadImage";
@@ -14,6 +14,7 @@ import { saveCollection } from "../../utils/SaveRecord";
 import Map from "../formMain/Map";
 
 const widhtScreen = Dimensions.get("window").width;
+
 function AddMissinPetForm(props) {
   const { toastRef, setIsLoading, navigation } = props;
   const [locationMissingPet, setLocationMissingPet] = useState(null);
