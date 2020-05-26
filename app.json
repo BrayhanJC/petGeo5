@@ -20,6 +20,11 @@
     },
     "android": {
       "package": "com.brayhanjjuanz.petgeocinco",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCyBPXGoYlIZSE5A2a6BmjlLJ442KAI6R0"
+        }
+      },
       "permissions": [
         "CAMERA_ROLL",
         "READ_EXTERNAL_STORAGE",
