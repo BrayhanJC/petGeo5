@@ -34,7 +34,18 @@ function MissingPets(props) {
 
   return (
     <View style={viewBody.viewBody}>
-      <ListRecordsForm elements={missingPets} isLoading={isLoading} />
+      <ListRecordsForm
+        elements={missingPets}
+        isLoading={isLoading}
+        handleLoadMore={handleLoadMore(
+          "missingPets",
+          { missingPets },
+          { totalMissingPets },
+          { setIsLoading },
+          { startMissingPets },
+          { setStartMissingPets }
+        )}
+      />
       {user && (
         <Icon
           containerStyle={buttonFormFloating.btnContainer}

@@ -1,1 +1,10 @@
-{}
+{
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://mu-eay.jucazuse.petgeo5.exp.direct",
+  "packagerNgrokUrl": "https://packager.mu-eay.jucazuse.petgeo5.exp.direct",
+  "ngrokPid": 2776,
+  "packagerPort": 19001,
+  "packagerPid": 5184,
+  "webpackServerPort": null,
+  "devToolsPort": 19002
+}
