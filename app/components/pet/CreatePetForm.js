@@ -65,6 +65,7 @@ function CreatePetForm(props) {
 				  setIsLoading,
 				  "Error al guardar la Mascota " + namePet 
 				);
+				setNamePet('')
 			  })
 			  .catch(() => {
 				setIsLoading(false);
