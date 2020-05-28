@@ -4,7 +4,8 @@ import { Icon } from "react-native-elements";
 import firebase from "firebase/app";
 import { viewBody, buttonFormFloating } from "../../src/css/GeneralStyles";
 import { listRecords, handleLoadMore } from "../../utils/SaveRecord";
-import ListRecordsForm from "../../components/formMain/ListRecordsForm";
+//import ListRecordsForm from "../../components/formMain/ListRecordsForm";
+import ListRecords from '../../components/formList/ListRecords';
 /***
  * Allows to see all the news of the veterinary centers and animal foundations
  */
@@ -34,7 +35,7 @@ function MissingPets(props) {
 
   return (
     <View style={viewBody.viewBody}>
-      <ListRecordsForm elements={missingPets} isLoading={isLoading} />
+      <ListRecords elements={missingPets} isLoading={isLoading} />
       {user && (
         <Icon
           containerStyle={buttonFormFloating.btnContainer}

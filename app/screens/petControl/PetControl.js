@@ -5,7 +5,9 @@ import { Icon } from 'react-native-elements';
 import { firebaseApp } from '../../utils/FireBase';
 import firebase from 'firebase/app';
 import { styleFloatButton} from '../../src/css/FloatButton'
-
+import 'firebase/firestore';
+import { listRecords, handleLoadMore } from "../../utils/SaveRecord";
+import ListRecords from '../../components/formList/ListRecords';
 /***
  * Allows create controls of pets, to create controls
  */
@@ -14,6 +16,13 @@ function PetControl (props) {
 	const { navigation } = props;
 	const [ user, setUser ] = useState(null);
 
+
+	const [missingPets, setMissingPets] = useState([]);
+	const [totalMissingPets, setTotalMissingPets] = useState(0);
+	const [startMissingPets, setStartMissingPets] = useState(null);
+	const [isLoading, setIsLoading] = useState(false);
+
+
 	useEffect(() => {
 		firebase.auth().onAuthStateChanged((userInfo) => {
 			setUser(userInfo);
@@ -21,9 +30,18 @@ function PetControl (props) {
     }, []);
     
 
+	useEffect(() => {
+		listRecords(
+		  'petControl',
+		  setTotalMissingPets,
+		  setMissingPets,
+		  setStartMissingPets
+		);
+	  }, []);
+
 	return (
 		<View style={styleFloatButton.viewBody}>
-			<Text>Aca aparecen todos los controles</Text>
+			<ListRecords elements={missingPets} isLoading={isLoading} showPet={false} showPetControl={true}/>
 			{user && (
 				
 				<Icon

@@ -6,24 +6,21 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { styleFloatButton } from '../../src/css/FloatButton';
 import ListPets from '../../components/pet/ListPets';
-
+import { listRecords, handleLoadMore } from "../../utils/SaveRecord";
+import ListRecords from '../../components/formList/ListRecords';
+import ListRecordsForm from "../../components/formMain/ListRecordsForm";
 const LIMIT_PETS = 5;
-const db = firebase.firestore(firebaseApp);
-
-
 
 function Pet(props) {
 	//se puede obtener porque esta en la screen principal
 	const { navigation } = props;
 	const [ user, setUser ] = useState(null);
-	const [ pets, setPets ] = useState([]);
-	const [ sizePet, setSizePet ] = useState(0);
-	const [ startPets, setStartPets ] = useState(null);
-	const [ loadingPet, setLoadingPet ] = useState(false);
 
-	console.log('Mascotas encontradas ' + sizePet);
+	const [missingPets, setMissingPets] = useState([]);
+	const [totalMissingPets, setTotalMissingPets] = useState(0);
+	const [startMissingPets, setStartMissingPets] = useState(null);
+	const [isLoading, setIsLoading] = useState(false);
 
-	
 	useEffect(() => {
 		firebase.auth().onAuthStateChanged((userInfo) => {
 			setUser(userInfo);
@@ -31,68 +28,18 @@ function Pet(props) {
 	}, []);
 
 	useEffect(() => {
-		db
-			.collection('pet')
-			.get()
-			.then((response) => {
-				setSizePet(response.size);
-
-				const resultpets = [];
-				db
-					.collection('pet')
-					.orderBy('create_date', 'desc')
-					.limit(LIMIT_PETS)
-					.get()
-					.then((response) => {
-						setStartPets(response.docs[response.docs.length - 1]);
-						
-						response.forEach((doc) => {
-							const pet = doc.data();
-							pet.id = doc.id;
-							resultpets.push(pet);
-						});
-						setPets(resultpets);
-					})
-					.catch();
-			})
-			.catch();
-	}, []);
-
-	const handleLoadMore = () => {
-		const resultPets = [];
-		console.log('por aca maestro')
-		console.log(pets.length)
-		pets.length < sizePet && setLoadingPet(true);
-		console.log('esto es lo que hay')
-		console.log(startPets)
-		db
-			.collection('pet')
-			.orderBy('create_date', 'desc')
-			.startAfter(startPets.data().create_date)
-			.limit(LIMIT_PETS)
-			.get()
-			.then((response) => {
-				if (response.docs.length < 0) {
-					setStartPets(response.docs[response.docs.length - 1]);
-				} else {
-					setLoadingPet(false);
-				}
-	
-				response.forEach((doc) => {
-					const pet = doc.data();
-					pet.id = doc.id;
-					resultPets.push(pets);
-				});
-	
-				setPets([ ...pets, ...resultPets ]);
-			})
-			.catch();
-	};
+		listRecords(
+		  'pet',
+		  setTotalMissingPets,
+		  setMissingPets,
+		  setStartMissingPets
+		);
+	  }, []);
 
 	return (
 		<View style={styleFloatButton.viewBody}>
-			<Text>Aca aparecen todas las mascotas registradas</Text>
-			<ListPets pets={pets} handleLoadMore={handleLoadMore} loadingPet={loadingPet} />
+			<ListRecords elements={missingPets} isLoading={isLoading} showPet={true}/>
+			
 			{user && (
 				<Icon
 					type="material-community"

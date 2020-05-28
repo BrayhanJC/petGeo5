@@ -51,8 +51,10 @@ function CreateComedogForm(props) {
             description: description,
             location: locationComeDog,
             image: response,
-            createAt: new Date(),
-            createBy: firebase.auth().currentUser.uid,
+            //createAt: new Date(),
+            create_date: new Date(),
+            //createBy: firebase.auth().currentUser.uid,
+            create_uid: firebase.auth().currentUser.uid
           },
           "comedogs",
           navigation,
