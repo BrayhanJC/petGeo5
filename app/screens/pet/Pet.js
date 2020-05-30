@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { firebaseApp } from '../../utils/FireBase';
@@ -6,9 +6,10 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { styleFloatButton } from '../../src/css/FloatButton';
 import ListPets from '../../components/pet/ListPets';
-import { listRecords, handleLoadMore } from "../../utils/SaveRecord";
+import { listRecords, handleLoadMore } from '../../utils/SaveRecord';
 import ListRecords from '../../components/formList/ListRecords';
-import ListRecordsForm from "../../components/formMain/ListRecordsForm";
+//import ListRecordsForm from "../../components/formMain/ListRecordsForm";
+import { useFocusEffect } from '@react-navigation/native';
 const LIMIT_PETS = 5;
 
 function Pet(props) {
@@ -16,10 +17,10 @@ function Pet(props) {
 	const { navigation } = props;
 	const [ user, setUser ] = useState(null);
 
-	const [missingPets, setMissingPets] = useState([]);
-	const [totalMissingPets, setTotalMissingPets] = useState(0);
-	const [startMissingPets, setStartMissingPets] = useState(null);
-	const [isLoading, setIsLoading] = useState(false);
+	const [ Pets, setPets ] = useState([]);
+	const [ totalPets, setTotalPets ] = useState(0);
+	const [ startPets, setStartPets ] = useState(null);
+	const [ isLoading, setIsLoading ] = useState(false);
 
 	useEffect(() => {
 		firebase.auth().onAuthStateChanged((userInfo) => {
@@ -27,19 +28,16 @@ function Pet(props) {
 		});
 	}, []);
 
-	useEffect(() => {
-		listRecords(
-		  'pet',
-		  setTotalMissingPets,
-		  setMissingPets,
-		  setStartMissingPets
-		);
-	  }, []);
+	useFocusEffect(
+		useCallback(() => {
+			listRecords('pet', setTotalPets, setPets, setStartPets);
+		}, [])
+	);
 
 	return (
 		<View style={styleFloatButton.viewBody}>
-			<ListRecords elements={missingPets} isLoading={isLoading} showPet={true}/>
-			
+			<ListRecords elements={Pets} navigation={navigation} isLoading={isLoading} showPet={true} />
+
 			{user && (
 				<Icon
 					type="material-community"

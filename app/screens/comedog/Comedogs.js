@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { styles } from '../../src/css/Comedogs';
 import { firebaseApp } from '../../utils/FireBase';
 import firebase from 'firebase/app';
-import { listRecords, handleLoadMore } from "../../utils/SaveRecord";
+import { useFocusEffect } from '@react-navigation/native';
+
+import { listRecords, handleLoadMore } from '../../utils/SaveRecord';
 //import ListRecordsForm from "../../components/formMain/ListRecordsForm";
 import ListRecords from '../../components/formList/ListRecords';
+
 /***
  * Allows to see all the news of the veterinary centers and animal foundations
  */
@@ -15,12 +18,11 @@ function Comedogs(props) {
 	const { navigation } = props;
 	const [ user, setUser ] = useState(null);
 
-	const [missingPets, setMissingPets] = useState([]);
-	const [totalMissingPets, setTotalMissingPets] = useState(0);
-	const [startMissingPets, setStartMissingPets] = useState(null);
-	const [isLoading, setIsLoading] = useState(false);
-  
-	
+	const [ Comedog, setComedog ] = useState([]);
+	const [ totalComedog, setTotalComedog ] = useState(0);
+	const [ startComedog, setStartComedog ] = useState(null);
+	const [ isLoading, setIsLoading ] = useState(false);
+
 	useEffect(() => {
 		firebase.auth().onAuthStateChanged((userInfo) => {
 			//console.log(userInfo)
@@ -28,27 +30,24 @@ function Comedogs(props) {
 		});
 	}, []);
 
+	useFocusEffect(
+		useCallback(() => {
+			listRecords('comedogs', setTotalComedog, setComedog, setStartComedog);
+		}, [])
+	);
 
-	useEffect(() => {
-		listRecords(
-		  "comedogs",
-		  setTotalMissingPets,
-		  setMissingPets,
-		  setStartMissingPets
-		);
-	  }, []);
 
 	return (
 		<View style={styles.viewBody}>
-			<ListRecords elements={missingPets} isLoading={isLoading} />
+			<ListRecords elements={Comedog} isLoading={isLoading} navigation={navigation} navigator='ViewComedog'/>
 			{user && (
 				<Icon
 					type="material-community"
 					name="plus"
 					color="#1A89E7"
 					reverse
-                    containerStyle={styles.btnContainer}
-                    onPress={ () => navigation.navigate('CreateComedog')}
+					containerStyle={styles.btnContainer}
+					onPress={() => navigation.navigate('CreateComedog')}
 				/>
 			)}
 		</View>

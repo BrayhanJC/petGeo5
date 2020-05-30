@@ -3,7 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import MissingPetsScreen from "../../screens/missingPets/MissingPets";
 import AddMissingPet from "../../screens/missingPets/AddMessingPet";
 import AvatarIcon from "../../components/AvatarIcon";
-
+import MissingPetView from '../../screens/missingPets/MissingPetView'
 const Stack = createStackNavigator();
 
 /***
@@ -29,6 +29,7 @@ function MissingPetsStack() {
           headerLeft: () => <AvatarIcon />,
         }}
       />
+      <Stack.Screen name="ViewMissingPet" component={MissingPetView} />
     </Stack.Navigator>
   );
 }

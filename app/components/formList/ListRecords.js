@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { Image } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
 import { size } from 'lodash';
 import {
 	styleLoadingRecords,
@@ -16,51 +17,39 @@ import {
 import RenderItems from './RenderItems';
 import FooterList from './FooterList';
 import RendenderItemsPet from './RenderItemsPet';
-import RenderItemsPetControl from './RenderItemsPetControl'
-function ListRecords(props) {
-	const { elements, isLoading, handleLoadMore, showPet, showPetControl } = props;
+import RenderItemsPetControl from './RenderItemsPetControl';
+import RenderItemsPetDoctor from './RenderItemsPetDoctor';
 
-		console.log('entrando al list')
-		console.log(showPet)
-		console.log(showPetControl)
+function ListRecords(props) {
+	const navigation = useNavigation();
+	const { elements, isLoading, handleLoadMore, showPet, showPetControl, showPetDoctor, navigator } = props;
+
+	console.log('entrando al list para pasar el navigation');
+	console.log(navigation);
+	console.log('***');
+	console.log('-----');
+	//console.log(showPet);
+	//console.log(showPetControl);
 	return (
 		<View>
 			{size(elements) > 0 ? (
 				<FlatList
 					data={elements}
 					renderItem={(elementData) => {
-						if (showPet){
-							return (<RendenderItemsPet
-								elements={elementData}
-								keyExtractor={(item, index) => index.toString()}
-								onEndReachedThreshold={0.5}
-								onEndReached={handleLoadMore}
-								ListFooterComponent={<FooterList isLoading={isLoading} />}
-							/>)
+						if (showPet) {
+							return <RendenderItemsPet elements={elementData} navigation={navigation} />;
+						} else if (showPetControl) {
+							return <RenderItemsPetControl elements={elementData} navigation={navigation} />;
+						} else if (showPetDoctor) {
+							return <RenderItemsPetDoctor elements={elementData} navigation={navigation} />;
+						} else {
+							return <RenderItems elements={elementData} navigation={navigation} navigator={navigator} />;
 						}
-						else if (showPetControl){
-							
-							return (<RenderItemsPetControl
-								elements={elementData}
-								keyExtractor={(item, index) => index.toString()}
-								onEndReachedThreshold={0.5}
-								onEndReached={handleLoadMore}
-								ListFooterComponent={<FooterList isLoading={isLoading} />}
-							/>)
-							
-						}
-						else{
-							return (<RenderItems
-								elements={elementData}
-								keyExtractor={(item, index) => index.toString()}
-								onEndReachedThreshold={0.5}
-								onEndReached={handleLoadMore}
-								ListFooterComponent={<FooterList isLoading={isLoading} />}
-							/>)
-						}
-					}
-				
-				}
+					}}
+					keyExtractor={(item, index) => index.toString()}
+					onEndReachedThreshold={0.5}
+					onEndReached={handleLoadMore}
+					ListFooterComponent={<FooterList isLoading={isLoading} />}
 				/>
 			) : (
 				<View style={styleLoadingRecords.loadingRecordsStyle}>

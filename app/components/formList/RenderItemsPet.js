@@ -15,25 +15,21 @@ import {
 } from '../../src/css/ListRecord';
 
 function RendenderItemsPet(props) {
-	const { elements } = props;
-	const { image_id, name, type, sex } = elements.item;
+	const { elements, navigation } = props;
+	const { id, image_id, name, type, sex } = elements.item;
 	const mainImage = image_id[0];
-    console.log(elements.item)
-    console.log('hola')
+
 	const goElement = () => {
-		console.log('ok');
+		navigation.navigate('ViewPet', {
+			id,
+			name
+		})
 	};
 
 	return (
 		<TouchableOpacity onPress={goElement}>
 			<View style={styleTouchableViewRecords.touchableViewRecordsStyle}>
 				<View style={styleTouchableViewImageRecords.touchableViewImageRecordsStyle}>
-					{/* <Image
-						resizeMode="cover"
-						PlaceholderContent={<ActivityIndicator color="#fff" />}
-						source={mainImage ? { uri: mainImage } : require('../../../assets/img/not_found.png')}
-						style={touchableImageRecords.touchableImageRecordsStyle}
-					/> */}
 
 					<Avatar
 						xlarge

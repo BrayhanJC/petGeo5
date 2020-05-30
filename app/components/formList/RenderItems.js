@@ -15,12 +15,18 @@ import {
 } from '../../src/css/ListRecord';
 
 function RendenderItems(props) {
-	const { elements } = props;
-	const { image, name, address, description } = elements.item;
+	const { elements, navigation, navigator } = props;
+	const { id, image, name, address, description } = elements.item;
 	const mainImage = image[0];
+
 
 	const goElement = () => {
 		console.log('ok');
+		console.log(navigation)
+		navigation.navigate(navigator, {
+			id,
+			name
+		})
 	};
 
 	return (

@@ -2,7 +2,6 @@ import * as React from 'react';
 import { View, Text, Image, Button } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
-import { useNavigation } from '@react-navigation/native';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 
 import PetDoctorDrawer from './PetDoctorDrawer'

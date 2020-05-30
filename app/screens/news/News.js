@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { styles } from '../../src/css/News';
@@ -6,6 +6,7 @@ import { firebaseApp } from '../../utils/FireBase';
 import firebase from 'firebase/app';
 import { listRecords, handleLoadMore } from '../../utils/SaveRecord';
 import ListRecords from '../../components/formList/ListRecords';
+import { useFocusEffect } from '@react-navigation/native';
 
 /***
  * Allows to see all the news of the veterinary centers and animal foundations
@@ -27,13 +28,15 @@ function News(props) {
 		});
 	}, []);
 
-	useEffect(() => {
-		listRecords('news', setTotalNews, setNews, setStartNews);
-	}, []);
+	useFocusEffect(
+		useCallback(() => {
+			listRecords('news', setTotalNews, setNews, setStartNews);
+		}, [])
+	);
 
 	return (
 		<View style={styles.viewBody}>
-			<ListRecords elements={News} isLoading={isLoading} />
+			<ListRecords elements={News} isLoading={isLoading} navigation={navigation} navigator='ViewNews'/>
 			{user && (
 				<Icon
 					type="material-community"
