@@ -1,12 +1,14 @@
 import React from 'react'
 import { View, Text } from 'react-native'
-import ViewForm from '../../components/viewForm/ViewForm'
+import ViewForm from '../../components/formView/ViewForm'
+import {viewFormStyle} from '../../src/css/ViewForm'
 
-const NewsView = () => {
+const NewsView = (props) => {
+    const {navigation, route} = props
     return (
-        <View>
+        <View style={viewFormStyle.viewBody}>
             <Text>Vista de notiias</Text>
-            <ViewForm props={props}/>
+            <ViewForm navigation={navigation} route={route} collection='news'/>
         </View>
     )
 }

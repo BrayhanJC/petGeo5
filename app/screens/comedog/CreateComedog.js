@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { View, Text } from 'react-native';
 import Toast from 'react-native-easy-toast';
 import Loading from '../../components/Loading';

@@ -24,10 +24,6 @@ function ListRecords(props) {
 	const navigation = useNavigation();
 	const { elements, isLoading, handleLoadMore, showPet, showPetControl, showPetDoctor, navigator } = props;
 
-	console.log('entrando al list para pasar el navigation');
-	console.log(navigation);
-	console.log('***');
-	console.log('-----');
 	//console.log(showPet);
 	//console.log(showPetControl);
 	return (

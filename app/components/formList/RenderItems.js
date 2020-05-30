@@ -21,8 +21,7 @@ function RendenderItems(props) {
 
 
 	const goElement = () => {
-		console.log('ok');
-		console.log(navigation)
+
 		navigation.navigate(navigator, {
 			id,
 			name

@@ -42,10 +42,11 @@ function AddMissinPetForm(props) {
             description: description,
             location: locationMissingPet,
             image: response,
-            //createAt: new Date(),
             create_date: new Date(),
-            //createBy: firebase.auth().currentUser.uid,
-            create_uid: firebase.auth().currentUser.uid
+            create_uid: firebase.auth().currentUser.uid,
+						quantityVoting: 0,
+						rating: 0,
+						ratingTotal: 0
           },
           "missingPets",
           navigation,

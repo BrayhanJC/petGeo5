@@ -20,10 +20,8 @@ function RenderItemsPetDoctor(props) {
 	const { elements, navigation } = props;
 	const { id, image_id, name, description } = elements.item;
 	const mainImage = image_id[0];
-	console.log('por aca');
-	console.log(navigation);
+
 	//console.log(elements)
-	console.log('hola desde los veterinaios');
 	const goElement = () => {
 		console.log('listo');
 		navigation.navigate('ViewPetDoctor', {
