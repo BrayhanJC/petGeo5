@@ -35,7 +35,7 @@ function PetControl(props) {
 
 	return (
 		<View style={styleFloatButton.viewBody}>
-			<ListRecords elements={PetControl} navigation={navigation} isLoading={isLoading} showPet={false} showPetControl={true} />
+			<ListRecords elements={PetControl} navigation={navigation} isLoading={isLoading} showPet={false} showPetControl={true} user={user}/>
 			{user && (
 				<Icon
 					type="material-community"

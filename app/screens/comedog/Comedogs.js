@@ -39,7 +39,7 @@ function Comedogs(props) {
 
 	return (
 		<View style={styles.viewBody}>
-			<ListRecords elements={Comedog} isLoading={isLoading} navigation={navigation} navigator='ViewComedog'/>
+			<ListRecords elements={Comedog} isLoading={isLoading} navigation={navigation} navigator='ViewComedog' user={user}/>
 			{user && (
 				<Icon
 					type="material-community"

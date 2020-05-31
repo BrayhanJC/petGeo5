@@ -23,14 +23,13 @@ function RendenderItemsPet(props) {
 		navigation.navigate('ViewPet', {
 			id,
 			name
-		})
+		});
 	};
 
 	return (
 		<TouchableOpacity onPress={goElement}>
 			<View style={styleTouchableViewRecords.touchableViewRecordsStyle}>
 				<View style={styleTouchableViewImageRecords.touchableViewImageRecordsStyle}>
-
 					<Avatar
 						xlarge
 						style={touchableImageRecords.touchableImageRecordsStyle}
@@ -39,12 +38,23 @@ function RendenderItemsPet(props) {
 					/>
 				</View>
 				<View style={styleViewFormat.textFormat}>
-				
-					<Text style={styleTouchableNameRecords.touchableNameRecordsStyle}>{name}</Text>
-					<Text style={styletouchableAddressRecords.touchableAddressRecordsStyle}>{type}</Text>
-					<Text style={styleTouchableDescriptionRecordsRecords.touchableDescriptionRecordsStyle}>
-						{sex}...
-					</Text>
+					<View>
+						<Text style={styleTouchableNameRecords.touchableNameRecordsStyle}>{name}</Text>
+					</View>
+					<View style={{ flexDirection: 'row', margin: 5 }}>
+						<View style={{ width: '30%' }}>
+							<Text>Tipo: </Text>
+							<Text style={styleTouchableDescriptionRecordsRecords.touchableDescriptionRecordsStyle}>
+								{type}
+							</Text>
+						</View>
+						<View >
+						<Text>Genero: </Text>
+							<Text style={styleTouchableDescriptionRecordsRecords.touchableDescriptionRecordsStyle}>
+								{sex}
+							</Text>
+						</View>
+					</View>
 				</View>
 			</View>
 		</TouchableOpacity>

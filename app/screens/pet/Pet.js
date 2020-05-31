@@ -36,7 +36,7 @@ function Pet(props) {
 
 	return (
 		<View style={styleFloatButton.viewBody}>
-			<ListRecords elements={Pets} navigation={navigation} isLoading={isLoading} showPet={true} />
+			<ListRecords elements={Pets} navigation={navigation} isLoading={isLoading} showPet={true} user={user}/>
 
 			{user && (
 				<Icon

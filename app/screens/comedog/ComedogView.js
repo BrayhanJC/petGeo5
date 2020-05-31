@@ -8,8 +8,7 @@ const ComedogView = (props) => {
     const { navigation, route} = props
     return (
         <View style={viewFormStyle.viewBody}>
-            <Text>Comedogs</Text>
-            <ViewForm navigation={navigation} route={route} collection='comedogs'/>
+            <ViewForm navigation={navigation} route={route} collection='comedogs' nameInfo='el Comedog'/>
         </View>
     )
 }

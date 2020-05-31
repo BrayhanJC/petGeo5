@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { firebaseApp } from '../../utils/FireBase';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
@@ -7,6 +7,7 @@ import 'firebase/firestore';
 import Loading from '../../components/Loading';
 import ViewAvatar from '../../components/formView/ViewAvatar';
 import TitleItem from '../../components/formView/TitleItem';
+import InfoItem from '../../components/formView/InfoItem';
 
 const db = firebase.firestore(firebaseApp);
 
@@ -35,14 +36,20 @@ const PetDoctorView = (props) => {
 
 	if (!petDoctor) return <Loading isVisible={true} text="Cargando..." />;
 
+	const listInfo = [
+		{
+			text: 'Especialidad: ' + petDoctor.specialty,
+			iconName: 'card-bulleted',
+			iconType: 'material-community',
+			action: null
+		}
+	];
 	return (
-		<View>
-			<Text>Vista Veterinarios</Text>
-			<ViewAvatar image_id={petDoctor.image_id}
-			 image_default= {require("../../../assets/img/doctor.png" )} 
-			/>
-			<TitleItem name={petDoctor.name} description={petDoctor.description} showRating={false}/>
-		</View>
+		<ScrollView vertical>
+			<ViewAvatar image_id={petDoctor.image_id} image_default={require('../../../assets/img/doctor.png')} />
+			<TitleItem name={petDoctor.name} description={petDoctor.description} showRating={false} />
+			<InfoItem name={petDoctor.name} listInfo={listInfo} showMap={false} nameInfo="del Veterinario" />
+		</ScrollView>
 	);
 };
 

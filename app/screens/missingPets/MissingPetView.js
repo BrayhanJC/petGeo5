@@ -7,8 +7,7 @@ const MissingPetView = (props) => {
     const { navigation, route} = props
     return (
         <View style={viewFormStyle.viewBody}>
-            <Text>Missing pet view</Text>
-            <ViewForm navigation={navigation} route={route} collection='missingPets'/>
+            <ViewForm navigation={navigation} route={route} collection='missingPets' nameInfo='sobre la Mascota Extraviada'/>
         </View>
     )
 }
