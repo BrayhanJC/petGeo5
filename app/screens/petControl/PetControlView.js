@@ -6,6 +6,8 @@ import 'firebase/firestore';
 
 import Loading from '../../components/Loading'
 import ViewAvatar from '../../components/formView/ViewAvatar';
+import TitleItem from '../../components/formView/TitleItem';
+
 const db = firebase.firestore(firebaseApp)
 
 const PetControlView = (props) => {
@@ -39,6 +41,7 @@ const PetControlView = (props) => {
 			<ViewAvatar image_id={petControl.image_id}
 			 image_default= {require("../../../assets/img/controlPet.jpg" )} 
 			/>
+			<TitleItem name={petControl.name} description={petControl.description} showRating={false}/>
 		</View>
 	);
 };

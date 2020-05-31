@@ -8,7 +8,7 @@ import AvatarMain from '../AvatarMain';
 import { stylePetForm } from '../../src/css/PetForm';
 import { isEmpty } from 'lodash';
 
-import PetDoctorForm from './PetDoctorForm'
+import PetDoctorForm from './PetDoctorForm';
 import { uploadImageStorage } from '../../utils/UploadImageStorage';
 import { saveCollection } from '../../utils/SaveRecord';
 
@@ -19,20 +19,20 @@ function CreatePetDoctorForm(props) {
 	const [ imageSelected, setImageSelected ] = useState([]);
 	const [ name, setName ] = useState('');
 	const [ specialty, setSpecialty ] = useState('');
-	const [ biography, setBiography ] = useState('');
+	const [ description, setDescription ] = useState('');
 
 	const [ errorName, setErrorName ] = useState('');
-	const [ errorBiography, seterrorBiography ] = useState('');
+	const [ errordescription, seterrordescription ] = useState('');
 
 	const addPetDoctor = () => {
 		if (isEmpty(name)) {
 			//toastRef.current.show('Debe diligenciar el campo Nombre Mascota', 2000);
 			setErrorName('Este campo es requerido');
-		} else if (isEmpty(biography)) {
-			seterrorBiography('Este campo es requerido');
+		} else if (isEmpty(description)) {
+			seterrordescription('Este campo es requerido');
 		} else {
 			setErrorName('');
-			seterrorBiography('');
+			seterrordescription('');
 
 			setIsLoading(true);
 
@@ -41,7 +41,8 @@ function CreatePetDoctorForm(props) {
 					const data = {
 						name: name,
 						specialty: specialty,
-						biography: biography,
+						description: description,
+						//biography: description,
 						image_id: response,
 						create_uid: firebase.auth().currentUser.uid,
 						create_date: new Date()
@@ -77,11 +78,11 @@ function CreatePetDoctorForm(props) {
 				/>
 
 				<PetDoctorForm
-				setSpecialty={setSpecialty}
+					setSpecialty={setSpecialty}
 					setName={setName}
-					setBiography={setBiography}
+					setDescription={setDescription}
 					errorName={errorName}
-					errorBiography={errorBiography}
+					errordescription={errordescription}
 				/>
 
 				<Button buttonStyle={stylePetForm.btnCreate} title="Crear Veterinario" onPress={addPetDoctor} />
