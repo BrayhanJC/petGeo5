@@ -7,7 +7,7 @@ const NewsView = (props) => {
     const {navigation, route} = props
     return (
         <View style={viewFormStyle.viewBody}>
-            <ViewForm navigation={navigation} route={route} collection='news' nameInfo='la Noticia'/>
+            <ViewForm navigation={navigation} route={route} collection='news' nameInfo='la Noticia' navigateTo='CreateReviewNews'/>
         </View>
     )
 }
