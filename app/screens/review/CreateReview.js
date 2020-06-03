@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, Text } from 'react-native';
 import { AirbnbRating, Button, Input } from 'react-native-elements';
 
-
 import { styleCreateReview } from '../../src/css/CreateReview';
 import Toast from 'react-native-easy-toast';
 import Loading from '../../components/Loading';
@@ -11,13 +10,12 @@ import { firebaseApp } from '../../utils/FireBase';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 
-
 const db = firebase.firestore(firebaseApp);
 
 const CreateReview = (props) => {
 	const { navigation, route } = props;
-	console.log(props);
-	console.log(route);
+	//console.log(props);
+	//console.log(route);
 	//el name nos sirve para saber de que stack viene (CreateReviewMissingPet)
 	const { idItem } = route.params;
 	const [ rating, setRating ] = useState(null);
@@ -28,7 +26,7 @@ const CreateReview = (props) => {
 	const toastRef = useRef();
 
 	var type = '';
-	console.log(props.route.name);
+	//console.log(props.route.name);
 	if (props.route.name === 'CreateReviewMissingPet') {
 		type = 'missingPets';
 	}
@@ -39,36 +37,30 @@ const CreateReview = (props) => {
 		type = 'news';
 	}
 
-
-
-    const updateRestaurant = () => {
-        const itemRef = db.collection(type).doc(idItem)
-        itemRef
-        .get()
-        .then( (response) => {
-            const itemData = response.data()
-            const ratingTotal = itemData.ratingTotal + rating
-            const quantityVoting = itemData.quantityVoting + 1
-            const ratingResult = ratingTotal/quantityVoting
-            const val = {
-                rating: ratingResult,
-                ratingTotal,
-                quantityVoting
-            }
-            itemRef
-            .update(val)
-            .then( () => {
-                setIsLoading(false)
-                navigation.goBack()
-            })
-            .catch()
-        })
-        .catch()
-    }
-
-
-
-
+	const updateRestaurant = () => {
+		const itemRef = db.collection(type).doc(idItem);
+		itemRef
+			.get()
+			.then((response) => {
+				const itemData = response.data();
+				const ratingTotal = itemData.ratingTotal + rating;
+				const quantityVoting = itemData.quantityVoting + 1;
+				const ratingResult = ratingTotal / quantityVoting;
+				const val = {
+					rating: ratingResult,
+					ratingTotal,
+					quantityVoting
+				};
+				itemRef
+					.update(val)
+					.then(() => {
+						setIsLoading(false);
+						navigation.goBack();
+					})
+					.catch();
+			})
+			.catch();
+	};
 
 	const addReview = () => {
 		if (!rating) {
@@ -78,30 +70,30 @@ const CreateReview = (props) => {
 		} else if (!review) {
 			toastRef.current.show('El comentario es obligatorio');
 		} else {
-			setIsLoading(true)
+			setIsLoading(true);
 			const user = firebase.auth().currentUser;
 			const payload = {
 				user_id: user.uid,
 				avatar: user.photoURL,
-				idItem: idItem,
-				title: title,
-				review: review,
+				idItem,
+				title,
+				review,
 				create_date: new Date(),
-				type: type
+				type,
+				rating
 			};
 
-			
 			db
-			.collection('reviews')
-			.add(payload)
-			.then( () => {
-                //setIsLoading(false)
-                updateRestaurant()
-			})
-			.catch( ()=>{
-			    toastRef.current.show('Error al enviar el comentario')
-			    setIsLoading(false)
-			})
+				.collection('reviews')
+				.add(payload)
+				.then(() => {
+					//setIsLoading(false)
+					updateRestaurant();
+				})
+				.catch(() => {
+					toastRef.current.show('Error al enviar el comentario');
+					setIsLoading(false);
+				});
 		}
 	};
 

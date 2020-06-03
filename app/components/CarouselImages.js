@@ -5,7 +5,7 @@ import Carousel from 'react-native-snap-carousel';
 
 const CarouselImages = (props) => {
 	const { image_ids, height, width } = props;
-	console.log(image_ids);
+	//console.log(image_ids);
 	const renderItem = ({ item }) => {
 		return (
 			<Image
