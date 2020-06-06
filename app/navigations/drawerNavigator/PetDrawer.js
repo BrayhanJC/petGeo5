@@ -7,7 +7,7 @@ import { Icon } from 'react-native-elements';
 import PetScreen from '../../screens/pet/Pet';
 import CreatePet from '../../screens/pet/CreatePet'
 import AvatarIcon from '../../components/AvatarIcon'
-
+import PetView from '../../screens/pet/PetView'
 const Stack = createStackNavigator();
 
 /***
@@ -41,6 +41,7 @@ function PetDrawer() {
 					headerRight: () => <AvatarIcon />
 				}}
 			/>
+			<Stack.Screen name="ViewPet" component={PetView} />
 		</Stack.Navigator>
 	);
 }

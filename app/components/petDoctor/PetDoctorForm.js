@@ -5,7 +5,7 @@ import { Dropdown } from 'react-native-material-dropdown';
 import { styleCreateForm } from '../../src/css/CreateForm';
 
 function PetForm(props) {
-	const { setSpecialty, setName, setBiography, errorName, errorBiography } = props;
+	const { setSpecialty, setName, setDescription, errorName, errorBiography } = props;
 
 	const SPECIALITY = [
 		{
@@ -58,7 +58,7 @@ function PetForm(props) {
 					placeholderTextColor="grey"
 					multiline={true}
 					errorMessage={errorBiography}
-					onChange={(even) => setBiography(even.nativeEvent.text)}
+					onChange={(even) => setDescription(even.nativeEvent.text)}
 				/>
 			</View>
 		</View>

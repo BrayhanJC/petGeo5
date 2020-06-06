@@ -8,7 +8,7 @@ const Stack = createStackNavigator();
 import PetControlScreen from '../../screens/petControl/PetControl';
 import CreatePetControl from '../../screens/petControl/CreatePetControl';
 import AvatarIcon from '../../components/AvatarIcon';
-
+import PetControlView from '../../screens/petControl/PetControlView'
 /***
  * Create stack nav pets control
  * show all pets controls register by user
@@ -41,6 +41,8 @@ function PetControlDrawer() {
 					headerRight: () => <AvatarIcon />
 				}}
 			/>
+
+			<Stack.Screen name="ViewPetControl" component={PetControlView} />
 		</Stack.Navigator>
 	);
 }

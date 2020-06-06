@@ -11,33 +11,47 @@ export const loadingRecords = {
 export const touchableViewRecords = {
   touchableViewRecordsStyle: {
     flexDirection: "row",
-    margin: 10,
+    marginTop: 7,
+    marginLeft: 10,
+    marginRight:10,
+    borderColor: "#C2C2C2",
+    borderWidth: 3,
+    borderBottomRightRadius:40,
+    borderTopRightRadius: 40,
+    borderBottomLeftRadius: 20,
+    borderTopLeftRadius: 20,
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 0.2
   },
 };
 
 export const touchableViewImageRecords = {
   touchableViewImageRecordsStyle: {
-    marginRight: 15,
+    marginLeft: 1,
+
   },
 };
 
 export const touchableImageRecords = {
   touchableImageRecordsStyle: {
-    width: 80,
-    height: 80,
+    width: 75,
+    height: 75,
+    margin: 3
   },
 };
 
 export const touchableNameRecords = {
   touchableNameRecordsStyle: {
     fontWeight: "bold",
+    fontSize:18
   },
 };
 
 export const touchableAddressRecords = {
   touchableAddressRecordsStyle: {
     padding: 2,
-    color: "grey",
+    color: "black",
+    fontStyle: 'italic'
   },
 };
 
@@ -45,7 +59,7 @@ export const touchableDescriptionRecords = {
   touchableDescriptionRecordsStyle: {
     paddingTop: 2,
     color: "grey",
-    width: 300,
+    width: 250,
   },
 };
 
@@ -57,7 +71,17 @@ export const noFoundRecords = {
   },
 };
 
+
+export const textFormatView = {
+  textFormat: {
+    margin: 10,
+
+  },
+};
+export const styleViewFormat = StyleSheet.create(textFormatView);
+
 export const styleLoadingRecords = StyleSheet.create(loadingRecords);
+
 export const styleTouchableViewRecords = StyleSheet.create(
   touchableViewRecords
 );
@@ -74,3 +98,5 @@ export const styleTouchableDescriptionRecordsRecords = StyleSheet.create(
   touchableDescriptionRecords
 );
 export const styleNoFoundRecords = StyleSheet.create(noFoundRecords);
+
+

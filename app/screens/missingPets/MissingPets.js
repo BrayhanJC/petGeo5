@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { View, Text } from "react-native";
 import { Icon } from "react-native-elements";
 import firebase from "firebase/app";
 import { viewBody, buttonFormFloating } from "../../src/css/GeneralStyles";
 import { listRecords, handleLoadMore } from "../../utils/SaveRecord";
-import ListRecordsForm from "../../components/formMain/ListRecordsForm";
+//import ListRecordsForm from "../../components/formMain/ListRecordsForm";
+import ListRecords from "../../components/formList/ListRecords";
+import { useFocusEffect } from "@react-navigation/native";
+
 /***
  * Allows to see all the news of the veterinary centers and animal foundations
  */
@@ -23,28 +26,24 @@ function MissingPets(props) {
     });
   }, []);
 
-  useEffect(() => {
-    listRecords(
-      "missingPets",
-      setTotalMissingPets,
-      setMissingPets,
-      setStartMissingPets
-    );
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      listRecords(
+        "missingPets",
+        setTotalMissingPets,
+        setMissingPets,
+        setStartMissingPets
+      );
+    }, [])
+  );
 
   return (
     <View style={viewBody.viewBody}>
-      <ListRecordsForm
+      <ListRecords
         elements={missingPets}
         isLoading={isLoading}
-        handleLoadMore={handleLoadMore(
-          "missingPets",
-          { missingPets },
-          { totalMissingPets },
-          { setIsLoading },
-          { startMissingPets },
-          { setStartMissingPets }
-        )}
+        navigation={navigation}
+        navigator="ViewMissingPet"
       />
       {user && (
         <Icon

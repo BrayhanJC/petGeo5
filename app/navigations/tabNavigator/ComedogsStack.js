@@ -3,8 +3,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 
 import ComedogsScreen from '../../screens/comedog/Comedogs';
-import AvatarIcon from '../../components/AvatarIcon'
-import CreateComedog from '../../screens/comedog/CreateComedog'
+import AvatarIcon from '../../components/AvatarIcon';
+import CreateComedog from '../../screens/comedog/CreateComedog';
+import ComedogView from '../../screens/comedog/ComedogView';
+import CreateReview from '../../screens/review/CreateReview';
+
 const Stack = createStackNavigator();
 
 /***
@@ -12,7 +15,6 @@ const Stack = createStackNavigator();
  * Show all the news of the veterinary centers and animal foundations
  */
 function ComedogsStack() {
-
 	return (
 		<Stack.Navigator>
 			<Stack.Screen
@@ -20,7 +22,7 @@ function ComedogsStack() {
 				component={ComedogsScreen}
 				options={{
 					title: 'Comedogs',
-					headerLeft: () => <AvatarIcon/>
+					headerLeft: () => <AvatarIcon />
 				}}
 			/>
 			<Stack.Screen
@@ -28,7 +30,15 @@ function ComedogsStack() {
 				component={CreateComedog}
 				options={{
 					title: 'Crear Comedog',
-					headerRight: () => <AvatarIcon/>
+					headerRight: () => <AvatarIcon />
+				}}
+			/>
+			<Stack.Screen name="ViewComedog" component={ComedogView} />
+			<Stack.Screen
+				name="CreateReviewComedog"
+				component={CreateReview}
+				options={{
+					title: 'Nuevo Comentario'
 				}}
 			/>
 		</Stack.Navigator>

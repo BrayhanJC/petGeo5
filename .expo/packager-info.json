@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "expoServerPort": 19000,
   "expoServerNgrokUrl": "https://mu-eay.jucazuse.petgeo5.exp.direct",
   "packagerNgrokUrl": "https://packager.mu-eay.jucazuse.petgeo5.exp.direct",
@@ -7,4 +8,13 @@
   "packagerPid": 5184,
   "webpackServerPort": null,
   "devToolsPort": 19002
+=======
+  "devToolsPort": 19002,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
+>>>>>>> develop
 }

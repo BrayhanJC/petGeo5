@@ -5,12 +5,12 @@ import { useNavigation } from '@react-navigation/native';
 import { Icon } from 'react-native-elements';
 
 import PetScreen from '../../screens/pet/Pet';
-import CreatePet from '../../screens/pet/CreatePet'
+import CreatePet from '../../screens/pet/CreatePet';
 
-import PetDoctorScreen from '../../screens/petDoctor/PetDoctor'
-import CreatePetDoctor from '../../screens/petDoctor/CreatePetDoctor'
-import AvatarIcon from '../../components/AvatarIcon'
-
+import PetDoctorScreen from '../../screens/petDoctor/PetDoctor';
+import CreatePetDoctor from '../../screens/petDoctor/CreatePetDoctor';
+import AvatarIcon from '../../components/AvatarIcon';
+import PetDoctorView from '../../screens/petDoctor/PetDoctorView';
 const Stack = createStackNavigator();
 
 /***
@@ -44,6 +44,7 @@ function PetDoctorDrawer() {
 					headerRight: () => <AvatarIcon />
 				}}
 			/>
+			<Stack.Screen name="ViewPetDoctor" component={PetDoctorView} />
 		</Stack.Navigator>
 	);
 }

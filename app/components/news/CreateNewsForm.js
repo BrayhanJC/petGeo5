@@ -41,8 +41,11 @@ function CreateNewsForm(props) {
             description: description,
             location: locationNew,
             image: response,
-            createAt: new Date(),
-            createBy: firebase.auth().currentUser.uid,
+            create_date: new Date(),
+            create_uid: firebase.auth().currentUser.uid,
+						quantityVoting: 0,
+						rating: 0,
+						ratingTotal: 0
           },
           "news",
           navigation,
