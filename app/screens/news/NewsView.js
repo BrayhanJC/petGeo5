@@ -5,6 +5,7 @@ import { viewFormStyle } from "../../src/css/ViewForm";
 
 const NewsView = (props) => {
   const { navigation, route } = props;
+  console.log("route news", route);
   return (
     <View style={viewFormStyle.viewBody}>
       <ViewForm
