@@ -25,14 +25,17 @@ function CreateNewsForm(props) {
   const [locationNew, setLocationNew] = useState(null);
 
   const addNews = () => {
-    setIsLoading(true);
+    setIsLoading(false);
     if (!title || !address || !description) {
       toastRef.current.show("Todos los campos del formulario son obligatorios");
     } else if (size(imageSelected) === 0) {
-      toastRef.current.show("El evento debe de tener por lo menos una imagen");
+      toastRef.current.show(
+        "La noticia o evento debe de tener por lo menos una imagen"
+      );
     } else if (!locationNew) {
       toastRef.current.show("Debes localizar tu noticia o evento en el mapa");
     } else {
+      setIsLoading(true);
       uploadImageStorage(imageSelected, "news").then((response) => {
         saveCollection(
           {
@@ -43,15 +46,15 @@ function CreateNewsForm(props) {
             image: response,
             create_date: new Date(),
             create_uid: firebase.auth().currentUser.uid,
-						quantityVoting: 0,
-						rating: 0,
-						ratingTotal: 0
+            quantityVoting: 0,
+            rating: 0,
+            ratingTotal: 0,
           },
           "news",
           navigation,
           "HomeStack",
           toastRef,
-          setloading,
+          setIsLoading,
           "Error al subir la noticia"
         );
       });
