@@ -8,6 +8,10 @@ import { styleFloatButton } from '../../src/css/FloatButton';
 import 'firebase/firestore';
 import { listRecords, handleLoadMore } from '../../utils/SaveRecord';
 import ListRecords from '../../components/formList/ListRecords';
+import Search from '../../components/formSearch/Search';
+import NotFoundItem from '../../components/formSearch/NotFoundItem';
+import { size, isEmpty } from 'lodash';
+
 /***
  * Allows create controls of pets, to create controls
  */
@@ -20,6 +24,10 @@ function PetControl(props) {
 	const [ totalPetControl, setTotalPetControl ] = useState(0);
 	const [ startPetControl, setStartPetControl ] = useState(null);
 	const [ isLoading, setIsLoading ] = useState(false);
+
+	//variables para el buscador
+	const [ item, setItem ] = useState([]);
+	const [ search, setSearch ] = useState('');
 
 	useEffect(() => {
 		firebase.auth().onAuthStateChanged((userInfo) => {
@@ -35,7 +43,41 @@ function PetControl(props) {
 
 	return (
 		<View style={styleFloatButton.viewBody}>
-			<ListRecords elements={PetControl} navigation={navigation} isLoading={isLoading} showPet={false} showPetControl={true} user={user}/>
+			<Search
+				search={search}
+				setSearch={setSearch}
+				setItem={setItem}
+				item={item}
+				collection="petControl"
+				placeholderDefault="Buscar Controles..."
+			/>
+
+			{!isEmpty(search) && size(item) > 0 ? (
+				<View style={styleFloatButton.viewBody}>
+					<ListRecords
+						elements={item}
+						navigation={navigation}
+						isLoading={isLoading}
+						showPet={false}
+						showPetControl={true}
+						user={user}
+					/>
+				</View>
+			) : (
+				!isEmpty(search) && <NotFoundItem />
+			)}
+
+			{isEmpty(search) && (
+				<ListRecords
+					elements={PetControl}
+					navigation={navigation}
+					isLoading={isLoading}
+					showPet={false}
+					showPetControl={true}
+					user={user}
+				/>
+			)}
+
 			{user && (
 				<Icon
 					type="material-community"

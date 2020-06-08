@@ -10,7 +10,11 @@ import { listRecords, handleLoadMore } from '../../utils/SaveRecord';
 import ListRecords from '../../components/formList/ListRecords';
 //import ListRecordsForm from "../../components/formMain/ListRecordsForm";
 import { useFocusEffect } from '@react-navigation/native';
-const LIMIT_PETS = 5;
+
+import Search from '../../components/formSearch/Search';
+import NotFoundItem from '../../components/formSearch/NotFoundItem';
+
+import { size, isEmpty } from 'lodash';
 
 function Pet(props) {
 	//se puede obtener porque esta en la screen principal
@@ -21,6 +25,10 @@ function Pet(props) {
 	const [ totalPets, setTotalPets ] = useState(0);
 	const [ startPets, setStartPets ] = useState(null);
 	const [ isLoading, setIsLoading ] = useState(false);
+
+	//variables para el buscador
+	const [ item, setItem ] = useState([]);
+	const [ search, setSearch ] = useState('');
 
 	useEffect(() => {
 		firebase.auth().onAuthStateChanged((userInfo) => {
@@ -34,9 +42,37 @@ function Pet(props) {
 		}, [])
 	);
 
+	//console.log('mirando ando');
+	//console.log(item);
+	//console.log(search)
 	return (
 		<View style={styleFloatButton.viewBody}>
-			<ListRecords elements={Pets} navigation={navigation} isLoading={isLoading} showPet={true} user={user}/>
+			<Search
+				search={search}
+				setSearch={setSearch}
+				setItem={setItem}
+				item={item}
+				collection="pet"
+				placeholderDefault="Buscar Mascotas..."
+			/>
+
+			{!isEmpty(search) && size(item) > 0 ? (
+				<View style={styleFloatButton.viewBody}>
+					<ListRecords
+						elements={item}
+						navigation={navigation}
+						isLoading={isLoading}
+						showPet={true}
+						user={user}
+					/>
+				</View>
+			) : (
+				!isEmpty(search) && <NotFoundItem />
+			)}
+
+			{isEmpty(search) && (
+				<ListRecords elements={Pets} navigation={navigation} isLoading={isLoading} showPet={true} user={user} />
+			)}
 
 			{user && (
 				<Icon

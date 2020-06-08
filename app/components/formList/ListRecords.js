@@ -25,24 +25,12 @@ function ListRecords(props) {
 	const navigation = useNavigation();
 	const { elements, isLoading, handleLoadMore, showPet, showPetControl, showPetDoctor, navigator, user } = props;
 
-	//console.log(showPet);
-	//console.log(showPetControl);
-	console.log('Listando elementos y viendo que contiene');
-	console.log(elements);
-	console.log(user);
-	console.log(size(elements));
 	var dataRender = elements;
 	if (user) {
-		console.log(user.uid);
-
-		
 
 		if (showPet || showPetControl) {
 			const filtro = (elements) => elements.create_uid == user.uid;
 			var elementsRender = elements.filter(filtro);
-			console.log('el nuevo coso seria');
-			console.log(elementsRender);
-			console.log(size(elementsRender));
 			dataRender = elementsRender;
 		}
 	}
