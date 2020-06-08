@@ -1,7 +1,7 @@
-import React from 'react'
-import { View, Text } from 'react-native'
-import ViewForm from '../../components/formView/ViewForm'
-import {viewFormStyle} from '../../src/css/ViewForm'
+import React from "react";
+import { View, Text } from "react-native";
+import ViewForm from "../../components/formView/ViewForm";
+import { viewFormStyle } from "../../src/css/ViewForm";
 
 const MissingPetView = (props) => {
     const { navigation, route} = props
@@ -12,4 +12,4 @@ const MissingPetView = (props) => {
     )
 }
 
-export default MissingPetView
+export default MissingPetView;

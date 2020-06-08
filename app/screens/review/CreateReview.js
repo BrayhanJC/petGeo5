@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { View, Text } from 'react-native';
-import { AirbnbRating, Button, Input } from 'react-native-elements';
+import React, { useState, useEffect, useRef } from "react";
+import { View, Text } from "react-native";
+import { AirbnbRating, Button, Input } from "react-native-elements";
 
 import { styleCreateReview } from '../../src/css/CreateReview';
 import Toast from 'react-native-easy-toast';
