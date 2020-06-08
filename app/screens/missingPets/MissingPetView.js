@@ -4,19 +4,12 @@ import ViewForm from "../../components/formView/ViewForm";
 import { viewFormStyle } from "../../src/css/ViewForm";
 
 const MissingPetView = (props) => {
-  const { navigation, route } = props;
-  console.log("route missinPets", route);
-  return (
-    <View style={viewFormStyle.viewBody}>
-      <ViewForm
-        navigation={navigation}
-        route={route}
-        collection="missingPets"
-        nameInfo="Mascotas Extraviadas"
-        navigateTo="CreateReviewMissingPet"
-      />
-    </View>
-  );
-};
+    const { navigation, route} = props
+    return (
+        <View style={viewFormStyle.viewBody}>
+            <ViewForm navigation={navigation} route={route} collection='missingPets' nameInfo='sobre la Mascota Extraviada' navigateTo='CreateReviewMissingPet' collection_name='missingPets'/>
+        </View>
+    )
+}
 
 export default MissingPetView;

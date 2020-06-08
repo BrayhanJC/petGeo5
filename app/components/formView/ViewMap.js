@@ -5,11 +5,6 @@ import openMap from 'react-native-open-maps'
 const ViewMap = (props) => {
     const { location, name, height } = props;
     
-
-
-
-
-
     const openMapApp = () => {
 
         openMap({

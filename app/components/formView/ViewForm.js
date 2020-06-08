@@ -15,7 +15,7 @@ import { viewFormStyle } from '../../src/css/ViewForm';
 const db = firebase.firestore(firebaseApp);
 const screenWidth = Dimensions.get('window').width;
 const ViewForm = (props) => {
-	const { navigation, route, collection, nameInfo, navigateTo } = props;
+	const { navigation, route, collection, nameInfo, navigateTo, collection_name } = props;
 	const { name, id } = route.params;
 	const [ item, setItem ] = useState(null);
 	const [ rating, setRating ] = useState(0);
@@ -26,7 +26,7 @@ const ViewForm = (props) => {
 
 	useFocusEffect(
 		useCallback(() => {
-			console.log(collection);
+			//console.log(collection);
 			db
 				.collection(collection)
 				.doc(id)
@@ -52,6 +52,9 @@ const ViewForm = (props) => {
 		}
 	];
 
+
+
+
 	return (
 		<ScrollView vertical style={viewFormStyle.viewBody}>
 			<CarouselImages image_ids={item.image} height={200} width={screenWidth} />
@@ -64,7 +67,7 @@ const ViewForm = (props) => {
 				showMap={true}
 				nameInfo={nameInfo}
 			/>
-			<ListReview navigation={navigation} idItem={item.id} setRating={setRating} navigateTo={navigateTo} />
+			<ListReview navigation={navigation} idItem={item.id} setRating={setRating} navigateTo={navigateTo} collection_name={collection}/>
 		</ScrollView>
 	);
 };
