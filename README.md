@@ -14,6 +14,7 @@ Aplicación móvil hecha en react native para la geolocalización y administraci
 - yarn add @react-navigation/native
 - yarn add @react-navigation/drawer
 - yarn add react-native-open-maps
+- yarn add firesql
 
 
 
