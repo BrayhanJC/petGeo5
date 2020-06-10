@@ -1,19 +1,9 @@
 {
   "devToolsPort": 19002,
-<<<<<<< HEAD
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 3096,
-  "expoServerNgrokUrl": "https://mu-eay.jucazuse.petgeo5.exp.direct",
-  "packagerNgrokUrl": "https://packager.mu-eay.jucazuse.petgeo5.exp.direct",
-  "ngrokPid": 10156,
-=======
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
   "expoServerNgrokUrl": null,
   "packagerNgrokUrl": null,
-  "ngrokPid": null,
->>>>>>> Brayhan
-  "webpackServerPort": null
+  "ngrokPid": null
 }

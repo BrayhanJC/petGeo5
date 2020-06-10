@@ -13,8 +13,6 @@ function Map(props) {
   const { isVisibleMap, setIsVisibleMap, toastRef, setLocationForms } = props;
   const [location, setLocation] = useState(null);
 
-  console.log("aca");
-
   useEffect(() => {
     (async () => {
       const resultPermissions = await Permissions.askAsync(
