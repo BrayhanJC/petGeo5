@@ -49,16 +49,27 @@ function LocalizationMap(props) {
 		})();
 	}, []);
 
+
+
 	useFocusEffect(
 		useCallback(() => {
-			for (let index = 0; index < collections.length; index++) {
-				ListMap(collections[index], setResult);
-			}
+			//for (let index = 0; index < collections.length; index++) {
+				ListMap('comedogs', setResult, resultElements);
+				ListMap('missingPets', setResult, resultElements);
+			//}
 		}, [])
 	);
 
 	console.log(result[0]);
 
+	const returnColor = (collection) =>{
+		if (collection === 'comedogs'){
+			return 'orange'
+		}
+		if (collection === 'missingPets'){
+			return 'red'
+		}
+	}
 	const goElement = (view, id, name) => {
 		//console.log(navigation)
 		//navigation.goBack()
@@ -98,7 +109,7 @@ function LocalizationMap(props) {
 								latitude: record.location.latitude,
 								longitude: record.location.longitude
 							}}
-							pinColor="red"
+							pinColor={returnColor(record.collection) }
 							title={record.name}
 							//description={record.description}
 							//image={require('../../../assets/img/comedog_icon.png')}
