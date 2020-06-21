@@ -25,6 +25,8 @@ export const addForm = {
 	},
 	input: {
 		marginBottom: 3,
+		
+		
 	},
 	inputForm: {
 		
