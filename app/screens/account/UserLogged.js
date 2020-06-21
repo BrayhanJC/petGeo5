@@ -5,47 +5,50 @@ import * as firebase from 'firebase';
 import Toast from 'react-native-easy-toast';
 import Loading from '../../components/Loading';
 
-import InfoUser from '../../components/account/InfoUser'
-import AccountOptions from '../../components/account/AccountOptions'
+import InfoUser from '../../components/account/InfoUser';
+import AccountOptions from '../../components/account/AccountOptions';
 
 function UserLogged() {
 	const [ loading, setLoading ] = useState(false);
-    const [ loadingText, setLoadingText ] = useState('');
-    const [userInfo, setUserInfo] = useState({
+	const [ loadingText, setLoadingText ] = useState('');
+	const [ userInfo, setUserInfo ] = useState({
 		displayName: '',
 		email: ''
-	})
+	});
 	const toastRef = useRef();
-	
+
 	//variable que nos sirve para actualizar la informacion del usuario
-	const [reloadUserInfo, setReloadUserInfo] = useState(false)
-    
+	const [ reloadUserInfo, setReloadUserInfo ] = useState(false);
 
-    //cargamos los datos del usuario 
-    useEffect(() => {
-        (async () => {
-            const user = await firebase.auth().currentUser
-            console.log(user)
-            //cargando datos al userInfo, contiene toda la informacion del usuario
-            setUserInfo(user)
-		})()
-		setReloadUserInfo(false)
-    }, [reloadUserInfo])
-
-
-
+	//cargamos los datos del usuario
+	useEffect(
+		() => {
+			(async () => {
+				const user = await firebase.auth().currentUser;
+				console.log(user);
+				//cargando datos al userInfo, contiene toda la informacion del usuario
+				setUserInfo(user);
+			})();
+			setReloadUserInfo(false);
+		},
+		[]
+	);
 
 	return (
 		<View style={styles.viewUserInfo}>
+			{//se valida que la varable userInfo sea diferente de {} o de null
+			//se pasan el setLoading para poder actualizar el avatar el tiempo real
+			//como tambien para reutilizarlo
+			userInfo && (
+				<InfoUser
+					userInfo={userInfo}
+					toastRef={toastRef}
+					setLoading={setLoading}
+					setLoadingText={setLoadingText}
+				/>
+			)}
 
-            {
-                //se valida que la varable userInfo sea diferente de {} o de null
-				//se pasan el setLoading para poder actualizar el avatar el tiempo real
-				//como tambien para reutilizarlo
-				userInfo && <InfoUser userInfo={userInfo} toastRef={toastRef} setLoading={setLoading} setLoadingText={setLoadingText}/>
-            }
-			
-			<AccountOptions userInfo={userInfo} toastRef={toastRef} setReloadUserInfo={setReloadUserInfo}/>
+			<AccountOptions userInfo={userInfo} toastRef={toastRef} setReloadUserInfo={setReloadUserInfo} />
 			<Button
 				title="Cerrar Sesión"
 				buttonStyle={styles.btnCloseSession}
