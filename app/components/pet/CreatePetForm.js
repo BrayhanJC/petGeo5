@@ -47,8 +47,6 @@ function CreatePetForm(props) {
             create_date: new Date(),
           };
 
-          console.log(data);
-
           saveCollection(
             data,
             "pet",

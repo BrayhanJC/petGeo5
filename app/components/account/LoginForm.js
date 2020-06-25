@@ -37,7 +37,7 @@ function LoginForm(props) {
 					.auth()
 					.signInWithEmailAndPassword(email, password)
 					.then((response) => {
-						console.log('iniciando sesion');
+						//console.log('iniciando sesion');
 						setloading(false);
 						navigation.navigate('Profile');
 					})
@@ -87,6 +87,7 @@ function LoginForm(props) {
 				title="Iniciar Sesión"
 				containerStyle={styles.btnContainerLogin}
 				buttonStyle={styles.btnLogin}
+				titleStyle={styles.btnTitleStyle}
 				onPress={onSubmit}
 			/>
 			<Loading isVisible={loading} text="Iniciando sesion" />
@@ -103,17 +104,24 @@ const styles = StyleSheet.create({
 	},
 	inputForm: {
 		width: '100%',
-		marginTop: 20
+		marginTop: 20,
+		borderRadius: 30,
+		borderWidth: 2,
+		borderColor: '#C2C2C2'
 	},
 	btnContainerLogin: {
 		marginTop: 20,
-		width: '95%'
+		width: '97%'
 	},
 	btnLogin: {
-		backgroundColor: '#1A89E7'
+		backgroundColor: '#1A89E7',
+		borderRadius: 30
 	},
 	iconRight: {
 		color: 'gray'
+	},
+	btnTitleStyle: {
+		fontWeight: 'bold'
 	}
 });
 export default LoginForm;

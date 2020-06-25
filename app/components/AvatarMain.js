@@ -14,11 +14,11 @@ import { styleAvatarMain } from '../src/css/AvatarMain';
  */
 function AvatarMain(props) {
 	//capturando datos del usuario
-	console.log(props);
+	//console.log(props);
 	const { imageDefault, imageSelected, setImageSelected, toastRef } = props;
 
 	const removeImage = (image) => {
-		console.log('removiendo');
+		//console.log('removiendo');
 
 		Alert.alert(
 			'Eliminar Imagen',
@@ -32,7 +32,7 @@ function AvatarMain(props) {
 					text: 'Eliminar',
 
 					onPress: () => {
-						console.log('eliminada');
+						//console.log('eliminada');
 						setImageSelected(filter(imageSelected, (imageUri) => imageUri !== image));
 					}
 				}
@@ -57,7 +57,7 @@ function AvatarMain(props) {
 				aspect: [ 4, 3 ]
 			});
 
-			console.log(result);
+			//console.log(result);
 
 			if (result.cancelled) {
 				toastRef.current.show('Haz cerrado la galeria sin seleccionar ninguna imagen', 2000);

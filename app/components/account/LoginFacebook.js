@@ -16,7 +16,7 @@ function LoginFacebook(props){
 
         const login = async () => {
 
-            console.log('Login ...');
+            //console.log('Login ...');
 
             await Facebook.initializeAsync(FacebookApi.application_id);
 
@@ -32,7 +32,7 @@ function LoginFacebook(props){
                 .auth()
                 .signInWithCredential(credentials)
                 .then( () => {
-                    console.log('ingreso con exito')
+                    //console.log('ingreso con exito')
                     setLoading(false)
                     navigation.navigate('Profile')
                 })

@@ -10,8 +10,6 @@ function InfoUserDrawer(props) {
 	//capturando datos del usuario
 	//const { userInfo: { uid, photoURL, displayName, email } } = props;
 
-	console.log(props);
-
 	return (
 		<View style={styleUserInfo.viewUserInfo}>
 			<Avatar

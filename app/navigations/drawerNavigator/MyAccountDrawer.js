@@ -62,8 +62,7 @@ function MyAccountStack() {
         name="Login"
         component={LoginScreen}
         options={{
-          title: "Cuenta",
-          headerTitle: (props) => <LogoTitle title="Cuenta" />,
+          title: "Inicio de Sesión",
           headerStyle: {
             backgroundColor: "#E0E0E0",
           },

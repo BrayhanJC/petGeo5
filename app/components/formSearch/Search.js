@@ -15,12 +15,12 @@ const Search = (props) => {
 		() => {
 			if (search) {
 				setLoading(true);
-				console.log(search)
+				//console.log(search)
 				fireSQL
 					.query(`SELECT * FROM ${collection} WHERE name LIKE '${search}%' `)
 					.then((response) => {
-						console.log('capturando')
-						console.log(response)
+						//console.log('capturando')
+						//console.log(response)
 						setItem(response);
 						setLoading(false);
 					})

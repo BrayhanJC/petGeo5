@@ -8,7 +8,7 @@ import { useNavigation } from '@react-navigation/native';
  */
 function UserGuest() {
 	const navigation = useNavigation();
-	console.log('estamos desde el UserGuest');
+	//console.log('estamos desde el UserGuest');
 	return (
 		<ScrollView style={styles.viewBody} centerContent={true}>
 			<Image
@@ -27,7 +27,7 @@ function UserGuest() {
 					title="Ver tu Perfil"
 					accessibilityLabel="Learn more about this purple button"
 					onPress={() => {
-						console.log('estamos en el perfil');
+						//console.log('estamos en el perfil');
 						navigation.navigate('Login');
 					}}
 				/>

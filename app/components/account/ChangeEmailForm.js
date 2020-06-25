@@ -42,7 +42,7 @@ function ChangeEmailForm(props) {
 	//funcion que nos permite actualizar el displayName del usuario
 	const onSubmit = () => {
 		setShowError({});
-		console.log(formData);
+		//console.log(formData);
 
 		if (!formData.email) {
 			setShowError({
@@ -66,7 +66,7 @@ function ChangeEmailForm(props) {
 			});
 		} else {
 			setShowError({});
-			console.log('ok');
+			//console.log('ok');
 			setIsLoadig(true);
 			reauthenticate(formData.password)
 				.then(() => {

@@ -10,7 +10,6 @@ function UploadImage(props) {
   const { styleUploadImage, toastRef, imageSelected, setImageSelected } = props;
 
   const removeImage = (image) => {
-    console.log("removiendo");
 
     Alert.alert(
       "Eliminar Imagen",
@@ -52,7 +51,7 @@ function UploadImage(props) {
         aspect: [4, 3],
       });
 
-      console.log(result);
+      //console.log(result);
 
       if (result.cancelled) {
         toastRef.current.show(

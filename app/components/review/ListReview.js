@@ -33,10 +33,10 @@ const ListReview = (props) => {
 						const data = doc.data();
 						data.id = doc.id;
 						resultReview.push(data);
-						console.log(doc.data());
+						//console.log(doc.data());
 					});
 					setReviews(resultReview);
-					console.log(reviews);
+					//console.log(reviews);
 				})
 				.catch();
 		}, [])

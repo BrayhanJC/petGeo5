@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
 import * as firebase from 'firebase';
@@ -7,6 +7,11 @@ import Loading from '../../components/Loading';
 
 import InfoUser from '../../components/account/InfoUser';
 import AccountOptions from '../../components/account/AccountOptions';
+import UserData from './UserData';
+import { getInfoByUser } from '../../utils/SaveRecord';
+
+import { useFocusEffect } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 function UserLogged() {
 	const [ loading, setLoading ] = useState(false);
@@ -16,23 +21,57 @@ function UserLogged() {
 		email: ''
 	});
 	const toastRef = useRef();
+	const navigation = useNavigation();
+	const [ elements, setElements ] = useState('');
+	const [ modalVisible, setModalVisible ] = useState(false);
 
 	//variable que nos sirve para actualizar la informacion del usuario
 	const [ reloadUserInfo, setReloadUserInfo ] = useState(false);
 
 	//cargamos los datos del usuario
-	useEffect(
-		() => {
-			(async () => {
-				const user = await firebase.auth().currentUser;
-				console.log(user);
-				//cargando datos al userInfo, contiene toda la informacion del usuario
-				setUserInfo(user);
-			})();
-			setReloadUserInfo(false);
-		},
-		[]
-	);
+	useEffect(() => {
+		(async () => {
+			const user = await firebase.auth().currentUser;
+
+			console.log(user.uid);
+			//cargando datos al userInfo, contiene toda la informacion del usuario
+			setUserInfo(user);
+
+			if (user) {
+				if (user.uid) {
+					console.log('vamos a consultar si el usuario esta registrado');
+					getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
+					console.log(elements);
+					console.log('el resultado quedo asi ' + modalVisible);
+				}
+			}
+		})();
+		setReloadUserInfo(false);
+	}, []);
+
+	// useFocusEffect(
+	// 	useCallback(() => {
+	// 		(async () => {
+	// 			const user = await firebase.auth().currentUser;
+
+	// 			console.log(user.uid);
+	// 			//cargando datos al userInfo, contiene toda la informacion del usuario
+	// 			setUserInfo(user);
+
+	// 			if (user) {
+	// 				if (user.uid) {
+	// 					console.log('entro');
+	// 					getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
+	// 					console.log(elements);
+	// 				}
+	// 			}
+	// 		})();
+
+	// 		setReloadUserInfo(false);
+	// 	}, [])
+	// );
+
+	console.log('el usuario esta regisrado: ' + modalVisible);
 
 	return (
 		<View style={styles.viewUserInfo}>
@@ -57,6 +96,21 @@ function UserLogged() {
 			/>
 			<Toast ref={toastRef} position="center" opacity={0.9} />
 			<Loading text={loadingText} isVisible={loading} />
+
+			{/***
+			 * Modal que sirve para registrar el tipo de usuario
+			 */
+
+			modalVisible ? (
+				<UserData
+					modalVisible={modalVisible}
+					setModalVisible={setModalVisible}
+					userInfo={userInfo}
+					
+				/>
+			) : (
+				<Text />
+			)}
 		</View>
 	);
 }

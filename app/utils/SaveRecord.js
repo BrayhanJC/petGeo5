@@ -1,89 +1,171 @@
-import { firebaseApp } from "../utils/FireBase";
-import firebase from "firebase/app";
-import "firebase/storage";
-import "firebase/firestore";
+import { firebaseApp } from '../utils/FireBase';
+import firebase from 'firebase/app';
+import 'firebase/storage';
+import 'firebase/firestore';
+import { size } from 'lodash';
+
 const db = firebase.firestore(firebaseApp);
 
 const limitRecords = 20;
 
 export const saveCollection = (
-  collectionData,
-  collectionName,
-  navigation,
-  navigateTo,
-  toastRef,
-  setIsLoading,
-  msgError
+	collectionData,
+	collectionName,
+	navigation,
+	navigateTo,
+	toastRef,
+	setIsLoading,
+	msgError
 ) => {
-  db.collection(collectionName)
-    .add(collectionData)
-    .then(() => {
-      setIsLoading(false);
-      navigation.navigate(navigateTo);
-    })
-    .catch((e) => {
-      console.log(e);
-      setIsLoading(false);
-      toastRef.current.show(msgError);
-    });
+	db
+		.collection(collectionName)
+		.add(collectionData)
+		.then(() => {
+			setIsLoading(false);
+			navigation.navigate(navigateTo);
+		})
+		.catch((e) => {
+			//console.log(e);
+			setIsLoading(false);
+			toastRef.current.show(msgError);
+		});
 };
 
-export const listRecords = (
-  collectionName,
-  setTotalElements,
-  setElements,
-  setStartElement
-) => {
-  db.collection(collectionName)
-    .get()
-    .then((snap) => {
-      setTotalElements(snap.size);
-    });
+export const listRecords = (collectionName, setTotalElements, setElements, setStartElement) => {
+	db.collection(collectionName).get().then((snap) => {
+		setTotalElements(snap.size);
+	});
 
-  const resultElements = [];
+	const resultElements = [];
 
-  db.collection(collectionName)
-    .orderBy("create_date", "desc")
-    .limit(limitRecords)
-    .get()
-    .then((response) => {
-      setStartElement(response.docs[response.docs.length - 1]);
-      response.forEach((doc) => {
-        const element = doc.data();
-        element.id = doc.id;
-        resultElements.push(element);
-      });
-      setElements(resultElements);
-    });
+	db.collection(collectionName).orderBy('create_date', 'desc').limit(limitRecords).get().then((response) => {
+		setStartElement(response.docs[response.docs.length - 1]);
+		response.forEach((doc) => {
+			const element = doc.data();
+			element.id = doc.id;
+			resultElements.push(element);
+		});
+		setElements(resultElements);
+	});
 };
 
 export const handleLoadMore = (
-  collectionName,
-  element,
-  totalElement,
-  setIsLoading,
-  startElement,
-  setStartElement,
-  setElements
+	collectionName,
+	element,
+	totalElement,
+	setIsLoading,
+	startElement,
+	setStartElement,
+	setElements
 ) => {
-  const resultElements = [];
-  element.length < totalElement && setIsLoading(true);
-  db.collection(collectionName)
-    .orderBy("create_date", "desc")
-    .startAfter(startElement.data().create_date)
-    .limit(limitRecords)
-    .get()
-    .then((response) => {
-      if (response.docs.length > 0) {
-        setStartElement(response.docs[response.docs.length - 1]);
-      } else {
-        setIsLoading(false);
-      }
-      response.forEach((doc) => {
-        const elementDoc = doc.data();
-        elementDoc.id = doc.id;
-        resultElements.push(elementDoc);
-      });
-      setElements([...element, ...resultElements]);
-    });
+	const resultElements = [];
+	element.length < totalElement && setIsLoading(true);
+	db
+		.collection(collectionName)
+		.orderBy('create_date', 'desc')
+		.startAfter(startElement.data().create_date)
+		.limit(limitRecords)
+		.get()
+		.then((response) => {
+			if (response.docs.length > 0) {
+				setStartElement(response.docs[response.docs.length - 1]);
+			} else {
+				setIsLoading(false);
+			}
+			response.forEach((doc) => {
+				const elementDoc = doc.data();
+				elementDoc.id = doc.id;
+				resultElements.push(elementDoc);
+			});
+			setElements([ ...element, ...resultElements ]);
+		});
+};
+
+/**
+ * 
+ * @param {Nombre del collection a consultar} collectionName 
+ * @param {variable que hace referencia al usuario} user_id 
+ * @param {variable que modica los elementos a retornar} setElements 
+ */
+export const getInfoByUser = (collectionName, user_id, setElements, setModalVisible) => {
+	console.log('****');
+	console.log(collectionName);
+	console.log(user_id);
+	const resultElements = [];
+	db
+		.collection(collectionName)
+		.where('create_uid', '==', user_id)
+		.get()
+		.then((response) => {
+
+			console.log('sisas aqui')
+			if (response.doc !== undefined) {
+				console.log('como asi')
+				console.log(response.doc)
+				setModalVisible(false);
+			} else {
+				setModalVisible(true);
+			}
+
+
+			response.forEach((doc) => {
+				const element = doc.data();
+				element.id = doc.id;
+				console.log(element)
+				resultElements.push(element);
+				console.log('esto es lo que obtuvimos de la pinche consulta ' + element);
+				if (size(element) > 0) {
+					setModalVisible(false);
+				} else {
+					setModalVisible(true);
+				}
+			});
+
+			console.log('como que no '+ resultElements)
+
+			setElements(resultElements);
+		})
+		.catch((response) => {
+			setModalVisible(false);
+		});
+};
+
+/**
+ * 
+ * @param {datos que se van a guardar} data 
+ * @param {Nombre del collection a guardar} collectionName 
+ * @param {identifica si el modal se va a mostrar o no} setModalVisible 
+ * @param {identifica si el modal se va a mostrar o no} modalVisible 
+ */
+export const saveUserInfo = (data, collectionName, setModalVisible) => {
+	db
+		.collection(collectionName)
+		.add(data)
+		.then(() => {
+			setModalVisible(false);
+		})
+		.catch((e) => {
+			console.log('Ha Ocurrido un error');
+		});
+};
+
+/**
+ * Funcion que permite guardar el centro veterinario o la fundacion animalista
+ * 
+ * @param {contiene la data necesiaria para crear el centro veterinario o la fundacion animalista} data 
+ * @param {Nombre de la coleccion a guardar} collectionName 
+ * @param { Objeto de navegacion} navigation 
+ * @param { destino despues de que se guarde el registro} navigateTo 
+ */
+export const saveCenter = (data, collectionName) => {
+	db
+		.collection(collectionName)
+		.add(data)
+		.then(() => {
+			//navigation.navigate(navigateTo);
+			console.log('Se ha creado el registro')
+		})
+		.catch((e) => {
+			console.log('Ha Ocurrido un error');
+		});
 };

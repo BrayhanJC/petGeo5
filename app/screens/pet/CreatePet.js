@@ -22,13 +22,11 @@ function CreatePet(props) {
   useEffect(() => {
     (async () => {
       const user = await firebase.auth().currentUser;
-      console.log(user);
+      //console.log(user);
       //cargando datos al userInfo, contiene toda la informacion del usuario
       setUserInfo(user);
     })();
   }, []);
-
-  console.log("Screen Create Pet");
 
   return (
     <View>

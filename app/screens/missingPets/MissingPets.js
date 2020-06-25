@@ -3,13 +3,15 @@ import { View, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 import firebase from 'firebase/app';
 import { viewBody, buttonFormFloating } from '../../src/css/GeneralStyles';
-import { listRecords, handleLoadMore } from '../../utils/SaveRecord';
+import { listRecords, handleLoadMore, getInfoByUser } from '../../utils/SaveRecord';
 //import ListRecordsForm from "../../components/formMain/ListRecordsForm";
 import ListRecords from '../../components/formList/ListRecords';
 import { useFocusEffect } from '@react-navigation/native';
 import Search from '../../components/formSearch/Search';
 import NotFoundItem from '../../components/formSearch/NotFoundItem';
 import { size, isEmpty } from 'lodash';
+
+import UserData from '../account/UserData';
 
 /***
  * Allows to see all the news of the veterinary centers and animal foundations
@@ -22,6 +24,10 @@ function MissingPets(props) {
 	const [ totalMissingPets, setTotalMissingPets ] = useState(0);
 	const [ startMissingPets, setStartMissingPets ] = useState(null);
 	const [ isLoading, setIsLoading ] = useState(false);
+
+	//variables para el popup
+	const [ elements, setElements ] = useState('');
+	const [ modalVisible, setModalVisible ] = useState(false);
 
 	//variables para el buscador
 	const [ item, setItem ] = useState([]);
@@ -36,6 +42,16 @@ function MissingPets(props) {
 	useFocusEffect(
 		useCallback(() => {
 			listRecords('missingPets', setTotalMissingPets, setMissingPets, setStartMissingPets);
+
+			if (user) {
+				if (user.uid) {
+					console.log('vamos a consultar si el usuario esta registrado');
+					getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
+					console.log(elements);
+					console.log('el resultado quedo asi ' + modalVisible);
+				}
+			}
+
 		}, [])
 	);
 
@@ -72,6 +88,14 @@ function MissingPets(props) {
 				/>
 			)}
 
+			{/***
+			 * Modal que sirve para registrar el tipo de usuario
+			 */
+			modalVisible ? (
+				<UserData modalVisible={modalVisible} setModalVisible={setModalVisible} userInfo={user} />
+			) : (
+				<Text />
+			)}
 			{user && (
 				<Icon
 					containerStyle={buttonFormFloating.btnContainer}

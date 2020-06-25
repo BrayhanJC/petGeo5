@@ -39,7 +39,7 @@ function ChangePasswordForm(props) {
 			...formData,
 			[type]: even.nativeEvent.text
 		});
-		console.log(formData);
+		//(formData);
 	};
 
 	const onSubmit = async () => {
@@ -71,7 +71,7 @@ function ChangePasswordForm(props) {
 			setIsLoadig(true);
 			await reauthenticate(password)
 				.then(async () => {
-					console.log('ok');
+					//console.log('ok');
 
 					setIsLoadig(false);
 					await firebase

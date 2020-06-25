@@ -15,7 +15,7 @@ function defaultFormValue(displayName) {
 }
 
 function ChangeDisplayNameForm(props) {
-  console.log("cambiando nombre");
+  //console.log("cambiando nombre");
 
   const { displayName, setShowModal, setReloadUserInfo } = props;
 
@@ -49,7 +49,7 @@ function ChangeDisplayNameForm(props) {
       displayName: `${formData.names} ${formData.lastnames}`,
     });
 
-    console.log(formData);
+    //console.log(formData);
   };
 
   //funcion que nos permite actualizar el displayName del usuario
@@ -89,7 +89,7 @@ function ChangeDisplayNameForm(props) {
         .auth()
         .currentUser.updateProfile(update)
         .then(() => {
-          console.log("ok");
+          //console.log("ok");
           setIsLoading(false);
           setReloadUserInfo(true);
           setShowModal(false);

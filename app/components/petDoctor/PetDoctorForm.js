@@ -27,7 +27,7 @@ function PetForm(props) {
     errorName,
     errorDescription,
   } = props;
-  console.log("errorDescription", errorDescription);
+
   const SPECIALITY = [
     {
       value: "Otro",

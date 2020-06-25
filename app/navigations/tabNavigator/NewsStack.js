@@ -15,7 +15,7 @@ const Stack = createStackNavigator();
  */
 function NewsStack() {
 	//const navigation = useNavigation();
-	console.log('Navegando por las noticias');
+	//console.log('Navegando por las noticias');
 	return (
 		<Stack.Navigator>
 			<Stack.Screen

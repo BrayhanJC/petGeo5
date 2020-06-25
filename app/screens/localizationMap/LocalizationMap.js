@@ -16,6 +16,11 @@ import ViewAvatar from '../../components/formView/ViewAvatar';
 import CarouselImages from '../../components/CarouselImages';
 import { mapInfoStyle } from '../../src/css/InfoMap';
 import { useNavigation } from '@react-navigation/native';
+import { getInfoByUser } from '../../utils/SaveRecord';
+
+
+import UserData from '../account/UserData';
+
 /***
  * Allows to see all the news of the veterinary centers and animal foundations
  */
@@ -23,8 +28,16 @@ function LocalizationMap(props) {
 	const { navigation } = props
 	const [ result, setResult ] = useState([]);
 	const [ location, setLocation ] = useState(null);
+	const [ user, setUser ] = useState(null);
 
-	console.log('mapa');
+	//console.log('mapa');
+
+
+
+	//variables para el popup
+	const [ elements, setElements ] = useState('');
+	const [ modalVisible, setModalVisible ] = useState(false);
+
 
 	const resultElements = [];
 	const collections = [ 'comedogs', 'missingPets' ];
@@ -33,12 +46,12 @@ function LocalizationMap(props) {
 		(async () => {
 			const resultPermissions = await Permissions.askAsync(Permissions.LOCATION);
 			const statusPermissions = resultPermissions.permissions.location.status;
-			console.log(statusPermissions);
+			//console.log(statusPermissions);
 			if (statusPermissions !== 'granted') {
 				toastRef.current.show('Tienes que Aceptar los permisos de localización para crear un Comedog', 3000);
 			} else {
 				const loc = await Location.getCurrentPositionAsync({});
-				console.log(loc);
+				//console.log(loc);
 				setLocation({
 					latitude: loc.coords.latitude,
 					longitude: loc.coords.longitude,
@@ -47,6 +60,12 @@ function LocalizationMap(props) {
 				});
 			}
 		})();
+
+
+		firebase.auth().onAuthStateChanged((userInfo) => {
+			setUser(userInfo);
+		});
+
 	}, []);
 
 
@@ -57,10 +76,21 @@ function LocalizationMap(props) {
 				ListMap('comedogs', setResult, resultElements);
 				ListMap('missingPets', setResult, resultElements);
 			//}
+
+
+			if (user) {
+				if (user.uid) {
+					console.log('vamos a consultar si el usuario esta registrado');
+					getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
+					console.log(elements);
+					console.log('el resultado quedo asi ' + modalVisible);
+				}
+			}
+
 		}, [])
 	);
 
-	console.log(result[0]);
+	//console.log(result[0]);
 
 	const returnColor = (collection) =>{
 		if (collection === 'comedogs'){
@@ -74,11 +104,11 @@ function LocalizationMap(props) {
 		//console.log(navigation)
 		//navigation.goBack()
 		console.log(view)
-		//navigation.navigate('ComedogStack');
-		// navigation.navigate(view, {
-		// 	id,
-		// 	name
-		// });
+		//navigation.navigate('ViewComedog');
+		navigation.navigate(view, {
+			id,
+			name
+		});
 	};
 	return (
 		<View style={styles.container}>
@@ -146,6 +176,15 @@ function LocalizationMap(props) {
 						</Callout>
 					</MapView.Marker> */}
 				</MapView>
+			)}
+
+						{/***
+			 * Modal que sirve para registrar el tipo de usuario
+			 */
+			modalVisible ? (
+				<UserData modalVisible={modalVisible} setModalVisible={setModalVisible} userInfo={user} />
+			) : (
+				<Text />
 			)}
 		</View>
 	);

@@ -8,7 +8,7 @@ import { map, size, filter } from 'lodash';
 
 function UploadImage(props) {
 	const { styleImageMain, toastRef, imageMain, widhtScreen } = props;
-	console.log(styleImageMain);
+
 	return (
 		<View style={styleImageMain.viewPhoto}>
 			<Image

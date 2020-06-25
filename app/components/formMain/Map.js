@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, ScrollView, Alert, TextInput } from "react-native";
+import { View, Text, ScrollView, Alert, TextInput, Dimensions } from "react-native";
 import { Icon, Avatar, Image, Input, Button } from "react-native-elements";
 import * as Permissions from "expo-permissions";
 import * as ImagePicker from "expo-image-picker";
@@ -9,8 +9,10 @@ import * as Location from "expo-location";
 import MapView from "react-native-maps";
 import { styleMap } from "../../src/css/MapView";
 
+const HeightScreen = Dimensions.get('window').height;
+
 function Map(props) {
-  const { isVisibleMap, setIsVisibleMap, toastRef, setLocationForms } = props;
+  const { isVisibleMap, setIsVisibleMap, toastRef, setLocationForms, setMessage } = props;
   const [location, setLocation] = useState(null);
 
   useEffect(() => {
@@ -19,12 +21,17 @@ function Map(props) {
         Permissions.LOCATION
       );
       const statusPermissions = resultPermissions.permissions.location.status;
-      console.log(statusPermissions);
+      //console.log(statusPermissions);
       if (statusPermissions !== "granted") {
-        toastRef.current.show(
-          "Tienes que Aceptar los permisos de localización para crear un Comedog",
-          3000
-        );
+        
+        if (toastRef) {
+          toastRef.current.show(
+            "Tienes que Aceptar los permisos de localización",
+            3000
+          );
+        } else {
+          setMessage('Tienes que Aceptar los permisos de localización');
+        }
       } else {
         const loc = await Location.getCurrentPositionAsync({});
         setLocation({
@@ -39,16 +46,24 @@ function Map(props) {
 
   const confirmLocation = () => {
     setLocationForms(location);
-    toastRef.current.show("Localizacion guardada correctamente");
+    if (toastRef) {
+			toastRef.current.show('Localizacion guardada correctamente');
+		} else {
+			setMessage('Localizacion guardada correctamente');
+		}
     setIsVisibleMap(false);
   };
 
   return (
-    <Modal isVisible={isVisibleMap} setIsVisible={setIsVisibleMap}>
+    <Modal isVisible={isVisibleMap} setIsVisible={setIsVisibleMap} >
       <View>
         {location && (
           <MapView
-            style={styleMap.mapStyle}
+          HeightScreen
+            style={ {
+              width: "100%",
+              height: HeightScreen-150,
+            }}
             initialRegion={location}
             showsUserLocation={true}
             onRegionChange={(region) => setLocation(region)}
@@ -63,17 +78,19 @@ function Map(props) {
           </MapView>
         )}
         <View style={styleMap.viewMapBtn}>
+          
           <Button
-            title="Guardar ubicación"
-            containerStyle={styleMap.viewMapBtnContainerSave}
-            buttonStyle={styleMap.viewMapBtnSave}
-            onPress={confirmLocation}
-          />
-          <Button
-            title="Cancelar ubicación"
+            title="Cancelar"
             containerStyle={styleMap.viewMapBtnContainerCancel}
             buttonStyle={styleMap.viewMapBtnCancel}
             onPress={() => setIsVisibleMap(false)}
+          />
+
+          <Button
+            title="Guardar"
+            containerStyle={styleMap.viewMapBtnContainerSave}
+            buttonStyle={styleMap.viewMapBtnSave}
+            onPress={confirmLocation}
           />
         </View>
       </View>

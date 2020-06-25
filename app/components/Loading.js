@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		borderColor: '#1A89E7',
 		borderWidth: 2,
-		borderRadius: 10
+		borderRadius: 20
     },
     view:{
         flex: 1,
@@ -42,6 +42,9 @@ const styles = StyleSheet.create({
     text:{
         color: '#1A89E7',
         textTransform: 'uppercase',
-        marginTop: 10
+        marginTop: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+
     }
 });

@@ -31,7 +31,7 @@ function CreatePetControlForm(props) {
   const [errorDescription, setErrorDescription] = useState("");
 
   const addPetControl = () => {
-    console.log(typeControl);
+
     if (pet === "") {
       setErrorPet("Debe selecionar una mascota");
     } else if (typeControl === "") {

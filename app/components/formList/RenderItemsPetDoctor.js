@@ -21,9 +21,8 @@ function RenderItemsPetDoctor(props) {
 	const { id, image_id, name, description } = elements.item;
 	const mainImage = image_id[0];
 
-	//console.log(elements)
+
 	const goElement = () => {
-		console.log('listo');
 		navigation.navigate('ViewPetDoctor', {
 			id,
 			name

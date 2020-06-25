@@ -21,7 +21,7 @@ function RenderItemsPetControl(props) {
     
     
 	const goElement = () => {
-		console.log('ok');
+		//console.log('ok');
 		navigation.navigate('ViewPetControl', {
 			id,
 			name

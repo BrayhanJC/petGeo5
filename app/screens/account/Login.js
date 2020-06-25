@@ -43,6 +43,8 @@ const styles = StyleSheet.create({
 		marginLeft: 40
 	},
 	divider: {
-		backgroundColor: '#1A89E7'
+		backgroundColor: '#C2C2C2',
+		marginRight: 40,
+		marginLeft: 40
 	}
 });

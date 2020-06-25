@@ -36,8 +36,7 @@ const ListPets = (props) => {
 
 function Pet(props) {
   const { pet } = props;
-  console.log("esta entrando esto   ");
-  console.log(pet);
+
   const { image_id, name, type, raza, sex } = pet.item;
   //const imagePet = image_id[0] ? image_id[0] : null
   const goPet = () => {

@@ -9,10 +9,10 @@ function InfoUser(props) {
 	//capturando datos del usuario
 	const { userInfo: { uid, photoURL, displayName, email }, toastRef, setLoading, setLoadingText } = props;
 
-	console.log(props);
+	//console.log(props);
 
 	const changeAvatar = async () => {
-		console.log('cambiando icono');
+		//console.log('cambiando icono');
 		const resultPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
 		const resultPermissionCamera = resultPermission.permissions.cameraRoll.status;
 
@@ -31,7 +31,7 @@ function InfoUser(props) {
 			} else {
 				uploadImage(result.uri)
 					.then((response) => {
-                        console.log('imagen subida');
+                        //console.log('imagen subida');
                         updatePhotoUrl()
 					})
 					.catch((response) => {
@@ -71,7 +71,7 @@ function InfoUser(props) {
                 photoURL: response
             }
             await firebase.auth().currentUser.updateProfile(update)
-            console.log('Imagen Actualizada')
+            //console.log('Imagen Actualizada')
             setLoading(false)
         })
         .catch( (response) => {

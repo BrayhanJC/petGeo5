@@ -141,8 +141,6 @@ function PetForm(props) {
 		{ value: 'Yorkshire Terrier' }
 	];
 
-	console.log(styleCreateForm);
-
 	const onChange = (event, selectedDate) => {
 		const currentDate = selectedDate;
 		setValueDate(currentDate);

@@ -11,7 +11,7 @@ function LinkCreateAccount(){
             ¿Aún no tienes una cuenta?{""}
             <Text style={styles.btnRegister} onPress={
                 ()=> {
-                    console.log('navegando al formulario de registro')
+                    //console.log('navegando al formulario de registro')
                     navigation.navigate('Register')
             }}>
                 Registrate
