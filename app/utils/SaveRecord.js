@@ -87,12 +87,12 @@ export const handleLoadMore = (
  * @param {variable que hace referencia al usuario} user_id 
  * @param {variable que modica los elementos a retornar} setElements 
  */
-export const getInfoByUser = (collectionName, user_id, setElements, setModalVisible) => {
+export const getInfoByUser = async (collectionName, user_id, setElements, setModalVisible) => {
 	console.log('****');
 	console.log(collectionName);
 	console.log(user_id);
 	const resultElements = [];
-	db
+	const result = await db
 		.collection(collectionName)
 		.where('create_uid', '==', user_id)
 		.get()

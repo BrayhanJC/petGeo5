@@ -48,6 +48,7 @@ function UserLogged() {
 		})();
 		setReloadUserInfo(false);
 	}, []);
+	console.log('el usuario es: ' + userInfo);
 
 	// useFocusEffect(
 	// 	useCallback(() => {
