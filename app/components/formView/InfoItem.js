@@ -31,7 +31,6 @@ const InfoItem = (props) => {
 						type: item.iconType,
 						color: '#1A89E7'
                     }}
-                    
 					containerStyle={viewInfoStyle.listStyle}
 				/>
 			))}

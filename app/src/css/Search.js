@@ -2,7 +2,7 @@ import { StyleSheet, Icon } from 'react-native';
 
 export const search = {
 	searchBar: {
-        marginBottom:20,
+        marginBottom:0,
     },
     notFound:{
        

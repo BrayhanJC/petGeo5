@@ -9,7 +9,7 @@ export const addForm = {
 		padding: 5,
 		borderColor: '#1A89E7',
 		borderWidth: 2,
-		borderRadius: 5,
+		borderRadius: 15,
 		backgroundColor: '#ffffff',
 	},
 	scrollView: {
@@ -28,9 +28,11 @@ export const addForm = {
 		height: 35,
 		marginTop: 5,
 		padding: 5,
+		paddingLeft: 10,
+		paddingRight:10,
 		borderColor: '#1A89E7',
 		borderWidth: 2,
-		borderRadius: 5,
+		borderRadius: 30,
 		backgroundColor: '#ffffff'
 	},
 	btnCreate: {

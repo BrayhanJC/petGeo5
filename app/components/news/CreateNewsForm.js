@@ -23,6 +23,7 @@ function CreateNewsForm(props) {
   const [imageSelected, setImageSelected] = useState([]);
   const [isVisibleMap, setIsVisibleMap] = useState(false);
   const [locationNew, setLocationNew] = useState(null);
+  const [phone, setPhone] = useState('')
 
   const addNews = () => {
     setIsLoading(false);
@@ -30,10 +31,10 @@ function CreateNewsForm(props) {
       toastRef.current.show("Todos los campos del formulario son obligatorios");
     } else if (size(imageSelected) === 0) {
       toastRef.current.show(
-        "La noticia o evento debe de tener por lo menos una imagen"
+        "La noticia o evento debe de tener por lo menos una imagen", 3000
       );
     } else if (!locationNew) {
-      toastRef.current.show("Debes localizar tu noticia o evento en el mapa");
+      toastRef.current.show("Debes localizar tu noticia o evento en el mapa. Pulse el icono del mapa para hacerlo.", 3000);
     } else {
       setIsLoading(true);
       uploadImageStorage(imageSelected, "news").then((response) => {
@@ -46,6 +47,8 @@ function CreateNewsForm(props) {
             image: response,
             create_date: new Date(),
             create_uid: firebase.auth().currentUser.uid,
+            create_name: firebase.auth().currentUser.displayName,
+            phone,
             quantityVoting: 0,
             rating: 0,
             ratingTotal: 0,
@@ -83,6 +86,7 @@ function CreateNewsForm(props) {
           setDescription={setDescription}
           setIsVisibleMap={setIsVisibleMap}
           locationForm={locationNew}
+          setPhone={setPhone}
         />
 
         <UploadImage

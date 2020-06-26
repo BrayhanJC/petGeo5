@@ -45,11 +45,24 @@ const ViewForm = (props) => {
 
 	const listInfo = [
 		{
-			text: item.address,
+			text: 'Creado por: ' + item.create_name,
+			iconName: 'account',
+			iconType: 'material-community',
+			action: null
+		},
+		{
+			text: 'Teléfono: ' +  item.phone,
+			iconName: 'phone',
+			iconType: 'material-community',
+			action: null
+		},
+		{
+			text: 'Dirección: ' + item.address,
 			iconName: 'map-marker',
 			iconType: 'material-community',
 			action: null
-		}
+		},
+
 	];
 
 

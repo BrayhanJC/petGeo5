@@ -7,13 +7,15 @@ export const addForm = {
 		marginRight: 10,
 		marginTop: 5,
 		padding: 5,
-		borderColor: '#1A89E7',
+		paddingLeft: 10,
+		paddingRight: 10,
+		borderColor: '#C2C2C2',
 		borderWidth: 2,
-		borderRadius: 5,
+		borderRadius: 15,
 		backgroundColor: '#ffffff',
 	},
 	textArea: {
-
+		fontSize:14
 	},
 	scrollView: {
 		height: '100%'
@@ -25,17 +27,14 @@ export const addForm = {
 	},
 	input: {
 		marginBottom: 3,
-		
-		
 	},
 	inputForm: {
-		
 		height: 35,
 		marginTop: 5,
-		padding: 5,
-		borderColor: '#1A89E7',
+		padding: 10,
+		borderColor: '#C2C2C2',
 		borderWidth: 2,
-		borderRadius: 5,
+		borderRadius: 30,
 		backgroundColor: '#ffffff'
 	},
 	btnCreate: {

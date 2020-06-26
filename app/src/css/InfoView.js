@@ -6,13 +6,14 @@ export const info = {
         marginTop:-5
     },
     infoTitle:{
-        fontSize:18,
+        fontSize:17,
         fontWeight: 'bold',
         marginBottom: 10
     },
     listStyle:{
         borderBottomColor: '#D8D8D8',
-        borderBottomWidth: 2
+        borderBottomWidth: 2,
+        padding: 7,
     }
 };
 

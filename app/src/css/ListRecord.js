@@ -2,9 +2,10 @@ import { StyleSheet } from "react-native";
 
 export const loadingRecords = {
   loadingRecordsStyle: {
-    marginTop: 10,
+    
     marginBottom: 10,
     alignItems: "center",
+
   },
 };
 

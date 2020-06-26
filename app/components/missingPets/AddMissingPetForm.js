@@ -24,7 +24,7 @@ function AddMissinPetForm(props) {
   const [description, setDescription] = useState("");
   const [imageSelected, setImageSelected] = useState([]);
   const [isVisibleMap, setIsVisibleMap] = useState(false);
-
+  const [phone, setPhone] = useState('')
   const addMissingPets = () => {
     setIsLoading(true);
     if (!title || !address || !description) {
@@ -44,6 +44,7 @@ function AddMissinPetForm(props) {
             image: response,
             create_date: new Date(),
             create_uid: firebase.auth().currentUser.uid,
+            phone,
 						quantityVoting: 0,
 						rating: 0,
 						ratingTotal: 0
@@ -79,6 +80,7 @@ function AddMissinPetForm(props) {
         setDescription={setDescription}
         setIsVisibleMap={setIsVisibleMap}
         locationForm={locationMissingPet}
+        setPhone={setPhone}
       />
       <UploadImage
         styleUploadImage={styleUploadImage}

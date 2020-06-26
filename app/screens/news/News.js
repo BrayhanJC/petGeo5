@@ -34,16 +34,14 @@ function News(props) {
 	const [ item, setItem ] = useState([]);
 	const [ search, setSearch ] = useState('');
 
-
-
 	useEffect(() => {
 		firebase.auth().onAuthStateChanged((userInfo) => {
 			//console.log(userInfo)
 			setUser(userInfo);
 		});
-		
+
 		if (user) {
-			console.log(user)
+			console.log(user);
 			if (user.uid) {
 				console.log('vamos a consultar si el usuario esta registrado');
 				getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
@@ -51,13 +49,8 @@ function News(props) {
 				console.log('el resultado quedo asi ' + modalVisible);
 			}
 		}
-
-
-		
 	}, []);
 
-
-	
 	useFocusEffect(
 		useCallback(() => {
 			listRecords('news', setTotalNews, setNews, setStartNews);
@@ -93,7 +86,9 @@ function News(props) {
 			)}
 
 			{isEmpty(search) && (
-				<ListRecords elements={News} isLoading={isLoading} navigation={navigation} navigator="ViewNews" />
+				<View style={styles.viewBody}>
+					<ListRecords elements={News} isLoading={isLoading} navigation={navigation} navigator="ViewNews" />
+				</View>
 			)}
 
 			{/***

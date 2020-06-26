@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { View, Text, ScrollView, Alert, TextInput, StyleSheet, Picker } from 'react-native';
 import { Icon, Avatar, Image, Input, Button, Divider } from 'react-native-elements';
 import { Dropdown } from 'react-native-material-dropdown';
-//import DateTimePicker from '@react-native-community/datetimepicker';
+import RNPickerSelect, { defaultStyles } from 'react-native-picker-select';
 
 import DatePicker from 'react-native-datepicker';
 import { styleCreateForm } from '../../src/css/CreateForm';
-
+import { RAZA, TYPE_SEX, TYPE_PETS } from '../../utils/Configurations';
 function PetForm(props) {
 	const {
 		setImageSelected,
@@ -19,127 +19,11 @@ function PetForm(props) {
 		valueRaza,
 		setValueRaza,
 		valueDate,
-        setValueDate,
-        error
+		setValueDate,
+		error
 	} = props;
 
-	const TYPE_PETS = [
-		{
-			value: 'Perro'
-		},
-		{
-			value: 'Gato'
-		},
-		{
-			value: 'Cerdo'
-		},
-		{
-			value: 'Otro'
-		}
-	];
 
-	const TYPE_SEX = [
-		{
-			value: 'Hembra'
-		},
-		{
-			value: 'Macho'
-		}
-	];
-
-	const RAZA = [
-		{ value: 'Otro' },
-		{ value: 'Alano' },
-		{ value: 'Alaskan Malamute' },
-		{ value: 'American Staffordshire Terrier' },
-		{ value: 'American Water Spaniel' },
-		{ value: 'Antiguo Pastor Inglés' },
-		{ value: 'Basset Azul de Gaseogne' },
-		{ value: 'Basset Hound' },
-		{ value: 'Basset leonado de Bretaña' },
-		{ value: 'Beagle' },
-		{ value: 'Bearded Collie' },
-		{ value: 'Bichón Maltés' },
-		{ value: 'Bobtail' },
-		{ value: 'Border Collie' },
-		{ value: 'Boston Terrier' },
-		{ value: 'Boxer' },
-		{ value: 'Bull Terrier' },
-		{ value: 'Bulldog Americano' },
-		{ value: 'Bulldog Francés' },
-		{ value: 'Bulldog Inglés' },
-		{ value: 'Caniche' },
-		{ value: 'Carlino' },
-		{ value: 'Chihuahua' },
-		{ value: 'Cirneco del Etna' },
-		{ value: 'Chow Chow' },
-		{ value: 'Cocker Spaniel Americano' },
-		{ value: 'Cocker Spaniel Inglés' },
-		{ value: 'Criollo' },
-		{ value: 'Dálmata' },
-		{ value: 'Dobermann' },
-		{ value: 'Dogo Alemán' },
-		{ value: 'Dogo Argentino' },
-		{ value: 'Dogo de Burdeos' },
-		{ value: 'Finlandés' },
-		{ value: 'Fox Terrier de pelo liso' },
-		{ value: 'Fox Terrier' },
-		{ value: 'Foxhound Americano' },
-		{ value: 'Foxhound Inglés' },
-		{ value: 'Galgo Afgano' },
-		{ value: 'Gigante de los Pirineos' },
-		{ value: 'Golden Retriever' },
-		{ value: 'Gos d Atura' },
-		{ value: 'Gran Danés' },
-		{ value: 'Husky Siberiano' },
-		{ value: 'Laika de Siberia Occidental' },
-		{ value: 'Laika Ruso-europeo' },
-		{ value: 'Labrador Retriever' },
-		{ value: 'Mastín del Pirineo' },
-		{ value: 'Mastin del Tibet' },
-		{ value: 'Mastín Español' },
-		{ value: 'Mastín Napolitano' },
-		{ value: 'Pastor Alemán' },
-		{ value: 'Pastor Australiano' },
-		{ value: 'Pastor Belga' },
-		{ value: 'Pastor de Brie' },
-		{ value: 'Pastor de los Pirineos de Cara Rosa' },
-		{ value: 'Pekinés' },
-		{ value: 'Perdiguero Chesapeake Bay' },
-		{ value: 'Perdiguero de Drentse' },
-		{ value: 'Perdiguero de Pelo lido' },
-		{ value: 'Perdiguero de pelo rizado' },
-		{ value: 'Perdiguero Portugués' },
-		{ value: 'Pitbull' },
-		{ value: 'Podenco Ibicenco' },
-		{ value: 'Podenco Portugués' },
-		{ value: 'presa canario' },
-		{ value: 'Presa Mallorquin' },
-		{ value: 'Rottweiler' },
-		{ value: 'Rough Collie' },
-		{ value: 'Sabueso Español' },
-		{ value: 'Sabueso Hélenico' },
-		{ value: 'Sabueso Italiano' },
-		{ value: 'Sabueso Suizo' },
-		{ value: 'Samoyedo' },
-		{ value: 'San Bernardo' },
-		{ value: 'Scottish Terrier' },
-		{ value: 'Setter Irlandés' },
-		{ value: 'Shar Pei' },
-		{ value: 'Shiba Inu' },
-		{ value: 'Siberian Husky' },
-		{ value: 'Staffordshire Bull Terrier' },
-		{ value: 'Teckel' },
-		{ value: 'Terranova' },
-		{ value: 'Terrier Australiano' },
-		{ value: 'Terrier Escocés' },
-		{ value: 'Terrier Irlandés' },
-		{ value: 'Terrier Japonés' },
-		{ value: 'Terrier Negro Ruso' },
-		{ value: 'Terrier Norfolk' },
-		{ value: 'Terrier Norwich' },
-		{ value: 'Yorkshire Terrier' }
-	];
 
 	const onChange = (event, selectedDate) => {
 		const currentDate = selectedDate;
@@ -153,11 +37,101 @@ function PetForm(props) {
 				containerStyle={styleCreateForm.input}
 				inputContainerStyle={styleCreateForm.inputForm}
 				errorStyle={{ color: 'red' }}
-                onChange={(even) => setNamePet(even.nativeEvent.text)}
-                errorMessage={error}
+				onChange={(even) => setNamePet(even.nativeEvent.text)}
+				errorMessage={error}
 			/>
 
-			<Dropdown
+			<RNPickerSelect
+				onValueChange={(value) => console.log(value)}
+				placeholder={{
+					label: 'Selecionar Tipo Mascota',
+					value: null,
+					color: '#1A89E7'
+				}}
+				style={pickerSelectStyles}
+				items={TYPE_PETS}
+				Icon={() => {
+					return (
+						<View
+							style={{
+								marginTop: 22,
+								marginRight: 25,
+								backgroundColor: 'transparent',
+								borderTopWidth: 10,
+								borderTopColor: '#C2C2C2',
+								borderRightWidth: 10,
+								borderRightColor: 'transparent',
+								borderLeftWidth: 10,
+								borderLeftColor: 'transparent',
+								width: 0,
+								height: 0
+							}}
+						/>
+					);
+				}}
+			/>
+
+			<RNPickerSelect
+				onValueChange={(value) => console.log(value)}
+				placeholder={{
+					label: 'Selecionar Género',
+					value: null,
+					color: '#1A89E7'
+				}}
+				style={pickerSelectStyles}
+				items={TYPE_SEX}
+				Icon={() => {
+					return (
+						<View
+							style={{
+								marginTop: 22,
+								marginRight: 25,
+								backgroundColor: 'transparent',
+								borderTopWidth: 10,
+								borderTopColor: '#C2C2C2',
+								borderRightWidth: 10,
+								borderRightColor: 'transparent',
+								borderLeftWidth: 10,
+								borderLeftColor: 'transparent',
+								width: 0,
+								height: 0
+							}}
+						/>
+					);
+				}}
+			/>
+
+			<RNPickerSelect
+				onValueChange={(value) => console.log(value)}
+				placeholder={{
+					label: 'Selecionar Mascota',
+					value: null,
+					color: '#1A89E7'
+				}}
+				style={pickerSelectStyles}
+				items={RAZA}
+				Icon={() => {
+					return (
+						<View
+							style={{
+								marginTop: 22,
+								marginRight: 25,
+								backgroundColor: 'transparent',
+								borderTopWidth: 10,
+								borderTopColor: '#C2C2C2',
+								borderRightWidth: 10,
+								borderRightColor: 'transparent',
+								borderLeftWidth: 10,
+								borderLeftColor: 'transparent',
+								width: 0,
+								height: 0
+							}}
+						/>
+					);
+				}}
+			/>
+
+			{/* <Dropdown
 				label="Tipo Mascota"
 				data={TYPE_PETS}
 				value={valueTypePet}
@@ -180,7 +154,7 @@ function PetForm(props) {
 				itemCount={5}
 				onChangeText={(itemValue, itemIndex) => setValueRaza(itemValue)}
 			/>
-
+*/}
 			<Text>Fecha Nacimiento</Text>
 			<DatePicker
 				style={{ width: '100%' }}
@@ -201,12 +175,11 @@ function PetForm(props) {
 					dateInput: {
 						marginLeft: 36
 					}
-					
 				}}
 				onDateChange={(date) => {
 					setValueDate({ date: date });
 				}}
-			/>
+			/> 
 			{/* <DateTimePicker
 				value={valueDate}
 
@@ -262,3 +235,32 @@ const styles = StyleSheet.create({
 
 */
 }
+
+const pickerSelectStyles = StyleSheet.create({
+	inputIOS: {
+		marginLeft: 10,
+		marginRight: 10,
+		backgroundColor: 'white',
+		marginTop: 8,
+		fontSize: 16,
+		paddingVertical: 8,
+		paddingHorizontal: 10,
+		borderWidth: 2,
+		borderColor: '#C2C2C2',
+		borderRadius: 30,
+		color: 'black',
+		paddingRight: 30 // to ensure the text is never behind the icon
+	},
+	inputAndroid: {
+		marginLeft: 10,
+		marginRight: 10,
+		fontSize: 16,
+		paddingVertical: 8,
+		paddingHorizontal: 10,
+		borderWidth: 2,
+		borderColor: '#C2C2C2',
+		borderRadius: 30,
+		color: 'black',
+		paddingRight: 30 // to ensure the text is never behind the icon
+	}
+});

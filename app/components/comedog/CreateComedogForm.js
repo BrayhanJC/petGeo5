@@ -25,15 +25,16 @@ function CreateComedogForm(props) {
 	const [ imageSelected, setImageSelected ] = useState([]);
 	const [ isVisibleMap, setIsVisibleMap ] = useState(false);
 	const [ locationComeDog, setLocationComeDog ] = useState(null);
+	const [phone, setPhone] = useState('')
 
 	const addComedog = () => {
 		setIsLoading(false);
 		if (!title || !address || !description) {
-			toastRef.current.show('Todos los campos del formulario son obligatorios');
+			toastRef.current.show('Todos los campos del formulario son obligatorios',3000);
 		} else if (size(imageSelected) === 0) {
-			toastRef.current.show('El comedog debe de tener por lo menos una imagen');
+			toastRef.current.show('El comedog debe de tener por lo menos una imagen',3000);
 		} else if (!locationComeDog) {
-			toastRef.current.show('Debes localizar el comedog en el mapa');
+			toastRef.current.show("Debes localizar tu noticia o evento en el mapa. Pulse el icono del mapa para hacerlo.", 3000);
 		} else {
 			setIsLoading(true);
 			uploadImageStorage(imageSelected, 'Comedogs').then((response) => {
@@ -46,6 +47,7 @@ function CreateComedogForm(props) {
 						image: response,
 						create_date: new Date(),
 						create_uid: firebase.auth().currentUser.uid,
+						phone,
 						quantityVoting: 0,
 						rating: 0,
 						ratingTotal: 0
@@ -83,6 +85,7 @@ function CreateComedogForm(props) {
 				setDescription={setDescription}
 				setIsVisibleMap={setIsVisibleMap}
 				locationForm={locationComeDog}
+				setPhone={setPhone}
 			/>
 			<UploadImage
 				styleUploadImage={styleUploadImage}
