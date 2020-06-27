@@ -4,7 +4,7 @@ import { viewTitleStyle } from '../../src/css/ViewTitle';
 import { Rating } from 'react-native-elements';
 
 const TitleItem = (props) => {
-	const { name, description, rating, showRating } = props;
+	const { name, description, rating, showRating, showDescription } = props;
 	return (
 		<View>
 			<View style={viewTitleStyle.viewTitle}>
@@ -13,7 +13,8 @@ const TitleItem = (props) => {
 				<View style={viewTitleStyle.viewComponent}>
 					<Text style={viewTitleStyle.nameItem}>{name}</Text>
 				</View>
-				<Text style={viewTitleStyle.description}>{description}</Text>
+
+				{!showDescription && <Text style={viewTitleStyle.description}>{description}</Text>}
 			</View>
 		</View>
 	);

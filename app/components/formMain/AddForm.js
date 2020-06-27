@@ -20,8 +20,8 @@ function AddForm(props) {
 		addressVisible,
 		styleForm,
 		setIsVisibleMap,
-    locationForm,
-    setPhone
+		locationForm,
+		setPhone
 	} = props;
 
 	return (
@@ -31,9 +31,9 @@ function AddForm(props) {
 				containerStyle={styleForm.input}
 				inputContainerStyle={styleForm.inputForm}
 				errorStyle={{ color: 'red' }}
-        onChange={(even) => setTitle(even.nativeEvent.text)}
-        autoCapitalize="characters"
-        rightIcon={{
+				onChange={(even) => setTitle(even.nativeEvent.text)}
+				autoCapitalize="characters"
+				rightIcon={{
 					type: 'material-community',
 					name: 'format-letter-case',
 					color: '#C2C2C2'

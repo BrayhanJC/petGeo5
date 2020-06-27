@@ -6,29 +6,35 @@ import RNPickerSelect, { defaultStyles } from 'react-native-picker-select';
 
 import DatePicker from 'react-native-datepicker';
 import { styleCreateForm } from '../../src/css/CreateForm';
-import { RAZA, TYPE_SEX, TYPE_PETS } from '../../utils/Configurations';
+import { RAZA, TYPE_SEX, TYPE_PETS, RAZA_CAT } from '../../utils/Configurations';
+
 function PetForm(props) {
 	const {
-		setImageSelected,
+		setNamePet,
+		setDescription,
 		valueTypePet,
 		setValueTypePet,
-		valueTypeSex,
-		setValueTypeSex,
-		namePet,
-		setNamePet,
-		valueRaza,
+		setValueSex,
 		setValueRaza,
 		valueDate,
 		setValueDate,
 		error
 	} = props;
 
-
-
 	const onChange = (event, selectedDate) => {
 		const currentDate = selectedDate;
 		setValueDate(currentDate);
 	};
+
+	var raza = '';
+
+	if (valueTypePet === 'Perro') {
+		raza = RAZA;
+	} else if (valueTypePet === 'Gato') {
+		raza = RAZA_CAT;
+	} else {
+		raza = [{ label: 'Otro', value: 'Otro' }]
+	}
 
 	return (
 		<View>
@@ -42,9 +48,9 @@ function PetForm(props) {
 			/>
 
 			<RNPickerSelect
-				onValueChange={(value) => console.log(value)}
+				onValueChange={(value) => setValueTypePet(value)}
 				placeholder={{
-					label: 'Selecionar Tipo Mascota',
+					label: 'Tipo Mascota',
 					value: null,
 					color: '#1A89E7'
 				}}
@@ -72,9 +78,9 @@ function PetForm(props) {
 			/>
 
 			<RNPickerSelect
-				onValueChange={(value) => console.log(value)}
+				onValueChange={(value) => setValueSex(value)}
 				placeholder={{
-					label: 'Selecionar Género',
+					label: 'Género',
 					value: null,
 					color: '#1A89E7'
 				}}
@@ -102,14 +108,14 @@ function PetForm(props) {
 			/>
 
 			<RNPickerSelect
-				onValueChange={(value) => console.log(value)}
+				onValueChange={(value) => setValueRaza(value)}
 				placeholder={{
-					label: 'Selecionar Mascota',
+					label: 'Raza Mascota',
 					value: null,
 					color: '#1A89E7'
 				}}
 				style={pickerSelectStyles}
-				items={RAZA}
+				items={raza}
 				Icon={() => {
 					return (
 						<View
@@ -131,39 +137,25 @@ function PetForm(props) {
 				}}
 			/>
 
-			{/* <Dropdown
-				label="Tipo Mascota"
-				data={TYPE_PETS}
-				value={valueTypePet}
-				itemCount={3}
-				onChangeText={(itemValue, itemIndex) => setValueTypePet(itemValue)}
-			/>
-
-			<Dropdown
-				label="Genero"
-				data={TYPE_SEX}
-				value={valueTypeSex}
-				itemCount={3}
-				onChangeText={(itemValue, itemIndex) => setValueTypeSex(itemValue)}
-			/>
-
-			<Dropdown
-				label="Raza"
-				data={RAZA}
-				value={valueRaza}
-				itemCount={5}
-				onChangeText={(itemValue, itemIndex) => setValueRaza(itemValue)}
-			/>
-*/}
-			<Text>Fecha Nacimiento</Text>
+			<View style={styleCreateForm.textAreaContainer}>
+				<TextInput
+					style={styleCreateForm.textArea}
+					underlineColorAndroid="transparent"
+					placeholder="Describa en breve como es su mascota"
+					placeholderTextColor="grey"
+					multiline={true}
+					onChange={(even) => setDescription(even.nativeEvent.text)}
+				/>
+			</View>
+			<Text style={{ marginTop: 5, marginLeft: 15, marginRight: 20, color: 'gray' }}>Fecha Nacimiento</Text>
 			<DatePicker
-				style={{ width: '100%' }}
+				style={{ width: '90%', marginLeft: 15, marginRight: 30 }}
 				date={valueDate.date}
 				mode="date"
 				placeholder="select date"
 				format="MMMM DD YYYY"
-				confirmBtnText="Confirm"
-				cancelBtnText="Cancel"
+				confirmBtnText="Confirmar"
+				cancelBtnText="Cancelar"
 				is24Hour={true}
 				customStyles={{
 					dateIcon: {
@@ -179,7 +171,7 @@ function PetForm(props) {
 				onDateChange={(date) => {
 					setValueDate({ date: date });
 				}}
-			/> 
+			/>
 			{/* <DateTimePicker
 				value={valueDate}
 

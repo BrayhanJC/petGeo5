@@ -95,6 +95,7 @@ function CreateNewsForm(props) {
           imageSelected={imageSelected}
           setImageSelected={setImageSelected}
         />
+        
         <Button
           buttonStyle={styleForm.btnCreate}
           title="Crear Noticia"
