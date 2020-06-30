@@ -4,10 +4,9 @@ import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
 import firebase from 'firebase/app';
 import { styleUploadImage } from '../../src/css/UploadImage';
 import { styleImageMain } from '../../src/css/ImageMain';
-import AddForm from '../formMain/AddForm';
 import UploadImage from '../formMain/UploadImage';
 import ImageMain from '../formMain/ImageMain';
-import AvatarMain from '../AvatarMain';
+
 
 import { stylePetForm } from '../../src/css/PetForm';
 import { isEmpty } from 'lodash';
@@ -18,6 +17,8 @@ const widhtScreen = Dimensions.get('window').width;
 function CreatePetForm(props) {
 	const { toastRef, setIsLoading, navigation, userInfo } = props;
 	const [ loading, setloading ] = useState(false);
+	
+	
 	const [ valueTypePet, setValueTypePet ] = useState('');
 	const [ valueSex, setValueSex ] = useState('');
 	const [ namePet, setNamePet ] = useState('');
@@ -107,8 +108,8 @@ function CreatePetForm(props) {
 					valueSex={valueSex}
 					setValueSex={setValueSex}
 					namePet={namePet}
-          setNamePet={setNamePet}
-          setDescription={setDescription}
+					setNamePet={setNamePet}
+					setDescription={setDescription}
 					valueRaza={valueRaza}
 					setValueRaza={setValueRaza}
 					valueDate={valueDate}

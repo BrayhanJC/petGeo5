@@ -25,7 +25,7 @@ function AvatarMain(props) {
 			'¿Estas seguro de que quieres eliminar la imagen?',
 			[
 				{
-					text: 'Cancel',
+					text: 'Cancelar',
 					style: 'cancel'
 				},
 				{

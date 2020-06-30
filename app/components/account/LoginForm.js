@@ -1,13 +1,27 @@
-import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, AsyncStorage } from 'react-native';
 import { Icon, Button, Input } from 'react-native-elements';
 import { isEmpty } from 'lodash';
 import { useNavigation } from '@react-navigation/native';
 
 import { validateEmail } from '../../utils/validations';
-import * as firebase from 'firebase';
+
 
 import Loading from '../Loading';
+
+
+
+
+import { firebaseApp } from '../../utils/FireBase';
+import firebase from 'firebase/app';
+import 'firebase/storage';
+import 'firebase/firestore';
+
+
+const db = firebase.firestore(firebaseApp);
+
+
+
 
 function defaultFormValue() {
 	return {
@@ -15,7 +29,7 @@ function defaultFormValue() {
 		password: ''
 	};
 }
-
+const INFO_USER = '@info_user:key';
 function LoginForm(props) {
 	const navigation = useNavigation();
 	const { toastRef } = props;
@@ -25,7 +39,47 @@ function LoginForm(props) {
 
 	var { email, password } = formData;
 
-	const onSubmit = () => {
+	const saveDataUser = async (data) => {
+		console.log('entro');
+	//	console.log(data);
+		var data_user = data.user;
+		var userType = ''
+		try {
+			const result = await db
+				.collection('userInfo')
+				.where('create_uid', '==', data_user.uid)
+				.get()
+				.then((response) => {
+					response.forEach((doc) => {
+						const element = doc.data();
+						element.id = doc.id;
+						console.log(element)
+						console.log(element.userType)
+						userType = element.userType
+					});
+
+				})
+				.catch((response) => {
+					console.log('Algo salio mal con la consulta del tipo de usuario')
+				});
+			const val = {
+				uid: data_user.uid,
+				displayName: data_user.displayName,
+				email: data_user.email,
+				providerId: data.additionalUserInfo.providerId,
+				userType: userType
+			};
+
+			//const getInfoUser = await AsyncStorage.getItem(INFO_USER);
+			await AsyncStorage.setItem(INFO_USER, JSON.stringify(val));
+			//await AsyncStorage.setItem(INFO_USER, 'Brayhan Jaramillo');
+		} catch (error) {
+			console.log('algo salio mal');
+			console.log(error);
+		}
+	};
+
+	const onSubmit = async () => {
 		if (isEmpty(email) || isEmpty(password)) {
 			toastRef.current.show('Los campos deben de estar diligenciados');
 		} else {
@@ -37,7 +91,9 @@ function LoginForm(props) {
 					.auth()
 					.signInWithEmailAndPassword(email, password)
 					.then((response) => {
-						//console.log('iniciando sesion');
+						console.log('iniciando sesion');
+					//	console.log(response);
+						saveDataUser(response);
 						setloading(false);
 						navigation.navigate('Profile');
 					})
@@ -48,6 +104,7 @@ function LoginForm(props) {
 			}
 		}
 	};
+	//ktktmurillo@hotmail.com
 
 	const onChange = (even, type) => {
 		setformData({

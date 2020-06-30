@@ -16,10 +16,24 @@ import {
 
 function RenderItemsPetControl(props) {
 	const { elements, navigation } = props;
-	const { id, image_id, name, description,  } = elements.item;
+	const { id, image_id, name, description, create_date  } = elements.item;
 	const mainImage = image_id[0];
-    
-    
+	
+	console.log(create_date)
+	const createControl = new Date(create_date.seconds * 1000);
+	var date_control =
+		createControl.getDate() -
+		1 +
+		'/' +
+		createControl.getMonth() +
+		'/' +
+		createControl.getFullYear() +
+		' ' +
+		createControl.getHours() +
+		':' +
+		(createControl.getMinutes() < 10 ? '0' : '') +
+		createControl.getMinutes();
+	console.log(createControl)
 	const goElement = () => {
 		//console.log('ok');
 		navigation.navigate('ViewPetControl', {
@@ -32,12 +46,6 @@ function RenderItemsPetControl(props) {
 		<TouchableOpacity onPress={goElement}>
 			<View style={styleTouchableViewRecords.touchableViewRecordsStyle}>
 				<View style={styleTouchableViewImageRecords.touchableViewImageRecordsStyle}>
-					{/* <Image
-						resizeMode="cover"
-						PlaceholderContent={<ActivityIndicator color="#fff" />}
-						source={mainImage ? { uri: mainImage } : require('../../../assets/img/not_found.png')}
-						style={touchableImageRecords.touchableImageRecordsStyle}
-					/> */}
 
 					<Avatar
 						xlarge
@@ -49,8 +57,7 @@ function RenderItemsPetControl(props) {
 				<View style={styleViewFormat.textFormat}>
 				
 					<Text style={styleTouchableNameRecords.touchableNameRecordsStyle}>{name}</Text>
-					{/* <Text style={styletouchableAddressRecords.touchableAddressRecordsStyle}>{create_date}</Text>
-					 */}
+					<Text>Fecha: <Text style={styleTouchableDescriptionRecordsRecords.touchableDescriptionRecordsStyle}>{date_control.toString()}</Text></Text>
                     <Text style={styleTouchableDescriptionRecordsRecords.touchableDescriptionRecordsStyle}>
                     {description}
 					</Text>

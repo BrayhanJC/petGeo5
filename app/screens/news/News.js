@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, AsyncStorage } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { styles } from '../../src/css/News';
 import { firebaseApp } from '../../utils/FireBase';
@@ -13,6 +13,7 @@ import { size, isEmpty } from 'lodash';
 
 import UserData from '../account/UserData';
 
+const INFO_USER = '@info_user:key';
 /***
  * Allows to see all the news of the veterinary centers and animal foundations
  */
@@ -34,7 +35,17 @@ function News(props) {
 	const [ item, setItem ] = useState([]);
 	const [ search, setSearch ] = useState('');
 
+	const saveDataUser = async () => {
+		try {
+			//const getInfoUser = await AsyncStorage.getItem(INFO_USER);
+			const userInfoData = await AsyncStorage.getItem(INFO_USER);
+			console.log('****************')
+			console.log('esto es lo del asyncstorage: ' + userInfoData);
+		} catch (error) {}
+	};
+
 	useEffect(() => {
+		saveDataUser();
 		firebase.auth().onAuthStateChanged((userInfo) => {
 			//console.log(userInfo)
 			setUser(userInfo);

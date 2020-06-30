@@ -2,10 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { useFocusEffect } from '@react-navigation/native';
-import { firebaseApp } from '../../utils/FireBase';
 import firebase from 'firebase/app';
 import { styleFloatButton } from '../../src/css/FloatButton';
-import 'firebase/firestore';
 import { listRecords, handleLoadMore, getInfoByUser } from '../../utils/SaveRecord';
 import ListRecords from '../../components/formList/ListRecords';
 import Search from '../../components/formSearch/Search';
@@ -35,26 +33,13 @@ function PetControl(props) {
 
 	//cargamos los datos del usuario
 	useEffect(() => {
-		(async () => {
-			const user = await firebase.auth().currentUser;
-
-			console.log(user.uid);
-			//cargando datos al userInfo, contiene toda la informacion del usuario
-			setUser(user);
-
-			if (user) {
-				if (user.uid) {
-					console.log('vamos a consultar si el usuario esta registrado');
-					getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
-					console.log(elements);
-					console.log('el resultado quedo asi ' + modalVisible);
-				}
-			}
-		})();
+		setUser(firebase.auth().currentUser);
+		//getInfoByUser('userInfo', firebase.auth().currentUser.uid, setElements, setModalVisible);
 	}, []);
 
 	useFocusEffect(
 		useCallback(() => {
+			getInfoByUser('userInfo', firebase.auth().currentUser.uid, setElements, setModalVisible);
 			listRecords('petControl', setTotalPetControl, setPetControl, setStartPetControl);
 		}, [])
 	);
@@ -95,14 +80,9 @@ function PetControl(props) {
 					user={user}
 				/>
 			)}
-			{/***
-			 * Modal que sirve para registrar el tipo de usuario
-			 */
-			modalVisible ? (
-				<UserData modalVisible={modalVisible} setModalVisible={setModalVisible} userInfo={user} />
-			) : (
-				<Text />
-			)}
+
+			{modalVisible && <UserData modalVisible={modalVisible} setModalVisible={setModalVisible} userInfo={user} />}
+
 			{user && (
 				<Icon
 					type="material-community"

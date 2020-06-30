@@ -224,3 +224,35 @@ const styles = StyleSheet.create({
 		padding: 5
 	}
 });
+
+
+
+/***
+ * 
+ * 
+ * 
+ * 		<View style={{
+			
+			flex: 1,
+		  }}>
+			{location && (
+				<MapView style={{
+					
+					flex: 1,
+				  }} initialRegion={location} showsUserLocation={true}>
+					<View
+						
+					>
+						
+						<Button style={{ borderWidth: 2, width:'30%', alignItems:'right',justifyContent:'right'}} title="Info" onPress={() => console.log("This is not fired")}/>
+					 
+					
+					
+					 <ButtonGroup
+					 onPress={(even) => setUserType(even)}
+					 selectedIndex={userType}
+					 buttons={buttons}
+					 containerStyle={{ borderWidth: 2, width:'80%'}}
+				 />		
+		 </View>
+ */

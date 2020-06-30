@@ -173,3 +173,11 @@ export const RAZA_CAT = [
 	{ label: 'Tonkinés', value: 'Tonkinés' },
 	{ label: 'Van Turco', value: 'Van Turco' }
 ];
+
+export const TYPE_CONTROL = [
+	{ label: 'Vacunación', value: 'Vacunación' },
+	{ label: 'Desparacitación', value: 'Desparacitación' },
+	{ label: 'Baño', value: 'Baño' },
+	{ label: 'Control', value: 'Control' },
+	{ label: 'Otro', value: 'Otro' }
+];

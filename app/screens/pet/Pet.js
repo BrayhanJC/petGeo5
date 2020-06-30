@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { firebaseApp } from '../../utils/FireBase';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { styleFloatButton } from '../../src/css/FloatButton';
-import ListPets from '../../components/pet/ListPets';
 import { listRecords, handleLoadMore, getInfoByUser } from '../../utils/SaveRecord';
 import ListRecords from '../../components/formList/ListRecords';
 //import ListRecordsForm from "../../components/formMain/ListRecordsForm";

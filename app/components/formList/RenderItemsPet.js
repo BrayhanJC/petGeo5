@@ -16,7 +16,7 @@ import {
 
 function RendenderItemsPet(props) {
 	const { elements, navigation } = props;
-	const { id, image_id, name, type, sex } = elements.item;
+	const { id, image_id, name, type, sex, raza } = elements.item;
 	const mainImage = image_id[0];
 
 	const goElement = () => {
@@ -42,18 +42,25 @@ function RendenderItemsPet(props) {
 						<Text style={styleTouchableNameRecords.touchableNameRecordsStyle}>{name}</Text>
 					</View>
 					<View style={{ flexDirection: 'row', margin: 5 }}>
-						<View style={{ width: '30%' }}>
+						<View style={{ width: '15%' }}>
 							<Text>Tipo: </Text>
 							<Text style={styleTouchableDescriptionRecordsRecords.touchableDescriptionRecordsStyle}>
 								{type}
 							</Text>
 						</View>
-						<View >
-						<Text>Genero: </Text>
+						<View style={{ width: '18%' }}>
+							<Text>Genero: </Text>
 							<Text style={styleTouchableDescriptionRecordsRecords.touchableDescriptionRecordsStyle}>
 								{sex}
 							</Text>
 						</View>
+						<View style={{ width: '95%' }}>
+						<Text>Raza: </Text>
+							<Text style={styleTouchableDescriptionRecordsRecords.touchableDescriptionRecordsStyle}>
+								{raza}
+							</Text>
+						</View>
+
 					</View>
 				</View>
 			</View>

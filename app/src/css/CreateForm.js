@@ -21,6 +21,11 @@ export const addForm = {
 		marginLeft: 30,
 		marginRight: 30
 	},
+	viewFormm: {
+		marginTop: 5,
+		marginLeft: 15,
+		marginRight: 20
+	},
 	input: {
 		marginBottom: 3,
 	},

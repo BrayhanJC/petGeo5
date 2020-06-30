@@ -88,32 +88,30 @@ export const handleLoadMore = (
  * @param {variable que modica los elementos a retornar} setElements 
  */
 export const getInfoByUser = async (collectionName, user_id, setElements, setModalVisible) => {
-	console.log('****');
-	console.log(collectionName);
-	console.log(user_id);
+	// console.log('****');
+	// console.log(collectionName);
+	// console.log(user_id);
 	const resultElements = [];
-	const result = await db
+	await db
 		.collection(collectionName)
 		.where('create_uid', '==', user_id)
 		.get()
 		.then((response) => {
-
-			console.log('sisas aqui')
+			//console.log('sisas aqui')
 			if (response.doc !== undefined) {
-				console.log('como asi')
-				console.log(response.doc)
+				// console.log('como asi')
+				// console.log(response.doc)
 				setModalVisible(false);
 			} else {
 				setModalVisible(true);
 			}
 
-
 			response.forEach((doc) => {
 				const element = doc.data();
 				element.id = doc.id;
-				console.log(element)
+				//console.log(element)
 				resultElements.push(element);
-				console.log('esto es lo que obtuvimos de la pinche consulta ' + element);
+				//console.log('esto es lo que obtuvimos de la pinche consulta ' + element);
 				if (size(element) > 0) {
 					setModalVisible(false);
 				} else {
@@ -121,7 +119,7 @@ export const getInfoByUser = async (collectionName, user_id, setElements, setMod
 				}
 			});
 
-			console.log('como que no '+ resultElements)
+			//console.log('como que no '+ resultElements)
 
 			setElements(resultElements);
 		})
@@ -163,9 +161,34 @@ export const saveCenter = (data, collectionName) => {
 		.add(data)
 		.then(() => {
 			//navigation.navigate(navigateTo);
-			console.log('Se ha creado el registro')
+			console.log('Se ha creado el registro');
 		})
 		.catch((e) => {
 			console.log('Ha Ocurrido un error');
 		});
+};
+
+
+/**
+ * 
+ * @param {Nombre de la coleccion} collectionName 
+ * @param {id del usuario} user_id 
+ * @param { contiene los elementos de la consulta} setElements 
+ */
+export const getRecord = async (collectionName, user_id, setElements) => {
+	const resultElements = [];
+	await db
+		.collection(collectionName)
+		.where('create_uid', '==', user_id)
+		.get()
+		.then((response) => {
+			response.forEach((doc) => {
+				const element = doc.data();
+				element.id = doc.id;
+				resultElements.push(element);
+			});
+
+			setElements(resultElements);
+		})
+		.catch((response) => {});
 };

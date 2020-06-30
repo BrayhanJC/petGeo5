@@ -1,56 +1,82 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, ScrollView, Alert, TextInput, StyleSheet, Picker } from 'react-native';
 import { Icon, Avatar, Image, Input, Button, Divider } from 'react-native-elements';
 import { Dropdown } from 'react-native-material-dropdown';
 import { styleCreateForm } from '../../src/css/CreateForm';
+import RNPickerSelect from 'react-native-picker-select';
+import firebase from 'firebase/app';
+import { stylePicker } from '../../src/css/PickerSelect';
+import { TYPE_CONTROL } from '../../utils/Configurations';
+import { getRecord } from '../../utils/SaveRecord';
+import { useFocusEffect } from '@react-navigation/native';
 
 function PetForm(props) {
+
+
 	const {
-		setDescription,
-		setNameControl,
+
 		setPet,
-		errorType,
 		setTypeControl,
+		setNameControl,
+		setDescription,
+
+		setErrorPet,
 		setErrorType,
-		errorPet,
+		setErrorName,
+
 		errorName,
 		errorDescription,
-		
+		userInfo
 	} = props;
 
-	const PET_LOAD = [
-		{
-			value: ''
-		},
-		{
-			value: 'MASCOTA 1'
-		},
-		{
-			value: 'MASCOTA 2'
-		}
-	];
+	const [ elements, setElements ] = useState(null);
 
-	const TYPE_CONTROL = [
-		{
-			value: ''
-		},
-		{
-			value: 'Vacunación'
-		},
-		{
-			value: 'Baño'
-		},
-		{
-			value: 'Control'
-		},
-		{
-			value: 'Otro'
+	useFocusEffect(
+		useCallback(() => {
+			getRecord('pet', firebase.auth().currentUser.uid, setElements);
+		}, [])
+	);
+
+	var list_pets = [];
+	if (elements) {
+		for (let index = 0; index < elements.length; index++) {
+			list_pets.push({ label: elements[index]['name'] , value: elements[index]['id'] + '*' + elements[index]['name'] });
 		}
-	];
+	}
+
+	console.log(list_pets);
 
 	return (
 		<View>
-			<Dropdown
+			<RNPickerSelect
+				onValueChange={(value) => setPet(value)}
+				placeholder={{
+					label: 'Mascota',
+					value: null,
+					color: '#1A89E7'
+				}}
+				style={stylePicker}
+				items={list_pets}
+				Icon={() => {
+					return <View style={stylePicker.iconStyle} />;
+				}}
+			/>
+
+			<RNPickerSelect
+				onValueChange={(value) => setTypeControl(value)}
+				placeholder={{
+					label: 'Tipo Mascota',
+					value: null,
+					color: '#1A89E7'
+				}}
+				style={stylePicker}
+				items={TYPE_CONTROL}
+				Icon={() => {
+					return <View style={stylePicker.iconStyle} />;
+				}}
+			/>
+
+			{/* <Dropdown
 				label="Tipo de Control"
 				data={TYPE_CONTROL}
 				//value=""
@@ -65,7 +91,7 @@ function PetForm(props) {
 				//value={valueTypePet}
 				itemCount={3}
 				onChangeText={(itemValue, itemIndex) => setPet(itemValue)}
-			/>
+			/> */}
 
 			<Input
 				placeholder="Nombre Control"

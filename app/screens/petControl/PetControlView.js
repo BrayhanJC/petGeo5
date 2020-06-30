@@ -4,14 +4,14 @@ import { firebaseApp } from '../../utils/FireBase';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 
-import Loading from '../../components/Loading'
+import Loading from '../../components/Loading';
 import ViewAvatar from '../../components/formView/ViewAvatar';
 import CarouselImages from '../../components/CarouselImages';
 import TitleItem from '../../components/formView/TitleItem';
 import InfoItem from '../../components/formView/InfoItem';
 import { viewFormStyle } from '../../src/css/ViewForm';
 
-const db = firebase.firestore(firebaseApp)
+const db = firebase.firestore(firebaseApp);
 const screenWidth = Dimensions.get('window').width;
 
 const PetControlView = (props) => {
@@ -37,7 +37,25 @@ const PetControlView = (props) => {
 			.catch();
 	}, []);
 
-	if (!petControl) return <Loading isVisible={true} text='Cargando...'/>
+	if (!petControl) return <Loading isVisible={true} text="Cargando..." />;
+
+	// {createReview.getDate() - 1}/{createReview.getMonth()}/{createReview.getFullYear()} -{' '}
+	// 				{createReview.getHours()}:{createReview.getMinutes() < 10 ? '0' : ''}
+	// 				{createReview.getMinutes()}
+
+	const createControl = new Date(petControl.create_date.seconds * 1000);
+	var date_control =
+		createControl.getDate() -
+		1 +
+		'/' +
+		createControl.getMonth() +
+		'/' +
+		createControl.getFullYear() +
+		' ' +
+		createControl.getHours() +
+		':' +
+		(createControl.getMinutes() < 10 ? '0' : '') +
+		createControl.getMinutes();
 
 	const listInfo = [
 		{
@@ -47,13 +65,13 @@ const PetControlView = (props) => {
 			action: null
 		},
 		{
-			text: 'Mascota: ' + petControl.pet_id,
+			text: 'Mascota: ' + petControl.pet_id.split('*')[1],
 			iconName: 'paw',
 			iconType: 'material-community',
 			action: null
 		},
 		{
-			text: 'Fecha: ' + petControl.create_date,
+			text: 'Fecha: ' + date_control,
 			iconName: 'calendar-range',
 			iconType: 'material-community',
 			action: null
@@ -61,11 +79,16 @@ const PetControlView = (props) => {
 	];
 
 	return (
-		<ScrollView vertical  style={viewFormStyle.viewBody}>
-			<CarouselImages image_ids={petControl.image_id} height={200} width={screenWidth} image_default= {require("../../../assets/img/controlPet.jpg" )} />
-			
-			<TitleItem name={petControl.name} description={petControl.description} showRating={false}/>
-			<InfoItem  name={petControl.name}  listInfo={listInfo} showMap={false} nameInfo='el Control'/>
+		<ScrollView vertical style={viewFormStyle.viewBody}>
+			<CarouselImages
+				image_ids={petControl.image_id}
+				height={200}
+				width={screenWidth}
+				image_default={require('../../../assets/img/controlPet.jpg')}
+			/>
+
+			<TitleItem name={petControl.name} description={petControl.description} showRating={false} />
+			<InfoItem name={petControl.name} listInfo={listInfo} showMap={false} nameInfo="el Control" />
 		</ScrollView>
 	);
 };

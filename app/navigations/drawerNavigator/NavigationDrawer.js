@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, Image, Button } from 'react-native';
+import { View, Text, Image, Button, AsyncStorage } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 
@@ -16,8 +16,10 @@ import { getInfoUserLogin } from '../../utils/SaveRecord';
 import { FireSQL } from 'firesql';
 
 const fireSQL = new FireSQL(firebase.firestore(), { includeId: 'id' });
+
 const Drawer = createDrawerNavigator();
 
+const INFO_USER = '@info_user:key';
 // function CustomDrawerContent(props) {
 //   return (
 //     <DrawerContentScrollView {...props}>
@@ -55,48 +57,39 @@ function NavigatorDrawer() {
 	const [ elements, setElements ] = useState('');
 	const [ modalVisible, setModalVisible ] = useState(false);
 	const [ userType, setUserType ] = useState('');
+	var typeUser = ''
 	// const usersCollection = firestore().collection('userInfo');
 	// console.log('como por aca ' + usersCollection)
 
-	useEffect(() => {
-		async function getUser() {
-			var coso = await firebase.auth().onAuthStateChanged((userInfo) => {
-				//console.log(userInfo.uid);
-				setUser(userInfo);
-			});
+	const getDataUser = async () => {
+		try {
+			//const getInfoUser = await AsyncStorage.getItem(INFO_USER);
+			const userInfoData = await AsyncStorage.getItem(INFO_USER);
+			console.log('****************');
+			console.log('esto es lo del asyncstorage: ' + userInfoData);
+			const dataUserInfo = JSON.parse(userInfoData)
+			typeUser = JSON.parse(userInfoData) //userInfoData.userType
+			setUserType(dataUserInfo.userType)
+			
+			console.log('aca esta el problem ' +  userType)
+		} catch (error) {}
+	};
 
-			if (coso) {
-				console.log(coso);
-				if (user) {
-					//console.log('si hay usuad');
-					//console.log(userInfo.uid);
-					if (user.uid) {
-						fireSQL
-							.query(`SELECT * FROM userInfo WHERE create_uid = '${user.uid}' `)
-							.then((response) => {
-								console.log('estamos ok');
-								setElements(response);
-							})
-							.catch((response) => {
-								console.log('algo salio mal');
-							});
-					}
-				}
-			}
-
-			if (elements) {
-				console.log(elements[0].userType);
-				setUserType(elements[0].userType);
-			}
-		}
-		getUser();
+	useEffect( () => {
+		firebase.auth().onAuthStateChanged((userInfo) => {
+			setUser(userInfo);
+		});
+		getDataUser();
 	}, []);
 
-	var flagUser = user ? true : false;
-	console.log('sdfsdfs ' + flagUser);
-	console.log(userType);
+
+	var flagUser  = user ? true : false;
+	var flagCenter =  user ? true : false;
 	if (user && userType === 'user') {
 		flagUser = false;
+	}
+	if ((user && userType === 'veterinary') || (user && userType === 'fundation')) {
+		flagCenter = false;
 	}
 	return (
 		<Drawer.Navigator
@@ -118,12 +111,12 @@ function NavigatorDrawer() {
 				name="ProfileDrawer"
 				component={MyAccountDrawer}
 				options={{
-					title: user ? 'Perfil' : 'Registrate',
+					title: user ? 'Perfil' : 'Iniciar Sesión',
 					drawerIcon: ({ color, size }) => <MaterialCommunityIcons name="account" color="#1A89E7" size={24} />
 				}}
 			/>
 
-			{user && (
+			{flagCenter && (
 				<Drawer.Screen
 					name="PetDrawer"
 					component={PetDrawer}
@@ -133,7 +126,7 @@ function NavigatorDrawer() {
 					}}
 				/>
 			)}
-			{user && (
+			{flagCenter && (
 				<Drawer.Screen
 					name="PetControlDrawer"
 					component={PetControlDrawer}
