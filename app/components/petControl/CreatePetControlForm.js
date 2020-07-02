@@ -12,6 +12,7 @@ import PetControlForm from '../petControl/PetControlForm';
 import { uploadImageStorage } from '../../utils/UploadImageStorage';
 import { saveCollection } from '../../utils/SaveRecord';
 import UploadImage from '../formMain/UploadImage';
+import { showAlert } from '../../utils/validations';
 
 //devuelve el ancho de la screen
 const widhtScreen = Dimensions.get('window').width;
@@ -64,19 +65,7 @@ function CreatePetControlForm(props) {
 					toastRef.current.show('Algo salio mal');
 				});
 		} else {
-			Alert.alert(
-				'Alerta',
-				'Todos los campos son requeridos para poder crear el control',
-				[
-					{
-						text: 'Aceptar',
-						style: 'cancel'
-					}
-				],
-				{
-					cancelable: false
-				}
-			);
+			showAlert('Todos los campos son requeridos')
 		}
 	};
 
@@ -88,6 +77,7 @@ function CreatePetControlForm(props) {
 					toastRef={toastRef}
 					widhtScreen={widhtScreen}
 					imageMain={imageSelected[0]}
+					image_default={require('../../../assets/img/controlPet.jpg')}
 				/>
 				<UploadImage
 					styleUploadImage={styleUploadImage}

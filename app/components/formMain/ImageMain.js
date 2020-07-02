@@ -7,14 +7,15 @@ import * as ImagePicker from 'expo-image-picker';
 import { map, size, filter } from 'lodash';
 
 function UploadImage(props) {
-	const { styleImageMain, toastRef, imageMain, widhtScreen } = props;
-
+	const { styleImageMain, imageMain, widhtScreen, image_default } = props;
+	console.log('estamamos en el imagen main')
+	console.log(image_default)
 	return (
 		<View style={styleImageMain.viewPhoto}>
 			<Image
 				source={
 					imageMain ? { uri: imageMain }
-					: require('../../../assets/img/not_found.png')
+					: image_default
 				}
 				style={{
 					width: widhtScreen,

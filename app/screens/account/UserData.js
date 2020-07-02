@@ -97,14 +97,23 @@ const UserData = (props) => {
 			if (phone && street && location) {
 				setErrorPhone('');
 				setErrorStreet('');
+				console.log(userInfo)
 				const data = {
 					create_uid: userInfo.uid,
+					create_name: userInfo.displayName,
 					email: userInfo.email,
 					phone,
-					street,
+					address: street,
 					location,
 					veterinaries:[],
-					userType: returnUserType(userType)
+					userType: returnUserType(userType),
+					name: userInfo.displayName,
+					description: '',
+					create_date: new Date(),
+					image: [],
+					quantityVoting: 0,
+					rating: 0,
+					ratingTotal: 0,
 				};
 				//console.log(data);
 				//console.log('todo ok para los veterinarios');

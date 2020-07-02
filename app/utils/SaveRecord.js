@@ -168,7 +168,6 @@ export const saveCenter = (data, collectionName) => {
 		});
 };
 
-
 /**
  * 
  * @param {Nombre de la coleccion} collectionName 
@@ -191,4 +190,32 @@ export const getRecord = async (collectionName, user_id, setElements) => {
 			setElements(resultElements);
 		})
 		.catch((response) => {});
+};
+
+/**
+ * Función que permite eliminar un registro de forma permanente
+ * @param {id del registro a eliminar} record_id 
+ * @param {nombre de la coleccion } collectionName 
+ * @param { permite dirigir al usuario hacia atras } navegation 
+ */
+export const deleteRecordBD = (record_id, collectionName, navigation) => {
+	console.log('por aca');
+	console.log(collectionName);
+	console.log(record_id);
+
+	if (record_id && collectionName){
+		db
+		.collection(collectionName)
+		.doc(record_id)
+		.delete()
+		.then( (response) => {
+			console.log(response)
+			console.log('Se ha eliminado el registro con exito');
+			navigation.goBack();
+		})
+		.catch(function(error) {
+			console.error('Error removing document: ', error);
+			console.log('Ha Ocurrido un error al eliminar');
+		});
+	}
 };

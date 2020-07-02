@@ -18,9 +18,9 @@ import {
 function RenderItemsPetDoctor(props) {
 	//const navigation = useNavigation();
 	const { elements, navigation } = props;
-	const { id, image_id, name, description } = elements.item;
+	const { id, image_id, name, description, specialty } = elements.item;
+	console.log(elements.item)
 	const mainImage = image_id[0];
-
 
 	const goElement = () => {
 		navigation.navigate('ViewPetDoctor', {
@@ -33,13 +33,6 @@ function RenderItemsPetDoctor(props) {
 		<TouchableOpacity onPress={goElement}>
 			<View style={styleTouchableViewRecords.touchableViewRecordsStyle}>
 				<View style={styleTouchableViewImageRecords.touchableViewImageRecordsStyle}>
-					{/* <Image
-						resizeMode="cover"
-						PlaceholderContent={<ActivityIndicator color="#fff" />}
-						source={mainImage ? { uri: mainImage } : require('../../../assets/img/not_found.png')}
-						style={touchableImageRecords.touchableImageRecordsStyle}
-					/> */}
-
 					<Avatar
 						xlarge
 						style={touchableImageRecords.touchableImageRecordsStyle}
@@ -49,10 +42,14 @@ function RenderItemsPetDoctor(props) {
 				</View>
 				<View style={styleViewFormat.textFormat}>
 					<Text style={styleTouchableNameRecords.touchableNameRecordsStyle}>{name}</Text>
-					{/* <Text style={styletouchableAddressRecords.touchableAddressRecordsStyle}>{create_date}</Text>
-					 */}
+					<Text>
+						{ specialty ?  'Especialidad: ': ''}
+						<Text style={styleTouchableDescriptionRecordsRecords.touchableDescriptionRecordsStyle}>
+							{specialty}
+						</Text>
+					</Text>
 					<Text style={styleTouchableDescriptionRecordsRecords.touchableDescriptionRecordsStyle}>
-						{description}
+					{description.substr(0, 70)}...
 					</Text>
 				</View>
 			</View>

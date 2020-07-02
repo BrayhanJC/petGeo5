@@ -67,6 +67,7 @@ function AddMissinPetForm(props) {
         toastRef={toastRef}
         widhtScreen={widhtScreen}
         imageMain={imageSelected[0]}
+        image_default={require('../../../assets/img/avatar_dog.png')}
       />
 
       <AddForm

@@ -37,9 +37,16 @@ const PetDoctorView = (props) => {
 	if (!petDoctor) return <Loading isVisible={true} text="Cargando..." />;
 
 	const listInfo = [
+
 		{
 			text: 'Especialidad: ' + petDoctor.specialty,
 			iconName: 'card-bulleted',
+			iconType: 'material-community',
+			action: null
+		},
+		{
+			text: 'Biografía: ' + petDoctor.description,
+			iconName: 'message-bulleted',
 			iconType: 'material-community',
 			action: null
 		}
@@ -47,7 +54,7 @@ const PetDoctorView = (props) => {
 	return (
 		<ScrollView vertical>
 			<ViewAvatar image_id={petDoctor.image_id} image_default={require('../../../assets/img/doctor.png')} />
-			<TitleItem name={petDoctor.name} description={petDoctor.description} showRating={false} />
+			<TitleItem name={petDoctor.name} description={petDoctor.description} showRating={false}  showDescription={true}/>
 			<InfoItem name={petDoctor.name} listInfo={listInfo} showMap={false} nameInfo="del Veterinario" />
 		</ScrollView>
 	);

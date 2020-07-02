@@ -1,29 +1,38 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Text, View } from 'react-native'
-import { useFocusEffect } from '@react-navigation/native';
-
-import firebase from "firebase/app";
-import "firebase/firestore";
+import { View, Text } from 'react-native';
+import { Icon } from 'react-native-elements';
+import firebase from 'firebase/app';
+import { viewBody, buttonFormFloating } from '../../src/css/GeneralStyles';
 import { listRecords, handleLoadMore, getInfoByUser } from '../../utils/SaveRecord';
+//import ListRecordsForm from "../../components/formMain/ListRecordsForm";
+import ListRecords from '../../components/formList/ListRecords';
+import { useFocusEffect } from '@react-navigation/native';
+import Search from '../../components/formSearch/Search';
+import NotFoundItem from '../../components/formSearch/NotFoundItem';
+import { size, isEmpty } from 'lodash';
+
 import UserData from '../account/UserData';
 
-/**
- * allows to see the veterinary centers and animal foundations
+/***
+ * Allows to see all the news of the veterinary centers and animal foundations
  */
-function CenterVeterinary () {
+function CenterVeterinary(props) {
+	const { navigation } = props;
+	const [ user, setUser ] = useState(null);
 
-    const [user, setUser] = useState(null);
+	const [ centerVeterinary, setcenterVeterinary ] = useState([]);
+	const [ totalcenterVeterinary, setTotalcenterVeterinary ] = useState(0);
+	const [ startcenterVeterinary, setStartcenterVeterinary ] = useState(null);
+	const [ isLoading, setIsLoading ] = useState(false);
 
-    //obteniendo datos
-    const [Pets, setPets] = useState([]);
-    const [totalPets, setTotalPets] = useState(0);
-    const [startPets, setStartPets] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
-
-    //variables para el popup
+	//variables para el popup
 	const [ elements, setElements ] = useState('');
-    const [ modalVisible, setModalVisible ] = useState(false);
-    
+	const [ modalVisible, setModalVisible ] = useState(false);
+
+	//variables para el buscador
+	const [ item, setItem ] = useState([]);
+	const [ search, setSearch ] = useState('');
+
 	useEffect(() => {
 		(async () => {
 			const user = await firebase.auth().currentUser;
@@ -43,28 +52,54 @@ function CenterVeterinary () {
 		})();
 	
 	}, []);
-    
 
 	useFocusEffect(
 		useCallback(() => {
-			//listRecords('comedogs', setTotalComedog, setComedog, setStartComedog);
+			listRecords('petCenters', setTotalcenterVeterinary, setcenterVeterinary, setStartcenterVeterinary);
+
 			if (user) {
 				if (user.uid) {
-					console.log('vamos a consultar si el usuario esta registrado');
 					getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
-					console.log(elements);
-					console.log('el resultado quedo asi ' + modalVisible);
 				}
 			}
 
 		}, [])
-    );
+	);
 
+	console.log(centerVeterinary)
+	return (
+		<View style={viewBody.viewBody}>
+			<Search
+				search={search}
+				setSearch={setSearch}
+				setItem={setItem}
+				item={item}
+				collection="petCenters"
+				placeholderDefault="Buscar Mascotas Extraviadas..."
+			/>
 
-    
-    return (
-        <View>
-            <Text> Ver los centros veterinarios de Mascotas y fundaciones animalistas</Text>
+			{!isEmpty(search) && size(item) > 0 ? (
+				<View style={viewBody.viewBody}>
+					<ListRecords
+						elements={item}
+						isLoading={isLoading}
+						navigation={navigation}
+						navigator="ViewPetCenter"
+					/>
+				</View>
+			) : (
+				!isEmpty(search) && <NotFoundItem />
+			)}
+
+			{isEmpty(search) && (
+				<ListRecords
+					elements={centerVeterinary}
+					isLoading={isLoading}
+					navigation={navigation}
+					navigator="ViewPetCenter"
+				/>
+			)}
+
 			{/***
 			 * Modal que sirve para registrar el tipo de usuario
 			 */
@@ -73,8 +108,9 @@ function CenterVeterinary () {
 			) : (
 				<Text />
 			)}
-        </View>
-    )
+
+		</View>
+	);
 }
 
-export default CenterVeterinary
+export default CenterVeterinary;

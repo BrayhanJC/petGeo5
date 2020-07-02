@@ -7,6 +7,7 @@ import AvatarIcon from '../../components/AvatarIcon';
 import CreateComedog from '../../screens/comedog/CreateComedog';
 import ComedogView from '../../screens/comedog/ComedogView';
 import CreateReview from '../../screens/review/CreateReview';
+import DeleteRecord from '../../components/UpdateRecords/DeleteRecord'
 
 const Stack = createStackNavigator();
 
@@ -34,6 +35,7 @@ function ComedogsStack() {
 				}}
 			/>
 			<Stack.Screen name="ViewComedog" component={ComedogView} />
+			
 			<Stack.Screen
 				name="CreateReviewComedog"
 				component={CreateReview}

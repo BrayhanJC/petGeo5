@@ -138,6 +138,8 @@ function NavigatorDrawer() {
 					}}
 				/>
 			)}
+
+		
 			{flagUser && (
 				<Drawer.Screen
 					name="PetDoctorDrawer"

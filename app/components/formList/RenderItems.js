@@ -15,14 +15,16 @@ import {
 } from '../../src/css/ListRecord';
 
 function RendenderItems(props) {
-	const { elements, navigation, navigator } = props;
-	const { id, image, name, address, description } = elements.item;
+	const { elements, navigation, navigator, collectionName } = props;
+	const { id, image, name, address, description, create_name } = elements.item;
 	const mainImage = image[0];
 
 	const goElement = () => {
 		navigation.navigate(navigator, {
 			id,
-			name
+			name,
+			collectionName
+
 		});
 	};
 
@@ -46,9 +48,10 @@ function RendenderItems(props) {
 				</View>
 				<View style={styleViewFormat.textFormat}>
 					<Text style={styleTouchableNameRecords.touchableNameRecordsStyle}>{name}</Text>
-					<Text style={styletouchableAddressRecords.touchableAddressRecordsStyle}>{address}</Text>
+					{/* <Text style={styletouchableAddressRecords.touchableAddressRecordsStyle}>Dirección: {address}</Text> */}
+					<Text style={styletouchableAddressRecords.touchableAddressRecordsStyle}>Autor: {create_name}</Text>
 					<Text style={styleTouchableDescriptionRecordsRecords.touchableDescriptionRecordsStyle}>
-						{description.substr(0, 70)}...
+						{description.substr(0, 60)}...
 					</Text>
 				</View>
 			</View>

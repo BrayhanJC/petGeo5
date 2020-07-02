@@ -39,14 +39,7 @@ function CreatePetForm(props) {
 		} else if (!valueRaza) {
 			toastRef.current.show('La Raza de la Mascota es requerida', 2000);
 		} else {
-			console.log('***');
-			console.log(namePet);
-			console.log(valueTypePet);
-			console.log(valueSex);
-			console.log(valueRaza);
-			console.log(valueDate);
-			console.log(imageSelected);
-			console.log('todo ok');
+
 			setIsLoading(true);
 			uploadImageStorage(imageSelected, 'pets')
 				.then((response) => {
@@ -82,18 +75,12 @@ function CreatePetForm(props) {
 	return (
 		<ScrollView style={stylePetForm.scrollView}>
 			<View style={stylePetForm.viewForm}>
-				{/* <AvatarMain
-					imageDefault={require('../../../assets/img/icon.png')}
-					imageSelected={imageSelected}
-					setImageSelected={setImageSelected}
-					toastRef={toastRef}
-				/> */}
-
 				<ImageMain
 					styleImageMain={styleImageMain}
 					toastRef={toastRef}
 					widhtScreen={widhtScreen}
 					imageMain={imageSelected[0]}
+					image_default={require('../../../assets/img/avatar_dog.png')}
 				/>
 				<UploadImage
 					styleUploadImage={styleUploadImage}

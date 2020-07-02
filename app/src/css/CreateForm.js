@@ -47,6 +47,9 @@ export const addForm = {
 		marginLeft: 30,
 		marginRight: 30,
 		borderRadius: 10
+	},
+	textArea:{
+		fontSize:14
 	}
 };
 

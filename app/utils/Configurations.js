@@ -181,3 +181,13 @@ export const TYPE_CONTROL = [
 	{ label: 'Control', value: 'Control' },
 	{ label: 'Otro', value: 'Otro' }
 ];
+
+export const SPECIALITY = [
+	{ label: 'Cirujía', value: 'Cirujía' },
+	{ label: 'Oncología', value: 'Oncología' },
+	{ label: 'Fisioterapia', value: 'Fisioterapia' },
+	{ label: 'Rehabilitación', value: 'Rehabilitación' },
+	{ label: 'Imagenología (diagnóstico por imagen)', value: 'Imagenología (diagnóstico por imagen)' },
+	{ label: 'Fauna Silvestre', value: 'Fauna Silvestre' },
+	{ label: 'Otro', value: 'Otro' }
+];

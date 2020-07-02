@@ -90,7 +90,7 @@ function News(props) {
 
 			{!isEmpty(search) && size(item) > 0 ? (
 				<View style={styles.viewBody}>
-					<ListRecords elements={item} isLoading={isLoading} navigation={navigation} navigator="ViewNews" />
+					<ListRecords elements={item} isLoading={isLoading} navigation={navigation} navigator="ViewNews" collectionName='news'/>
 				</View>
 			) : (
 				!isEmpty(search) && <NotFoundItem />
@@ -98,7 +98,7 @@ function News(props) {
 
 			{isEmpty(search) && (
 				<View style={styles.viewBody}>
-					<ListRecords elements={News} isLoading={isLoading} navigation={navigation} navigator="ViewNews" />
+					<ListRecords elements={News} isLoading={isLoading} navigation={navigation} navigator="ViewNews" collectionName='news'/>
 				</View>
 			)}
 

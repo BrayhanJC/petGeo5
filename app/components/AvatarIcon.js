@@ -18,12 +18,12 @@ function AvatarIcon() {
 				size="small"
 				rounded
 				raised
-				icon={{ name: 'user', type: 'font-awesome', color: 'white'  }}
+				icon={{ name: 'view-headline', type: 'material-community', color: 'white', size:25  }}
 				onPress={() => {
 					navigation.dispatch(DrawerActions.openDrawer());
 				}}
 				activeOpacity={0.7}
-				containerStyle={{ marginLeft: 10 }}
+				containerStyle={{ marginLeft: 5, marginRight: 7 }}
 				overlayContainerStyle={{ backgroundColor: '#1A89E7' }}
 			/>
 		</View>

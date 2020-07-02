@@ -20,8 +20,6 @@ const InfoItem = (props) => {
 	return (
 		<View style={viewInfoStyle.viewItemInfo}>
 			<Text style={viewInfoStyle.infoTitle}>Informacion sobre {nameInfo}</Text>
-            {showMap && <ViewMap location={location} name={name} height={100} /> }
-			
 			{map(listInfo, (item, index) => (
 				<ListItem
                     key={index}
@@ -34,6 +32,7 @@ const InfoItem = (props) => {
 					containerStyle={viewInfoStyle.listStyle}
 				/>
 			))}
+			{showMap && <ViewMap location={location} name={name} height={100} /> }
 		</View>
 	);
 };

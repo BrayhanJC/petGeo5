@@ -18,26 +18,22 @@ import { mapInfoStyle } from '../../src/css/InfoMap';
 import { useNavigation } from '@react-navigation/native';
 import { getInfoByUser } from '../../utils/SaveRecord';
 
-
 import UserData from '../account/UserData';
 
 /***
  * Allows to see all the news of the veterinary centers and animal foundations
  */
 function LocalizationMap(props) {
-	const { navigation } = props
+	const { navigation } = props;
 	const [ result, setResult ] = useState([]);
 	const [ location, setLocation ] = useState(null);
 	const [ user, setUser ] = useState(null);
 
 	//console.log('mapa');
 
-
-
 	//variables para el popup
 	const [ elements, setElements ] = useState('');
 	const [ modalVisible, setModalVisible ] = useState(false);
-
 
 	const resultElements = [];
 	const collections = [ 'comedogs', 'missingPets' ];
@@ -73,22 +69,15 @@ function LocalizationMap(props) {
 					console.log('el resultado quedo asi ' + modalVisible);
 				}
 			}
-
-
 		})();
-
-
 	}, []);
-
-
 
 	useFocusEffect(
 		useCallback(() => {
 			//for (let index = 0; index < collections.length; index++) {
-				ListMap('comedogs', setResult, resultElements);
-				ListMap('missingPets', setResult, resultElements);
+			ListMap('comedogs', setResult, resultElements);
+			ListMap('missingPets', setResult, resultElements);
 			//}
-
 
 			if (user) {
 				if (user.uid) {
@@ -98,24 +87,23 @@ function LocalizationMap(props) {
 					console.log('el resultado quedo asi ' + modalVisible);
 				}
 			}
-
 		}, [])
 	);
 
 	//console.log(result[0]);
 
-	const returnColor = (collection) =>{
-		if (collection === 'comedogs'){
-			return 'orange'
+	const returnColor = (collection) => {
+		if (collection === 'comedogs') {
+			return 'orange';
 		}
-		if (collection === 'missingPets'){
-			return 'red'
+		if (collection === 'missingPets') {
+			return 'red';
 		}
-	}
+	};
 	const goElement = (view, id, name) => {
 		//console.log(navigation)
 		//navigation.goBack()
-		console.log(view)
+		console.log(view);
 		//navigation.navigate('ViewComedog');
 		navigation.navigate(view, {
 			id,
@@ -151,14 +139,14 @@ function LocalizationMap(props) {
 								latitude: record.location.latitude,
 								longitude: record.location.longitude
 							}}
-							pinColor={returnColor(record.collection) }
+							pinColor={returnColor(record.collection)}
 							title={record.name}
 							//description={record.description}
 							//image={require('../../../assets/img/comedog_icon.png')}
 						>
 							<Callout
 								style={styles.callout}
-								onPress={()=>goElement('ViewComedog', record.id, record.name)}
+								onPress={() => goElement('ViewComedog', record.id, record.name)}
 							>
 								<ScrollView vertical>
 									<CarouselImages image_ids={record.image} height={85} width={170} />
@@ -190,7 +178,7 @@ function LocalizationMap(props) {
 				</MapView>
 			)}
 
-						{/***
+			{/***
 			 * Modal que sirve para registrar el tipo de usuario
 			 */
 			modalVisible ? (
@@ -224,8 +212,6 @@ const styles = StyleSheet.create({
 		padding: 5
 	}
 });
-
-
 
 /***
  * 

@@ -65,6 +65,8 @@ function CreateComedogForm(props) {
 
 	//const {title, setTitle, address, setAddress, description, setDescription, btnName, addressVisible} = props
 
+
+
 	return (
 		<ScrollView style={styleForm.scrollView}>
 			<ImageMain
@@ -72,6 +74,7 @@ function CreateComedogForm(props) {
 				toastRef={toastRef}
 				widhtScreen={widhtScreen}
 				imageMain={imageSelected[0]}
+				image_default={require('../../../assets/img/default_comedog.jpg')}
 			/>
 
 			<AddForm

@@ -18,8 +18,6 @@ function RenderItemsPetControl(props) {
 	const { elements, navigation } = props;
 	const { id, image_id, name, description, create_date  } = elements.item;
 	const mainImage = image_id[0];
-	
-	console.log(create_date)
 	const createControl = new Date(create_date.seconds * 1000);
 	var date_control =
 		createControl.getDate() -
@@ -33,9 +31,8 @@ function RenderItemsPetControl(props) {
 		':' +
 		(createControl.getMinutes() < 10 ? '0' : '') +
 		createControl.getMinutes();
-	console.log(createControl)
+
 	const goElement = () => {
-		//console.log('ok');
 		navigation.navigate('ViewPetControl', {
 			id,
 			name
