@@ -34,7 +34,7 @@ function PetControl(props) {
 	//cargamos los datos del usuario
 	useEffect(() => {
 		setUser(firebase.auth().currentUser);
-		//getInfoByUser('userInfo', firebase.auth().currentUser.uid, setElements, setModalVisible);
+		getInfoByUser('userInfo', firebase.auth().currentUser.uid, setElements, setModalVisible);
 	}, []);
 
 	useFocusEffect(

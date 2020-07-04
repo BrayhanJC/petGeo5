@@ -6,7 +6,7 @@ import { size } from 'lodash';
 
 const db = firebase.firestore(firebaseApp);
 
-const limitRecords = 20;
+const limitRecords = 10000;
 
 export const saveCollection = (
 	collectionData,
@@ -31,6 +31,13 @@ export const saveCollection = (
 		});
 };
 
+/**
+ * Funcion que permite listar el contenido de la coleccion
+ * @param { nombre de la coleccion a listar} collectionName 
+ * @param { guarda el numero de elementos totales} setTotalElements 
+ * @param { contiene toda la lista de los elementos} setElements 
+ * @param { contiene el elemento inicial en el cual se va a empezar a listar} setStartElement 
+ */
 export const listRecords = (collectionName, setTotalElements, setElements, setStartElement) => {
 	db.collection(collectionName).get().then((snap) => {
 		setTotalElements(snap.size);
@@ -47,6 +54,35 @@ export const listRecords = (collectionName, setTotalElements, setElements, setSt
 		});
 		setElements(resultElements);
 	});
+};
+
+/**
+ * Funcion que permite listar el contenido de la coleccion por registro de usuario
+ * @param {nombre de la coleccion a listar} collectionName 
+ * @param { variable que permite realizar un filtro por creacion de registro} create_uid 
+ * @param { guarda el numero de elementos totales} setTotalElements 
+ * @param { contiene toda la lista de los elementos} setElements 
+ * @param { contiene el elemento inicial en el cual se va a empezar a listar} setStartElement 
+ */
+export const listRecordsById = (collectionName, create_uid, setTotalElements, setElements, setStartElement) => {
+	if (create_uid) {
+
+		db.collection(collectionName).where('create_uid', '==', create_uid).get().then((snap) => {
+			setTotalElements(snap.size);
+		});
+
+		const resultElements = [];
+
+		db.collection(collectionName).limit(limitRecords).where('create_uid', "==", create_uid).orderBy('create_date', 'desc').get().then((response) => {
+			setStartElement(response.docs[response.docs.length - 1]);
+			response.forEach((doc) => {
+				const element = doc.data();
+				element.id = doc.id;
+				resultElements.push(element);
+			});
+			setElements(resultElements);
+		});
+	}
 };
 
 export const handleLoadMore = (
@@ -198,24 +234,42 @@ export const getRecord = async (collectionName, user_id, setElements) => {
  * @param {nombre de la coleccion } collectionName 
  * @param { permite dirigir al usuario hacia atras } navegation 
  */
-export const deleteRecordBD = (record_id, collectionName, navigation) => {
-	console.log('por aca');
-	console.log(collectionName);
-	console.log(record_id);
-
-	if (record_id && collectionName){
-		db
-		.collection(collectionName)
-		.doc(record_id)
-		.delete()
-		.then( (response) => {
-			console.log(response)
-			console.log('Se ha eliminado el registro con exito');
-			navigation.goBack();
-		})
-		.catch(function(error) {
-			console.error('Error removing document: ', error);
-			console.log('Ha Ocurrido un error al eliminar');
-		});
+export const deleteRecordBD = async (collectionName, record_id, navigation) => {
+	if (record_id && collectionName) {
+		await db
+			.collection(collectionName)
+			.doc(record_id)
+			.delete()
+			.then((response) => {
+				console.log('Se ha eliminado el registro con exito');
+				navigation.goBack();
+			})
+			.catch(function(error) {
+				console.log('Ha Ocurrido un error al eliminar');
+			});
 	}
+};
+
+/**
+ * Funcion que permite validar si el registro se puede editar o eliminar
+ * @param {*} collectionName 
+ * @param {*} user_id 
+ * @param {*} setElements 
+ */
+export const validateRecordEditDelete = async (collectionName, record_id, user_id, setElements) => {
+	const resultElements = [];
+	await db
+		.collection(collectionName)
+		.where('create_uid', '==', user_id)
+		.get()
+		.then((response) => {
+			response.forEach((doc) => {
+				const element = doc.data();
+				element.id = doc.id;
+				resultElements.push(element);
+			});
+
+			setElements(resultElements);
+		})
+		.catch((response) => {});
 };

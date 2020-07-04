@@ -11,19 +11,14 @@ import { getRecord } from '../../utils/SaveRecord';
 import { useFocusEffect } from '@react-navigation/native';
 
 function PetForm(props) {
-
-
 	const {
-
 		setPet,
 		setTypeControl,
 		setNameControl,
 		setDescription,
-
 		setErrorPet,
 		setErrorType,
 		setErrorName,
-
 		errorName,
 		errorDescription,
 		userInfo
@@ -40,7 +35,10 @@ function PetForm(props) {
 	var list_pets = [];
 	if (elements) {
 		for (let index = 0; index < elements.length; index++) {
-			list_pets.push({ label: elements[index]['name'] , value: elements[index]['id'] + '*' + elements[index]['name'] });
+			list_pets.push({
+				label: elements[index]['name'],
+				value: elements[index]['id'] + '*' + elements[index]['name']
+			});
 		}
 	}
 

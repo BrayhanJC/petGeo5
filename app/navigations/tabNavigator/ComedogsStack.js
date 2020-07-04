@@ -15,7 +15,7 @@ const Stack = createStackNavigator();
  * Create stack nav news
  * Show all the news of the veterinary centers and animal foundations
  */
-function ComedogsStack() {
+function ComedogsStack(props) {
 	return (
 		<Stack.Navigator>
 			<Stack.Screen
@@ -31,10 +31,11 @@ function ComedogsStack() {
 				component={CreateComedog}
 				options={{
 					title: 'Crear Comedog',
-					headerRight: () => <AvatarIcon />
 				}}
 			/>
-			<Stack.Screen name="ViewComedog" component={ComedogView} />
+			<Stack.Screen name="ViewComedog" component={ComedogView} options={{
+					headerRight: () => <DeleteRecord props={props} />
+				}}/>
 			
 			<Stack.Screen
 				name="CreateReviewComedog"

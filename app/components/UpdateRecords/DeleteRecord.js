@@ -1,10 +1,12 @@
-import * as React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { Avatar } from 'react-native-elements';
-import { showAlertConfirm } from '../../utils/validations';
-import { deleteRecordBD } from '../../utils/SaveRecord';
+import firebase from 'firebase/app';
+import { showAlertConfirm, showAlert } from '../../utils/validations';
+import { useFocusEffect } from '@react-navigation/native';
+import { size } from 'lodash'
 /**
  * Permite eliminar el registro actual
  * @param {*} props 
@@ -12,27 +14,61 @@ import { deleteRecordBD } from '../../utils/SaveRecord';
 function DeleteRecord(props) {
 	const { navigation, route } = props.props;
 
-	const deleteRecord = (record_id) => {
-		console.log('eliminando');
+	const [ user, setUser ] = useState(false);
+	const [ currentUser, setCurrentUser ] = useState('');
 
-		console.log(route.state.routes);
+	const returnData = () => {
 		const data = route.state.routes;
+		console.log(data);
 		var collectionName = '';
 		var record_id = '';
+		var current_user_id = '';
 		for (let index = 0; index < data.length; index++) {
-            
 			if (data[index].params != undefined) {
 				if (data[index].params.collectionName) {
-                    collectionName = data[index].params.collectionName;
-                    record_id = data[index].params.id;
+					collectionName = data[index].params.collectionName;
+					record_id = data[index].params.id;
+					current_user_id = data[index].params.create_uid;
+					console.log(size(current_user_id))
 				}
 			}
 		}
-		console.log(collectionName);
-		console.log(record_id);
-		showAlertConfirm('¿Esta seguro que desea eliminar este registro?...', `'${collectionName}'`, `'${record_id}'`, navigation)
-        //deleteRecordBD(collectionName, record_id, navigation)
-    };
+
+		return {
+			collectionName,
+			record_id,
+			current_user_id
+		};
+	};
+
+	const deleteRecord = () => {
+		const data = returnData();
+		const user_id = firebase.auth().currentUser.uid;
+		console.log('eliminando')
+		console.log(size(user_id))
+		console.log(user_id);
+		console.log('hola ' + data.current_user_id);
+		if (user_id == data.current_user_id) {
+			showAlertConfirm(
+				'¿Esta seguro que desea eliminar este registro?...',
+				`${data.collectionName}`,
+				`${data.record_id}`,
+				navigation
+			);
+		} else {
+			showAlert('No puede eliminar este registro, ya que no es de su propiedad');
+		}
+	};
+
+	// useFocusEffect(
+	// 	useCallback(() => {
+	// 		const data = returnData();
+	// 		const user_id = firebase.auth().currentUser.uid;
+	// 		if (user_id == data.current_user_id) {
+	// 			setUser(true);
+	// 		}
+	// 	}, [])
+	// );
 
 	return (
 		<View style={{ flex: 1, alignItems: 'center', margin: 5 }}>

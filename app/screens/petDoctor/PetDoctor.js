@@ -1,19 +1,17 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { firebaseApp } from '../../utils/FireBase';
 import firebase from 'firebase/app';
 import { styleFloatButton } from '../../src/css/FloatButton';
 import { useFocusEffect } from '@react-navigation/native';
-
-import { listRecords, handleLoadMore, getInfoByUser } from '../../utils/SaveRecord';
+import { listRecordsById, handleLoadMore, getInfoByUser } from '../../utils/SaveRecord';
 import ListRecords from '../../components/formList/ListRecords';
 import { useNavigation } from '@react-navigation/native';
-import ListRecordsForm from '../../components/formMain/ListRecordsForm';
 import Search from '../../components/formSearch/Search';
 import NotFoundItem from '../../components/formSearch/NotFoundItem';
 import { size, isEmpty } from 'lodash';
 import UserData from '../account/UserData';
+
 function PetDoctor(props) {
 	//se puede obtener porque esta en la screen principal
 	//const { navigation } = props;
@@ -36,26 +34,24 @@ function PetDoctor(props) {
 	//cargamos los datos del usuario
 	useEffect(() => {
 		(async () => {
-			const user = await firebase.auth().currentUser;
-
-			console.log(user.uid);
+			const user = firebase.auth().currentUser.uid;
 			//cargando datos al userInfo, contiene toda la informacion del usuario
 			setUser(user);
-
 			if (user) {
-				if (user.uid) {
-					console.log('vamos a consultar si el usuario esta registrado');
-					getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
-					console.log(elements);
-					console.log('el resultado quedo asi ' + modalVisible);
-				}
+				getInfoByUser('userInfo', firebase.auth().currentUser.uid, setElements, setModalVisible);
 			}
 		})();
 	}, []);
 
 	useFocusEffect(
 		useCallback(() => {
-			listRecords('petDoctor', setTotalPetDoctor, setPetDoctor, setStartPetDoctor);
+			listRecordsById(
+				'petDoctor',
+				firebase.auth().currentUser.uid,
+				setTotalPetDoctor,
+				setPetDoctor,
+				setStartPetDoctor
+			);
 		}, [])
 	);
 

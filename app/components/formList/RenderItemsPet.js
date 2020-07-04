@@ -15,14 +15,16 @@ import {
 } from '../../src/css/ListRecord';
 
 function RendenderItemsPet(props) {
-	const { elements, navigation } = props;
-	const { id, image_id, name, type, sex, raza } = elements.item;
+	const { elements, navigation, collectionName } = props;
+	const { id, image_id, name, type, sex, raza, create_uid } = elements.item;
 	const mainImage = image_id[0];
 
 	const goElement = () => {
 		navigation.navigate('ViewPet', {
 			id,
-			name
+			name,
+			collectionName,
+			create_uid
 		});
 	};
 

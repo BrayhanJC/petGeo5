@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { StyleSheet, View, Text, AsyncStorage } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { styles } from '../../src/css/News';
-import { firebaseApp } from '../../utils/FireBase';
 import firebase from 'firebase/app';
 import { listRecords, handleLoadMore, getInfoByUser } from '../../utils/SaveRecord';
 import ListRecords from '../../components/formList/ListRecords';
@@ -35,45 +34,19 @@ function News(props) {
 	const [ item, setItem ] = useState([]);
 	const [ search, setSearch ] = useState('');
 
-	const saveDataUser = async () => {
-		try {
-			//const getInfoUser = await AsyncStorage.getItem(INFO_USER);
-			const userInfoData = await AsyncStorage.getItem(INFO_USER);
-			console.log('****************')
-			console.log('esto es lo del asyncstorage: ' + userInfoData);
-		} catch (error) {}
-	};
-
 	useEffect(() => {
-		saveDataUser();
 		firebase.auth().onAuthStateChanged((userInfo) => {
-			//console.log(userInfo)
+			console.log(userInfo)
 			setUser(userInfo);
-		});
-
-		if (user) {
-			console.log(user);
-			if (user.uid) {
-				console.log('vamos a consultar si el usuario esta registrado');
-				getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
-				console.log(elements);
-				console.log('el resultado quedo asi ' + modalVisible);
+			if (userInfo) {
+				getInfoByUser('userInfo', userInfo.uid, setElements, setModalVisible);
 			}
-		}
+		});
 	}, []);
 
 	useFocusEffect(
 		useCallback(() => {
 			listRecords('news', setTotalNews, setNews, setStartNews);
-
-			if (user) {
-				if (user.uid) {
-					console.log('vamos a consultar si el usuario esta registrado');
-					getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
-					console.log(elements);
-					console.log('el resultado quedo asi ' + modalVisible);
-				}
-			}
 		}, [])
 	);
 
@@ -90,7 +63,13 @@ function News(props) {
 
 			{!isEmpty(search) && size(item) > 0 ? (
 				<View style={styles.viewBody}>
-					<ListRecords elements={item} isLoading={isLoading} navigation={navigation} navigator="ViewNews" collectionName='news'/>
+					<ListRecords
+						elements={item}
+						isLoading={isLoading}
+						navigation={navigation}
+						navigator="ViewNews"
+						collectionName="news"
+					/>
 				</View>
 			) : (
 				!isEmpty(search) && <NotFoundItem />
@@ -98,19 +77,20 @@ function News(props) {
 
 			{isEmpty(search) && (
 				<View style={styles.viewBody}>
-					<ListRecords elements={News} isLoading={isLoading} navigation={navigation} navigator="ViewNews" collectionName='news'/>
+					<ListRecords
+						elements={News}
+						isLoading={isLoading}
+						navigation={navigation}
+						navigator="ViewNews"
+						collectionName="news"
+					/>
 				</View>
 			)}
 
 			{/***
 			 * Modal que sirve para registrar el tipo de usuario
 			 */
-
-			modalVisible ? (
-				<UserData modalVisible={modalVisible} setModalVisible={setModalVisible} userInfo={user} />
-			) : (
-				<Text />
-			)}
+			modalVisible && <UserData modalVisible={modalVisible} setModalVisible={setModalVisible} userInfo={user} />}
 
 			{user && (
 				<Icon

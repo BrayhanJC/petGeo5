@@ -48,7 +48,6 @@ export function showAlertConfirm(message, collectionName, record_id, navigation)
 			{
 				text: 'Eliminar',
 				onPress: () => {
-
 					deleteRecordBD(collectionName, record_id, navigation);
 				}
 			}

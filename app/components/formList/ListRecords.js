@@ -24,9 +24,13 @@ import { USER_FACING_NOTIFICATIONS } from 'expo-permissions';
 function ListRecords(props) {
 	const navigation = useNavigation();
 	const { elements, isLoading, handleLoadMore, showPet, showPetControl, showPetDoctor, navigator, user, collectionName } = props;
-
+	console.log('entramos a listar')
+	console.log(user)
+	console.log('como asi: ' + showPetDoctor)
 	var dataRender = elements;
 	if (user) {
+
+
 
 		if (showPet || showPetControl || showPetDoctor) {
 			const filtro = (elements) => elements.create_uid == user.uid;
@@ -42,11 +46,11 @@ function ListRecords(props) {
 					data={dataRender}
 					renderItem={(elementData) => {
 						if (showPet) {
-							return <RendenderItemsPet elements={elementData} navigation={navigation} />;
+							return <RendenderItemsPet elements={elementData} navigation={navigation} collectionName='pets'/>;
 						} else if (showPetControl) {
-							return <RenderItemsPetControl elements={elementData} navigation={navigation} />;
+							return <RenderItemsPetControl elements={elementData} navigation={navigation} collectionName='petControl'/>;
 						} else if (showPetDoctor) {
-							return <RenderItemsPetDoctor elements={elementData} navigation={navigation} />;
+							return <RenderItemsPetDoctor elements={elementData} navigation={navigation} collectionName='petDoctor'/>;
 						} else {
 							return <RenderItems elements={elementData} navigation={navigation} navigator={navigator} collectionName={collectionName}/>;
 						}

@@ -8,7 +8,7 @@ import { useNavigation } from '@react-navigation/native';
  */
 function UserGuest() {
 	const navigation = useNavigation();
-	//console.log('estamos desde el UserGuest');
+
 	return (
 		<ScrollView style={styles.viewBody} centerContent={true}>
 			<Image

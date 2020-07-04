@@ -39,45 +39,6 @@ function LoginForm(props) {
 
 	var { email, password } = formData;
 
-	const saveDataUser = async (data) => {
-		console.log('entro');
-	//	console.log(data);
-		var data_user = data.user;
-		var userType = ''
-		try {
-			const result = await db
-				.collection('userInfo')
-				.where('create_uid', '==', data_user.uid)
-				.get()
-				.then((response) => {
-					response.forEach((doc) => {
-						const element = doc.data();
-						element.id = doc.id;
-						console.log(element)
-						console.log(element.userType)
-						userType = element.userType
-					});
-
-				})
-				.catch((response) => {
-					console.log('Algo salio mal con la consulta del tipo de usuario')
-				});
-			const val = {
-				uid: data_user.uid,
-				displayName: data_user.displayName,
-				email: data_user.email,
-				providerId: data.additionalUserInfo.providerId,
-				userType: userType
-			};
-
-			//const getInfoUser = await AsyncStorage.getItem(INFO_USER);
-			await AsyncStorage.setItem(INFO_USER, JSON.stringify(val));
-			//await AsyncStorage.setItem(INFO_USER, 'Brayhan Jaramillo');
-		} catch (error) {
-			console.log('algo salio mal');
-			console.log(error);
-		}
-	};
 
 	const onSubmit = async () => {
 		if (isEmpty(email) || isEmpty(password)) {
@@ -92,8 +53,6 @@ function LoginForm(props) {
 					.signInWithEmailAndPassword(email, password)
 					.then((response) => {
 						console.log('iniciando sesion');
-					//	console.log(response);
-						saveDataUser(response);
 						setloading(false);
 						navigation.navigate('Profile');
 					})

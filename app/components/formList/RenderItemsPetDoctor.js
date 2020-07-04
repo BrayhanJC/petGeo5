@@ -17,15 +17,17 @@ import {
 
 function RenderItemsPetDoctor(props) {
 	//const navigation = useNavigation();
-	const { elements, navigation } = props;
-	const { id, image_id, name, description, specialty } = elements.item;
-	console.log(elements.item)
+	const { elements, navigation, collectionName } = props;
+	const { id, image_id, name, description, specialty, create_uid } = elements.item;
+	
 	const mainImage = image_id[0];
 
 	const goElement = () => {
 		navigation.navigate('ViewPetDoctor', {
 			id,
-			name
+			name,
+			collectionName,
+			create_uid
 		});
 	};
 

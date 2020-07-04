@@ -16,15 +16,15 @@ import {
 
 function RendenderItems(props) {
 	const { elements, navigation, navigator, collectionName } = props;
-	const { id, image, name, address, description, create_name } = elements.item;
+	const { id, image, name, address, description, create_name, create_uid } = elements.item;
 	const mainImage = image[0];
 
 	const goElement = () => {
 		navigation.navigate(navigator, {
 			id,
 			name,
-			collectionName
-
+			collectionName,
+			create_uid
 		});
 	};
 

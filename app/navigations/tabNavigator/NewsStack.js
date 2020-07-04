@@ -7,7 +7,7 @@ import AvatarIcon from '../../components/AvatarIcon';
 import CreateNews from '../../screens/news/CreateNews';
 import NewsView from '../../screens/news/NewsView';
 import CreateReview from '../../screens/review/CreateReview';
-import DeleteRecord from '../../components/UpdateRecords/DeleteRecord'
+import DeleteRecord from '../../components/UpdateRecords/DeleteRecord';
 const Stack = createStackNavigator();
 
 /***
@@ -31,13 +31,16 @@ function NewsStack(props) {
 				name="CreateNews"
 				component={CreateNews}
 				options={{
-					title: 'Añadir Nueva Noticia',
+					title: 'Añadir Nueva Noticia'
 				}}
 			/>
-			<Stack.Screen name="ViewNews" component={NewsView} 	options={{
-					
-					headerRight: () => <DeleteRecord props={props}/>
-				}}/>
+			<Stack.Screen
+				name="ViewNews"
+				component={NewsView}
+				options={{
+					headerRight: () => <DeleteRecord props={props} />
+				}}
+			/>
 
 			<Stack.Screen
 				name="CreateReviewNews"

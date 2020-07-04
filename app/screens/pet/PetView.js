@@ -71,7 +71,6 @@ const PetView = (props) => {
 
 	return (
 		<ScrollView vertical>
-			{/* <ViewAvatar image_id={pet.image_id} image_default={require('../../../assets/img/avatar_dog.png')} /> */}
 			<CarouselImages image_ids={pet.image_id} height={200} width={screenWidth} />
 			<TitleItem name={pet.name} description={pet.description} showRating={false} showDescription={true}/>
 			<InfoItem name={pet.name} listInfo={listInfo} showMap={false} nameInfo="la Mascota" />

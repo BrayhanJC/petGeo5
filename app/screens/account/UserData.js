@@ -8,7 +8,6 @@ import Map from '../../components/formMain/Map';
 import Toast from 'react-native-easy-toast';
 import * as Permissions from 'expo-permissions';
 
-
 const returnUserType = (option) => {
 	var userType = '';
 	if (option == 0) {
@@ -22,10 +21,12 @@ const returnUserType = (option) => {
 	}
 	return userType;
 };
+
 const UserData = (props) => {
 	const { modalVisible, setModalVisible, userInfo } = props;
 	const toastRef = useRef();
 	const buttons = [ 'Usuario', 'Veterinaria', 'Fundación' ];
+	const buttonTime = [ '12 Horas', '24 Horas' ];
 
 	const [ message, setMessage ] = useState('');
 	const [ street, setStreet ] = useState('');
@@ -35,17 +36,12 @@ const UserData = (props) => {
 	const [ errorStreet, setErrorStreet ] = useState('');
 	const [ errorPhone, setErrorPhone ] = useState('');
 	const [ errorMap, setErrorMap ] = useState('');
-	
+	const [ description, setDescription ] = useState('');
+	const [ time, setTime ] = useState(0);
+
 	const [ isVisibleMap, setIsVisibleMap ] = useState(false);
-	console.log('esto es lo que paso ' + modalVisible)
-	const onSubmit =  () => {
-		var errorsTemp = {};
-		console.log('pulsando');
-		//console.log(userType == 1);
-
-		let isSetErrors = true;
-		//console.log(userType);
-
+	console.log('esto es lo que paso ' + modalVisible);
+	const onSubmit = () => {
 		if (!location) {
 			setMessage('');
 		}
@@ -67,7 +63,6 @@ const UserData = (props) => {
 				//console.log(data);
 				saveUserInfo(data, 'userInfo', setModalVisible);
 				//navigation.navigate('Profile');
-                
 			} else {
 				setErrorStreet('');
 				setErrorPhone('El celular es requerido');
@@ -97,7 +92,7 @@ const UserData = (props) => {
 			if (phone && street && location) {
 				setErrorPhone('');
 				setErrorStreet('');
-				console.log(userInfo)
+
 				const data = {
 					create_uid: userInfo.uid,
 					create_name: userInfo.displayName,
@@ -105,7 +100,7 @@ const UserData = (props) => {
 					phone,
 					address: street,
 					location,
-					veterinaries:[],
+					veterinaries: [],
 					userType: returnUserType(userType),
 					name: userInfo.displayName,
 					description: '',
@@ -113,14 +108,10 @@ const UserData = (props) => {
 					image: [],
 					quantityVoting: 0,
 					rating: 0,
-					ratingTotal: 0,
+					ratingTotal: 0
 				};
-				//console.log(data);
-				//console.log('todo ok para los veterinarios');
-				saveCenter(data, 'petCenters')
+				saveCenter(data, 'petCenters');
 				saveUserInfo(data, 'userInfo', setModalVisible);
-				
-                 
 			}
 		}
 	};
@@ -161,29 +152,51 @@ const UserData = (props) => {
 								onChange={(even) => setphone(even.nativeEvent.text)}
 							/>
 
-							<Input
-								placeholder="Dirección"
-								containerStyle={userInfoStyle.input}
-								inputContainerStyle={userInfoStyle.inputForm}
-								errorStyle={{ color: 'red' }}
-								rightIcon={{
-									type: 'material-community',
-									name: 'google-maps',
-									color: location ? '#1A89E7' : '#C2C2C2',
-									onPress: () => setIsVisibleMap(true)
-								}}
-								errorMessage={!street ? errorStreet : errorMap}
-								onChange={(even) => setStreet(even.nativeEvent.text)}
-							/>
+							{userType != 0 && (
+								<Input
+									placeholder="Dirección"
+									containerStyle={userInfoStyle.input}
+									inputContainerStyle={userInfoStyle.inputForm}
+									errorStyle={{ color: 'red' }}
+									rightIcon={{
+										type: 'material-community',
+										name: 'google-maps',
+										color: location ? '#1A89E7' : '#C2C2C2',
+										onPress: () => setIsVisibleMap(true)
+									}}
+									errorMessage={!street ? errorStreet : errorMap}
+									onChange={(even) => setStreet(even.nativeEvent.text)}
+								/>
+							)}
 
-							<Text style={userInfoStyle.textError}>{ (message ? (message + '!') : '')} </Text>
+							{userType == 1 && <Text style={userInfoStyle.textButton}>Horario de Atención </Text>}
+							{userType == 1 && (
+								<ButtonGroup
+									onPress={(even) => setTime(even)}
+									selectedIndex={time}
+									buttons={buttonTime}
+									containerStyle={userInfoStyle.buttonGroup}
+								/>
+							)}
+
+							{userType != 0 && (
+								<Input
+									placeholder="Descripción"
+									containerStyle={userInfoStyle.inputArea}
+									inputContainerStyle={userInfoStyle.inputFormArea}
+									style={{ fontSize: 8 }}
+									errorStyle={{ color: 'red' }}
+									multiline={true}
+									errorMessage={!street ? errorStreet : errorMap}
+									onChange={(even) => setDescription(even.nativeEvent.text)}
+								/>
+							)}
+
+							<Text style={userInfoStyle.textError}>{message ? message + '!' : ''} </Text>
 
 							<TouchableHighlight
 								style={{ ...userInfoStyle.openButton, backgroundColor: '#1A89E7', width: '90%' }}
-								onPress={
-									onSubmit
-									//setModalVisible(!modalVisible);
-								}
+								onPress={onSubmit}
 							>
 								<Text style={userInfoStyle.textStyle}>Guardar</Text>
 							</TouchableHighlight>

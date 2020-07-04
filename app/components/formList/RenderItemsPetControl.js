@@ -15,8 +15,8 @@ import {
 } from '../../src/css/ListRecord';
 
 function RenderItemsPetControl(props) {
-	const { elements, navigation } = props;
-	const { id, image_id, name, description, create_date  } = elements.item;
+	const { elements, navigation, collectionName } = props;
+	const { id, image_id, name, description, create_date, create_uid  } = elements.item;
 	const mainImage = image_id[0];
 	const createControl = new Date(create_date.seconds * 1000);
 	var date_control =
@@ -35,7 +35,9 @@ function RenderItemsPetControl(props) {
 	const goElement = () => {
 		navigation.navigate('ViewPetControl', {
 			id,
-			name
+			name,
+			collectionName,
+			create_uid
 		})
 	};
 

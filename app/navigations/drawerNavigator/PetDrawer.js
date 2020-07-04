@@ -9,12 +9,12 @@ import CreatePet from '../../screens/pet/CreatePet'
 import AvatarIcon from '../../components/AvatarIcon'
 import PetView from '../../screens/pet/PetView'
 const Stack = createStackNavigator();
-
+import DeleteRecord from '../../components/UpdateRecords/DeleteRecord'
 /***
  * Create stack nav pets 
  * show all pets register by user
  */
-function PetDrawer() {
+function PetDrawer(props) {
 	const navigation = useNavigation();
 	return (
 		<Stack.Navigator>
@@ -38,10 +38,11 @@ function PetDrawer() {
 				component={CreatePet}
 				options={{
 					title: 'Añadir Mascota',
-					headerRight: () => <AvatarIcon />
 				}}
 			/>
-			<Stack.Screen name="ViewPet" component={PetView} />
+			<Stack.Screen name="ViewPet" component={PetView} options={{
+					headerRight: () => <DeleteRecord props={props} />
+				}}/>
 		</Stack.Navigator>
 	);
 }
