@@ -19,7 +19,7 @@ function DeleteRecord(props) {
 
 	const returnData = () => {
 		const data = route.state.routes;
-		console.log(data);
+
 		var collectionName = '';
 		var record_id = '';
 		var current_user_id = '';
@@ -29,7 +29,6 @@ function DeleteRecord(props) {
 					collectionName = data[index].params.collectionName;
 					record_id = data[index].params.id;
 					current_user_id = data[index].params.create_uid;
-					console.log(size(current_user_id))
 				}
 			}
 		}
@@ -44,10 +43,6 @@ function DeleteRecord(props) {
 	const deleteRecord = () => {
 		const data = returnData();
 		const user_id = firebase.auth().currentUser.uid;
-		console.log('eliminando')
-		console.log(size(user_id))
-		console.log(user_id);
-		console.log('hola ' + data.current_user_id);
 		if (user_id == data.current_user_id) {
 			showAlertConfirm(
 				'¿Esta seguro que desea eliminar este registro?...',

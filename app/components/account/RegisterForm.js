@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Input, Button, Icon } from 'react-native-elements';
 import { validateEmail } from '../../utils/validations';
-import Loading from '../Loading'
+import Loading from '../Loading';
 import { size, isEmpty } from 'lodash';
 import * as firebase from 'firebase';
-import {useNavigation} from '@react-navigation/native'
-
+import { useNavigation } from '@react-navigation/native';
 
 function defaultFormValue() {
 	return {
@@ -23,39 +22,34 @@ function RegisterForm(props) {
 	const [ showPassword, setShowPassword ] = useState(false);
 	const [ showRepitPassword, setshowRepitPassword ] = useState(false);
 	const [ formData, setformData ] = useState(defaultFormValue());
-	const [loading, setloading] = useState(false)
-	const navigation = useNavigation()
+	const [ loading, setloading ] = useState(false);
+	const navigation = useNavigation();
 	const onSubmit = () => {
 		//console.log(formData);
 		var { email, password, repeatPassword } = formData;
 		if (isEmpty(email) || isEmpty(password) || isEmpty(repeatPassword)) {
-			console.log('Todos los campos son obligatorios');
 			toastRef.current.show('Todos los campos son obligatorios');
 		} else {
 			if (!validateEmail(email)) {
-				console.log('Debe ser un correo valido');
 				toastRef.current.show('Debe ser un correo valido');
 			} else if (size(password) < 6 || size(repeatPassword) < 6) {
-				console.log('la contraseña deberia tener por lo menos tantos caracteres');
+				//console.log('la contraseña deberia tener por lo menos tantos caracteres');
 				toastRef.current.show('la contraseña deberia tener por lo menos 6 caracteres');
 			} else if (password !== repeatPassword) {
-				console.log('las contraseñas deberian ser iguales');
+				//console.log('las contraseñas deberian ser iguales');
 				toastRef.current.show('las contraseñas deberian ser iguales');
 			} else {
-				//console.log('ok');
-				setloading(true)
+				setloading(true);
 				firebase
 					.auth()
 					.createUserWithEmailAndPassword(email, password)
 					.then((response) => {
-						//console.log(response);
-						setloading(false)
-						navigation.navigate('Profile')
+						setloading(false);
+						navigation.navigate('Profile');
 					})
 					.catch((error) => {
-						//console.log(error);
-						toastRef.current.show('Ya hay un usuario con este mismo email')
-						setloading(true)
+						toastRef.current.show('Ya hay un usuario con este mismo email');
+						setloading(true);
 					});
 			}
 		}

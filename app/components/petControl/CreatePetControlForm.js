@@ -48,8 +48,6 @@ function CreatePetControlForm(props) {
 						image_id: response
 					};
 
-					console.log(data);
-
 					saveCollection(
 					  data,
 					  "petControl",

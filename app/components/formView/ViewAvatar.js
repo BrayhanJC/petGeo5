@@ -14,7 +14,6 @@ import { styleAvatarMain } from '../../src/css/AvatarMain';
  */
 function AvatarMain(props) {
 	//capturando datos del usuario
-	console.log(props);
 	const { image_id , image_default} = props;
 
 	return (

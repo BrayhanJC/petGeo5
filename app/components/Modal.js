@@ -26,8 +26,8 @@ export default Modal;
 const styles = StyleSheet.create({
 	overlay: {
 		height: 'auto',
-		width: '90%',
+		width: '93%',
 		backgroundColor: 'white',
-		borderRadius: 15
+		borderRadius: 20
 	}
 });

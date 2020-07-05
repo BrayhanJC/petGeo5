@@ -42,8 +42,6 @@ function PetForm(props) {
 		}
 	}
 
-	console.log(list_pets);
-
 	return (
 		<View>
 			<RNPickerSelect

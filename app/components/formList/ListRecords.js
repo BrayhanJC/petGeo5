@@ -23,15 +23,20 @@ import { USER_FACING_NOTIFICATIONS } from 'expo-permissions';
 
 function ListRecords(props) {
 	const navigation = useNavigation();
-	const { elements, isLoading, handleLoadMore, showPet, showPetControl, showPetDoctor, navigator, user, collectionName } = props;
-	console.log('entramos a listar')
-	console.log(user)
-	console.log('como asi: ' + showPetDoctor)
+	const {
+		elements,
+		isLoading,
+		handleLoadMore,
+		showPet,
+		showPetControl,
+		showPetDoctor,
+		navigator,
+		user,
+		collectionName
+	} = props;
+
 	var dataRender = elements;
 	if (user) {
-
-
-
 		if (showPet || showPetControl || showPetDoctor) {
 			const filtro = (elements) => elements.create_uid == user.uid;
 			var elementsRender = elements.filter(filtro);
@@ -46,13 +51,38 @@ function ListRecords(props) {
 					data={dataRender}
 					renderItem={(elementData) => {
 						if (showPet) {
-							return <RendenderItemsPet elements={elementData} navigation={navigation} collectionName='pets'/>;
+							return (
+								<RendenderItemsPet
+									elements={elementData}
+									navigation={navigation}
+									collectionName="pets"
+								/>
+							);
 						} else if (showPetControl) {
-							return <RenderItemsPetControl elements={elementData} navigation={navigation} collectionName='petControl'/>;
+							return (
+								<RenderItemsPetControl
+									elements={elementData}
+									navigation={navigation}
+									collectionName="petControl"
+								/>
+							);
 						} else if (showPetDoctor) {
-							return <RenderItemsPetDoctor elements={elementData} navigation={navigation} collectionName='petDoctor'/>;
+							return (
+								<RenderItemsPetDoctor
+									elements={elementData}
+									navigation={navigation}
+									collectionName="petDoctor"
+								/>
+							);
 						} else {
-							return <RenderItems elements={elementData} navigation={navigation} navigator={navigator} collectionName={collectionName}/>;
+							return (
+								<RenderItems
+									elements={elementData}
+									navigation={navigation}
+									navigator={navigator}
+									collectionName={collectionName}
+								/>
+							);
 						}
 					}}
 					keyExtractor={(item, index) => index.toString()}

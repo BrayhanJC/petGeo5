@@ -5,22 +5,9 @@ import { userInfoStyle } from '../../src/css/UserInfoStyle';
 import { styleForm } from '../../src/css/AddForm';
 import { saveUserInfo, saveCenter } from '../../utils/SaveRecord';
 import Map from '../../components/formMain/Map';
-import Toast from 'react-native-easy-toast';
-import * as Permissions from 'expo-permissions';
+import {returnUserType, returnSchedule} from '../../utils/Configurations'
 
-const returnUserType = (option) => {
-	var userType = '';
-	if (option == 0) {
-		userType = 'user';
-	}
-	if (option == 1) {
-		userType = 'veterinary';
-	}
-	if (option == 2) {
-		userType = 'fundation';
-	}
-	return userType;
-};
+
 
 const UserData = (props) => {
 	const { modalVisible, setModalVisible, userInfo } = props;
@@ -38,9 +25,11 @@ const UserData = (props) => {
 	const [ errorMap, setErrorMap ] = useState('');
 	const [ description, setDescription ] = useState('');
 	const [ time, setTime ] = useState(0);
+	const [errorDescription, setErrorDescription] = useState('')
+
 
 	const [ isVisibleMap, setIsVisibleMap ] = useState(false);
-	console.log('esto es lo que paso ' + modalVisible);
+	
 	const onSubmit = () => {
 		if (!location) {
 			setMessage('');
@@ -89,9 +78,16 @@ const UserData = (props) => {
 				setErrorMap('Debe guardar la ubicación, pulse el icono del mapa');
 			}
 
-			if (phone && street && location) {
+			if (description){
+				setErrorDescription('')
+			}else{
+				setErrorDescription('Debes agregar una descripcón')
+			}
+
+			if (phone && street && location && description) {
 				setErrorPhone('');
 				setErrorStreet('');
+				setErrorDescription('')
 
 				const data = {
 					create_uid: userInfo.uid,
@@ -100,10 +96,11 @@ const UserData = (props) => {
 					phone,
 					address: street,
 					location,
+					description,
 					veterinaries: [],
 					userType: returnUserType(userType),
+					schedule: returnSchedule(time),
 					name: userInfo.displayName,
-					description: '',
 					create_date: new Date(),
 					image: [],
 					quantityVoting: 0,
@@ -187,7 +184,7 @@ const UserData = (props) => {
 									style={{ fontSize: 8 }}
 									errorStyle={{ color: 'red' }}
 									multiline={true}
-									errorMessage={!street ? errorStreet : errorMap}
+									errorMessage={errorDescription}
 									onChange={(even) => setDescription(even.nativeEvent.text)}
 								/>
 							)}

@@ -1,3 +1,6 @@
+/**
+ * Raza de los perros mas comunes
+ */
 export const RAZA = [
 	{ label: 'Otro', value: 'Otro' },
 	{ label: 'Alano', value: 'Alano' },
@@ -92,8 +95,14 @@ export const RAZA = [
 	{ label: 'Yorkshire Terrier', value: 'Yorkshire Terrier' }
 ];
 
+/**
+ * Contiene el genero de la mascota
+ */
 export const TYPE_SEX = [ { label: 'Hembra', value: 'Hembra' }, { label: 'Macho', value: 'Macho' } ];
 
+/**
+ * Tipos de mascotas
+ */
 export const TYPE_PETS = [
 	{
 		label: 'Perro',
@@ -104,8 +113,8 @@ export const TYPE_PETS = [
 		value: 'Gato'
 	},
 	{
-		label: 'Cerdo',
-		value: 'Cerdo'
+		label: 'Minipig',
+		value: 'Minipig'
 	},
 	{
 		label: 'Otro',
@@ -113,6 +122,9 @@ export const TYPE_PETS = [
 	}
 ];
 
+/**
+ * Razas mas comunes de los gatos
+ */
 export const RAZA_CAT = [
 	{ label: 'Abisinio', value: 'Abisinio' },
 	{ label: 'Africano doméstico', value: 'Africano doméstico' },
@@ -174,6 +186,9 @@ export const RAZA_CAT = [
 	{ label: 'Van Turco', value: 'Van Turco' }
 ];
 
+/**
+ * Contiene los datos para el tipo de control
+ */
 export const TYPE_CONTROL = [
 	{ label: 'Vacunación', value: 'Vacunación' },
 	{ label: 'Desparacitación', value: 'Desparacitación' },
@@ -182,6 +197,9 @@ export const TYPE_CONTROL = [
 	{ label: 'Otro', value: 'Otro' }
 ];
 
+/**
+ * Contiene los datos de la especialidad del veterinario
+ */
 export const SPECIALITY = [
 	{ label: 'Cirujía', value: 'Cirujía' },
 	{ label: 'Oncología', value: 'Oncología' },
@@ -191,3 +209,250 @@ export const SPECIALITY = [
 	{ label: 'Fauna Silvestre', value: 'Fauna Silvestre' },
 	{ label: 'Otro', value: 'Otro' }
 ];
+
+/**
+ * Funcion que permite retornar el valor de la opción elegida
+ * @param { opcion elegida por el usuario } option 
+ */
+export const returnUserType = (option) => {
+	var userType = '';
+	if (option == 0) {
+		userType = 'user';
+	}
+	if (option == 1) {
+		userType = 'veterinary';
+	}
+	if (option == 2) {
+		userType = 'fundation';
+	}
+	return userType;
+};
+
+/**
+ * Funcion que permite retornar el horario del centro 
+ * @param { opcion elegida por el usuario} option 
+ */
+export const returnSchedule = (option) => {
+	var schedule = '';
+	if (option == 0) {
+		schedule = '12';
+	}
+	if (option == 1) {
+		schedule = '24';
+	}
+
+	return schedule;
+};
+
+/**
+ * Funcion que permite crear una lista de las opciones disponibles para el usuario
+ * @param { componente a seleccionar} selectedComponent 
+ * @param { titulo a mostrar} title 
+ */
+export function generateOptionsUser(selectedComponent, title, subtitle) {
+	return [
+		{
+			title: title ? 'Nombre Centro' : 'Nombre y Apellidos',
+			iconType: 'material-community',
+			iconNameLeft: 'account-circle',
+			iconNameRight: 'chevron-right',
+			iconColorLeft: '#1A89E7',
+			iconColorRight: '#CCC',
+			subtitle: subtitle[0].create_name,
+			onPress: () => selectedComponent('displayName')
+		},
+		{
+			title: 'Celular',
+			iconType: 'material-community',
+			iconNameLeft: 'phone',
+			iconNameRight: 'chevron-right',
+			iconColorLeft: '#1A89E7',
+			iconColorRight: '#CCC',
+			subtitle: subtitle[0].phone,
+			onPress: () => selectedComponent('phone')
+		},
+		{
+			title: 'Email',
+			iconType: 'material-community',
+			iconNameLeft: 'at',
+			iconNameRight: 'chevron-right',
+			iconColorLeft: '#1A89E7',
+			iconColorRight: '#CCC',
+			subtitle: subtitle[0].email,
+			onPress: () => selectedComponent('email')
+		},
+		{
+			title: 'Contraseña',
+			iconType: 'material-community',
+			iconNameLeft: 'lock-reset',
+			iconNameRight: 'chevron-right',
+			iconColorLeft: '#1A89E7',
+			iconColorRight: '#CCC',
+			onPress: () => selectedComponent('password')
+		}
+	];
+}
+
+/**
+ * Funcion que permite crear una lista de las opciones disponibles para el centro 
+ * @param { componente a seleccionar} selectedComponent 
+ * @param { titulo a mostrar} title 
+ */
+export function generateOptionsCenter(selectedComponent, title, subtitle) {
+
+	return [
+		{
+			title: title ? 'Nombre Centro' : 'Nombre y Apellidos',
+			iconType: 'material-community',
+			iconNameLeft: 'account-circle',
+			iconNameRight: 'chevron-right',
+			iconColorLeft: '#1A89E7',
+			iconColorRight: '#CCC',
+			subtitle: subtitle[0].create_name,
+			onPress: () => selectedComponent('displayName')
+		},
+		{
+			title: 'Celular',
+			iconType: 'material-community',
+			iconNameLeft: 'phone',
+			iconNameRight: 'chevron-right',
+			iconColorLeft: '#1A89E7',
+			iconColorRight: '#CCC',
+			subtitle: subtitle[0].phone,
+			onPress: () => selectedComponent('phone')
+		},
+		{
+			title: 'Email',
+			iconType: 'material-community',
+			iconNameLeft: 'at',
+			iconNameRight: 'chevron-right',
+			iconColorLeft: '#1A89E7',
+			iconColorRight: '#CCC',
+			subtitle: subtitle[0].email,
+			onPress: () => selectedComponent('email')
+		},
+		{
+			title: 'Dirección',
+			iconType: 'material-community',
+			iconNameLeft: 'map-marker',
+			iconNameRight: 'chevron-right',
+			iconColorLeft: '#1A89E7',
+			iconColorRight: '#CCC',
+			subtitle: subtitle[0].address,
+			onPress: () => selectedComponent('street')
+		},
+		{
+			title: 'Página Web',
+			iconType: 'material-community',
+			iconNameLeft: 'web',
+			iconNameRight: 'chevron-right',
+			iconColorLeft: '#1A89E7',
+			iconColorRight: '#CCC',
+			subtitle: subtitle[0].website,
+			onPress: () => selectedComponent('website')
+		},
+		{
+			title: 'Contraseña',
+			iconType: 'material-community',
+			iconNameLeft: 'lock-reset',
+			iconNameRight: 'chevron-right',
+			iconColorLeft: '#1A89E7',
+			iconColorRight: '#CCC',
+			onPress: () => selectedComponent('password')
+		}
+	];
+}
+
+/**
+ * Funcion que permite crear una lista de las opciones disponibles para el usuario que ingreso con facebook
+ * @param { componente a seleccionar} selectedComponent 
+ * @param { titulo a mostrar} title 
+ */
+export function generateOptionsUserFacebook(selectedComponent, title, subtitle) {
+	return [
+		{
+			title: title ? 'Nombre Centro' : 'Nombre y Apellidos',
+			iconType: 'material-community',
+			iconNameLeft: 'account-circle',
+			iconNameRight: 'chevron-right',
+			iconColorLeft: '#1A89E7',
+			iconColorRight: '#CCC',
+			subtitle: subtitle[0].create_name
+		},
+		{
+			title: 'Celular',
+			iconType: 'material-community',
+			iconNameLeft: 'phone',
+			iconNameRight: 'chevron-right',
+			iconColorLeft: '#1A89E7',
+			iconColorRight: '#CCC',
+			subtitle: subtitle[0].phone
+		},
+		{
+			title: 'Email',
+			iconType: 'material-community',
+			iconNameLeft: 'at',
+			iconNameRight: 'chevron-right',
+			iconColorLeft: '#1A89E7',
+			iconColorRight: '#CCC',
+			subtitle: subtitle[0].email
+		}
+	];
+}
+
+/**
+ * Funcion que permite crear una lista de las opciones disponibles para el centro ingresado con facebook
+ * @param { componente a seleccionar} selectedComponent 
+ * @param { titulo a mostrar} title 
+ */
+export function generateOptionsCenterFacebook(selectedComponent, title, subtitle) {
+	return [
+		{
+			title: title ? 'Nombre Centro' : 'Nombre y Apellidos',
+			iconType: 'material-community',
+			iconNameLeft: 'account-circle',
+			iconNameRight: 'chevron-right',
+			iconColorLeft: '#1A89E7',
+			iconColorRight: '#CCC',
+			subtitle: subtitle[0].create_name
+		},
+		{
+			title: 'Celular',
+			iconType: 'material-community',
+			iconNameLeft: 'phone',
+			iconNameRight: 'chevron-right',
+			iconColorLeft: '#1A89E7',
+			iconColorRight: '#CCC',
+			subtitle: subtitle[0].phone
+		},
+		{
+			title: 'Email',
+			iconType: 'material-community',
+			iconNameLeft: 'at',
+			iconNameRight: 'chevron-right',
+			iconColorLeft: '#1A89E7',
+			iconColorRight: '#CCC',
+			subtitle: subtitle[0].email
+		},
+		{
+			title: 'Dirección',
+			iconType: 'material-community',
+			iconNameLeft: 'map-marker',
+			iconNameRight: 'chevron-right',
+			iconColorLeft: '#1A89E7',
+			iconColorRight: '#CCC',
+			subtitle: subtitle[0].address,
+			onPress: () => selectedComponent('street')
+		},
+		{
+			title: 'Página Web',
+			iconType: 'material-community',
+			iconNameLeft: 'web',
+			iconNameRight: 'chevron-right',
+			iconColorLeft: '#1A89E7',
+			iconColorRight: '#CCC',
+			subtitle: subtitle[0].website,
+			onPress: () => selectedComponent('website')
+		}
+	];
+}

@@ -66,22 +66,27 @@ export const listRecords = (collectionName, setTotalElements, setElements, setSt
  */
 export const listRecordsById = (collectionName, create_uid, setTotalElements, setElements, setStartElement) => {
 	if (create_uid) {
-
 		db.collection(collectionName).where('create_uid', '==', create_uid).get().then((snap) => {
 			setTotalElements(snap.size);
 		});
 
 		const resultElements = [];
 
-		db.collection(collectionName).limit(limitRecords).where('create_uid', "==", create_uid).orderBy('create_date', 'desc').get().then((response) => {
-			setStartElement(response.docs[response.docs.length - 1]);
-			response.forEach((doc) => {
-				const element = doc.data();
-				element.id = doc.id;
-				resultElements.push(element);
+		db
+			.collection(collectionName)
+			.limit(limitRecords)
+			.where('create_uid', '==', create_uid)
+			.orderBy('create_date', 'desc')
+			.get()
+			.then((response) => {
+				setStartElement(response.docs[response.docs.length - 1]);
+				response.forEach((doc) => {
+					const element = doc.data();
+					element.id = doc.id;
+					resultElements.push(element);
+				});
+				setElements(resultElements);
 			});
-			setElements(resultElements);
-		});
 	}
 };
 
@@ -118,7 +123,7 @@ export const handleLoadMore = (
 };
 
 /**
- * 
+ * Funcuon que permite obtener la informacion del usuario
  * @param {Nombre del collection a consultar} collectionName 
  * @param {variable que hace referencia al usuario} user_id 
  * @param {variable que modica los elementos a retornar} setElements 
@@ -251,13 +256,11 @@ export const deleteRecordBD = async (collectionName, record_id, navigation) => {
 };
 
 /**
- * Funcion que permite validar si el registro se puede editar o eliminar
- * @param {*} collectionName 
- * @param {*} user_id 
- * @param {*} setElements 
+ * Funcion que permite actualizar los datos del registro
+ * @param { nombre de la collection } collectionName 
+ * @param { id del usario} user_id 
  */
-export const validateRecordEditDelete = async (collectionName, record_id, user_id, setElements) => {
-	const resultElements = [];
+export const updateInfoUserCenter = async (collectionName, user_id, data) => {
 	await db
 		.collection(collectionName)
 		.where('create_uid', '==', user_id)
@@ -266,10 +269,41 @@ export const validateRecordEditDelete = async (collectionName, record_id, user_i
 			response.forEach((doc) => {
 				const element = doc.data();
 				element.id = doc.id;
-				resultElements.push(element);
-			});
 
-			setElements(resultElements);
+				db
+					.collection(collectionName)
+					.doc(element.id)
+					.update(data)
+					.then((response) => {
+						console.log('actualizado');
+					})
+					.catch((response) => {});
+			});
+		})
+		.catch((response) => {});
+};
+
+/**
+ * Funcion que permite verificar si el usuario actualmente logueado es un usuario o un centro
+ * @param { id del usuario } user_id 
+ * @param { almacena el valor de la respuesta } data 
+ */
+export const isCenter = async (user_id, data) => {
+	await db
+		.collection('userInfo')
+		.where('create_uid', '==', user_id)
+		.get()
+		.then((response) => {
+			response.forEach((doc) => {
+				const element = doc.data();
+				element.id = doc.id;
+
+				if (element.userType == 'veterinary' || element.userType == 'fundation') {
+					data(true);
+				} else {
+					data(false);
+				}
+			});
 		})
 		.catch((response) => {});
 };

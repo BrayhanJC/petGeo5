@@ -37,20 +37,15 @@ function CenterVeterinary(props) {
 		(async () => {
 			const user = await firebase.auth().currentUser;
 
-			console.log(user.uid);
 			//cargando datos al userInfo, contiene toda la informacion del usuario
 			setUser(user);
 
 			if (user) {
 				if (user.uid) {
-					console.log('vamos a consultar si el usuario esta registrado');
 					getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
-					console.log(elements);
-					console.log('el resultado quedo asi ' + modalVisible);
 				}
 			}
 		})();
-	
 	}, []);
 
 	useFocusEffect(
@@ -62,11 +57,10 @@ function CenterVeterinary(props) {
 					getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
 				}
 			}
-
 		}, [])
 	);
 
-	console.log(centerVeterinary)
+
 	return (
 		<View style={viewBody.viewBody}>
 			<Search
@@ -108,7 +102,6 @@ function CenterVeterinary(props) {
 			) : (
 				<Text />
 			)}
-
 		</View>
 	);
 }

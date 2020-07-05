@@ -5,8 +5,7 @@ import Carousel from 'react-native-snap-carousel';
 import {size} from 'lodash'
 const CarouselImages = (props) => {
 	const { image_ids, height, width } = props;
-	console.log('esta es la imagen que vamos a poner as')
-	console.log(image_ids);
+
 	const renderItem = ({ item }) => {
 		return (
 			<Image

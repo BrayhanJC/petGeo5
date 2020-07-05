@@ -52,7 +52,7 @@ function LoginForm(props) {
 					.auth()
 					.signInWithEmailAndPassword(email, password)
 					.then((response) => {
-						console.log('iniciando sesion');
+						
 						setloading(false);
 						navigation.navigate('Profile');
 					})

@@ -14,8 +14,6 @@ function CreatePet(props) {
 	const [ isLoading, setIsLoading ] = useState(false);
 	const toastRef = useRef();
 	
-    console.log('Screen Create Pet Doctor');
-    
 	return (
 		<View>
 			<CreatePetDoctorForm toastRef={toastRef} setIsLoading={setIsLoading}  navigation={navigation}/>

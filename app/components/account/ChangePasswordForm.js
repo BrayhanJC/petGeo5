@@ -111,6 +111,7 @@ function ChangePasswordForm(props) {
 					password={true}
 					secureTextEntry={showPassword ? false : true}
 					containerStyle={styles.input}
+					inputContainerStyle={styles.inputForm}
 					rightIcon={{
 						type: 'material-community',
 						name: showPassword ? 'eye-outline' : 'eye-off-outline',
@@ -125,6 +126,7 @@ function ChangePasswordForm(props) {
 					password={true}
 					secureTextEntry={showPassword ? false : true}
 					containerStyle={styles.input}
+					inputContainerStyle={styles.inputForm}
 					rightIcon={{
 						type: 'material-community',
 						name: showPassword ? 'eye-outline' : 'eye-off-outline',
@@ -139,6 +141,7 @@ function ChangePasswordForm(props) {
 					password={true}
 					secureTextEntry={showPassword ? false : true}
 					containerStyle={styles.input}
+					inputContainerStyle={styles.inputForm}
 					rightIcon={{
 						type: 'material-community',
 						name: showPassword ? 'eye-outline' : 'eye-off-outline',

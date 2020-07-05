@@ -34,7 +34,6 @@ function CreatePetControl(props) {
 		useCallback(() => {
 			(async () => {
 				firebase.auth().onAuthStateChanged((user) => {
-					console.log('sure')
 					setUserInfo(user)
 				});
 			})();

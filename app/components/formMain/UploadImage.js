@@ -22,7 +22,6 @@ function UploadImage(props) {
 					text: 'Eliminar',
 
 					onPress: () => {
-						console.log('eliminada');
 						setImageSelected(filter(imageSelected, (imageUri) => imageUri !== image));
 					}
 				}

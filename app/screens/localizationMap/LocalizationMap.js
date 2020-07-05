@@ -57,16 +57,12 @@ function LocalizationMap(props) {
 			}
 			const user = await firebase.auth().currentUser;
 
-			console.log(user.uid);
 			//cargando datos al userInfo, contiene toda la informacion del usuario
 			setUser(user);
 
 			if (user) {
 				if (user.uid) {
-					console.log('vamos a consultar si el usuario esta registrado');
 					getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
-					console.log(elements);
-					console.log('el resultado quedo asi ' + modalVisible);
 				}
 			}
 		})();
@@ -81,10 +77,7 @@ function LocalizationMap(props) {
 
 			if (user) {
 				if (user.uid) {
-					console.log('vamos a consultar si el usuario esta registrado');
 					getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
-					console.log(elements);
-					console.log('el resultado quedo asi ' + modalVisible);
 				}
 			}
 		}, [])
@@ -103,7 +96,6 @@ function LocalizationMap(props) {
 	const goElement = (view, id, name) => {
 		//console.log(navigation)
 		//navigation.goBack()
-		console.log(view);
 		//navigation.navigate('ViewComedog');
 		navigation.navigate(view, {
 			id,

@@ -36,7 +36,7 @@ function News(props) {
 
 	useEffect(() => {
 		firebase.auth().onAuthStateChanged((userInfo) => {
-			console.log(userInfo)
+			
 			setUser(userInfo);
 			if (userInfo) {
 				getInfoByUser('userInfo', userInfo.uid, setElements, setModalVisible);

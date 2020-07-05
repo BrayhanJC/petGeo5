@@ -1,24 +1,35 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { Input, Button, Card } from 'react-native-elements';
-import { styles } from '../../src/css/ModalProfile';
-import { validateEmail } from '../../utils/validations';
+import { isEmpty } from 'lodash';
 import * as firebase from 'firebase';
-
 import { reauthenticate } from '../../utils/Api';
+import { styles } from '../../src/css/ModalProfile';
+//import {db} from '../../utils/FireBase'
+import { updateInfoUserCenter } from '../../utils/SaveRecord';
 
 /***
  * Funcion que permite inicializar la variable formData
  */
 function defaultFormValue() {
 	return {
-		email: '',
+		phone: '',
 		password: ''
 	};
 }
 
-function ChangeEmailForm(props) {
-	const { email, setShowModal, toastRef, setReloadUserInfo, petCenter } = props;
+function EditPhone(props) {
+	//console.log("cambiando nombre");
+
+	const { displayName, setShowModal, setReloadUserInfo, user_id, userInfo, data_user, toastRef, petCenter, phoneDefault } = props;
+	
+	const [ phone, setPhone ] = useState('');
+
+	//variable que se utiliza para mostrar el error en el campo displayName
+	const [ error, setError ] = useState(null);
+
+	//variable que se utiliza para actualizar automaticamente despues de que se guarde el nuevo nombre
+	const [ isLoading, setIsLoading ] = useState(false);
 
 	//variable donde se almacenaran los datos de email y contraseña
 	const [ formData, setFormData ] = useState(defaultFormValue);
@@ -44,14 +55,9 @@ function ChangeEmailForm(props) {
 		setShowError({});
 		//console.log(formData);
 
-		if (!formData.email) {
+		if (!formData.phone) {
 			setShowError({
-				email: 'El campo email debe estar diligenciado',
-				password: ''
-			});
-		} else if (!validateEmail(formData.email)) {
-			setShowError({
-				email: 'No es un correo valido',
+				phone: 'El campo Celular debe estar diligenciado',
 				password: ''
 			});
 		} else if (!formData.password) {
@@ -59,44 +65,46 @@ function ChangeEmailForm(props) {
 				email: '',
 				password: 'El campo contraseña debe estar diligenciado'
 			});
-		} else if (email === formData.email) {
-			setShowError({
-				email: 'El email es igual al actual',
-				password: ''
-			});
 		} else {
 			setShowError({});
-			//console.log('ok');
+			
 			setIsLoadig(true);
+		
 			reauthenticate(formData.password)
 				.then(() => {
-					firebase
-						.auth()
-						.currentUser.updateEmail(formData.email)
-						.then(() => {
-							setIsLoadig(false);
-							setReloadUserInfo(true);
-							if (petCenter) {
-								updateInfoUserCenter('userInfo', user_id, {
-									email: formData.email
-								});
-							}
+					// firebase
+					// 	.auth()
+					// 	.currentUser.updatePhoneNumber(formData.phone)
+					// 	.then(() => {
+					// 		setIsLoadig(false);
+					// 		setReloadUserInfo(true)
+					// 		toastRef.current.show('Se ha Actualizado el Celular')
+					// 		setShowModal(false)
+					// 	})
+					// 	.catch( () => {
+					// 		toastRef.current.show('Error al actualizar el Celular')
+					// 		setShowError({
+					// 			email: 'Error al actualizar el Celular.'
+					// 		});
+					// 		setIsLoadig(false);
+					//     });32012
 
-							updateInfoUserCenter('petCenters', user_id, {
-								email: formData.email
-							});
-							toastRef.current.show('Email Actualizado con Exito', 1500);
-							setShowModal(false);
-						})
-						.catch(() => {
-							toastRef.current.show('Error al actualizar el email');
-							setShowError({
-								email: 'Error al actualizar el email.'
-							});
-							setIsLoadig(false);
-						});
+					if (user_id) {
+						updateInfoUserCenter('userInfo', user_id, { phone: formData.phone });
+						setIsLoadig(false);
+						setReloadUserInfo(true);
+						toastRef.current.show('Se ha Actualizado el Celular', 1500);
+						setShowModal(false);
+
+						if (petCenter) {
+							updateInfoUserCenter('petCenters', user_id, { phone: formData.phone });
+						} else {
+							//validar que guarde en la autenticacion
+						}
+					}
 				})
 				.catch(() => {
+					toastRef.current.show('La contraseña no es correcta');
 					setShowError({
 						password: 'La contraseña no es correcta.'
 					});
@@ -106,25 +114,31 @@ function ChangeEmailForm(props) {
 	};
 
 	return (
-		<Card title="Correo Electrónico">
+		<Card title="Celular" containerStyle={{ borderRadius: 20, paddingBottom: 10, marginBottom: 10 }}>
 			<View style={styles.view}>
 				<Input
-					placeholder="Correo Electrónico"
+					placeholder="Teléfono o Celular"
 					containerStyle={styles.input}
+					inputContainerStyle={styles.inputForm}
+					keyboardType="numeric"
+					defaultValue={phoneDefault}
 					rightIcon={{
 						type: 'material-community',
-						name: 'email',
+						name: 'phone',
 						color: '#C2C2C2'
 					}}
-					defaultValue={email}
-					onChange={(even) => onChange(even, 'email')}
-					errorMessage={showError.email}
+					
+					disabled={false}
+					// onChange={(even) => setPhone(even.nativeEvent.text)}
+					onChange={(even) => onChange(even, 'phone')}
+					errorMessage={error}
 				/>
 				<Input
 					placeholder="Contraseña"
 					password={true}
 					secureTextEntry={showPassword ? false : true}
 					containerStyle={styles.input}
+					inputContainerStyle={styles.inputForm}
 					rightIcon={{
 						type: 'material-community',
 						name: showPassword ? 'eye-outline' : 'eye-off-outline',
@@ -135,15 +149,15 @@ function ChangeEmailForm(props) {
 					errorMessage={showError.password}
 				/>
 				<Button
-					title="Cambiar Email"
+					title="Actualizar Celular"
 					containerStyle={styles.btnContainer}
 					buttonStyle={styles.btnUpdate}
 					onPress={onSubmit}
-					loading={isLoadig}
+					loading={isLoading}
 				/>
 			</View>
 		</Card>
 	);
 }
 
-export default ChangeEmailForm;
+export default EditPhone;

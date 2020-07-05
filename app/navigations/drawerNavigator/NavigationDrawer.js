@@ -58,28 +58,15 @@ function NavigatorDrawer() {
 	const [ modalVisible, setModalVisible ] = useState(false);
 	const [ userType, setUserType ] = useState('');
 	var typeUser = ''
-	// const usersCollection = firestore().collection('userInfo');
-	// console.log('como por aca ' + usersCollection)
 
-	const getDataUser = async () => {
-		try {
-			//const getInfoUser = await AsyncStorage.getItem(INFO_USER);
-			const userInfoData = await AsyncStorage.getItem(INFO_USER);
-			console.log('****************');
-			console.log('esto es lo del asyncstorage: ' + userInfoData);
-			const dataUserInfo = JSON.parse(userInfoData)
-			typeUser = JSON.parse(userInfoData) //userInfoData.userType
-			setUserType(dataUserInfo.userType)
-			
-			console.log('aca esta el problem ' +  userType)
-		} catch (error) {}
-	};
+
+
 
 	useEffect( () => {
 		firebase.auth().onAuthStateChanged((userInfo) => {
 			setUser(userInfo);
 		});
-		getDataUser();
+
 	}, []);
 
 
