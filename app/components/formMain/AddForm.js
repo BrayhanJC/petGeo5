@@ -21,9 +21,13 @@ function AddForm(props) {
 		styleForm,
 		setIsVisibleMap,
 		locationForm,
-		setPhone
+		setPhone,
+		dataPet,
+		pet
 	} = props;
 
+
+	
 	return (
 		<View style={styleForm.viewForm}>
 			<Input
@@ -32,12 +36,14 @@ function AddForm(props) {
 				inputContainerStyle={styleForm.inputForm}
 				errorStyle={{ color: 'red' }}
 				onChange={(even) => setTitle(even.nativeEvent.text)}
-				autoCapitalize="characters"
+				//autoCapitalize="characters"
 				rightIcon={{
 					type: 'material-community',
 					name: 'format-letter-case',
 					color: '#C2C2C2'
 				}}
+				
+				
 			/>
 			{addressVisible && (
 				<Input
@@ -52,6 +58,7 @@ function AddForm(props) {
 						color: locationForm ? '#1A89E7' : '#C2C2C2',
 						onPress: () => setIsVisibleMap(true)
 					}}
+					defaultValue={pet ? (dataPet[0].address ? dataPet[0].address : '') : ''}
 				/>
 			)}
 
@@ -60,12 +67,14 @@ function AddForm(props) {
 				containerStyle={styleForm.input}
 				inputContainerStyle={styleForm.inputForm}
 				errorStyle={{ color: 'red' }}
+				keyboardType="numeric"
 				onChange={(even) => setPhone(even.nativeEvent.text)}
 				rightIcon={{
 					type: 'material-community',
 					name: 'phone',
 					color: '#C2C2C2'
 				}}
+				defaultValue={pet ? (dataPet[0].phone ? dataPet[0].phone : '') : ''}
 			/>
 
 			<View style={styleForm.textAreaContainer}>
@@ -76,6 +85,7 @@ function AddForm(props) {
 					placeholderTextColor="grey"
 					multiline={true}
 					onChange={(even) => setDescription(even.nativeEvent.text)}
+					defaultValue={pet ? (dataPet[0].description ? dataPet[0].description: '') : ''}
 				/>
 			</View>
 		</View>

@@ -7,8 +7,17 @@ import * as ImagePicker from 'expo-image-picker';
 import { map, size, filter } from 'lodash';
 
 function UploadImage(props) {
-	const { styleUploadImage, toastRef, imageSelected, setImageSelected } = props;
+	const { styleUploadImage, toastRef, imageSelected, setImageSelected, dataPet, pet } = props;
 
+	if (pet){
+		if (dataPet){
+			if (dataPet[0].image_id){
+				console.log(dataPet[0].image_id)
+				setImageSelected(dataPet[0].image_id)
+			}
+		}
+	}
+	
 	const removeImage = (image) => {
 		Alert.alert(
 			'Eliminar Imagen',
