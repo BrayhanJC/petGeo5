@@ -81,9 +81,9 @@ function AddMissinPetForm(props) {
 		} else if (!locationMissingPet) {
 			toastRef.current.show('Debes localizar tu reporte en el mapa. Pulse el icono del mapa para hacerlo', 1500);
 		} else {
-
+      setIsLoading(true);
 			uploadImageStorage(imageSelected, 'MissingPets').then((response) => {
-        setIsLoading(true);
+        
 				saveCollection(
 					{
 						name: title,

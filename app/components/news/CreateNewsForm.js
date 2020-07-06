@@ -37,8 +37,9 @@ function CreateNewsForm(props) {
 				3000
 			);
 		} else {
+      setIsLoading(true);
 			uploadImageStorage(imageSelected, 'news').then((response) => {
-				setIsLoading(true);
+				
 				saveCollection(
 					{
 						name: title,
