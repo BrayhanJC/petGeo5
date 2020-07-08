@@ -5,9 +5,7 @@ import { userInfoStyle } from '../../src/css/UserInfoStyle';
 import { styleForm } from '../../src/css/AddForm';
 import { saveUserInfo, saveCenter } from '../../utils/SaveRecord';
 import Map from '../../components/formMain/Map';
-import {returnUserType, returnSchedule} from '../../utils/Configurations'
-
-
+import { returnUserType, returnSchedule } from '../../utils/Configurations';
 
 const UserData = (props) => {
 	const { modalVisible, setModalVisible, userInfo } = props;
@@ -25,11 +23,10 @@ const UserData = (props) => {
 	const [ errorMap, setErrorMap ] = useState('');
 	const [ description, setDescription ] = useState('');
 	const [ time, setTime ] = useState(0);
-	const [errorDescription, setErrorDescription] = useState('')
-
+	const [ errorDescription, setErrorDescription ] = useState('');
 
 	const [ isVisibleMap, setIsVisibleMap ] = useState(false);
-	
+
 	const onSubmit = () => {
 		if (!location) {
 			setMessage('');
@@ -78,16 +75,16 @@ const UserData = (props) => {
 				setErrorMap('Debe guardar la ubicación, pulse el icono del mapa');
 			}
 
-			if (description){
-				setErrorDescription('')
-			}else{
-				setErrorDescription('Debes agregar una descripcón')
+			if (description) {
+				setErrorDescription('');
+			} else {
+				setErrorDescription('Debes agregar una descripcón');
 			}
 
 			if (phone && street && location && description) {
 				setErrorPhone('');
 				setErrorStreet('');
-				setErrorDescription('')
+				setErrorDescription('');
 
 				const data = {
 					create_uid: userInfo.uid,
@@ -198,17 +195,14 @@ const UserData = (props) => {
 								<Text style={userInfoStyle.textStyle}>Guardar</Text>
 							</TouchableHighlight>
 
-{
-	isVisibleMap && (
-		<Map
-								isVisibleMap={isVisibleMap}
-								setIsVisibleMap={setIsVisibleMap}
-								setMessage={setMessage}
-								setLocationForms={setLocation}
-							/>
-	)
-}
-							
+							{isVisibleMap && (
+								<Map
+									isVisibleMap={isVisibleMap}
+									setIsVisibleMap={setIsVisibleMap}
+									setMessage={setMessage}
+									setLocationForms={setLocation}
+								/>
+							)}
 						</View>
 					</View>
 				</Modal>

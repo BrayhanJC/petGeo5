@@ -31,9 +31,7 @@ function AccountOptions(props) {
 	//Varaibles que nos permitiran pasar la informacion necesaria para el modal
 	const [ renderComponent, setRenderComponent ] = useState(null);
 
-
-	const [updateData, setupdateData] = useState(false)
-
+	const [ updateData, setupdateData ] = useState(false);
 
 	//cargamos los datos del usuario
 
@@ -128,12 +126,12 @@ function AccountOptions(props) {
 
 	var menuOptions = '';
 
-	if (datUserInfo){
+	if (datUserInfo) {
 		if (props.userInfo.providerData) {
 			if (props.userInfo.providerData[0].providerId === 'facebook.com') {
 				//console.log(props.userInfo.providerData[0].providerId);
 				//menuOptions = [ generateOptionsUser(selectedComponent, petCenter, userInfo)[1] ];
-	
+
 				if (petCenter) {
 					menuOptions = generateOptionsCenterFacebook(selectedComponent, petCenter, datUserInfo);
 				} else {
@@ -151,7 +149,6 @@ function AccountOptions(props) {
 
 	return (
 		<View>
-			
 			{map(menuOptions, (menu, index) => (
 				<ListItem
 					key={index}
@@ -160,13 +157,13 @@ function AccountOptions(props) {
 						type: menu.iconType,
 						name: menu.iconNameLeft,
 						color: menu.iconColorLeft,
-						size:28
+						size: 28
 					}}
 					rightIcon={{
 						type: menu.iconType,
 						name: menu.iconNameRight,
 						color: menu.iconColorRight,
-						size:35
+						size: 35
 					}}
 					containerStyle={styles.menuItem}
 					onPress={menu.onPress}

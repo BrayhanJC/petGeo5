@@ -12,6 +12,7 @@ import PetFoundDrawer from './PetFoundDrawer';
 
 import firebase from 'firebase/app';
 import { FireSQL } from 'firesql';
+import Menu from './Menu'
 
 const fireSQL = new FireSQL(firebase.firestore(), { includeId: 'id' });
 
@@ -76,8 +77,9 @@ function NavigatorDrawer() {
 			initialRouteName="Pets"
 			drawerContentOptions={{
 				activeTintColor: '#1A89E7',
-				inactiveTintColor: '#C2C2C2'
+				inactiveTintColor: 'gray'
 			}}
+			drawerContent= { (props) => <Menu {...props}/> }
 		>
 			<Drawer.Screen
 				name="Home"
@@ -100,6 +102,7 @@ function NavigatorDrawer() {
 				<Drawer.Screen
 					name="PetDrawer"
 					component={PetDrawer}
+					
 					options={{
 						title: 'Mascotas',
 						drawerIcon: ({ color, size }) => <MaterialCommunityIcons name="paw" color="#1A89E7" size={24} />
