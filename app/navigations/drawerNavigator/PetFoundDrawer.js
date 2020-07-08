@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Icon } from 'react-native-elements';
 
 import PetScreen from '../../screens/pet/Pet';
+import PetsFoundScreen from '../../screens/petFound/PetsFound'
 import CreatePet from '../../screens/pet/CreatePet'
 import AvatarIcon from '../../components/AvatarIcon'
 import PetView from '../../screens/pet/PetView'
@@ -15,15 +16,15 @@ import DeleteRecord from '../../components/UpdateRecords/DeleteRecord'
  * Create stack nav pets 
  * show all pets register by user
  */
-function PetDrawer(props) {
+function PetFoundDrawer(props) {
 	const navigation = useNavigation();
 	return (
 		<Stack.Navigator>
 			<Stack.Screen
-				name="Pets"
-				component={PetScreen}
+				name="PetsFound"
+				component={PetsFoundScreen}
 				options={{
-					title: 'Mascotas',
+					title: 'Mascotas Encontradas',
 					headerLeft: ({ color, size }) => (
 						<MaterialCommunityIcons
 							name="chevron-left"
@@ -48,4 +49,4 @@ function PetDrawer(props) {
 	);
 }
 
-export default PetDrawer;
+export default PetFoundDrawer;

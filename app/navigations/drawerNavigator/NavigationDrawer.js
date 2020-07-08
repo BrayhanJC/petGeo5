@@ -8,11 +8,9 @@ import PetControlDrawer from './PetControlDrawer';
 import PetDrawer from './PetDrawer';
 import MyAccountDrawer from './MyAccountDrawer';
 import MenuTab from '../tabNavigator/MenuTab';
+import PetFoundDrawer from './PetFoundDrawer';
 
-import { firebaseApp } from '../../utils/FireBase';
 import firebase from 'firebase/app';
-import { getInfoUserLogin } from '../../utils/SaveRecord';
-
 import { FireSQL } from 'firesql';
 
 const fireSQL = new FireSQL(firebase.firestore(), { includeId: 'id' });
@@ -57,21 +55,16 @@ function NavigatorDrawer() {
 	const [ elements, setElements ] = useState('');
 	const [ modalVisible, setModalVisible ] = useState(false);
 	const [ userType, setUserType ] = useState('');
-	var typeUser = ''
+	var typeUser = '';
 
-
-
-
-	useEffect( () => {
+	useEffect(() => {
 		firebase.auth().onAuthStateChanged((userInfo) => {
 			setUser(userInfo);
 		});
-
 	}, []);
 
-
-	var flagUser  = user ? true : false;
-	var flagCenter =  user ? true : false;
+	var flagUser = user ? true : false;
+	var flagCenter = user ? true : false;
 	if (user && userType === 'user') {
 		flagUser = false;
 	}
@@ -126,7 +119,14 @@ function NavigatorDrawer() {
 				/>
 			)}
 
-		
+			<Drawer.Screen
+				name="PetFoundDrawer"
+				component={PetFoundDrawer}
+				options={{
+					title: 'Mascotas Encontradas',
+					drawerIcon: ({ color, size }) => <MaterialCommunityIcons name="rocket" color="#1A89E7" size={24} />
+				}}
+			/>
 			{flagUser && (
 				<Drawer.Screen
 					name="PetDoctorDrawer"

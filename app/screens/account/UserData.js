@@ -198,12 +198,17 @@ const UserData = (props) => {
 								<Text style={userInfoStyle.textStyle}>Guardar</Text>
 							</TouchableHighlight>
 
-							<Map
+{
+	isVisibleMap && (
+		<Map
 								isVisibleMap={isVisibleMap}
 								setIsVisibleMap={setIsVisibleMap}
 								setMessage={setMessage}
 								setLocationForms={setLocation}
 							/>
+	)
+}
+							
 						</View>
 					</View>
 				</Modal>

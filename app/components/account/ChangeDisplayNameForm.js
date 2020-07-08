@@ -88,7 +88,7 @@ function ChangeDisplayNameForm(props) {
 						setIsLoading(false);
 					});
 				updateInfoUserCenter('userInfo', user_id, { create_name: nameComplete, name: nameComplete });
-				updateInfoUserCenter('petCenters', user_id, { create_name: nameComplete });
+				updateInfoUserCenter('petCenters', user_id, { create_name: nameComplete, name: nameComplete });
 			}
 		} else {
 			if (isEmpty(names)) {

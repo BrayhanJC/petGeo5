@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 import { AirbnbRating, Button, Input } from 'react-native-elements';
 
 import { styleCreateReview } from '../../src/css/CreateReview';
@@ -14,8 +14,7 @@ const db = firebase.firestore(firebaseApp);
 
 const CreateReview = (props) => {
 	const { navigation, route } = props;
-	//console.log(props);
-	//console.log(route);
+
 	//el name nos sirve para saber de que stack viene (CreateReviewMissingPet)
 	const { idItem } = route.params;
 	const [ rating, setRating ] = useState(null);
@@ -26,7 +25,7 @@ const CreateReview = (props) => {
 	const toastRef = useRef();
 
 	var type = '';
-	//console.log(props.route.name);
+
 	if (props.route.name === 'CreateReviewMissingPet') {
 		type = 'missingPets';
 	}
@@ -36,7 +35,9 @@ const CreateReview = (props) => {
 	if (props.route.name === 'CreateReviewNews') {
 		type = 'news';
 	}
-
+	if (props.route.name === 'CreateReviewCenter') {
+		type = 'petCenters';
+	}
 	const updateRestaurant = () => {
 		const itemRef = db.collection(type).doc(idItem);
 		itemRef
@@ -64,11 +65,11 @@ const CreateReview = (props) => {
 
 	const addReview = () => {
 		if (!rating) {
-			toastRef.current.show('No has dado ninguna puntuación');
+			toastRef.current.show('No has dado ninguna puntuación', 1500);
 		} else if (!title) {
-			toastRef.current.show('El titulo es obligatorio');
+			toastRef.current.show('El titulo es obligatorio', 1500);
 		} else if (!review) {
-			toastRef.current.show('El comentario es obligatorio');
+			toastRef.current.show('El comentario es obligatorio', 1500);
 		} else {
 			setIsLoading(true);
 			const user = firebase.auth().currentUser;
@@ -103,7 +104,7 @@ const CreateReview = (props) => {
 				<AirbnbRating
 					count={5}
 					reviews={[ 'Pésimo', 'Deficiente', 'Normal', 'Muy Bueno', 'Excelente' ]}
-					defaulRating={0}
+					defaultRating={0}
 					size={30}
 					onFinishRating={(value) => setRating(value)}
 				/>
@@ -112,14 +113,19 @@ const CreateReview = (props) => {
 				<Input
 					placeholder="Titulo"
 					containerStyle={styleCreateReview.input}
+					inputContainerStyle={styleCreateReview.inputForm}
 					onChange={(even) => setTitle(even.nativeEvent.text)}
 				/>
-				<Input
-					placeholder="Comentario..."
-					multiline={true}
-					containerStyle={styleCreateReview.textArea}
-					onChange={(even) => setReview(even.nativeEvent.text)}
-				/>
+				<View style={styleCreateReview.textAreaContainer}>
+					<TextInput
+					
+						underlineColorAndroid="transparent"
+						placeholder="Escribe tu comentario..."
+						placeholderTextColor="grey"
+						multiline={true}
+						onChange={(even) => setReview(even.nativeEvent.text)}
+					/>
+				</View>
 				<Button
 					title="Enviar Comentario"
 					containerStyle={styleCreateReview.btnContainer}

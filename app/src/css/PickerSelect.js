@@ -14,6 +14,7 @@ export const picker = {
 		borderColor: '#C2C2C2',
 		borderRadius: 30,
 		color: 'black',
+		
 		paddingRight: 30 // to ensure the text is never behind the icon
 	},
 	inputAndroid: {
@@ -25,6 +26,7 @@ export const picker = {
 		paddingVertical: 8,
 		paddingHorizontal: 10,
 		borderWidth: 2,
+		
 		borderColor: '#C2C2C2',
 		borderRadius: 30,
 		color: 'black',

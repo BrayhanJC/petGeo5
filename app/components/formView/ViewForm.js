@@ -15,7 +15,7 @@ import { viewFormStyle } from '../../src/css/ViewForm';
 const db = firebase.firestore(firebaseApp);
 const screenWidth = Dimensions.get('window').width;
 const ViewForm = (props) => {
-	const { navigation, route, collection, nameInfo, navigateTo, collection_name } = props;
+	const { navigation, route, collection, nameInfo, navigateTo, collection_name, showSwitch } = props;
 	const { name, id } = route.params;
 	const [ item, setItem ] = useState(null);
 	const [ rating, setRating ] = useState(0);
@@ -103,6 +103,18 @@ const ViewForm = (props) => {
 				action: null
 			},
 			{
+				text: 'Correo: ' + item.email,
+				iconName: 'email',
+				iconType: 'material-community',
+				action: null
+			},
+			{
+				text: 'Página Web: ' + item.website,
+				iconName: 'web',
+				iconType: 'material-community',
+				action: null
+			},
+			{
 				text: 'Fecha Creación: ' + date_control,
 				iconName: 'calendar-range',
 				iconType: 'material-community',
@@ -114,7 +126,7 @@ const ViewForm = (props) => {
 	return (
 		<ScrollView vertical style={viewFormStyle.viewBody}>
 			<CarouselImages image_ids={item.image} height={200} width={screenWidth} />
-			<TitleItem name={item.name} description={item.description} rating={rating} showRating={true} />
+			<TitleItem name={item.name} description={item.description} rating={rating} showRating={true} showSwitch={showSwitch}/>
 			<InfoItem
 				location={item.location}
 				name={item.name}
@@ -122,6 +134,7 @@ const ViewForm = (props) => {
 				listInfo={listInfo}
 				showMap={true}
 				nameInfo={nameInfo}
+				
 			/>
 			<ListReview
 				navigation={navigation}

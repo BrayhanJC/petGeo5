@@ -8,7 +8,7 @@ const PetCenterView = (props) => {
     
     return (
         <View style={viewFormStyle.viewBody}>
-            <ViewForm navigation={navigation} route={route} collection='petCenters' nameInfo='sobre el centro' navigateTo='ViewPetCenter' collection_name='petCenters'/>
+            <ViewForm navigation={navigation} route={route} collection='petCenters' nameInfo='sobre el centro' navigateTo='CreateReviewCenter' collection_name='petCenters'/>
         </View>
     )
 }
