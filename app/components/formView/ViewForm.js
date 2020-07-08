@@ -15,7 +15,7 @@ import { viewFormStyle } from '../../src/css/ViewForm';
 const db = firebase.firestore(firebaseApp);
 const screenWidth = Dimensions.get('window').width;
 const ViewForm = (props) => {
-	const { navigation, route, collection, nameInfo, navigateTo, collection_name, showSwitch } = props;
+	const { navigation, route, collection, nameInfo, navigateTo, collection_name, showSwitch, setValSwitch, valSwitch } = props;
 	const { name, id } = route.params;
 	const [ item, setItem ] = useState(null);
 	const [ rating, setRating ] = useState(0);
@@ -126,7 +126,7 @@ const ViewForm = (props) => {
 	return (
 		<ScrollView vertical style={viewFormStyle.viewBody}>
 			<CarouselImages image_ids={item.image} height={200} width={screenWidth} />
-			<TitleItem name={item.name} description={item.description} rating={rating} showRating={true} showSwitch={showSwitch}/>
+			<TitleItem name={item.name} description={item.description} rating={rating} showRating={true} showSwitch={showSwitch} setValSwitch={setValSwitch} valSwitch={valSwitch} item={item} navigation={navigation}/>
 			<InfoItem
 				location={item.location}
 				name={item.name}

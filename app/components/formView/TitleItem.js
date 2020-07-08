@@ -2,12 +2,30 @@ import React, { useState } from 'react';
 import { View, Text, Switch } from 'react-native';
 import { viewTitleStyle } from '../../src/css/ViewTitle';
 import { Rating } from 'react-native-elements';
+import { uploadImageStorage } from '../../utils/UploadImageStorage';
+import { createPetFound } from '../../utils/SaveRecord'
 
 const TitleItem = (props) => {
-	const { name, description, rating, showRating, showDescription, showSwitch } = props;
-	const [ valor, setvalor ] = useState('');
-	console.log(valor);
-	console.log('El showSwitch es: ' + showSwitch)
+	const { name, description, rating, showRating, showDescription, showSwitch, setValSwitch, valSwitch, item, navigation } = props;
+	
+	const onChangePetMissing = (response, setVal, value) => {
+		const collectionName = 'missingPets'
+		setVal(response)
+		if (response){
+			console.log('el id es: ' + item.id)
+			console.log('************')
+			console.log('activando')
+			uploadImageStorage(item.image, 'petsFound').then(  (response) => {
+				createPetFound(item, navigation)
+
+			}).catch((response) => {
+				console.log('error')
+			})
+			
+		}else{
+			console.log('no esta activo')
+		}
+	}
 	return (
 		<View>
 			<View style={viewTitleStyle.viewTitle}>
@@ -19,7 +37,8 @@ const TitleItem = (props) => {
 							flex: 1,
 							justifyContent: 'flex-start',
 							alignItems: 'flex-start',
-							marginTop: -20
+							marginTop: -20,
+							marginBottom: -5
 						}}
 					>
 						<Text style={{ fontWeight: 'bold' }}>Mascota Encontrada</Text>
@@ -29,8 +48,8 @@ const TitleItem = (props) => {
 								position: 'relative',
 								left: 0
 							}}
-							onValueChange={(response) => setvalor(response)}
-							value={valor}
+							onValueChange={(response) => onChangePetMissing(response, setValSwitch, valSwitch )}
+							value={valSwitch}
 						/>
 					</View>
 				)}

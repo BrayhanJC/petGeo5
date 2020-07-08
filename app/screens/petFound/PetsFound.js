@@ -76,7 +76,7 @@ function PetsFound(props) {
 						elements={item}
 						isLoading={isLoading}
 						navigation={navigation}
-						navigator="ViewMissingPet"
+						navigator="petFoundView"
 					/>
 				</View>
 			) : (
@@ -88,7 +88,7 @@ function PetsFound(props) {
 					elements={petFound}
 					isLoading={isLoading}
 					navigation={navigation}
-					navigator="ViewMissingPet"
+					navigator="petFoundView"
 				/>
 			)}
 
@@ -100,16 +100,7 @@ function PetsFound(props) {
 			) : (
 				<Text />
 			)}
-			{user && (
-				<Icon
-					containerStyle={buttonFormFloating.btnContainer}
-					type="material-community"
-					name="plus"
-					color="#1A89E7"
-					reverse
-					onPress={() => navigation.navigate('add-missing-pet')}
-				/>
-			)}
+
 		</View>
 	);
 }

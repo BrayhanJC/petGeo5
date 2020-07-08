@@ -307,3 +307,20 @@ export const isCenter = async (user_id, data) => {
 		})
 		.catch((response) => {});
 };
+
+/**
+ * Funcion que permite crear el registro de una mascota encontrada
+ * @param { contiene la informacion necesaria para la creacion} collectionData 
+ * @param { permite regresar al menu principal} navigation 
+ */
+export const createPetFound = (collectionData, navigation) => {
+	db
+		.collection('petsFound')
+		.add(collectionData)
+		.then(() => {
+			navigation.goBack();
+		})
+		.catch((response) => {
+			console.log('error al crear');
+		});
+};
