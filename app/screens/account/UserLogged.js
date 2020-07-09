@@ -82,7 +82,7 @@ function UserLogged() {
 					userInfo={userInfo}
 					toastRef={toastRef}
 					setReloadUserInfo={setReloadUserInfo}
-					reloadUserInfo={reloadUserInfo}
+					
 					petCenter={petCenter}
 					elements={elements}
 					datUserInfo={datUserInfo}

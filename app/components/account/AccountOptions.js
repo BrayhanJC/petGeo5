@@ -20,7 +20,7 @@ import {
 } from '../../utils/Configurations';
 import { useFocusEffect } from '@react-navigation/native';
 function AccountOptions(props) {
-	const { userInfo, toastRef, setReloadUserInfo, petCenter, reloadUserInfo, datUserInfo, elements } = props;
+	const { userInfo, toastRef, setReloadUserInfo, petCenter, datUserInfo, elements } = props;
 	const { userInfo: { displayName, email, providerId, uid } } = props;
 
 	//console.log('el resultado es: ' + elements[0].create_name)

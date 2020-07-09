@@ -11,14 +11,23 @@ export default function Menu(props) {
 	return (
 		<View style={style.container}>
 			<View style={style.bgContainer}>
-				<TouchableOpacity onPress={() => {props.navigation.navigate('ProfileDrawer')}}>
+				<TouchableOpacity
+					onPress={() => {
+						props.navigation.navigate('ProfileDrawer');
+					}}
+				>
 					<View style={style.userContainer}>
-						<Image style={style.userImagen} source={require('../../../assets/img/avatar_dog.png')} />
-						
+						<Image style={style.userImagen} source={ firebase.auth().currentUser ? {url: firebase.auth().currentUser.photoURL} : require('../../../assets/img/avatar_dog.png')} />
 					</View>
 					<View style={style.userNombre}>
-						<Text style={style.userTitulo}> Brayhan Jaramillo</Text>
-						<Text style={style.userSubTitulo}> Correo</Text>
+						<Text style={style.userTitulo}>
+							{' '}
+							{firebase.auth().currentUser ? firebase.auth().currentUser.displayName : ''}
+						</Text>
+						<Text style={style.userSubTitulo}>
+							{' '}
+							{firebase.auth().currentUser ? firebase.auth().currentUser.email : ''}
+						</Text>
 					</View>
 				</TouchableOpacity>
 			</View>

@@ -7,7 +7,7 @@ import { useState } from "react";
 const MissingPetView = (props) => {
     const { navigation, route} = props
     const [valSwitch, setValSwitch] = useState('')
-    console.log(valSwitch);
+
 	console.log('El showSwitch es: ' + valSwitch)
     return (
         <View style={viewFormStyle.viewBody}>

@@ -113,10 +113,11 @@ function ChangeDisplayNameForm(props) {
 					.auth()
 					.currentUser.updateProfile(update)
 					.then(() => {
+
+						updateInfoUserCenter('userInfo', user_id, { create_name: newDisplayName, name: newDisplayName });
 						setIsLoading(false);
 						setReloadUserInfo(true);
 						setShowModal(false);
-						updateInfoUserCenter('userInfo', user_id, { create_name: nameComplete, name: nameComplete });
 					})
 					.catch(() => {
 						setError('Error al actualizar el nombre');
@@ -129,7 +130,7 @@ function ChangeDisplayNameForm(props) {
 	return (
 		<Card title={title} containerStyle={{ borderRadius: 20, paddingBottom: 10, marginBottom: 10 }}>
 			<View style={styles.view}>
-				{title == false && (
+				{petCenter == false && (
 					<Input
 						placeholder="Nombres"
 						containerStyle={styles.input}
@@ -139,7 +140,7 @@ function ChangeDisplayNameForm(props) {
 					/>
 				)}
 
-				{title == false && (
+				{petCenter == false && (
 					<Input
 						placeholder="Apellidos"
 						containerStyle={styles.input}
@@ -163,7 +164,7 @@ function ChangeDisplayNameForm(props) {
 						color: '#C2C2C2'
 					}}
 					defaultValue={formData.displayName}
-					disabled={title ? false : true}
+					disabled={petCenter ? false : true}
 					onChange={
 						title ? (
 							(even) => setNameComplete(even.nativeEvent.text)
