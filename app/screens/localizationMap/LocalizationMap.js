@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Text, View, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { Button } from 'react-native-elements';
 import MapView, { Marker, Callout } from 'react-native-maps';
 import * as Location from 'expo-location';
 import { useFocusEffect } from '@react-navigation/native';
@@ -37,6 +38,8 @@ function LocalizationMap(props) {
 
 	const resultElements = [];
 	const collections = [ 'comedogs', 'missingPets' ];
+
+	const [ typeFilter, setTypeFilter ] = useState(0);
 
 	useEffect(() => {
 		(async () => {
@@ -103,10 +106,11 @@ function LocalizationMap(props) {
 		});
 	};
 	return (
-		<View style={styles.container}>
-			{location && (
-				<MapView style={styles.mapStyle} initialRegion={location} showsUserLocation={true}>
-					{/* <MapView.Marker
+		<View style={{ flex: 1 }}>
+			<View>
+				{location && (
+					<MapView style={styles.mapStyle} initialRegion={location} showsUserLocation={true}>
+						{/* <MapView.Marker
 						coordinate={{
 							latitude: location.latitude,
 							longitude: location.longitude
@@ -115,44 +119,46 @@ function LocalizationMap(props) {
 						description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation"
 					/> */}
 
-					{map(result, (record, index) => (
-						// <Avatar
-						//   key={index}
-						//   style={styleUploadImage.miniatureAvatar}
-						//   source={{ uri: imageComedog }}
-						//   rounded
-						//   raised
-						//   onPress={() => removeImage(imageComedog)}
-						// />
+						{map(result, (record, index) => (
+							// <Avatar
+							//   key={index}
+							//   style={styleUploadImage.miniatureAvatar}
+							//   source={{ uri: imageComedog }}
+							//   rounded
+							//   raised
+							//   onPress={() => removeImage(imageComedog)}
+							// />
 
-						<MapView.Marker
-							key={index}
-							coordinate={{
-								latitude: record.location.latitude,
-								longitude: record.location.longitude
-							}}
-							pinColor={returnColor(record.collection)}
-							title={record.name}
-							//description={record.description}
-							//image={require('../../../assets/img/comedog_icon.png')}
-						>
-							<Callout
-								style={styles.callout}
-								onPress={() => goElement('ViewComedog', record.id, record.name)}
+							<MapView.Marker
+								key={index}
+								coordinate={{
+									latitude: record.location.latitude,
+									longitude: record.location.longitude
+								}}
+								pinColor={returnColor(record.collection)}
+								title={record.name}
+								//description={record.description}
+								//image={require('../../../assets/img/comedog_icon.png')}
 							>
-								<ScrollView vertical>
-									<CarouselImages image_ids={record.image} height={85} width={170} />
+								<Callout
+									style={styles.callout}
+									onPress={() => goElement('ViewComedog', record.id, record.name)}
+								>
+									<ScrollView vertical>
+										<CarouselImages image_ids={record.image} height={85} width={170} />
 
-									<View style={mapInfoStyle.viewComponent}>
-										<Text style={mapInfoStyle.nameItem}>{record.name}</Text>
-									</View>
-									<Text style={mapInfoStyle.description}>{record.description.substr(0, 85)}...</Text>
-								</ScrollView>
-							</Callout>
-						</MapView.Marker>
-					))}
+										<View style={mapInfoStyle.viewComponent}>
+											<Text style={mapInfoStyle.nameItem}>{record.name}</Text>
+										</View>
+										<Text style={mapInfoStyle.description}>
+											{record.description.substr(0, 85)}...
+										</Text>
+									</ScrollView>
+								</Callout>
+							</MapView.Marker>
+						))}
 
-					{/* <MapView.Marker
+						{/* <MapView.Marker
 						coordinate={{
 							latitude: location.latitude,
 							longitude: location.longitude
@@ -167,17 +173,19 @@ function LocalizationMap(props) {
 							</View>
 						</Callout>
 					</MapView.Marker> */}
-				</MapView>
-			)}
+					</MapView>
+				)}
 
-			{/***
+				{/***
 			 * Modal que sirve para registrar el tipo de usuario
 			 */
-			modalVisible ? (
-				<UserData modalVisible={modalVisible} setModalVisible={setModalVisible} userInfo={user} />
-			) : (
-				<Text />
-			)}
+				modalVisible ? (
+					<UserData modalVisible={modalVisible} setModalVisible={setModalVisible} userInfo={user} />
+				) : (
+					<Text />
+				)}
+				<FilterMap />
+			</View>
 		</View>
 	);
 }
@@ -205,6 +213,65 @@ const styles = StyleSheet.create({
 	}
 });
 
+function FilterMap(props) {
+	//const { } = props
+	const buttonFilter = [ 'Centros', 'Comedogs', 'Extraviados' ];
+	return (
+		<View style={{ position: 'absolute' }}>
+			<Button
+				title="Centros"
+				containerStyle={{
+					marginTop: 20,
+					width: '100%',
+					marginLeft: 10,
+					marginRight:10
+				}}
+				buttonStyle={{
+					backgroundColor: '#84CD58',
+					borderRadius: 20
+				}}
+				onPress={() => {
+					console.log('hola');
+				}}
+				//loading={isLoading}
+			/>
+			<Button
+				title="Comedogs"
+				containerStyle={{
+					marginTop: 20,
+					width: '100%',
+					marginLeft: 10,
+					marginRight:10
+				}}
+				buttonStyle={{
+					backgroundColor: 'orange',
+					borderRadius: 20
+				}}
+				onPress={() => {
+					console.log('hola');
+				}}
+				//loading={isLoading}
+			/>
+			<Button
+				title="Extraviados"
+				containerStyle={{
+					marginTop: 20,
+					width: '100%',
+					marginLeft: 10,
+					marginRight:10
+				}}
+				buttonStyle={{
+					backgroundColor: 'red',
+					borderRadius: 20
+				}}
+				onPress={() => {
+					console.log('hola');
+				}}
+				//loading={isLoading}
+			/>
+		</View>
+	);
+}
 /***
  * 
  * 
