@@ -17,7 +17,14 @@ export default function Menu(props) {
 					}}
 				>
 					<View style={style.userContainer}>
-						<Image style={style.userImagen} source={ firebase.auth().currentUser ? {url: firebase.auth().currentUser.photoURL} : require('../../../assets/img/avatar_dog.png')} />
+						<Image
+							style={style.userImagen}
+							source={
+								firebase.auth().currentUser
+									? { url: firebase.auth().currentUser.photoURL }
+									: require('../../../assets/img/avatar_dog.png')
+							}
+						/>
 					</View>
 					<View style={style.userNombre}>
 						<Text style={style.userTitulo}>

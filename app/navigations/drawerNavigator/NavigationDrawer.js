@@ -12,7 +12,11 @@ import PetFoundDrawer from './PetFoundDrawer';
 
 import firebase from 'firebase/app';
 import { FireSQL } from 'firesql';
-import Menu from './Menu'
+
+import { connect } from 'react-redux';
+import { actions } from '../../store';
+import { obtenerUsuarios } from '../../utils/SaveRecord';
+import Menu from './Menu';
 
 const fireSQL = new FireSQL(firebase.firestore(), { includeId: 'id' });
 
@@ -50,43 +54,53 @@ function LogoTitle() {
 	);
 }
 
-function NavigatorDrawer() {
-	const [ user, setUser ] = useState(null);
+function NavigatorDrawer(props) {
+	const { cliente, login } = props;
+
+	const [user, setUser] = useState(null);
 	//variables para el popup
-	const [ elements, setElements ] = useState('');
-	const [ modalVisible, setModalVisible ] = useState(false);
-	const [ userType, setUserType ] = useState('');
+	const [elements, setElements] = useState('');
+	const [modalVisible, setModalVisible] = useState(false);
+	const [userType, setUserType] = useState('');
 	var typeUser = '';
 
 	useEffect(() => {
 		firebase.auth().onAuthStateChanged((userInfo) => {
-			setUser(userInfo);
+			onObtenerUsuario(userInfo);
 		});
 	}, []);
 
-	var flagUser = user ? true : false;
-	var flagCenter = user ? true : false;
-	if (user && userType === 'user') {
-		flagUser = false;
-	}
-	if ((user && userType === 'veterinary') || (user && userType === 'fundation')) {
-		flagCenter = false;
-	}
+	const onObtenerUsuario = async (userInfo) => {
+		await obtenerUsuarios(userInfo?.uid, (r) => {
+			props.dispatch(actions.actualizarLogin(userInfo));
+
+			r.forEach((doc) => {
+				setUser(doc.data());
+				props.dispatch(actions.actualizarCliente(doc.data()));
+			});
+		});
+	};
+
+	//console.log('NavigatorDrawer', cliente.userType);
+
+	const isUser = cliente.userType == 'user';
+	const isCenter = cliente.userType == 'veterinary';
+
 	return (
 		<Drawer.Navigator
 			initialRouteName="Pets"
 			drawerContentOptions={{
 				activeTintColor: '#1A89E7',
-				inactiveTintColor: 'gray'
+				inactiveTintColor: '#C2C2C2',
 			}}
-			drawerContent= { (props) => <Menu {...props}/> }
+			drawerContent={(props) => <Menu {...props} />}
 		>
 			<Drawer.Screen
 				name="Home"
 				component={MenuTab}
 				options={{
 					title: 'Inicio',
-					drawerIcon: ({ color, size }) => <MaterialCommunityIcons name="home" color="#1A89E7" size={24} />
+					drawerIcon: ({ color, size }) => <MaterialCommunityIcons name="home" color="#1A89E7" size={24} />,
 				}}
 			/>
 			<Drawer.Screen
@@ -94,22 +108,25 @@ function NavigatorDrawer() {
 				component={MyAccountDrawer}
 				options={{
 					title: user ? 'Perfil' : 'Iniciar Sesión',
-					drawerIcon: ({ color, size }) => <MaterialCommunityIcons name="account" color="#1A89E7" size={24} />
+					drawerIcon: ({ color, size }) => (
+						<MaterialCommunityIcons name="account" color="#1A89E7" size={24} />
+					),
 				}}
 			/>
 
-			{flagCenter && (
+			{isUser && (
 				<Drawer.Screen
 					name="PetDrawer"
 					component={PetDrawer}
-					
 					options={{
 						title: 'Mascotas',
-						drawerIcon: ({ color, size }) => <MaterialCommunityIcons name="paw" color="#1A89E7" size={24} />
+						drawerIcon: ({ color, size }) => (
+							<MaterialCommunityIcons name="paw" color="#1A89E7" size={24} />
+						),
 					}}
 				/>
 			)}
-			{flagCenter && (
+			{isUser && (
 				<Drawer.Screen
 					name="PetControlDrawer"
 					component={PetControlDrawer}
@@ -117,7 +134,7 @@ function NavigatorDrawer() {
 						title: 'Controles',
 						drawerIcon: ({ color, size }) => (
 							<MaterialCommunityIcons name="hospital-building" color="#1A89E7" size={24} />
-						)
+						),
 					}}
 				/>
 			)}
@@ -127,10 +144,10 @@ function NavigatorDrawer() {
 				component={PetFoundDrawer}
 				options={{
 					title: 'Mascotas Encontradas',
-					drawerIcon: ({ color, size }) => <MaterialCommunityIcons name="rocket" color="#1A89E7" size={24} />
+					drawerIcon: ({ color, size }) => <MaterialCommunityIcons name="rocket" color="#1A89E7" size={24} />,
 				}}
 			/>
-			{flagUser && (
+			{isCenter && (
 				<Drawer.Screen
 					name="PetDoctorDrawer"
 					component={PetDoctorDrawer}
@@ -138,7 +155,7 @@ function NavigatorDrawer() {
 						title: 'Veterinarios',
 						drawerIcon: ({ color, size }) => (
 							<MaterialCommunityIcons name="account-multiple" color="#1A89E7" size={27} />
-						)
+						),
 					}}
 				/>
 			)}
@@ -146,4 +163,9 @@ function NavigatorDrawer() {
 	);
 }
 
-export default NavigatorDrawer;
+const mapStateToProps = (state) => ({
+	cliente: state.cliente.cliente,
+	login: state.login.login,
+});
+export default connect(mapStateToProps)(NavigatorDrawer);
+//export default connect(mapStateToProps)(NavigatorDrawer);

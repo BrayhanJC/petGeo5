@@ -6,16 +6,20 @@ import { Avatar } from 'react-native-elements';
 import firebase from 'firebase/app';
 import { showAlertConfirm, showAlert } from '../../utils/validations';
 import { useFocusEffect } from '@react-navigation/native';
-import { size } from 'lodash'
+import { size } from 'lodash';
+
+import { connect } from 'react-redux';
+
 /**
  * Permite eliminar el registro actual
- * @param {*} props 
+ * @param {*} props
  */
 function DeleteRecord(props) {
 	const { navigation, route } = props.props;
+	const { cliente } = props;
 
-	const [ user, setUser ] = useState(false);
-	const [ currentUser, setCurrentUser ] = useState('');
+	const [user, setUser] = useState(false);
+	const [currentUser, setCurrentUser] = useState('');
 
 	const returnData = () => {
 		const data = route.state.routes;
@@ -36,9 +40,14 @@ function DeleteRecord(props) {
 		return {
 			collectionName,
 			record_id,
-			current_user_id
+			current_user_id,
 		};
 	};
+
+	//console.log('DeleteRecord', returnData().current_user_id);
+	//console.log('DeleteRecord', cliente.create_uid);
+
+	let isOwner = returnData().current_user_id == cliente.create_uid;
 
 	const deleteRecord = () => {
 		const data = returnData();
@@ -67,18 +76,25 @@ function DeleteRecord(props) {
 
 	return (
 		<View style={{ flex: 1, alignItems: 'center', margin: 5 }}>
-			<Avatar
-				size="small"
-				rounded
-				raised
-				icon={{ name: 'delete', type: 'material-community', color: 'white', size: 25 }}
-				onPress={deleteRecord}
-				activeOpacity={0.7}
-				containerStyle={{ marginLeft: 5, marginRight: 7 }}
-				overlayContainerStyle={{ backgroundColor: '#1A89E7' }}
-			/>
+			{isOwner && (
+				<Avatar
+					size="small"
+					rounded
+					raised
+					icon={{ name: 'delete', type: 'material-community', color: 'white', size: 25 }}
+					onPress={deleteRecord}
+					activeOpacity={0.7}
+					containerStyle={{ marginLeft: 5, marginRight: 7 }}
+					overlayContainerStyle={{ backgroundColor: '#1A89E7' }}
+				/>
+			)}
 		</View>
 	);
 }
 
-export default DeleteRecord;
+const mapStateToProps = (state) => ({
+	cliente: state.cliente.cliente,
+	login: state.login.cliente,
+});
+
+export default connect(mapStateToProps)(DeleteRecord);

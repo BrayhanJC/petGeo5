@@ -20,7 +20,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import RNPickerSelect from 'react-native-picker-select';
 
 function AddMissinPetForm(props) {
-	const { toastRef, setIsLoading, navigation } = props;
+	const { toastRef, setIsLoading, navigationl } = props;
 	const [ locationMissingPet, setLocationMissingPet ] = useState(null);
 	const [ loading, setloading ] = useState(false);
 	const [ title, setTitle ] = useState('');

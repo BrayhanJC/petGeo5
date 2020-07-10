@@ -17,8 +17,7 @@ export const saveCollection = (
 	setIsLoading,
 	msgError
 ) => {
-	db
-		.collection(collectionName)
+	db.collection(collectionName)
 		.add(collectionData)
 		.then(() => {
 			setIsLoading(false);
@@ -33,47 +32,55 @@ export const saveCollection = (
 
 /**
  * Funcion que permite listar el contenido de la coleccion
- * @param { nombre de la coleccion a listar} collectionName 
- * @param { guarda el numero de elementos totales} setTotalElements 
- * @param { contiene toda la lista de los elementos} setElements 
- * @param { contiene el elemento inicial en el cual se va a empezar a listar} setStartElement 
+ * @param { nombre de la coleccion a listar} collectionName
+ * @param { guarda el numero de elementos totales} setTotalElements
+ * @param { contiene toda la lista de los elementos} setElements
+ * @param { contiene el elemento inicial en el cual se va a empezar a listar} setStartElement
  */
 export const listRecords = (collectionName, setTotalElements, setElements, setStartElement) => {
-	db.collection(collectionName).get().then((snap) => {
-		setTotalElements(snap.size);
-	});
+	db.collection(collectionName)
+		.get()
+		.then((snap) => {
+			setTotalElements(snap.size);
+		});
 
 	const resultElements = [];
 
-	db.collection(collectionName).orderBy('create_date', 'desc').limit(limitRecords).get().then((response) => {
-		setStartElement(response.docs[response.docs.length - 1]);
-		response.forEach((doc) => {
-			const element = doc.data();
-			element.id = doc.id;
-			resultElements.push(element);
+	db.collection(collectionName)
+		.orderBy('create_date', 'desc')
+		.limit(limitRecords)
+		.get()
+		.then((response) => {
+			setStartElement(response.docs[response.docs.length - 1]);
+			response.forEach((doc) => {
+				const element = doc.data();
+				element.id = doc.id;
+				resultElements.push(element);
+			});
+			setElements(resultElements);
 		});
-		setElements(resultElements);
-	});
 };
 
 /**
  * Funcion que permite listar el contenido de la coleccion por registro de usuario
- * @param {nombre de la coleccion a listar} collectionName 
- * @param { variable que permite realizar un filtro por creacion de registro} create_uid 
- * @param { guarda el numero de elementos totales} setTotalElements 
- * @param { contiene toda la lista de los elementos} setElements 
- * @param { contiene el elemento inicial en el cual se va a empezar a listar} setStartElement 
+ * @param {nombre de la coleccion a listar} collectionName
+ * @param { variable que permite realizar un filtro por creacion de registro} create_uid
+ * @param { guarda el numero de elementos totales} setTotalElements
+ * @param { contiene toda la lista de los elementos} setElements
+ * @param { contiene el elemento inicial en el cual se va a empezar a listar} setStartElement
  */
 export const listRecordsById = (collectionName, create_uid, setTotalElements, setElements, setStartElement) => {
 	if (create_uid) {
-		db.collection(collectionName).where('create_uid', '==', create_uid).get().then((snap) => {
-			setTotalElements(snap.size);
-		});
+		db.collection(collectionName)
+			.where('create_uid', '==', create_uid)
+			.get()
+			.then((snap) => {
+				setTotalElements(snap.size);
+			});
 
 		const resultElements = [];
 
-		db
-			.collection(collectionName)
+		db.collection(collectionName)
 			.limit(limitRecords)
 			.where('create_uid', '==', create_uid)
 			.orderBy('create_date', 'desc')
@@ -101,8 +108,7 @@ export const handleLoadMore = (
 ) => {
 	const resultElements = [];
 	element.length < totalElement && setIsLoading(true);
-	db
-		.collection(collectionName)
+	db.collection(collectionName)
 		.orderBy('create_date', 'desc')
 		.startAfter(startElement.data().create_date)
 		.limit(limitRecords)
@@ -118,15 +124,15 @@ export const handleLoadMore = (
 				elementDoc.id = doc.id;
 				resultElements.push(elementDoc);
 			});
-			setElements([ ...element, ...resultElements ]);
+			setElements([...element, ...resultElements]);
 		});
 };
 
 /**
  * Funcuon que permite obtener la informacion del usuario
- * @param {Nombre del collection a consultar} collectionName 
- * @param {variable que hace referencia al usuario} user_id 
- * @param {variable que modica los elementos a retornar} setElements 
+ * @param {Nombre del collection a consultar} collectionName
+ * @param {variable que hace referencia al usuario} user_id
+ * @param {variable que modica los elementos a retornar} setElements
  */
 export const getInfoByUser = async (collectionName, user_id, setElements, setModalVisible) => {
 	// console.log('****');
@@ -170,15 +176,14 @@ export const getInfoByUser = async (collectionName, user_id, setElements, setMod
 };
 
 /**
- * 
- * @param {datos que se van a guardar} data 
- * @param {Nombre del collection a guardar} collectionName 
- * @param {identifica si el modal se va a mostrar o no} setModalVisible 
- * @param {identifica si el modal se va a mostrar o no} modalVisible 
+ *
+ * @param {datos que se van a guardar} data
+ * @param {Nombre del collection a guardar} collectionName
+ * @param {identifica si el modal se va a mostrar o no} setModalVisible
+ * @param {identifica si el modal se va a mostrar o no} modalVisible
  */
 export const saveUserInfo = (data, collectionName, setModalVisible) => {
-	db
-		.collection(collectionName)
+	db.collection(collectionName)
 		.add(data)
 		.then(() => {
 			setModalVisible(false);
@@ -190,15 +195,14 @@ export const saveUserInfo = (data, collectionName, setModalVisible) => {
 
 /**
  * Funcion que permite guardar el centro veterinario o la fundacion animalista
- * 
- * @param {contiene la data necesiaria para crear el centro veterinario o la fundacion animalista} data 
- * @param {Nombre de la coleccion a guardar} collectionName 
- * @param { Objeto de navegacion} navigation 
- * @param { destino despues de que se guarde el registro} navigateTo 
+ *
+ * @param {contiene la data necesiaria para crear el centro veterinario o la fundacion animalista} data
+ * @param {Nombre de la coleccion a guardar} collectionName
+ * @param { Objeto de navegacion} navigation
+ * @param { destino despues de que se guarde el registro} navigateTo
  */
 export const saveCenter = (data, collectionName) => {
-	db
-		.collection(collectionName)
+	db.collection(collectionName)
 		.add(data)
 		.then(() => {
 			//navigation.navigate(navigateTo);
@@ -210,10 +214,10 @@ export const saveCenter = (data, collectionName) => {
 };
 
 /**
- * 
- * @param {Nombre de la coleccion} collectionName 
- * @param {id del usuario} user_id 
- * @param { contiene los elementos de la consulta} setElements 
+ *
+ * @param {Nombre de la coleccion} collectionName
+ * @param {id del usuario} user_id
+ * @param { contiene los elementos de la consulta} setElements
  */
 export const getRecord = async (collectionName, user_id, setElements) => {
 	const resultElements = [];
@@ -235,9 +239,9 @@ export const getRecord = async (collectionName, user_id, setElements) => {
 
 /**
  * Función que permite eliminar un registro de forma permanente
- * @param {id del registro a eliminar} record_id 
- * @param {nombre de la coleccion } collectionName 
- * @param { permite dirigir al usuario hacia atras } navegation 
+ * @param {id del registro a eliminar} record_id
+ * @param {nombre de la coleccion } collectionName
+ * @param { permite dirigir al usuario hacia atras } navegation
  */
 export const deleteRecordBD = async (collectionName, record_id, navigation) => {
 	if (record_id && collectionName) {
@@ -249,7 +253,7 @@ export const deleteRecordBD = async (collectionName, record_id, navigation) => {
 				console.log('Se ha eliminado el registro con exito');
 				navigation.goBack();
 			})
-			.catch(function(error) {
+			.catch(function (error) {
 				console.log('Ha Ocurrido un error al eliminar');
 			});
 	}
@@ -257,8 +261,8 @@ export const deleteRecordBD = async (collectionName, record_id, navigation) => {
 
 /**
  * Funcion que permite actualizar los datos del registro
- * @param { nombre de la collection } collectionName 
- * @param { id del usario} user_id 
+ * @param { nombre de la collection } collectionName
+ * @param { id del usario} user_id
  */
 export const updateInfoUserCenter = async (collectionName, user_id, data) => {
 	await db
@@ -270,8 +274,7 @@ export const updateInfoUserCenter = async (collectionName, user_id, data) => {
 				const element = doc.data();
 				element.id = doc.id;
 
-				db
-					.collection(collectionName)
+				db.collection(collectionName)
 					.doc(element.id)
 					.update(data)
 					.then((response) => {
@@ -285,9 +288,10 @@ export const updateInfoUserCenter = async (collectionName, user_id, data) => {
 
 /**
  * Funcion que permite verificar si el usuario actualmente logueado es un usuario o un centro
- * @param { id del usuario } user_id 
- * @param { almacena el valor de la respuesta } data 
+ * @param { id del usuario } user_id
+ * @param { almacena el valor de la respuesta } data
  */
+
 export const isCenter = async (user_id, data) => {
 	await db
 		.collection('userInfo')
@@ -308,19 +312,15 @@ export const isCenter = async (user_id, data) => {
 		.catch((response) => {});
 };
 
-/**
- * Funcion que permite crear el registro de una mascota encontrada
- * @param { contiene la informacion necesaria para la creacion} collectionData 
- * @param { permite regresar al menu principal} navigation 
- */
-export const createPetFound = (collectionData, navigation) => {
-	db
-		.collection('petsFound')
-		.add(collectionData)
-		.then(() => {
-			navigation.goBack();
+export const obtenerUsuarios = async (user_id, funcion) => {
+	await db
+		.collection('userInfo')
+		.where('create_uid', '==', user_id)
+		.get()
+		.then((response) => {
+			funcion(response);
 		})
 		.catch((response) => {
-			console.log('error al crear');
+			console.log('obtenerUsuarios error', response);
 		});
 };

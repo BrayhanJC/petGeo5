@@ -16,29 +16,35 @@ import {
 	generateOptionsUser,
 	generateOptionsCenter,
 	generateOptionsUserFacebook,
-	generateOptionsCenterFacebook
+	generateOptionsCenterFacebook,
 } from '../../utils/Configurations';
 import { useFocusEffect } from '@react-navigation/native';
-function AccountOptions(props) {
-	const { userInfo, toastRef, setReloadUserInfo, petCenter, datUserInfo, elements } = props;
-	const { userInfo: { displayName, email, providerId, uid } } = props;
 
-	//console.log('el resultado es: ' + elements[0].create_name)
+import { connect } from 'react-redux';
+
+function AccountOptions(props) {
+	const { userInfo, toastRef, setReloadUserInfo, petCenter, reloadUserInfo, datUserInfo, elements } = props;
+	const {
+		userInfo: { displayName, email, providerId, uid },
+	} = props;
+
+	const { cliente, login } = props;
+
 	// variables que nos permitiran la modificacion con un verdadero o un falso
 	// mostrar un modal para cambiar el nombre, email o contraseña
-	const [ showModal, setShowModal ] = useState(false);
+	const [showModal, setShowModal] = useState(false);
 	//const [ elements, setElements ] = useState('');
 	//Varaibles que nos permitiran pasar la informacion necesaria para el modal
-	const [ renderComponent, setRenderComponent ] = useState(null);
+	const [renderComponent, setRenderComponent] = useState(null);
 
-	const [ updateData, setupdateData ] = useState(false);
+	const [updateData, setupdateData] = useState(false);
 
 	//cargamos los datos del usuario
 
 	/***
- * Funcion que permite seleccionar el componente para cambiar
- * la el nombre, el email o la contraseña
- */
+	 * Funcion que permite seleccionar el componente para cambiar
+	 * la el nombre, el email o la contraseña
+	 */
 	const selectedComponent = (key) => {
 		//console.log(key);
 		setShowModal(true);
@@ -48,7 +54,7 @@ function AccountOptions(props) {
 			case 'displayName':
 				setRenderComponent(
 					<ChangeDisplayNameForm
-						displayName={displayName}
+						displayName={cliente.name}
 						setShowModal={setShowModal}
 						setReloadUserInfo={setReloadUserInfo}
 						toastRef={toastRef}
@@ -62,7 +68,7 @@ function AccountOptions(props) {
 			case 'email':
 				setRenderComponent(
 					<ChangeEmailForm
-						email={email}
+						email={cliente.email}
 						setShowModal={setShowModal}
 						setReloadUserInfo={setReloadUserInfo}
 						toastRef={toastRef}
@@ -86,7 +92,7 @@ function AccountOptions(props) {
 						setShowModal={setShowModal}
 						setReloadUserInfo={setReloadUserInfo}
 						toastRef={toastRef}
-						streetDefault={datUserInfo[0].address}
+						streetDefault={cliente.address}
 						saveLocation={petCenter ? true : false}
 						user_id={userInfo.uid}
 					/>
@@ -98,7 +104,7 @@ function AccountOptions(props) {
 						setShowModal={setShowModal}
 						setReloadUserInfo={setReloadUserInfo}
 						toastRef={toastRef}
-						phoneDefault={datUserInfo[0].phone}
+						phoneDefault={cliente.phone}
 						data_user={elements}
 						user_id={userInfo.uid}
 						petCenter={petCenter}
@@ -111,7 +117,7 @@ function AccountOptions(props) {
 						setShowModal={setShowModal}
 						setReloadUserInfo={setReloadUserInfo}
 						toastRef={toastRef}
-						websiteDefault={datUserInfo[0].website}
+						websiteDefault={cliente.website}
 						data_user={elements}
 						user_id={userInfo.uid}
 						petCenter={petCenter}
@@ -133,19 +139,24 @@ function AccountOptions(props) {
 				//menuOptions = [ generateOptionsUser(selectedComponent, petCenter, userInfo)[1] ];
 
 				if (petCenter) {
-					menuOptions = generateOptionsCenterFacebook(selectedComponent, petCenter, datUserInfo);
+					menuOptions = generateOptionsCenterFacebook(selectedComponent, petCenter, [cliente]);
 				} else {
-					menuOptions = generateOptionsUserFacebook(selectedComponent, petCenter, datUserInfo);
+					menuOptions = generateOptionsUserFacebook(selectedComponent, petCenter, [cliente]);
 				}
 			} else {
 				if (petCenter) {
-					menuOptions = generateOptionsCenter(selectedComponent, petCenter, datUserInfo);
+					menuOptions = generateOptionsCenter(selectedComponent, petCenter, [cliente]);
 				} else {
-					menuOptions = generateOptionsUser(selectedComponent, petCenter, datUserInfo);
+					menuOptions = generateOptionsUser(selectedComponent, petCenter, [cliente]);
 				}
 			}
 		}
 	}
+
+	//console.log('AccountOptions 22', datUserInfo);
+	console.log('AccountOptions', cliente);
+
+	//console.log('AccountOptions menuOptions', menuOptions);
 
 	return (
 		<View>
@@ -157,13 +168,13 @@ function AccountOptions(props) {
 						type: menu.iconType,
 						name: menu.iconNameLeft,
 						color: menu.iconColorLeft,
-						size: 28
+						size: 28,
 					}}
 					rightIcon={{
 						type: menu.iconType,
 						name: menu.iconNameRight,
 						color: menu.iconColorRight,
-						size: 35
+						size: 35,
 					}}
 					containerStyle={styles.menuItem}
 					onPress={menu.onPress}
@@ -179,13 +190,19 @@ function AccountOptions(props) {
 		</View>
 	);
 }
-export default AccountOptions;
 
 const styles = StyleSheet.create({
 	menuItem: {
 		borderBottomWidth: 1,
 		borderBottomColor: '#E3E3E3',
 		paddingTop: 5,
-		paddingBottom: 5
-	}
+		paddingBottom: 5,
+	},
 });
+
+const mapStateToProps = (state) => ({
+	cliente: state.cliente.cliente,
+	login: state.login.login,
+});
+
+export default connect(mapStateToProps)(AccountOptions);

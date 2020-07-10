@@ -13,10 +13,10 @@ import { useFocusEffect } from '@react-navigation/native';
 
 /**
  * Account of user
- * 
+ *
  */
-const MyAccount = () => {
-	const [ login, setLogin ] = useState(null);
+const MyAccount = (props) => {
+	const [login, setLogin] = useState(null);
 
 	useEffect(() => {
 		firebase.auth().onAuthStateChanged((user) => {

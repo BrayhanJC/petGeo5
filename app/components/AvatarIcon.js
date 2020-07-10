@@ -5,7 +5,7 @@ import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { Avatar } from 'react-native-elements';
 
 /***
- * Create un avatar in stack nav 
+ * Create un avatar in stack nav
  * Show Drawer Navigation
  */
 
@@ -13,12 +13,12 @@ function AvatarIcon() {
 	const navigation = useNavigation();
 
 	return (
-		<View style={{ flex: 1,  alignItems: 'center', margin:5 }}>
+		<View style={{ flex: 1, alignItems: 'center', margin: 5 }}>
 			<Avatar
 				size="small"
 				rounded
 				raised
-				icon={{ name: 'view-headline', type: 'material-community', color: 'white', size:25  }}
+				icon={{ name: 'view-headline', type: 'material-community', color: 'white', size: 25 }}
 				onPress={() => {
 					navigation.dispatch(DrawerActions.openDrawer());
 				}}

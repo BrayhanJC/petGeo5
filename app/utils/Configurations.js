@@ -92,13 +92,16 @@ export const RAZA = [
 	{ label: 'Terrier Negro Ruso', value: 'Terrier Negro Ruso' },
 	{ label: 'Terrier Norfolk', value: 'Terrier Norfolk' },
 	{ label: 'Terrier Norwich', value: 'Terrier Norwich' },
-	{ label: 'Yorkshire Terrier', value: 'Yorkshire Terrier' }
+	{ label: 'Yorkshire Terrier', value: 'Yorkshire Terrier' },
 ];
 
 /**
  * Contiene el genero de la mascota
  */
-export const TYPE_SEX = [ { label: 'Hembra', value: 'Hembra' }, { label: 'Macho', value: 'Macho' } ];
+export const TYPE_SEX = [
+	{ label: 'Hembra', value: 'Hembra' },
+	{ label: 'Macho', value: 'Macho' },
+];
 
 /**
  * Tipos de mascotas
@@ -106,20 +109,20 @@ export const TYPE_SEX = [ { label: 'Hembra', value: 'Hembra' }, { label: 'Macho'
 export const TYPE_PETS = [
 	{
 		label: 'Perro',
-		value: 'Perro'
+		value: 'Perro',
 	},
 	{
 		label: 'Gato',
-		value: 'Gato'
+		value: 'Gato',
 	},
 	{
 		label: 'Minipig',
-		value: 'Minipig'
+		value: 'Minipig',
 	},
 	{
 		label: 'Otro',
-		value: 'Otro'
-	}
+		value: 'Otro',
+	},
 ];
 
 /**
@@ -183,7 +186,7 @@ export const RAZA_CAT = [
 	{ label: 'Snowshoe', value: 'Snowshoe' },
 	{ label: 'Sphynx', value: 'Sphynx' },
 	{ label: 'Tonkinés', value: 'Tonkinés' },
-	{ label: 'Van Turco', value: 'Van Turco' }
+	{ label: 'Van Turco', value: 'Van Turco' },
 ];
 
 /**
@@ -194,7 +197,7 @@ export const TYPE_CONTROL = [
 	{ label: 'Desparacitación', value: 'Desparacitación' },
 	{ label: 'Baño', value: 'Baño' },
 	{ label: 'Control', value: 'Control' },
-	{ label: 'Otro', value: 'Otro' }
+	{ label: 'Otro', value: 'Otro' },
 ];
 
 /**
@@ -207,12 +210,12 @@ export const SPECIALITY = [
 	{ label: 'Rehabilitación', value: 'Rehabilitación' },
 	{ label: 'Imagenología (diagnóstico por imagen)', value: 'Imagenología (diagnóstico por imagen)' },
 	{ label: 'Fauna Silvestre', value: 'Fauna Silvestre' },
-	{ label: 'Otro', value: 'Otro' }
+	{ label: 'Otro', value: 'Otro' },
 ];
 
 /**
  * Funcion que permite retornar el valor de la opción elegida
- * @param { opcion elegida por el usuario } option 
+ * @param { opcion elegida por el usuario } option
  */
 export const returnUserType = (option) => {
 	var userType = '';
@@ -229,8 +232,8 @@ export const returnUserType = (option) => {
 };
 
 /**
- * Funcion que permite retornar el horario del centro 
- * @param { opcion elegida por el usuario} option 
+ * Funcion que permite retornar el horario del centro
+ * @param { opcion elegida por el usuario} option
  */
 export const returnSchedule = (option) => {
 	var schedule = '';
@@ -246,8 +249,8 @@ export const returnSchedule = (option) => {
 
 /**
  * Funcion que permite crear una lista de las opciones disponibles para el usuario
- * @param { componente a seleccionar} selectedComponent 
- * @param { titulo a mostrar} title 
+ * @param { componente a seleccionar} selectedComponent
+ * @param { titulo a mostrar} title
  */
 export function generateOptionsUser(selectedComponent, title, subtitle) {
 	return [
@@ -258,8 +261,8 @@ export function generateOptionsUser(selectedComponent, title, subtitle) {
 			iconNameRight: 'chevron-right',
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
-			subtitle: subtitle[0].create_name,
-			onPress: () => selectedComponent('displayName')
+			subtitle: subtitle[0].name,
+			onPress: () => selectedComponent('displayName'),
 		},
 		{
 			title: 'Celular',
@@ -269,7 +272,7 @@ export function generateOptionsUser(selectedComponent, title, subtitle) {
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
 			subtitle: subtitle[0].phone,
-			onPress: () => selectedComponent('phone')
+			onPress: () => selectedComponent('phone'),
 		},
 		{
 			title: 'Email',
@@ -279,7 +282,7 @@ export function generateOptionsUser(selectedComponent, title, subtitle) {
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
 			subtitle: subtitle[0].email,
-			onPress: () => selectedComponent('email')
+			onPress: () => selectedComponent('email'),
 		},
 		{
 			title: 'Contraseña',
@@ -288,18 +291,17 @@ export function generateOptionsUser(selectedComponent, title, subtitle) {
 			iconNameRight: 'chevron-right',
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
-			onPress: () => selectedComponent('password')
-		}
+			onPress: () => selectedComponent('password'),
+		},
 	];
 }
 
 /**
- * Funcion que permite crear una lista de las opciones disponibles para el centro 
- * @param { componente a seleccionar} selectedComponent 
- * @param { titulo a mostrar} title 
+ * Funcion que permite crear una lista de las opciones disponibles para el centro
+ * @param { componente a seleccionar} selectedComponent
+ * @param { titulo a mostrar} title
  */
 export function generateOptionsCenter(selectedComponent, title, subtitle) {
-
 	return [
 		{
 			title: title ? 'Nombre Centro' : 'Nombre y Apellidos',
@@ -308,8 +310,8 @@ export function generateOptionsCenter(selectedComponent, title, subtitle) {
 			iconNameRight: 'chevron-right',
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
-			subtitle: subtitle[0].create_name,
-			onPress: () => selectedComponent('displayName')
+			subtitle: subtitle[0].name,
+			onPress: () => selectedComponent('displayName'),
 		},
 		{
 			title: 'Celular',
@@ -319,7 +321,7 @@ export function generateOptionsCenter(selectedComponent, title, subtitle) {
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
 			subtitle: subtitle[0].phone,
-			onPress: () => selectedComponent('phone')
+			onPress: () => selectedComponent('phone'),
 		},
 		{
 			title: 'Email',
@@ -329,7 +331,7 @@ export function generateOptionsCenter(selectedComponent, title, subtitle) {
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
 			subtitle: subtitle[0].email,
-			onPress: () => selectedComponent('email')
+			onPress: () => selectedComponent('email'),
 		},
 		{
 			title: 'Dirección',
@@ -339,7 +341,7 @@ export function generateOptionsCenter(selectedComponent, title, subtitle) {
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
 			subtitle: subtitle[0].address,
-			onPress: () => selectedComponent('street')
+			onPress: () => selectedComponent('street'),
 		},
 		{
 			title: 'Página Web',
@@ -349,7 +351,7 @@ export function generateOptionsCenter(selectedComponent, title, subtitle) {
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
 			subtitle: subtitle[0].website,
-			onPress: () => selectedComponent('website')
+			onPress: () => selectedComponent('website'),
 		},
 		{
 			title: 'Contraseña',
@@ -358,15 +360,15 @@ export function generateOptionsCenter(selectedComponent, title, subtitle) {
 			iconNameRight: 'chevron-right',
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
-			onPress: () => selectedComponent('password')
-		}
+			onPress: () => selectedComponent('password'),
+		},
 	];
 }
 
 /**
  * Funcion que permite crear una lista de las opciones disponibles para el usuario que ingreso con facebook
- * @param { componente a seleccionar} selectedComponent 
- * @param { titulo a mostrar} title 
+ * @param { componente a seleccionar} selectedComponent
+ * @param { titulo a mostrar} title
  */
 export function generateOptionsUserFacebook(selectedComponent, title, subtitle) {
 	return [
@@ -377,7 +379,7 @@ export function generateOptionsUserFacebook(selectedComponent, title, subtitle) 
 			iconNameRight: 'chevron-right',
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
-			subtitle: subtitle[0].create_name
+			subtitle: subtitle[0].name,
 		},
 		{
 			title: 'Celular',
@@ -386,7 +388,7 @@ export function generateOptionsUserFacebook(selectedComponent, title, subtitle) 
 			iconNameRight: 'chevron-right',
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
-			subtitle: subtitle[0].phone
+			subtitle: subtitle[0].phone,
 		},
 		{
 			title: 'Email',
@@ -395,15 +397,15 @@ export function generateOptionsUserFacebook(selectedComponent, title, subtitle) 
 			iconNameRight: 'chevron-right',
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
-			subtitle: subtitle[0].email
-		}
+			subtitle: subtitle[0].email,
+		},
 	];
 }
 
 /**
  * Funcion que permite crear una lista de las opciones disponibles para el centro ingresado con facebook
- * @param { componente a seleccionar} selectedComponent 
- * @param { titulo a mostrar} title 
+ * @param { componente a seleccionar} selectedComponent
+ * @param { titulo a mostrar} title
  */
 export function generateOptionsCenterFacebook(selectedComponent, title, subtitle) {
 	return [
@@ -414,7 +416,7 @@ export function generateOptionsCenterFacebook(selectedComponent, title, subtitle
 			iconNameRight: 'chevron-right',
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
-			subtitle: subtitle[0].create_name
+			subtitle: subtitle[0].name,
 		},
 		{
 			title: 'Celular',
@@ -423,7 +425,7 @@ export function generateOptionsCenterFacebook(selectedComponent, title, subtitle
 			iconNameRight: 'chevron-right',
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
-			subtitle: subtitle[0].phone
+			subtitle: subtitle[0].phone,
 		},
 		{
 			title: 'Email',
@@ -432,7 +434,7 @@ export function generateOptionsCenterFacebook(selectedComponent, title, subtitle
 			iconNameRight: 'chevron-right',
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
-			subtitle: subtitle[0].email
+			subtitle: subtitle[0].email,
 		},
 		{
 			title: 'Dirección',
@@ -442,7 +444,7 @@ export function generateOptionsCenterFacebook(selectedComponent, title, subtitle
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
 			subtitle: subtitle[0].address,
-			onPress: () => selectedComponent('street')
+			onPress: () => selectedComponent('street'),
 		},
 		{
 			title: 'Página Web',
@@ -452,7 +454,7 @@ export function generateOptionsCenterFacebook(selectedComponent, title, subtitle
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
 			subtitle: subtitle[0].website,
-			onPress: () => selectedComponent('website')
-		}
+			onPress: () => selectedComponent('website'),
+		},
 	];
 }

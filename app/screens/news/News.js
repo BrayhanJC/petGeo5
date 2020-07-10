@@ -19,24 +19,23 @@ const INFO_USER = '@info_user:key';
 function News(props) {
 	//se puede obtener porque esta en la screen principal
 	const { navigation } = props;
-	const [ user, setUser ] = useState(null);
+	const [user, setUser] = useState(null);
 
-	const [ News, setNews ] = useState([]);
-	const [ totalNews, setTotalNews ] = useState(0);
-	const [ startNews, setStartNews ] = useState(null);
-	const [ isLoading, setIsLoading ] = useState(false);
+	const [News, setNews] = useState([]);
+	const [totalNews, setTotalNews] = useState(0);
+	const [startNews, setStartNews] = useState(null);
+	const [isLoading, setIsLoading] = useState(false);
 
 	//variables para el popup
-	const [ elements, setElements ] = useState('');
-	const [ modalVisible, setModalVisible ] = useState(false);
+	const [elements, setElements] = useState('');
+	const [modalVisible, setModalVisible] = useState(false);
 
 	//variables para el buscador
-	const [ item, setItem ] = useState([]);
-	const [ search, setSearch ] = useState('');
+	const [item, setItem] = useState([]);
+	const [search, setSearch] = useState('');
 
 	useEffect(() => {
 		firebase.auth().onAuthStateChanged((userInfo) => {
-			
 			setUser(userInfo);
 			if (userInfo) {
 				getInfoByUser('userInfo', userInfo.uid, setElements, setModalVisible);
@@ -87,10 +86,14 @@ function News(props) {
 				</View>
 			)}
 
-			{/***
-			 * Modal que sirve para registrar el tipo de usuario
-			 */
-			modalVisible && <UserData modalVisible={modalVisible} setModalVisible={setModalVisible} userInfo={user} />}
+			{
+				/***
+				 * Modal que sirve para registrar el tipo de usuario
+				 */
+				modalVisible && (
+					<UserData modalVisible={modalVisible} setModalVisible={setModalVisible} userInfo={user} />
+				)
+			}
 
 			{user && (
 				<Icon

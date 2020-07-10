@@ -15,19 +15,18 @@ import { viewFormStyle } from '../../src/css/ViewForm';
 const db = firebase.firestore(firebaseApp);
 const screenWidth = Dimensions.get('window').width;
 const ViewForm = (props) => {
-	const { navigation, route, collection, nameInfo, navigateTo, collection_name, showSwitch, setValSwitch, valSwitch } = props;
+	const { navigation, route, collection, nameInfo, navigateTo, collection_name, showSwitch } = props;
 	const { name, id } = route.params;
-	const [ item, setItem ] = useState(null);
-	const [ rating, setRating ] = useState(0);
+	const [item, setItem] = useState(null);
+	const [rating, setRating] = useState(0);
 
 	navigation.setOptions({
-		title: name
+		title: name,
 	});
 
 	useFocusEffect(
 		useCallback(() => {
-			db
-				.collection(collection)
+			db.collection(collection)
 				.doc(id)
 				.get()
 				.then((response) => {
@@ -60,73 +59,78 @@ const ViewForm = (props) => {
 			text: 'Creado por: ' + item.create_name,
 			iconName: 'account',
 			iconType: 'material-community',
-			action: null
+			action: null,
 		},
 		{
 			text: 'Teléfono: ' + item.phone,
 			iconName: 'phone',
 			iconType: 'material-community',
-			action: null
+			action: null,
 		},
 		{
 			text: 'Dirección: ' + item.address,
 			iconName: 'map-marker',
 			iconType: 'material-community',
-			action: null
+			action: null,
 		},
 		{
 			text: 'Fecha Creación: ' + date_control,
 			iconName: 'calendar-range',
 			iconType: 'material-community',
-			action: null
-		}
+			action: null,
+		},
 	];
 	if (collection == 'petCenters') {
 		listInfo = [
-
 			{
 				text: 'Dirección: ' + item.address,
 				iconName: 'map-marker',
 				iconType: 'material-community',
-				action: null
+				action: null,
 			},
 			{
 				text: 'Teléfono: ' + item.phone,
 				iconName: 'phone',
 				iconType: 'material-community',
-				action: null
+				action: null,
 			},
 			{
 				text: 'Horario de Atención: ' + item.schedule + ' Horas',
 				iconName: 'timer',
 				iconType: 'material-community',
-				action: null
+				action: null,
 			},
 			{
 				text: 'Correo: ' + item.email,
 				iconName: 'email',
 				iconType: 'material-community',
-				action: null
+				action: null,
 			},
 			{
 				text: 'Página Web: ' + item.website,
 				iconName: 'web',
 				iconType: 'material-community',
-				action: null
+				action: null,
 			},
 			{
 				text: 'Fecha Creación: ' + date_control,
 				iconName: 'calendar-range',
 				iconType: 'material-community',
-				action: null
-			}
+				action: null,
+			},
 		];
 	}
 
 	return (
 		<ScrollView vertical style={viewFormStyle.viewBody}>
 			<CarouselImages image_ids={item.image} height={200} width={screenWidth} />
-			<TitleItem name={item.name} description={item.description} rating={rating} showRating={true} showSwitch={showSwitch} setValSwitch={setValSwitch} valSwitch={valSwitch} item={item} navigation={navigation}/>
+			<TitleItem
+				name={item.name}
+				description={item.description}
+				rating={rating}
+				showRating={true}
+				showSwitch={showSwitch}
+			/>
 			<InfoItem
 				location={item.location}
 				name={item.name}
@@ -134,7 +138,6 @@ const ViewForm = (props) => {
 				listInfo={listInfo}
 				showMap={true}
 				nameInfo={nameInfo}
-				
 			/>
 			<ListReview
 				navigation={navigation}

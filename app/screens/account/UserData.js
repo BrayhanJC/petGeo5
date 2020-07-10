@@ -7,25 +7,28 @@ import { saveUserInfo, saveCenter } from '../../utils/SaveRecord';
 import Map from '../../components/formMain/Map';
 import { returnUserType, returnSchedule } from '../../utils/Configurations';
 
+import { connect } from 'react-redux';
+import { actions } from '../../store';
+
 const UserData = (props) => {
 	const { modalVisible, setModalVisible, userInfo } = props;
 	const toastRef = useRef();
-	const buttons = [ 'Usuario', 'Veterinaria', 'Fundación' ];
-	const buttonTime = [ '12 Horas', '24 Horas' ];
+	const buttons = ['Usuario', 'Veterinaria', 'Fundación'];
+	const buttonTime = ['12 Horas', '24 Horas'];
 
-	const [ message, setMessage ] = useState('');
-	const [ street, setStreet ] = useState('');
-	const [ location, setLocation ] = useState('');
-	const [ phone, setphone ] = useState('');
-	const [ userType, setUserType ] = useState(0);
-	const [ errorStreet, setErrorStreet ] = useState('');
-	const [ errorPhone, setErrorPhone ] = useState('');
-	const [ errorMap, setErrorMap ] = useState('');
-	const [ description, setDescription ] = useState('');
-	const [ time, setTime ] = useState(0);
-	const [ errorDescription, setErrorDescription ] = useState('');
+	const [message, setMessage] = useState('');
+	const [street, setStreet] = useState('');
+	const [location, setLocation] = useState('');
+	const [phone, setphone] = useState('');
+	const [userType, setUserType] = useState(0);
+	const [errorStreet, setErrorStreet] = useState('');
+	const [errorPhone, setErrorPhone] = useState('');
+	const [errorMap, setErrorMap] = useState('');
+	const [description, setDescription] = useState('');
+	const [time, setTime] = useState(0);
+	const [errorDescription, setErrorDescription] = useState('');
 
-	const [ isVisibleMap, setIsVisibleMap ] = useState(false);
+	const [isVisibleMap, setIsVisibleMap] = useState(false);
 
 	const onSubmit = () => {
 		if (!location) {
@@ -44,10 +47,13 @@ const UserData = (props) => {
 					email: userInfo.email,
 					phone,
 					street,
-					userType: returnUserType(userType)
+					userType: returnUserType(userType),
 				};
 				//console.log(data);
-				saveUserInfo(data, 'userInfo', setModalVisible);
+				saveUserInfo(data, 'userInfo', () => {
+					setModalVisible();
+					props.dispatch(actions.actualizarCliente(data));
+				});
 				//navigation.navigate('Profile');
 			} else {
 				setErrorStreet('');
@@ -102,10 +108,14 @@ const UserData = (props) => {
 					image: [],
 					quantityVoting: 0,
 					rating: 0,
-					ratingTotal: 0
+					ratingTotal: 0,
 				};
+
 				saveCenter(data, 'petCenters');
-				saveUserInfo(data, 'userInfo', setModalVisible);
+				saveUserInfo(data, 'userInfo', () => {
+					props.dispatch(actions.actualizarCliente(data));
+					setModalVisible();
+				});
 			}
 		}
 	};
@@ -140,7 +150,7 @@ const UserData = (props) => {
 								rightIcon={{
 									type: 'material-community',
 									name: 'phone',
-									color: '#C2C2C2'
+									color: '#C2C2C2',
 								}}
 								errorMessage={errorPhone}
 								onChange={(even) => setphone(even.nativeEvent.text)}
@@ -156,7 +166,7 @@ const UserData = (props) => {
 										type: 'material-community',
 										name: 'google-maps',
 										color: location ? '#1A89E7' : '#C2C2C2',
-										onPress: () => setIsVisibleMap(true)
+										onPress: () => setIsVisibleMap(true),
 									}}
 									errorMessage={!street ? errorStreet : errorMap}
 									onChange={(even) => setStreet(even.nativeEvent.text)}
@@ -211,21 +221,25 @@ const UserData = (props) => {
 	);
 };
 
-export default UserData;
-
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
 		paddingTop: 0,
-		backgroundColor: '#ecf0f1'
+		backgroundColor: '#ecf0f1',
 	},
 	paragraph: {
 		margin: 10,
 		fontSize: 18,
 		fontWeight: 'bold',
 		textAlign: 'center',
-		color: '#34495e'
-	}
+		color: '#34495e',
+	},
 });
+
+const mapStateToProps = (state) => ({
+	cliente: state.cliente.cliente,
+	login: state.login.login,
+});
+export default connect(mapStateToProps)(UserData);

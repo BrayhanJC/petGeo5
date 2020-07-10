@@ -4,16 +4,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 
-
-
-
 //importando stacks
 import NewsStack from './NewsStack';
 import PetCenterStack from './CenterVeterinaryStack';
 import ComedgosStack from './ComedogsStack';
 import MissingPetsStack from './MissingPetsStack';
 import LocalizationMapStack from './LocalizationMapStack';
-
 
 const Tab = createBottomTabNavigator();
 
@@ -61,17 +57,17 @@ function MenuTabs() {
 			style={{ backgroundColor: 'tomato' }}
 			tabBarOptions={{
 				activeTintColor: '#1A89E7',
-				inactiveTintColor: '#BED9EF'
+				inactiveTintColor: '#BED9EF',
 			}}
 			screenOptions={({ route }) => ({
-				tabBarIcon: ({ color }) => screenOptions(route, color)
+				tabBarIcon: ({ color }) => screenOptions(route, color),
 			})}
 		>
 			<Tab.Screen
 				name="HomeTab"
 				component={NewsStack}
 				options={{
-					tabBarLabel: 'Inicio'
+					tabBarLabel: 'Inicio',
 				}}
 			/>
 
@@ -79,7 +75,7 @@ function MenuTabs() {
 				name="centerVeterinaryTab"
 				component={PetCenterStack}
 				options={{
-					tabBarLabel: 'Centros'
+					tabBarLabel: 'Centros',
 				}}
 			/>
 
@@ -87,7 +83,7 @@ function MenuTabs() {
 				name="ComedogsTab"
 				component={ComedgosStack}
 				options={{
-					tabBarLabel: 'Comedogs'
+					tabBarLabel: 'Comedogs',
 				}}
 			/>
 
@@ -95,7 +91,7 @@ function MenuTabs() {
 				name="MissingPetsTab"
 				component={MissingPetsStack}
 				options={{
-					tabBarLabel: 'Extraviados'
+					tabBarLabel: 'Extraviados',
 				}}
 			/>
 
@@ -103,7 +99,7 @@ function MenuTabs() {
 				name="LocalizationMapTab"
 				component={LocalizationMapStack}
 				options={{
-					tabBarLabel: 'Mapa'
+					tabBarLabel: 'Mapa',
 				}}
 			/>
 

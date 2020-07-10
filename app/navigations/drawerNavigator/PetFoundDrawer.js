@@ -5,15 +5,15 @@ import { useNavigation } from '@react-navigation/native';
 import { Icon } from 'react-native-elements';
 
 import PetScreen from '../../screens/pet/Pet';
-import PetsFoundScreen from '../../screens/petFound/PetsFound'
-import CreatePet from '../../screens/pet/CreatePet'
-import AvatarIcon from '../../components/AvatarIcon'
-import PetView from '../../screens/pet/PetView'
+import PetsFoundScreen from '../../screens/petFound/PetsFound';
+import CreatePet from '../../screens/pet/CreatePet';
+import AvatarIcon from '../../components/AvatarIcon';
+import PetView from '../../screens/pet/PetView';
 const Stack = createStackNavigator();
-import DeleteRecord from '../../components/UpdateRecords/DeleteRecord'
-import PetFoundView from '../../screens/petFound/PetFoundView'
+import DeleteRecord from '../../components/UpdateRecords/DeleteRecord';
+
 /***
- * Create stack nav pets 
+ * Create stack nav pets
  * show all pets register by user
  */
 function PetFoundDrawer(props) {
@@ -32,11 +32,23 @@ function PetFoundDrawer(props) {
 							size={32}
 							onPress={() => navigation.goBack()}
 						/>
-					)
+					),
 				}}
 			/>
-		
-			<Stack.Screen name="petFoundView" component={PetFoundView}/>
+			<Stack.Screen
+				name="CreatePet"
+				component={CreatePet}
+				options={{
+					title: 'Añadir Mascota',
+				}}
+			/>
+			<Stack.Screen
+				name="ViewPet"
+				component={PetView}
+				options={{
+					headerRight: () => <DeleteRecord props={props} />,
+				}}
+			/>
 		</Stack.Navigator>
 	);
 }

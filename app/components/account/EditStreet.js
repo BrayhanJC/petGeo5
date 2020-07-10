@@ -5,23 +5,28 @@ import { isEmpty } from 'lodash';
 import * as firebase from 'firebase';
 import { styles } from '../../src/css/ModalProfile';
 import Map from '../../components/formMain/Map';
-import {updateInfoUserCenter} from '../../utils/SaveRecord'
+import { updateInfoUserCenter } from '../../utils/SaveRecord';
+
+import { connect } from 'react-redux';
+import { actions } from '../../store';
 
 function EditStreet(props) {
 	const { streetDefault, saveLocation, setShowModal, setReloadUserInfo, user_id, toastRef } = props;
 
-	const [ street, setStreet ] = useState('');
+	const { cliente } = props;
+
+	const [street, setStreet] = useState('');
 
 	//variables para el mapa
-	const [ location, setLocation ] = useState('');
-	const [ message, setMessage ] = useState('');
-	const [ isVisibleMap, setIsVisibleMap ] = useState(false);
+	const [location, setLocation] = useState('');
+	const [message, setMessage] = useState('');
+	const [isVisibleMap, setIsVisibleMap] = useState(false);
 
 	//variable que se utiliza para mostrar el error en el campo displayName
-	const [ error, setError ] = useState(null);
+	const [error, setError] = useState(null);
 
 	//variable que se utiliza para actualizar automaticamente despues de que se guarde el nuevo nombre
-	const [ isLoading, setIsLoading ] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
 	//funcion que nos permite actualizar el displayName del usuario
 	const onSubmit = () => {
@@ -31,24 +36,25 @@ function EditStreet(props) {
 			setError('El campo Dirección es requerido.');
 		} else {
 			if (saveLocation) {
-				
 				if (!location) {
 					setError('La localizacion es requerida. Por favor pulsa el icono del mapa');
 				} else {
 					setError('');
-					
-					updateInfoUserCenter('userInfo', user_id, {address: street, location})
-					updateInfoUserCenter('petCenters', user_id, {address: street, location})
-					toastRef.current.show('Se ha Actualizado la Dirección y Localización', 1500)
+
+					updateInfoUserCenter('userInfo', user_id, { address: street, location });
+					updateInfoUserCenter('petCenters', user_id, { address: street, location });
+					toastRef.current.show('Se ha Actualizado la Dirección y Localización', 1500);
+					props.dispatch(actions.actualizarCliente({ ...cliente, address: street, location }));
+					setShowModal(false);
 				}
 			} else {
-				
 				//setIsLoading(true);
 				setError('');
-		
-                updateInfoUserCenter('userInfo', user_id, {address: street})
-				updateInfoUserCenter('petCenters', user_id, {address: street})
-				toastRef.current.show('Se ha Actualizado la Dirección', 1500)
+
+				updateInfoUserCenter('userInfo', user_id, { address: street });
+				updateInfoUserCenter('petCenters', user_id, { address: street });
+				toastRef.current.show('Se ha Actualizado la Dirección', 1500);
+				props.dispatch(actions.actualizarCliente({ ...cliente, address: street, location }));
 				setShowModal(false);
 			}
 		}
@@ -58,7 +64,7 @@ function EditStreet(props) {
 		<Card title="Dirección" containerStyle={{ borderRadius: 20, paddingBottom: 10, marginBottom: 10 }}>
 			<View style={styles.view}>
 				<Input
-					placeholder='Dirección'
+					placeholder="Dirección"
 					containerStyle={styles.input}
 					inputContainerStyle={styles.inputForm}
 					defaultValue={streetDefault}
@@ -67,7 +73,7 @@ function EditStreet(props) {
 						type: 'material-community',
 						name: 'google-maps',
 						color: location ? '#1A89E7' : '#C2C2C2',
-						onPress: () => setIsVisibleMap(true)
+						onPress: () => setIsVisibleMap(true),
 					}}
 					errorMessage={error}
 					onChange={(even) => setStreet(even.nativeEvent.text)}
@@ -93,4 +99,8 @@ function EditStreet(props) {
 	);
 }
 
-export default EditStreet;
+const mapStateToProps = (state) => ({
+	cliente: state.cliente.cliente,
+	login: state.login.login,
+});
+export default connect(mapStateToProps)(EditStreet);

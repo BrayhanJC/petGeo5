@@ -7,35 +7,39 @@ import * as firebase from 'firebase';
 
 import { reauthenticate } from '../../utils/Api';
 
+import { connect } from 'react-redux';
+import { actions } from '../../store';
 /***
  * Funcion que permite inicializar la variable formData
  */
 function defaultFormValue() {
 	return {
 		email: '',
-		password: ''
+		password: '',
 	};
 }
 
 function ChangeEmailForm(props) {
+	const { cliente, login } = props;
+
 	const { email, setShowModal, toastRef, setReloadUserInfo, petCenter } = props;
 
 	//variable donde se almacenaran los datos de email y contraseña
-	const [ formData, setFormData ] = useState(defaultFormValue);
+	const [formData, setFormData] = useState(defaultFormValue);
 
 	//variable para ocultar o mostrar la contraseña, como tambien el icono
-	const [ showPassword, setShowPassword ] = useState(false);
+	const [showPassword, setShowPassword] = useState(false);
 
 	//variable que permite mostrar una informacion de error al usuario
-	const [ showError, setShowError ] = useState({});
+	const [showError, setShowError] = useState({});
 
 	//variable que permite verificar al usuario que se esta enviando una peticion, se mostrara en el boton
-	const [ isLoadig, setIsLoadig ] = useState(false);
+	const [isLoadig, setIsLoadig] = useState(false);
 	//funcion que nos permite actualizar el formData cada vez que el usuario ingrese algo en el email o password
 	const onChange = (even, type) => {
 		setFormData({
 			...formData,
-			[type]: even.nativeEvent.text
+			[type]: even.nativeEvent.text,
 		});
 	};
 
@@ -47,22 +51,22 @@ function ChangeEmailForm(props) {
 		if (!formData.email) {
 			setShowError({
 				email: 'El campo email debe estar diligenciado',
-				password: ''
+				password: '',
 			});
 		} else if (!validateEmail(formData.email)) {
 			setShowError({
 				email: 'No es un correo valido',
-				password: ''
+				password: '',
 			});
 		} else if (!formData.password) {
 			setShowError({
 				email: '',
-				password: 'El campo contraseña debe estar diligenciado'
+				password: 'El campo contraseña debe estar diligenciado',
 			});
 		} else if (email === formData.email) {
 			setShowError({
 				email: 'El email es igual al actual',
-				password: ''
+				password: '',
 			});
 		} else {
 			setShowError({});
@@ -78,12 +82,15 @@ function ChangeEmailForm(props) {
 							setReloadUserInfo(true);
 							if (petCenter) {
 								updateInfoUserCenter('userInfo', user_id, {
-									email: formData.email
+									email: formData.email,
 								});
 							}
 
+							props.dispatch(
+								actions.actualizarCliente({ ...cliente, create_name: nameComplete, name: nameComplete })
+							);
 							updateInfoUserCenter('petCenters', user_id, {
-								email: formData.email
+								email: formData.email,
 							});
 							toastRef.current.show('Email Actualizado con Exito', 1500);
 							setShowModal(false);
@@ -91,14 +98,14 @@ function ChangeEmailForm(props) {
 						.catch(() => {
 							toastRef.current.show('Error al actualizar el email');
 							setShowError({
-								email: 'Error al actualizar el email.'
+								email: 'Error al actualizar el email.',
 							});
 							setIsLoadig(false);
 						});
 				})
 				.catch(() => {
 					setShowError({
-						password: 'La contraseña no es correcta.'
+						password: 'La contraseña no es correcta.',
 					});
 					setIsLoadig(false);
 				});
@@ -114,7 +121,7 @@ function ChangeEmailForm(props) {
 					rightIcon={{
 						type: 'material-community',
 						name: 'email',
-						color: '#C2C2C2'
+						color: '#C2C2C2',
 					}}
 					defaultValue={email}
 					onChange={(even) => onChange(even, 'email')}
@@ -129,7 +136,7 @@ function ChangeEmailForm(props) {
 						type: 'material-community',
 						name: showPassword ? 'eye-outline' : 'eye-off-outline',
 						color: '#C2C2C2',
-						onPress: () => setShowPassword(!showPassword)
+						onPress: () => setShowPassword(!showPassword),
 					}}
 					onChange={(even) => onChange(even, 'password')}
 					errorMessage={showError.password}
@@ -146,4 +153,8 @@ function ChangeEmailForm(props) {
 	);
 }
 
-export default ChangeEmailForm;
+const mapStateToProps = (state) => ({
+	cliente: state.cliente.cliente,
+	login: state.login.login,
+});
+export default connect(mapStateToProps)(ChangeEmailForm);

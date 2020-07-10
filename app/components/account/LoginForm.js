@@ -6,39 +6,30 @@ import { useNavigation } from '@react-navigation/native';
 
 import { validateEmail } from '../../utils/validations';
 
-
 import Loading from '../Loading';
-
-
-
 
 import { firebaseApp } from '../../utils/FireBase';
 import firebase from 'firebase/app';
 import 'firebase/storage';
 import 'firebase/firestore';
 
-
 const db = firebase.firestore(firebaseApp);
-
-
-
 
 function defaultFormValue() {
 	return {
 		email: '',
-		password: ''
+		password: '',
 	};
 }
 const INFO_USER = '@info_user:key';
 function LoginForm(props) {
 	const navigation = useNavigation();
 	const { toastRef } = props;
-	const [ showPassword, setshowPassword ] = useState(true);
-	const [ formData, setformData ] = useState(defaultFormValue);
-	const [ loading, setloading ] = useState(false);
+	const [showPassword, setshowPassword] = useState(true);
+	const [formData, setformData] = useState(defaultFormValue);
+	const [loading, setloading] = useState(false);
 
 	var { email, password } = formData;
-
 
 	const onSubmit = async () => {
 		if (isEmpty(email) || isEmpty(password)) {
@@ -52,7 +43,6 @@ function LoginForm(props) {
 					.auth()
 					.signInWithEmailAndPassword(email, password)
 					.then((response) => {
-						
 						setloading(false);
 						navigation.navigate('Profile');
 					})
@@ -68,7 +58,7 @@ function LoginForm(props) {
 	const onChange = (even, type) => {
 		setformData({
 			...formData,
-			[type]: even.nativeEvent.text
+			[type]: even.nativeEvent.text,
 		});
 	};
 
@@ -116,28 +106,28 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
-		marginTop: 30
+		marginTop: 30,
 	},
 	inputForm: {
 		width: '100%',
 		marginTop: 20,
 		borderRadius: 30,
 		borderWidth: 2,
-		borderColor: '#C2C2C2'
+		borderColor: '#C2C2C2',
 	},
 	btnContainerLogin: {
 		marginTop: 20,
-		width: '97%'
+		width: '97%',
 	},
 	btnLogin: {
 		backgroundColor: '#1A89E7',
-		borderRadius: 30
+		borderRadius: 30,
 	},
 	iconRight: {
-		color: 'gray'
+		color: 'gray',
 	},
 	btnTitleStyle: {
-		fontWeight: 'bold'
-	}
+		fontWeight: 'bold',
+	},
 });
 export default LoginForm;

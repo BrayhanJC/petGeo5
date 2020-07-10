@@ -18,20 +18,20 @@ import UserData from '../account/UserData';
  */
 function PetsFound(props) {
 	const { navigation } = props;
-	const [ user, setUser ] = useState(null);
+	const [user, setUser] = useState(null);
 
-	const [ petFound, setPetFound ] = useState([]);
-	const [ totalPetFound, setTotalPetFound ] = useState(0);
-	const [ startPetFound, setStartPetFound ] = useState(null);
-	const [ isLoading, setIsLoading ] = useState(false);
+	const [petFound, setPetFound] = useState([]);
+	const [totalPetFound, setTotalPetFound] = useState(0);
+	const [startPetFound, setStartPetFound] = useState(null);
+	const [isLoading, setIsLoading] = useState(false);
 
 	//variables para el popup
-	const [ elements, setElements ] = useState('');
-	const [ modalVisible, setModalVisible ] = useState(false);
+	const [elements, setElements] = useState('');
+	const [modalVisible, setModalVisible] = useState(false);
 
 	//variables para el buscador
-	const [ item, setItem ] = useState([]);
-	const [ search, setSearch ] = useState('');
+	const [item, setItem] = useState([]);
+	const [search, setSearch] = useState('');
 
 	useEffect(() => {
 		(async () => {
@@ -76,7 +76,7 @@ function PetsFound(props) {
 						elements={item}
 						isLoading={isLoading}
 						navigation={navigation}
-						navigator="petFoundView"
+						navigator="ViewMissingPet"
 					/>
 				</View>
 			) : (
@@ -88,19 +88,30 @@ function PetsFound(props) {
 					elements={petFound}
 					isLoading={isLoading}
 					navigation={navigation}
-					navigator="petFoundView"
+					navigator="ViewMissingPet"
 				/>
 			)}
 
-			{/***
-			 * Modal que sirve para registrar el tipo de usuario
-			 */
-			modalVisible ? (
-				<UserData modalVisible={modalVisible} setModalVisible={setModalVisible} userInfo={user} />
-			) : (
-				<Text />
+			{
+				/***
+				 * Modal que sirve para registrar el tipo de usuario
+				 */
+				modalVisible ? (
+					<UserData modalVisible={modalVisible} setModalVisible={setModalVisible} userInfo={user} />
+				) : (
+					<Text />
+				)
+			}
+			{user && (
+				<Icon
+					containerStyle={buttonFormFloating.btnContainer}
+					type="material-community"
+					name="plus"
+					color="#1A89E7"
+					reverse
+					onPress={() => navigation.navigate('add-missing-pet')}
+				/>
 			)}
-
 		</View>
 	);
 }

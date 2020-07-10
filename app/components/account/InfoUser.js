@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import * as firebase from 'firebase';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
+import { connect } from 'react-redux';
+import { actions } from '../../store';
 
 function InfoUser(props) {
 	//capturando datos del usuario
-	const { userInfo: { uid, photoURL, displayName, email }, toastRef, setLoading, setLoadingText } = props;
+	const {
+		userInfo: { uid, photoURL, displayName, email },
+		toastRef,
+		setLoading,
+		setLoadingText,
+	} = props;
 
-	//console.log(props);
+	const { cliente } = props;
+	const { login } = props;
+
+	//console.log('InfoUser', cliente);
+	console.log('InfoUser', cliente);
 
 	const changeAvatar = async () => {
 		//console.log('cambiando icono');
@@ -21,7 +32,7 @@ function InfoUser(props) {
 		} else {
 			const result = await ImagePicker.launchImageLibraryAsync({
 				allowsEditing: true,
-				aspect: [ 4, 3 ]
+				aspect: [4, 3],
 			});
 
 			//console.log(result);
@@ -31,8 +42,8 @@ function InfoUser(props) {
 			} else {
 				uploadImage(result.uri)
 					.then((response) => {
-                        //console.log('imagen subida');
-                        updatePhotoUrl()
+						//console.log('imagen subida');
+						updatePhotoUrl();
 					})
 					.catch((response) => {
 						console.log('Error! No se ha podido subir la imagen');
@@ -43,11 +54,11 @@ function InfoUser(props) {
 	};
 
 	/***
-     * Funcion que permite subir la imagen al firestore
-     */
+	 * Funcion que permite subir la imagen al firestore
+	 */
 	const uploadImage = async (uri) => {
-        setLoadingText('Actualizando avatar')
-        setLoading(true)
+		setLoadingText('Actualizando avatar');
+		setLoading(true);
 		const response = await fetch(uri);
 		const blob = await response.blob();
 		//console.log(JSON.stringify(blob));
@@ -56,29 +67,34 @@ function InfoUser(props) {
 		var storageRef = storage.ref();
 		const ref = storageRef.child(`avatar/${uid}`);
 		return ref.put(blob);
-    };
-    
-    /***
-     * Funcion que permite actualizar la url de la imagen que es un parametro
-     * que tiene la variable userInfo
-     */
-    const updatePhotoUrl = () => {
-        var storage = firebase.storage();
-        var storageRef = storage.ref(`avatar/${uid}`);
-        storageRef.getDownloadURL()
-        .then( async (response) => {
-            const update = {
-                photoURL: response
-            }
-            await firebase.auth().currentUser.updateProfile(update)
-            //console.log('Imagen Actualizada')
-            setLoading(false)
-        })
-        .catch( (response) => {
-            toastRef.current.show('Ha surgido un error, no se ha podido actualizar el perfil')
-        })
+	};
 
-    }
+	/***
+	 * Funcion que permite actualizar la url de la imagen que es un parametro
+	 * que tiene la variable userInfo
+	 */
+
+	useEffect(() => {}, []);
+
+	const updatePhotoUrl = () => {
+		var storage = firebase.storage();
+		var storageRef = storage.ref(`avatar/${uid}`);
+		storageRef
+			.getDownloadURL()
+			.then(async (response) => {
+				const update = {
+					photoURL: response,
+				};
+				await firebase.auth().currentUser.updateProfile(update);
+
+				//console.log('Imagen Actualizada');
+				props.dispatch(actions.actualizarCliente({ ...cliente, photoURL: response }));
+				setLoading(false);
+			})
+			.catch((response) => {
+				toastRef.current.show('Ha surgido un error, no se ha podido actualizar el perfil');
+			});
+	};
 
 	return (
 		<View style={styles.viewUserInfo}>
@@ -87,19 +103,16 @@ function InfoUser(props) {
 				size="large"
 				showEditButton
 				containerStyle={styles.userInfoAvatar}
-				source={photoURL ? { url: photoURL } : require('../../../assets/img/avatar_cat.png')}
+				source={login.photoURL ? { uri: cliente.photoURL } : require('../../../assets/img/avatar_cat.png')}
 				onEditPress={changeAvatar}
 			/>
-
 			<View>
-				<Text style={styles.displayName}>{displayName ? displayName : 'Anónimo'}</Text>
-				<Text>{email ? email : 'Social login'}</Text>
+				<Text style={styles.displayName}>{cliente.name ? cliente.name : 'Anónimo'}</Text>
+				<Text>{cliente.email ? cliente.email : 'Social login'}</Text>
 			</View>
 		</View>
 	);
 }
-
-export default InfoUser;
 
 const styles = StyleSheet.create({
 	viewUserInfo: {
@@ -108,15 +121,22 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		backgroundColor: '#F2F2F2',
 		paddingTop: 30,
-		paddingBottom: 30
+		paddingBottom: 30,
 	},
 	userInfoAvatar: {
-		marginRight: 20
+		marginRight: 20,
 	},
 
 	displayName: {
 		fontWeight: 'bold',
 		paddingBottom: 10,
-		fontSize: 18
-	}
+		fontSize: 18,
+	},
 });
+
+const mapStateToProps = (state) => ({
+	cliente: state.cliente.cliente,
+	login: state.login.login,
+});
+
+export default connect(mapStateToProps)(InfoUser);

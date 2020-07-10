@@ -24,21 +24,21 @@ function NewsStack(props) {
 				component={NewsScreen}
 				options={{
 					title: 'Noticias',
-					headerLeft: () => <AvatarIcon />
+					headerLeft: () => <AvatarIcon />,
 				}}
 			/>
 			<Stack.Screen
 				name="CreateNews"
 				component={CreateNews}
 				options={{
-					title: 'Añadir Nueva Noticia'
+					title: 'Añadir Nueva Noticia',
 				}}
 			/>
 			<Stack.Screen
 				name="ViewNews"
 				component={NewsView}
 				options={{
-					headerRight: () => <DeleteRecord props={props} />
+					headerRight: () => <DeleteRecord props={props} />,
 				}}
 			/>
 
@@ -46,7 +46,7 @@ function NewsStack(props) {
 				name="CreateReviewNews"
 				component={CreateReview}
 				options={{
-					title: 'Nuevo Comentario'
+					title: 'Nuevo Comentario',
 				}}
 			/>
 		</Stack.Navigator>

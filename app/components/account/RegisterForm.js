@@ -7,22 +7,28 @@ import { size, isEmpty } from 'lodash';
 import * as firebase from 'firebase';
 import { useNavigation } from '@react-navigation/native';
 
+import { connect } from 'react-redux';
+import { actions } from '../../store';
+
 function defaultFormValue() {
 	return {
 		email: '',
 		password: '',
-		repeatPassword: ''
+		repeatPassword: '',
 	};
 }
 /**
- * Formulario de registro 
+ * Formulario de registro
  */
 function RegisterForm(props) {
 	const { toastRef } = props;
-	const [ showPassword, setShowPassword ] = useState(false);
-	const [ showRepitPassword, setshowRepitPassword ] = useState(false);
-	const [ formData, setformData ] = useState(defaultFormValue());
-	const [ loading, setloading ] = useState(false);
+
+	const { cliente, login } = props;
+
+	const [showPassword, setShowPassword] = useState(false);
+	const [showRepitPassword, setshowRepitPassword] = useState(false);
+	const [formData, setformData] = useState(defaultFormValue());
+	const [loading, setloading] = useState(false);
 	const navigation = useNavigation();
 	const onSubmit = () => {
 		//console.log(formData);
@@ -44,6 +50,8 @@ function RegisterForm(props) {
 					.auth()
 					.createUserWithEmailAndPassword(email, password)
 					.then((response) => {
+						props.dispatch(actions.actualizarCliente(response.user));
+						//console.log('RegisterForm', response);
 						setloading(false);
 						navigation.navigate('Profile');
 					})
@@ -58,7 +66,7 @@ function RegisterForm(props) {
 	const onChange = (even, type) => {
 		setformData({
 			...formData,
-			[type]: even.nativeEvent.text
+			[type]: even.nativeEvent.text,
 		});
 	};
 	return (
@@ -124,26 +132,31 @@ function RegisterForm(props) {
 	);
 }
 
-export default RegisterForm;
-
 const styles = StyleSheet.create({
 	formContainer: {
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
-		marginTop: 30
+		marginTop: 30,
 	},
 	iconRight: {},
 	inputForm: {
 		width: '100%',
-		marginTop: 20
+		marginTop: 20,
 	},
 	btnContainerRegister: {
 		marginTop: 20,
 		width: '90%',
-		alignItems: 'center'
+		alignItems: 'center',
 	},
 	btnRegister: {
-		backgroundColor: '#1A89E7'
-	}
+		backgroundColor: '#1A89E7',
+	},
 });
+
+const mapStateToProps = (state) => ({
+	cliente: state.cliente.cliente,
+	login: state.login.login,
+});
+
+export default connect(mapStateToProps)(RegisterForm);

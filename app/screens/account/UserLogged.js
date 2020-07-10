@@ -13,23 +13,23 @@ import firebase from 'firebase/app';
 import { useNavigation } from '@react-navigation/native';
 
 function UserLogged() {
-	const [ loading, setLoading ] = useState(false);
-	const [ loadingText, setLoadingText ] = useState('');
-	const [ userInfo, setUserInfo ] = useState({
+	const [loading, setLoading] = useState(false);
+	const [loadingText, setLoadingText] = useState('');
+	const [userInfo, setUserInfo] = useState({
 		displayName: '',
-		email: ''
+		email: '',
 	});
 	const toastRef = useRef();
 	const navigation = useNavigation();
-	const [ elements, setElements ] = useState('');
-	const [ modalVisible, setModalVisible ] = useState(false);
+	const [elements, setElements] = useState('');
+	const [modalVisible, setModalVisible] = useState(false);
 
-	const [ petCenter, setpetCenter ] = useState(false);
+	const [petCenter, setpetCenter] = useState(false);
 
 	//variable que nos sirve para actualizar la informacion del usuario
-	const [ reloadUserInfo, setReloadUserInfo ] = useState(false);
+	const [reloadUserInfo, setReloadUserInfo] = useState(false);
 
-	const [datUserInfo, setDatUserInfo] = useState('')
+	const [datUserInfo, setDatUserInfo] = useState('');
 
 	//    //cargamos los datos del usuario
 	//    useEffect(() => {
@@ -45,7 +45,6 @@ function UserLogged() {
 
 	//cargamos los datos del usuario
 	useEffect(() => {
-		
 		(async () => {
 			const user = await firebase.auth().currentUser;
 			console.log(user.uid);
@@ -63,10 +62,12 @@ function UserLogged() {
 		setReloadUserInfo(false);
 	}, [reloadUserInfo]);
 
+	console.log('UserLogged modalVisible', modalVisible);
+
 	return (
-		
-			<View style={styles.viewUserInfo}>
-				{//se valida que la varable userInfo sea diferente de {} o de null
+		<View style={styles.viewUserInfo}>
+			{
+				//se valida que la varable userInfo sea diferente de {} o de null
 				//se pasan el setLoading para poder actualizar el avatar el tiempo real
 				//como tambien para reutilizarlo
 				userInfo && (
@@ -76,35 +77,37 @@ function UserLogged() {
 						setLoading={setLoading}
 						setLoadingText={setLoadingText}
 					/>
-				)}
+				)
+			}
 
-				<AccountOptions
-					userInfo={userInfo}
-					toastRef={toastRef}
-					setReloadUserInfo={setReloadUserInfo}
-					
-					petCenter={petCenter}
-					elements={elements}
-					datUserInfo={datUserInfo}
-					setDatUserInfo={setDatUserInfo}
-				/>
-				<Button
-					title="Cerrar Sesión"
-					buttonStyle={styles.btnCloseSession}
-					titleStyle={styles.btnCloseSessionText}
-					onPress={() => firebase.auth().signOut()}
-				/>
-				<Toast ref={toastRef} position="center" opacity={0.9} />
-				<Loading text={loadingText} isVisible={loading} />
+			<AccountOptions
+				userInfo={userInfo}
+				toastRef={toastRef}
+				setReloadUserInfo={setReloadUserInfo}
+				reloadUserInfo={reloadUserInfo}
+				petCenter={petCenter}
+				elements={elements}
+				datUserInfo={datUserInfo}
+				setDatUserInfo={setDatUserInfo}
+			/>
+			<Button
+				title="Cerrar Sesión"
+				buttonStyle={styles.btnCloseSession}
+				titleStyle={styles.btnCloseSessionText}
+				onPress={() => firebase.auth().signOut()}
+			/>
+			<Toast ref={toastRef} position="center" opacity={0.9} />
+			<Loading text={loadingText} isVisible={loading} />
 
-				{/***
-			 * Modal que sirve para registrar el tipo de usuario
-			 */
+			{
+				/***
+				 * Modal que sirve para registrar el tipo de usuario
+				 */
 				modalVisible && (
 					<UserData modalVisible={modalVisible} setModalVisible={setModalVisible} userInfo={userInfo} />
-				)}
-			</View>
-		
+				)
+			}
+		</View>
 	);
 }
 
@@ -113,7 +116,7 @@ export default UserLogged;
 const styles = StyleSheet.create({
 	viewUserInfo: {
 		minHeight: '100%',
-		backgroundColor: '#f2f2f2'
+		backgroundColor: '#f2f2f2',
 	},
 	btnCloseSession: {
 		marginTop: 30,
@@ -123,9 +126,9 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 1,
 		borderBottomColor: '#E3E3E3',
 		paddingTop: 10,
-		paddingBottom: 10
+		paddingBottom: 10,
 	},
 	btnCloseSessionText: {
-		color: '#1A89E7'
-	}
+		color: '#1A89E7',
+	},
 });
