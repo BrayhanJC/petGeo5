@@ -11,50 +11,18 @@ import MenuTab from '../tabNavigator/MenuTab';
 import PetFoundDrawer from './PetFoundDrawer';
 
 import firebase from 'firebase/app';
-import { FireSQL } from 'firesql';
 
 import { connect } from 'react-redux';
 import { actions } from '../../store';
 import { obtenerUsuarios } from '../../utils/SaveRecord';
-import Menu from './Menu';
 
-const fireSQL = new FireSQL(firebase.firestore(), { includeId: 'id' });
+
+
 
 const Drawer = createDrawerNavigator();
 
-const INFO_USER = '@info_user:key';
-// function CustomDrawerContent(props) {
-//   return (
-//     <DrawerContentScrollView {...props}>
-//       <DrawerItemList {...props} />
-//       <DrawerItem
-//         label="Close drawerdsf"
-//         onPress={() => props.navigation.dispatch(DrawerActions.closeDrawer())}
-//       />
-//       <DrawerItem
-//         label="Toggle drawer"
-//         onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
-//       />
-//     </DrawerContentScrollView>
-//   );
-// }
-// function NotificationsScreen({ navigation }) {
-//   return (
-//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//       <Button onPress={() => navigation.goBack()} title="Eres el amor de mi vida" />
-//     </View>
-//   );
-// }
-function LogoTitle() {
-	//const { title } = props;
-	return (
-		<View>
-			<Image style={{ width: 50, height: 50, marginTop: -10 }} source={require('../../../assets/img/icon.png')} />
-		</View>
-	);
-}
-
 function NavigatorDrawer(props) {
+
 	const { cliente, login } = props;
 
 	const [user, setUser] = useState(null);
@@ -62,18 +30,23 @@ function NavigatorDrawer(props) {
 	const [elements, setElements] = useState('');
 	const [modalVisible, setModalVisible] = useState(false);
 	const [userType, setUserType] = useState('');
+	const [userFirebase, setUserFirebase] = useState('')
 	var typeUser = '';
 
 	useEffect(() => {
 		firebase.auth().onAuthStateChanged((userInfo) => {
+			setUserFirebase(userInfo)
 			onObtenerUsuario(userInfo);
 		});
 	}, []);
 
+	/**
+	 * Funcion que permite obtener el usuario actual
+	 * @param { variable que contiene la data del usuario de firebase} userInfo 
+	 */
 	const onObtenerUsuario = async (userInfo) => {
 		await obtenerUsuarios(userInfo?.uid, (r) => {
 			props.dispatch(actions.actualizarLogin(userInfo));
-
 			r.forEach((doc) => {
 				setUser(doc.data());
 				props.dispatch(actions.actualizarCliente(doc.data()));
@@ -107,14 +80,14 @@ function NavigatorDrawer(props) {
 				name="ProfileDrawer"
 				component={MyAccountDrawer}
 				options={{
-					title: user ? 'Perfil' : 'Iniciar Sesión',
+					title: userFirebase ? 'Perfil' : 'Iniciar Sesión',
 					drawerIcon: ({ color, size }) => (
 						<MaterialCommunityIcons name="account" color="#1A89E7" size={24} />
 					),
 				}}
 			/>
 
-			{isUser && (
+			{(isUser) && (
 				<Drawer.Screen
 					name="PetDrawer"
 					component={PetDrawer}

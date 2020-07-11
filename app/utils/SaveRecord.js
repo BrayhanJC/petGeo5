@@ -17,7 +17,8 @@ export const saveCollection = (
 	setIsLoading,
 	msgError
 ) => {
-	db.collection(collectionName)
+	db
+		.collection(collectionName)
 		.add(collectionData)
 		.then(() => {
 			setIsLoading(false);
@@ -38,27 +39,21 @@ export const saveCollection = (
  * @param { contiene el elemento inicial en el cual se va a empezar a listar} setStartElement
  */
 export const listRecords = (collectionName, setTotalElements, setElements, setStartElement) => {
-	db.collection(collectionName)
-		.get()
-		.then((snap) => {
-			setTotalElements(snap.size);
-		});
+	db.collection(collectionName).get().then((snap) => {
+		setTotalElements(snap.size);
+	});
 
 	const resultElements = [];
 
-	db.collection(collectionName)
-		.orderBy('create_date', 'desc')
-		.limit(limitRecords)
-		.get()
-		.then((response) => {
-			setStartElement(response.docs[response.docs.length - 1]);
-			response.forEach((doc) => {
-				const element = doc.data();
-				element.id = doc.id;
-				resultElements.push(element);
-			});
-			setElements(resultElements);
+	db.collection(collectionName).orderBy('create_date', 'desc').limit(limitRecords).get().then((response) => {
+		setStartElement(response.docs[response.docs.length - 1]);
+		response.forEach((doc) => {
+			const element = doc.data();
+			element.id = doc.id;
+			resultElements.push(element);
 		});
+		setElements(resultElements);
+	});
 };
 
 /**
@@ -71,16 +66,14 @@ export const listRecords = (collectionName, setTotalElements, setElements, setSt
  */
 export const listRecordsById = (collectionName, create_uid, setTotalElements, setElements, setStartElement) => {
 	if (create_uid) {
-		db.collection(collectionName)
-			.where('create_uid', '==', create_uid)
-			.get()
-			.then((snap) => {
-				setTotalElements(snap.size);
-			});
+		db.collection(collectionName).where('create_uid', '==', create_uid).get().then((snap) => {
+			setTotalElements(snap.size);
+		});
 
 		const resultElements = [];
 
-		db.collection(collectionName)
+		db
+			.collection(collectionName)
 			.limit(limitRecords)
 			.where('create_uid', '==', create_uid)
 			.orderBy('create_date', 'desc')
@@ -108,7 +101,8 @@ export const handleLoadMore = (
 ) => {
 	const resultElements = [];
 	element.length < totalElement && setIsLoading(true);
-	db.collection(collectionName)
+	db
+		.collection(collectionName)
 		.orderBy('create_date', 'desc')
 		.startAfter(startElement.data().create_date)
 		.limit(limitRecords)
@@ -124,7 +118,7 @@ export const handleLoadMore = (
 				elementDoc.id = doc.id;
 				resultElements.push(elementDoc);
 			});
-			setElements([...element, ...resultElements]);
+			setElements([ ...element, ...resultElements ]);
 		});
 };
 
@@ -139,40 +133,42 @@ export const getInfoByUser = async (collectionName, user_id, setElements, setMod
 	// console.log(collectionName);
 	// console.log(user_id);
 	const resultElements = [];
-	await db
-		.collection(collectionName)
-		.where('create_uid', '==', user_id)
-		.get()
-		.then((response) => {
-			//console.log('sisas aqui')
-			if (response.doc !== undefined) {
-				// console.log('como asi')
-				// console.log(response.doc)
-				setModalVisible(false);
-			} else {
-				setModalVisible(true);
-			}
-
-			response.forEach((doc) => {
-				const element = doc.data();
-				element.id = doc.id;
-				//console.log(element)
-				resultElements.push(element);
-				//console.log('esto es lo que obtuvimos de la pinche consulta ' + element);
-				if (size(element) > 0) {
+	if (user_id) {
+		await db
+			.collection(collectionName)
+			.where('create_uid', '==', user_id)
+			.get()
+			.then((response) => {
+				//console.log('sisas aqui')
+				if (response.doc !== undefined) {
+					// console.log('como asi')
+					// console.log(response.doc)
 					setModalVisible(false);
 				} else {
 					setModalVisible(true);
 				}
+
+				response.forEach((doc) => {
+					const element = doc.data();
+					element.id = doc.id;
+					//console.log(element)
+					resultElements.push(element);
+					//console.log('esto es lo que obtuvimos de la pinche consulta ' + element);
+					if (size(element) > 0) {
+						setModalVisible(false);
+					} else {
+						setModalVisible(true);
+					}
+				});
+
+				//console.log('como que no '+ resultElements)
+
+				setElements(resultElements);
+			})
+			.catch((response) => {
+				setModalVisible(false);
 			});
-
-			//console.log('como que no '+ resultElements)
-
-			setElements(resultElements);
-		})
-		.catch((response) => {
-			setModalVisible(false);
-		});
+	}
 };
 
 /**
@@ -183,7 +179,8 @@ export const getInfoByUser = async (collectionName, user_id, setElements, setMod
  * @param {identifica si el modal se va a mostrar o no} modalVisible
  */
 export const saveUserInfo = (data, collectionName, setModalVisible) => {
-	db.collection(collectionName)
+	db
+		.collection(collectionName)
 		.add(data)
 		.then(() => {
 			setModalVisible(false);
@@ -202,7 +199,8 @@ export const saveUserInfo = (data, collectionName, setModalVisible) => {
  * @param { destino despues de que se guarde el registro} navigateTo
  */
 export const saveCenter = (data, collectionName) => {
-	db.collection(collectionName)
+	db
+		.collection(collectionName)
 		.add(data)
 		.then(() => {
 			//navigation.navigate(navigateTo);
@@ -221,20 +219,22 @@ export const saveCenter = (data, collectionName) => {
  */
 export const getRecord = async (collectionName, user_id, setElements) => {
 	const resultElements = [];
-	await db
-		.collection(collectionName)
-		.where('create_uid', '==', user_id)
-		.get()
-		.then((response) => {
-			response.forEach((doc) => {
-				const element = doc.data();
-				element.id = doc.id;
-				resultElements.push(element);
-			});
+	if (user_id) {
+		await db
+			.collection(collectionName)
+			.where('create_uid', '==', user_id)
+			.get()
+			.then((response) => {
+				response.forEach((doc) => {
+					const element = doc.data();
+					element.id = doc.id;
+					resultElements.push(element);
+				});
 
-			setElements(resultElements);
-		})
-		.catch((response) => {});
+				setElements(resultElements);
+			})
+			.catch((response) => {});
+	}
 };
 
 /**
@@ -253,7 +253,7 @@ export const deleteRecordBD = async (collectionName, record_id, navigation) => {
 				console.log('Se ha eliminado el registro con exito');
 				navigation.goBack();
 			})
-			.catch(function (error) {
+			.catch(function(error) {
 				console.log('Ha Ocurrido un error al eliminar');
 			});
 	}
@@ -265,25 +265,28 @@ export const deleteRecordBD = async (collectionName, record_id, navigation) => {
  * @param { id del usario} user_id
  */
 export const updateInfoUserCenter = async (collectionName, user_id, data) => {
-	await db
-		.collection(collectionName)
-		.where('create_uid', '==', user_id)
-		.get()
-		.then((response) => {
-			response.forEach((doc) => {
-				const element = doc.data();
-				element.id = doc.id;
+	if (user_id) {
+		await db
+			.collection(collectionName)
+			.where('create_uid', '==', user_id)
+			.get()
+			.then((response) => {
+				response.forEach((doc) => {
+					const element = doc.data();
+					element.id = doc.id;
 
-				db.collection(collectionName)
-					.doc(element.id)
-					.update(data)
-					.then((response) => {
-						console.log('actualizado');
-					})
-					.catch((response) => {});
-			});
-		})
-		.catch((response) => {});
+					db
+						.collection(collectionName)
+						.doc(element.id)
+						.update(data)
+						.then((response) => {
+							console.log('actualizado');
+						})
+						.catch((response) => {});
+				});
+			})
+			.catch((response) => {});
+	}
 };
 
 /**
@@ -293,34 +296,38 @@ export const updateInfoUserCenter = async (collectionName, user_id, data) => {
  */
 
 export const isCenter = async (user_id, data) => {
-	await db
-		.collection('userInfo')
-		.where('create_uid', '==', user_id)
-		.get()
-		.then((response) => {
-			response.forEach((doc) => {
-				const element = doc.data();
-				element.id = doc.id;
+	if (user_id) {
+		await db
+			.collection('userInfo')
+			.where('create_uid', '==', user_id)
+			.get()
+			.then((response) => {
+				response.forEach((doc) => {
+					const element = doc.data();
+					element.id = doc.id;
 
-				if (element.userType == 'veterinary' || element.userType == 'fundation') {
-					data(true);
-				} else {
-					data(false);
-				}
-			});
-		})
-		.catch((response) => {});
+					if (element.userType == 'veterinary' || element.userType == 'fundation') {
+						data(true);
+					} else {
+						data(false);
+					}
+				});
+			})
+			.catch((response) => {});
+	}
 };
 
 export const obtenerUsuarios = async (user_id, funcion) => {
-	await db
-		.collection('userInfo')
-		.where('create_uid', '==', user_id)
-		.get()
-		.then((response) => {
-			funcion(response);
-		})
-		.catch((response) => {
-			console.log('obtenerUsuarios error', response);
-		});
+	if (user_id) {
+		await db
+			.collection('userInfo')
+			.where('create_uid', '==', user_id)
+			.get()
+			.then((response) => {
+				funcion(response);
+			})
+			.catch((response) => {
+				console.log('obtenerUsuarios error', response);
+			});
+	}
 };

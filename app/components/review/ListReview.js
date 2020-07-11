@@ -22,7 +22,8 @@ const ListReview = (props) => {
 
 	useFocusEffect(
 		useCallback(() => {
-			db
+			if (idItem){
+				db
 				.collection('reviews')
 				.where('idItem', '==', idItem)
 				.get()
@@ -38,7 +39,8 @@ const ListReview = (props) => {
 					setReviews(resultReview);
 					//console.log(reviews);
 				})
-				.catch();
+				.catch();				
+			}
 		}, [])
 	);
 

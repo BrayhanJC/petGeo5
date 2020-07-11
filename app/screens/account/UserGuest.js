@@ -11,8 +11,8 @@ function UserGuest() {
 
 	return (
 		<ScrollView style={styles.viewBody} centerContent={true}>
-			<Image source={require('../../../assets/img/user-guest.jpg')} style={styles.image} resizeMode="contain" />
-			<Text style={styles.title}>Consulta tu perfil en geoPet5</Text>
+			<Image source={require('../../../assets/img/user_guest.png')} style={styles.image} resizeMode="contain" />
+			<Text style={styles.title}>Consulta tu perfil en petGeo</Text>
 			<Text style={styles.description}>
 				¿Como encontrarías tu mascotas si es extraviada? Buscala y administra los datos de tu mascota
 			</Text>
@@ -37,33 +37,33 @@ export default UserGuest;
 const styles = StyleSheet.create({
 	viewBody: {
 		marginLeft: 30,
-		marginRight: 30,
+		marginRight: 30
 	},
 	image: {
 		height: 300,
 		width: '100%',
-		marginBottom: 40,
+		marginBottom: 40
 	},
 	title: {
 		fontWeight: 'bold',
 		fontSize: 20,
 		marginBottom: 10,
 		textAlign: 'center',
-		color: '#1A89E7',
+		color: '#1A89E7'
 	},
 	description: {
 		textAlign: 'center',
-		marginBottom: 20,
+		marginBottom: 20
 	},
 	viewBtn: {
 		flex: 1,
-		alignItems: 'center',
+		alignItems: 'center'
 	},
 	btnStyle: {
 		borderRadius: 30,
-		backgroundColor: '#1A89E7',
+		backgroundColor: '#1A89E7'
 	},
 	btnContainer: {
-		width: '70%',
-	},
+		width: '70%'
+	}
 });

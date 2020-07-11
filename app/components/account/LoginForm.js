@@ -21,7 +21,7 @@ function defaultFormValue() {
 		password: '',
 	};
 }
-const INFO_USER = '@info_user:key';
+
 function LoginForm(props) {
 	const navigation = useNavigation();
 	const { toastRef } = props;
@@ -53,7 +53,7 @@ function LoginForm(props) {
 			}
 		}
 	};
-	//ktktmurillo@hotmail.com
+
 
 	const onChange = (even, type) => {
 		setformData({
@@ -106,11 +106,11 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
-		marginTop: 30,
+		marginTop: 1,
 	},
 	inputForm: {
 		width: '100%',
-		marginTop: 20,
+		marginTop: 15,
 		borderRadius: 30,
 		borderWidth: 2,
 		borderColor: '#C2C2C2',

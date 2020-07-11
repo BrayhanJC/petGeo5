@@ -70,7 +70,7 @@ function RegisterForm(props) {
 		});
 	};
 	return (
-		<View style={styles.formContainer}>
+		<View >
 			<Input
 				label="Correo electrónico"
 				placeholder="Correo Electrónico"
@@ -124,6 +124,7 @@ function RegisterForm(props) {
 				title="Registrarse"
 				containerStyle={styles.btnContainerRegister}
 				buttonStyle={styles.btnRegister}
+				style={{ width:'100%'}}
 				onPress={onSubmit}
 			/>
 
@@ -146,11 +147,16 @@ const styles = StyleSheet.create({
 	},
 	btnContainerRegister: {
 		marginTop: 20,
-		width: '90%',
 		alignItems: 'center',
+		justifyContent: 'center',
+		width: '100%',
+		
 	},
 	btnRegister: {
+		justifyContent: 'center',
 		backgroundColor: '#1A89E7',
+		borderRadius: 50
+		
 	},
 });
 
