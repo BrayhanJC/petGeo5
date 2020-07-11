@@ -20,7 +20,7 @@ import { useNavigation } from '@react-navigation/native';
 import { getInfoByUser } from '../../utils/SaveRecord';
 
 import UserData from '../account/UserData';
-
+import FilterMap from './FilterMap';
 /***
  * Allows to see all the news of the veterinary centers and animal foundations
  */
@@ -39,7 +39,12 @@ function LocalizationMap(props) {
 	const resultElements = [];
 	const collections = [ 'comedogs', 'missingPets' ];
 
-	const [ typeFilter, setTypeFilter ] = useState(0);
+	//estados para manejar el filtro de los botones
+	const [ filterGreen, setFilterGreen ] = useState(true);
+	const [ filterRed, setFilterRed ] = useState(true);
+	const [ filterOrange, setFilterOrange ] = useState(true);
+
+	const [reload, setReload] = useState(false)
 
 	useEffect(() => {
 		(async () => {
@@ -73,17 +78,24 @@ function LocalizationMap(props) {
 
 	useFocusEffect(
 		useCallback(() => {
-			//for (let index = 0; index < collections.length; index++) {
-			ListMap('comedogs', setResult, resultElements);
-			ListMap('missingPets', setResult, resultElements);
-			//}
+			
+			if (filterOrange) {
+				ListMap('comedogs', setResult, resultElements);
+			}
+			if (filterGreen) {
+				ListMap('petCenters', setResult, resultElements);
+			}
+			if (filterRed) {
+				ListMap('missingPets', setResult, resultElements);
+			}
 
 			if (user) {
 				if (user.uid) {
 					getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
 				}
 			}
-		}, [])
+			setReload(false)
+		}, [reload])
 	);
 
 	//console.log(result[0]);
@@ -94,6 +106,9 @@ function LocalizationMap(props) {
 		}
 		if (collection === 'missingPets') {
 			return 'red';
+		}
+		if (collection === 'petCenters') {
+			return '#84CD58';
 		}
 	};
 	const goElement = (view, id, name) => {
@@ -184,7 +199,15 @@ function LocalizationMap(props) {
 				) : (
 					<Text />
 				)}
-				<FilterMap />
+				<FilterMap
+					filterGreen={filterGreen}
+					setFilterGreen={setFilterGreen}
+					filterOrange={filterOrange}
+					setFilterOrange={setFilterOrange}
+					filterRed={filterRed}
+					setFilterRed={setFilterRed}
+					setReload={setReload}
+				/>
 			</View>
 		</View>
 	);
@@ -212,92 +235,3 @@ const styles = StyleSheet.create({
 		padding: 5
 	}
 });
-
-function FilterMap(props) {
-	//const { } = props
-	const buttonFilter = [ 'Centros', 'Comedogs', 'Extraviados' ];
-	return (
-		<View style={{ position: 'absolute' }}>
-			<Button
-				title="Centros"
-				containerStyle={{
-					marginTop: 20,
-					width: '100%',
-					marginLeft: 10,
-					marginRight:10
-				}}
-				buttonStyle={{
-					backgroundColor: '#84CD58',
-					borderRadius: 20
-				}}
-				onPress={() => {
-					console.log('hola');
-				}}
-				//loading={isLoading}
-			/>
-			<Button
-				title="Comedogs"
-				containerStyle={{
-					marginTop: 20,
-					width: '100%',
-					marginLeft: 10,
-					marginRight:10
-				}}
-				buttonStyle={{
-					backgroundColor: 'orange',
-					borderRadius: 20
-				}}
-				onPress={() => {
-					console.log('hola');
-				}}
-				//loading={isLoading}
-			/>
-			<Button
-				title="Extraviados"
-				containerStyle={{
-					marginTop: 20,
-					width: '100%',
-					marginLeft: 10,
-					marginRight:10
-				}}
-				buttonStyle={{
-					backgroundColor: 'red',
-					borderRadius: 20
-				}}
-				onPress={() => {
-					console.log('hola');
-				}}
-				//loading={isLoading}
-			/>
-		</View>
-	);
-}
-/***
- * 
- * 
- * 
- * 		<View style={{
-			
-			flex: 1,
-		  }}>
-			{location && (
-				<MapView style={{
-					
-					flex: 1,
-				  }} initialRegion={location} showsUserLocation={true}>
-					<View
-						
-					>
-						
-						<Button style={{ borderWidth: 2, width:'30%', alignItems:'right',justifyContent:'right'}} title="Info" onPress={() => console.log("This is not fired")}/>
-					 
-					
-					
-					 <ButtonGroup
-					 onPress={(even) => setUserType(even)}
-					 selectedIndex={userType}
-					 buttons={buttons}
-					 containerStyle={{ borderWidth: 2, width:'80%'}}
-				 />		
-		 </View>
- */
