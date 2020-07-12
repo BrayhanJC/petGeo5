@@ -84,6 +84,7 @@ function Comedogs(props) {
 						navigation={navigation}
 						navigator="ViewComedog"
 						user={user}
+						collectionName="comedogs"
 					/>
 				</View>
 			) : (
@@ -97,6 +98,7 @@ function Comedogs(props) {
 					navigation={navigation}
 					navigator="ViewComedog"
 					user={user}
+					collectionName="comedogs"
 				/>
 			)}
 

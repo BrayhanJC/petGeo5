@@ -77,6 +77,7 @@ function MissingPets(props) {
 						isLoading={isLoading}
 						navigation={navigation}
 						navigator="ViewMissingPet"
+						collectionName="missingPets"
 					/>
 				</View>
 			) : (
@@ -89,6 +90,7 @@ function MissingPets(props) {
 					isLoading={isLoading}
 					navigation={navigation}
 					navigator="ViewMissingPet"
+					collectionName="missingPets"
 				/>
 			)}
 

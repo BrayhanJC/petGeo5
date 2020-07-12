@@ -9,6 +9,7 @@ import PetsFoundScreen from '../../screens/petFound/PetsFound';
 import CreatePet from '../../screens/pet/CreatePet';
 import AvatarIcon from '../../components/AvatarIcon';
 import PetView from '../../screens/pet/PetView';
+import PetFoundView from '../../screens/petFound/PetFoundView'
 const Stack = createStackNavigator();
 import DeleteRecord from '../../components/UpdateRecords/DeleteRecord';
 
@@ -35,20 +36,8 @@ function PetFoundDrawer(props) {
 					),
 				}}
 			/>
-			<Stack.Screen
-				name="CreatePet"
-				component={CreatePet}
-				options={{
-					title: 'Añadir Mascota',
-				}}
-			/>
-			<Stack.Screen
-				name="ViewPet"
-				component={PetView}
-				options={{
-					headerRight: () => <DeleteRecord props={props} />,
-				}}
-			/>
+
+			<Stack.Screen name="petFoundView" component={PetFoundView}/>
 		</Stack.Navigator>
 	);
 }

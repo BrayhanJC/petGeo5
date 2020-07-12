@@ -47,6 +47,7 @@ function CreateComedogForm(props) {
 						image: response,
 						create_date: new Date(),
 						create_uid: firebase.auth().currentUser.uid,
+						create_name: firebase.auth().currentUser.displayName,
 						phone,
 						quantityVoting: 0,
 						rating: 0,

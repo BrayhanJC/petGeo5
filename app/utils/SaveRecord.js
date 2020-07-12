@@ -294,7 +294,6 @@ export const updateInfoUserCenter = async (collectionName, user_id, data) => {
  * @param { id del usuario } user_id
  * @param { almacena el valor de la respuesta } data
  */
-
 export const isCenter = async (user_id, data) => {
 	if (user_id) {
 		await db
@@ -330,4 +329,23 @@ export const obtenerUsuarios = async (user_id, funcion) => {
 				console.log('obtenerUsuarios error', response);
 			});
 	}
+};
+
+
+
+/**
+ * Funcion que permite crear el registro de una mascota encontrada
+ * @param { contiene la informacion necesaria para la creacion} collectionData 
+ * @param { permite regresar al menu principal} navigation 
+ */
+export const createPetFound = (collectionData, navigation) => {
+	db
+		.collection('petsFound')
+		.add(collectionData)
+		.then(() => {
+			navigation.goBack();
+		})
+		.catch((response) => {
+			console.log('error al crear');
+		});
 };

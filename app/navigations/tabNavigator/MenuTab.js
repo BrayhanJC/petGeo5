@@ -48,7 +48,7 @@ function screenOptions(route, color) {
  * Create stack nav pets center
  * show all pets controls register by user
  */
-function MenuTabs() {
+function MenuTabs(props) {
 	const navigation = useNavigation();
 
 	return (
@@ -57,17 +57,17 @@ function MenuTabs() {
 			style={{ backgroundColor: 'tomato' }}
 			tabBarOptions={{
 				activeTintColor: '#1A89E7',
-				inactiveTintColor: '#BED9EF',
+				inactiveTintColor: '#BED9EF'
 			}}
 			screenOptions={({ route }) => ({
-				tabBarIcon: ({ color }) => screenOptions(route, color),
+				tabBarIcon: ({ color }) => screenOptions(route, color)
 			})}
 		>
 			<Tab.Screen
 				name="HomeTab"
 				component={NewsStack}
 				options={{
-					tabBarLabel: 'Inicio',
+					tabBarLabel: 'Inicio'
 				}}
 			/>
 
@@ -75,7 +75,7 @@ function MenuTabs() {
 				name="centerVeterinaryTab"
 				component={PetCenterStack}
 				options={{
-					tabBarLabel: 'Centros',
+					tabBarLabel: 'Centros'
 				}}
 			/>
 
@@ -83,7 +83,7 @@ function MenuTabs() {
 				name="ComedogsTab"
 				component={ComedgosStack}
 				options={{
-					tabBarLabel: 'Comedogs',
+					tabBarLabel: 'Comedogs'
 				}}
 			/>
 
@@ -91,7 +91,7 @@ function MenuTabs() {
 				name="MissingPetsTab"
 				component={MissingPetsStack}
 				options={{
-					tabBarLabel: 'Extraviados',
+					tabBarLabel: 'Extraviados'
 				}}
 			/>
 
@@ -99,43 +99,9 @@ function MenuTabs() {
 				name="LocalizationMapTab"
 				component={LocalizationMapStack}
 				options={{
-					tabBarLabel: 'Mapa',
+					tabBarLabel: 'Mapa'
 				}}
 			/>
-
-			{/* 
-			<Tab.Screen
-				name="controlsTab"
-				component={PetControlStack}
-				options={{
-					tabBarLabel: 'Controles',
-					tabBarIcon: ({ color, size }) => (
-						<MaterialCommunityIcons name="stethoscope" color={color} size={size} />
-					)
-				}}
-			/>
-
-			<Tab.Screen
-				name="profile"
-				component={MyAccountStack}
-				options={{
-					tabBarLabel: 'Perfil',
-					tabBarIcon: ({ color, size }) => (
-						<MaterialCommunityIcons name="home-outline" color={color} size={size} />
-					)
-				}}
-			/>
-
-			<Tab.Screen
-				name="settings"
-				component={NavigationDrawer}
-				options={{
-					tabBarLabel: 'fdfgd',
-					tabBarIcon: ({ color, size }) => (
-						<MaterialCommunityIcons name="view-list" color={color} size={size} />
-					)
-				}}
-			> */}
 		</Tab.Navigator>
 	);
 }

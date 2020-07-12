@@ -7,7 +7,6 @@ import { styleImageMain } from '../../src/css/ImageMain';
 import UploadImage from '../formMain/UploadImage';
 import ImageMain from '../formMain/ImageMain';
 
-
 import { stylePetForm } from '../../src/css/PetForm';
 import { isEmpty } from 'lodash';
 import PetForm from '../pet/PetForm';
@@ -17,8 +16,7 @@ const widhtScreen = Dimensions.get('window').width;
 function CreatePetForm(props) {
 	const { toastRef, setIsLoading, navigation, userInfo } = props;
 	const [ loading, setloading ] = useState(false);
-	
-	
+
 	const [ valueTypePet, setValueTypePet ] = useState('');
 	const [ valueSex, setValueSex ] = useState('');
 	const [ namePet, setNamePet ] = useState('');
@@ -39,7 +37,6 @@ function CreatePetForm(props) {
 		} else if (!valueRaza) {
 			toastRef.current.show('La Raza de la Mascota es requerida', 2000);
 		} else {
-
 			setIsLoading(true);
 			uploadImageStorage(imageSelected, 'pets')
 				.then((response) => {
@@ -51,7 +48,9 @@ function CreatePetForm(props) {
 						date_birth: valueDate.date,
 						image_id: response,
 						create_uid: firebase.auth().currentUser.uid,
-						create_date: new Date()
+						create_date: new Date(),
+						description,
+
 					};
 
 					saveCollection(

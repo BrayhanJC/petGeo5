@@ -19,7 +19,7 @@ import FooterList from './FooterList';
 import RendenderItemsPet from './RenderItemsPet';
 import RenderItemsPetControl from './RenderItemsPetControl';
 import RenderItemsPetDoctor from './RenderItemsPetDoctor';
-import { USER_FACING_NOTIFICATIONS } from 'expo-permissions';
+//import { USER_FACING_NOTIFICATIONS } from 'expo-permissions';
 
 function ListRecords(props) {
 	const navigation = useNavigation();

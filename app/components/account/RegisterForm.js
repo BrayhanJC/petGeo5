@@ -153,6 +153,7 @@ const styles = StyleSheet.create({
 		
 	},
 	btnRegister: {
+
 		justifyContent: 'center',
 		backgroundColor: '#1A89E7',
 		borderRadius: 50

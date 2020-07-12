@@ -27,6 +27,7 @@ function CreateNewsForm(props) {
 
 	const addNews = () => {
 		setIsLoading(false);
+		console.log(firebase.auth().currentUser)
 		if (!title || !address || !description) {
 			toastRef.current.show('Todos los campos del formulario son obligatorios');
 		} else if (size(imageSelected) === 0) {
@@ -37,9 +38,8 @@ function CreateNewsForm(props) {
 				3000
 			);
 		} else {
-      setIsLoading(true);
+			setIsLoading(true);
 			uploadImageStorage(imageSelected, 'news').then((response) => {
-				
 				saveCollection(
 					{
 						name: title,

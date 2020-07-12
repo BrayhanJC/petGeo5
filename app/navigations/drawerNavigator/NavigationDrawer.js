@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, Image, Button, AsyncStorage } from 'react-native';
+import { Alert, View, Text, Image, Button, AsyncStorage } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 
@@ -87,7 +87,7 @@ function NavigatorDrawer(props) {
 				}}
 			/>
 
-			{(isUser) && (
+			{(isUser && userFirebase) && (
 				<Drawer.Screen
 					name="PetDrawer"
 					component={PetDrawer}
@@ -99,7 +99,7 @@ function NavigatorDrawer(props) {
 					}}
 				/>
 			)}
-			{isUser && (
+			{(isUser && userFirebase) && (
 				<Drawer.Screen
 					name="PetControlDrawer"
 					component={PetControlDrawer}
@@ -120,7 +120,7 @@ function NavigatorDrawer(props) {
 					drawerIcon: ({ color, size }) => <MaterialCommunityIcons name="rocket" color="#1A89E7" size={24} />,
 				}}
 			/>
-			{isCenter && (
+			{(isCenter && userFirebase) && (
 				<Drawer.Screen
 					name="PetDoctorDrawer"
 					component={PetDoctorDrawer}
@@ -132,6 +132,7 @@ function NavigatorDrawer(props) {
 					}}
 				/>
 			)}
+
 		</Drawer.Navigator>
 	);
 }

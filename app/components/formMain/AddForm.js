@@ -27,7 +27,8 @@ function AddForm(props) {
 	} = props;
 
 
-	
+		setPhone(pet ? (dataPet[0].phone ? dataPet[0].phone : '') : '')
+		setDescription(pet ? (dataPet[0].description ? dataPet[0].description: '') : '')
 	return (
 		<View style={styleForm.viewForm}>
 			<Input
@@ -58,7 +59,7 @@ function AddForm(props) {
 						color: locationForm ? '#1A89E7' : '#C2C2C2',
 						onPress: () => setIsVisibleMap(true)
 					}}
-					defaultValue={pet ? (dataPet[0].address ? dataPet[0].address : '') : ''}
+					//defaultValue={pet ? (dataPet[0].address ? dataPet[0].address : '') : ''}
 				/>
 			)}
 

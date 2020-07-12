@@ -15,7 +15,10 @@ function FilterMap(props) {
 			<Button
 				title="Centros"
 				containerStyle={{
-					marginTop: 20,
+					shadowColor: 'black',
+					shadowOffset: { width: 2, height: 2 },
+					shadowOpacity: 0.7,
+					marginTop: 10,
 					marginLeft: 10,
 					marginRight: 10
 				}}
@@ -24,42 +27,64 @@ function FilterMap(props) {
 					borderRadius: 20
 				}}
 				onPress={() => {
-					console.log('hola');
                     setFilterGreen(!filterGreen);
-                    setReload(true)
+                    //setReload(true)
 				}}
 			/>
 			<Button
 				title="Comedogs"
 				containerStyle={{
-					marginTop: 20,
+					marginTop: 10,
 					marginLeft: 10,
-					marginRight: 10
+					marginRight: 10,
+					shadowColor: 'black',
+					shadowOffset: { width: 2, height: 2 },
+					shadowOpacity: 0.7
 				}}
 				buttonStyle={{
 					backgroundColor: filterOrange ? '#FCA503' : '#F8D798',
 					borderRadius: 20
 				}}
 				onPress={() => {
-					console.log('hola');
                     setFilterOrange(!filterOrange);
-                    setReload(true)
+                    //setReload(true)
 				}}
 			/>
 			<Button
 				title="Extraviados"
 				containerStyle={{
-					marginTop: 20,
+					marginTop: 10,
 					marginLeft: 10,
-					marginRight: 10
+					marginRight: 10,
+					shadowColor: 'black',
+					shadowOffset: { width: 2, height: 2 },
+					shadowOpacity: 0.7
 				}}
 				buttonStyle={{
 					backgroundColor: filterRed ? 'red' : '#F9A0A0',
 					borderRadius: 20
 				}}
 				onPress={() => {
-					console.log('hola');
                     setFilterRed(!filterRed);
+                    //setReload(true)
+				}}
+			/>
+			<Button
+				
+				icon={{ name: 'refresh', type: 'material-community', color: 'white', size: 25 }}
+				containerStyle={{
+					marginLeft: 10,
+					marginRight: 10,
+					marginTop: 10,
+					shadowColor: 'black',
+					shadowOffset: { width: 2, height: 2 },
+					shadowOpacity: 0.7
+				}}
+				buttonStyle={{
+					backgroundColor: '#C2C2C2',
+					borderRadius: 50
+				}}
+				onPress={() => {
                     setReload(true)
 				}}
 			/>

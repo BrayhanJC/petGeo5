@@ -42,7 +42,7 @@ export const addForm = {
 		margin: 10,
 		marginLeft: 30,
 		marginRight: 30,
-		borderRadius: 10
+		borderRadius: 40
 	}
 };
 

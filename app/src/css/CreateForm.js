@@ -44,9 +44,7 @@ export const addForm = {
 	btnCreate: {
 		backgroundColor: '#1A89E7',
 		margin: 10,
-		marginLeft: 30,
-		marginRight: 30,
-		borderRadius: 10
+		borderRadius: 40
 	},
 	textArea:{
 		fontSize:14

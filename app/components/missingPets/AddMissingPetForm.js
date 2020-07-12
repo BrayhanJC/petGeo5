@@ -20,7 +20,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import RNPickerSelect from 'react-native-picker-select';
 
 function AddMissinPetForm(props) {
-	const { toastRef, setIsLoading, navigationl } = props;
+	const { toastRef, setIsLoading, navigation } = props;
 	const [ locationMissingPet, setLocationMissingPet ] = useState(null);
 	const [ loading, setloading ] = useState(false);
 	const [ title, setTitle ] = useState('');
@@ -58,7 +58,7 @@ function AddMissinPetForm(props) {
 			if (elements[index].id == pet) {
 				var descriptionComplete = elements[index].description ? elements[index].description : '';
 				descriptionComplete += elements[index].raza ? '. De raza: ' + elements[index].raza : '';
-        console
+				console;
 				data.push({
 					description: descriptionComplete,
 					phone: userData[0].phone ? userData[0].phone : '',
@@ -71,7 +71,7 @@ function AddMissinPetForm(props) {
 	}
 
 	console.log(data);
- 
+
 	const addMissingPets = () => {
 		//setIsLoading(true);
 		if (!title || !address || !description) {
@@ -81,9 +81,8 @@ function AddMissinPetForm(props) {
 		} else if (!locationMissingPet) {
 			toastRef.current.show('Debes localizar tu reporte en el mapa. Pulse el icono del mapa para hacerlo', 1500);
 		} else {
-      setIsLoading(true);
+			setIsLoading(true);
 			uploadImageStorage(imageSelected, 'MissingPets').then((response) => {
-        
 				saveCollection(
 					{
 						name: title,
@@ -93,6 +92,7 @@ function AddMissinPetForm(props) {
 						image: response,
 						create_date: new Date(),
 						create_uid: firebase.auth().currentUser.uid,
+						create_name: firebase.auth().currentUser.displayName,
 						phone,
 						quantityVoting: 0,
 						rating: 0,
@@ -147,16 +147,16 @@ function AddMissinPetForm(props) {
 				setIsVisibleMap={setIsVisibleMap}
 				locationForm={locationMissingPet}
 				setPhone={setPhone}
-        dataPet={data}
-        pet={pet}
+				dataPet={data}
+				pet={pet}
 			/>
 			<UploadImage
 				styleUploadImage={styleUploadImage}
 				toastRef={toastRef}
 				imageSelected={imageSelected}
-        setImageSelected={setImageSelected}
-        dataPet={data}
-        pet={pet}
+				setImageSelected={setImageSelected}
+				dataPet={data}
+				pet={pet}
 			/>
 
 			<Button buttonStyle={styleForm.btnCreate} title="Crear Reporte" onPress={addMissingPets} />

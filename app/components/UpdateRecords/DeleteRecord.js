@@ -22,11 +22,13 @@ function DeleteRecord(props) {
 	const [currentUser, setCurrentUser] = useState('');
 
 	const returnData = () => {
+
 		const data = route.state.routes;
 
 		var collectionName = '';
 		var record_id = '';
 		var current_user_id = '';
+		console.log(data)
 		for (let index = 0; index < data.length; index++) {
 			if (data[index].params != undefined) {
 				if (data[index].params.collectionName) {
@@ -44,8 +46,8 @@ function DeleteRecord(props) {
 		};
 	};
 
-	//console.log('DeleteRecord', returnData().current_user_id);
-	//console.log('DeleteRecord', cliente.create_uid);
+	console.log('DeleteRecord', returnData().current_user_id);
+	console.log('DeleteRecord cliente', cliente.create_uid);
 
 	let isOwner = returnData().current_user_id == cliente.create_uid;
 

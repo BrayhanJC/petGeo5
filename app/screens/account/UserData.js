@@ -6,7 +6,7 @@ import { styleForm } from '../../src/css/AddForm';
 import { saveUserInfo, saveCenter } from '../../utils/SaveRecord';
 import Map from '../../components/formMain/Map';
 import { returnUserType, returnSchedule } from '../../utils/Configurations';
-
+import * as firebase from 'firebase';
 import { connect } from 'react-redux';
 import { actions } from '../../store';
 
@@ -28,36 +28,73 @@ const UserData = (props) => {
 	const [time, setTime] = useState(0);
 	const [errorDescription, setErrorDescription] = useState('');
 
+	const [nameUser, setNameUser] = useState('')
+	const [nameUserError, setNameUserError] = useState('')
+
 	const [isVisibleMap, setIsVisibleMap] = useState(false);
 
 	const onSubmit = () => {
 		if (!location) {
 			setMessage('');
 		}
+		if (!nameUser){
+			setNameUserError('El nombre es requerido')
+		}else{
+			setNameUserError('')
+		}
+
 
 		if (userType == 0) {
 			//console.log('SOMOS USUARIOS');
-			if (phone) {
+			if (phone && nameUser) {
 				//console.log('todo ok usuario');
 				setErrorPhone('');
 				setErrorStreet('');
 
 				const data = {
 					create_uid: userInfo.uid,
+					create_name: nameUser,
+					name: nameUser,
 					email: userInfo.email,
 					phone,
 					street,
 					userType: returnUserType(userType),
 				};
-				//console.log(data);
-				saveUserInfo(data, 'userInfo', () => {
-					setModalVisible();
-					props.dispatch(actions.actualizarCliente(data));
-				});
-				//navigation.navigate('Profile');
+
+				const update = {
+					displayName: nameUser
+				};
+
+				firebase
+					.auth()
+					.currentUser.updateProfile(update)
+					.then(() => {
+
+						//console.log(data);
+						saveUserInfo(data, 'userInfo', () => {
+							setModalVisible();
+							props.dispatch(actions.actualizarCliente(data));
+						});
+						//navigation.navigate('Profile');
+
+
+					})
+					.catch(() => {
+						setError('Error al actualizar el nombre');
+						setIsLoading(false);
+					});
+
+
+
 			} else {
+
+				if (!phone){
+					setErrorPhone('El celular es requerido');
+				}else{
+					setErrorPhone('')
+				}
 				setErrorStreet('');
-				setErrorPhone('El celular es requerido');
+			
 			}
 		}
 		if (userType == 1 || userType == 2) {
@@ -87,14 +124,14 @@ const UserData = (props) => {
 				setErrorDescription('Debes agregar una descripcón');
 			}
 
-			if (phone && street && location && description) {
+			if (phone && street && location && description && nameUser) {
 				setErrorPhone('');
 				setErrorStreet('');
 				setErrorDescription('');
 
 				const data = {
 					create_uid: userInfo.uid,
-					create_name: userInfo.displayName,
+					create_name: nameUser,
 					email: userInfo.email,
 					phone,
 					address: street,
@@ -103,7 +140,7 @@ const UserData = (props) => {
 					veterinaries: [],
 					userType: returnUserType(userType),
 					schedule: returnSchedule(time),
-					name: userInfo.displayName,
+					name: nameUser,
 					create_date: new Date(),
 					image: [],
 					quantityVoting: 0,
@@ -140,6 +177,19 @@ const UserData = (props) => {
 								selectedIndex={userType}
 								buttons={buttons}
 								containerStyle={userInfoStyle.buttonGroup}
+							/>
+
+							<Input
+								placeholder="Nombre"
+								containerStyle={userInfoStyle.input}
+								inputContainerStyle={userInfoStyle.inputForm}
+								rightIcon={{
+									type: 'material-community',
+									name: 'account-circle',
+									color: '#C2C2C2',
+								}}
+								errorMessage={nameUserError}
+								onChange={(even) => setNameUser(even.nativeEvent.text)}
 							/>
 
 							<Input

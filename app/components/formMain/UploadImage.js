@@ -12,8 +12,7 @@ function UploadImage(props) {
 	if (pet){
 		if (dataPet){
 			if (dataPet[0].image_id){
-				console.log(dataPet[0].image_id)
-				setImageSelected(dataPet[0].image_id)
+				setImageSelected(dataPet[0].image_id    )
 			}
 		}
 	}

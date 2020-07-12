@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView, Alert, TextInput, StyleSheet, Picker } from 'react-native';
 import { Icon, Avatar, Image, Input, Button, Divider } from 'react-native-elements';
-import { Dropdown } from 'react-native-material-dropdown';
+
 import RNPickerSelect, { defaultStyles } from 'react-native-picker-select';
 
 import DatePicker from 'react-native-datepicker';
@@ -172,61 +172,15 @@ function PetForm(props) {
 					setValueDate({ date: date });
 				}}
 			/>
-			{/* <DateTimePicker
-				value={valueDate}
 
-				timeZoneOffsetInMinutes={0}
-				is24Hour={true}
-				display="default"
-				onChange={onChange}
-				mode="default"
-				display="default"
-				mode="date"
-			/>  */}
 		</View>
 	);
 }
 
 export default PetForm;
 
-{
-	/* <View style={styles.container}>
-<Picker
-    selectedValue={selectedValue}
-    style={{
-        height: 50,
-        width: 150
-    }}
-    onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-    mode="dropdown"
->
-    <Picker.Item label="Java" value="java" />
-    <Picker.Item label="JavaScripdst" value="js" />
-</Picker>
-</View> 
 
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		paddingTop: 40,
-		alignItems: 'center'
-	},
-	pickerItem: {
-		height: 44,
-		backgroundColor: 'grey',
-		color: 'blue',
-		fontFamily: 'Ebrima',
-		fontSize: 17
-	},
-	viewForm: {
-		marginTop: 10,
-		marginLeft: 20,
-		marginRight: 20
-	}
-});
 
-*/
-}
 
 const pickerSelectStyles = StyleSheet.create({
 	inputIOS: {

@@ -61,7 +61,7 @@ function PetForm(props) {
 			<RNPickerSelect
 				onValueChange={(value) => setTypeControl(value)}
 				placeholder={{
-					label: 'Tipo Mascota',
+					label: 'Tipo de Control',
 					value: null,
 					color: '#1A89E7'
 				}}

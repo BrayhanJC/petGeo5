@@ -20,6 +20,15 @@ function RendenderItems(props) {
 	const mainImage = image[0];
 
 	const goElement = () => {
+
+		console.log({
+			id,
+			name,
+			collectionName,
+			create_uid
+		})
+
+
 		navigation.navigate(navigator, {
 			id,
 			name,

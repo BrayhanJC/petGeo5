@@ -76,7 +76,7 @@ function PetsFound(props) {
 						elements={item}
 						isLoading={isLoading}
 						navigation={navigation}
-						navigator="ViewMissingPet"
+						navigator="petFoundView"
 					/>
 				</View>
 			) : (
@@ -88,7 +88,7 @@ function PetsFound(props) {
 					elements={petFound}
 					isLoading={isLoading}
 					navigation={navigation}
-					navigator="ViewMissingPet"
+					navigator="petFoundView"
 				/>
 			)}
 
