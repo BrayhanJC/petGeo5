@@ -26,9 +26,11 @@ function AddForm(props) {
 		pet
 	} = props;
 
+		if (pet){
+			setPhone(pet ? (dataPet[0].phone ? dataPet[0].phone : '') : '')
+			setDescription(pet ? (dataPet[0].description ? dataPet[0].description: '') : '')
+		}
 
-		setPhone(pet ? (dataPet[0].phone ? dataPet[0].phone : '') : '')
-		setDescription(pet ? (dataPet[0].description ? dataPet[0].description: '') : '')
 	return (
 		<View style={styleForm.viewForm}>
 			<Input

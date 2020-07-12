@@ -21,6 +21,8 @@ import { getInfoByUser } from '../../utils/SaveRecord';
 
 import UserData from '../account/UserData';
 import FilterMap from './FilterMap';
+import { returnColor, returnNameFormView } from '../../utils/Configurations';
+
 /***
  * Allows to see all the news of the veterinary centers and animal foundations
  */
@@ -80,11 +82,10 @@ function LocalizationMap(props) {
 				}
 			})();
 
-			
-				ListMap('comedogs', setResult, resultElements);
-				ListMap('petCenters', setResult, resultElements);
-				ListMap('missingPets', setResult, resultElements);
-			
+			ListMap('comedogs', setResult, resultElements);
+			ListMap('petCenters', setResult, resultElements);
+			ListMap('missingPets', setResult, resultElements);
+
 			setReload(false);
 		},
 		[ reload ]
@@ -103,21 +104,21 @@ function LocalizationMap(props) {
 
 	//console.log(result[0]);
 
-	const returnColor = (collection) => {
-		if (collection === 'comedogs') {
-			return 'orange';
-		}
-		if (collection === 'missingPets') {
-			return 'red';
-		}
-		if (collection === 'petCenters') {
-			return '#84CD58';
-		}
-	};
+
+
+
+
+
 	const goElement = (view, id, name) => {
 		//console.log(navigation)
 		//navigation.goBack()
 		//navigation.navigate('ViewComedog');
+		console.log({
+			view,
+			id,
+			name
+		})
+		
 		navigation.navigate(view, {
 			id,
 			name
@@ -125,7 +126,6 @@ function LocalizationMap(props) {
 	};
 
 	var aux = result.filter((valueItem) => {
-
 		if (!filterOrange && filterGreen && filterRed) {
 			return valueItem.collection != 'comedogs';
 		} else if (!filterRed && filterOrange && filterGreen) {
@@ -154,14 +154,6 @@ function LocalizationMap(props) {
 			<View>
 				{location && (
 					<MapView style={styles.mapStyle} initialRegion={location} showsUserLocation={true}>
-						{/* <MapView.Marker
-						coordinate={{
-							latitude: location.latitude,
-							longitude: location.longitude
-						}}
-						title="This is a native view"
-						description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation"
-					/> */}
 
 						{map(aux, (record, index) => (
 							<MapView.Marker
@@ -177,7 +169,7 @@ function LocalizationMap(props) {
 							>
 								<Callout
 									style={styles.callout}
-									onPress={() => goElement(record.collection, record.id, record.name)}
+									onPress={() => goElement(returnNameFormView(record.collection), record.id, record.name)}
 								>
 									<ScrollView vertical>
 										<CarouselImages image_ids={record.image} height={85} width={170} />
@@ -212,7 +204,6 @@ function LocalizationMap(props) {
 					setFilterRed={setFilterRed}
 					setReload={setReload}
 				/>
-				
 			</View>
 		</View>
 	);

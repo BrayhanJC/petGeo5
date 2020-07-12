@@ -29,6 +29,9 @@ function CreateComedogForm(props) {
 
 	const addComedog = () => {
 		setIsLoading(false);
+		console.log(title)
+		console.log(address)
+		console.log(description)
 		if (!title || !address || !description) {
 			toastRef.current.show('Todos los campos del formulario son obligatorios',3000);
 		} else if (size(imageSelected) === 0) {

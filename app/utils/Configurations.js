@@ -458,3 +458,32 @@ export function generateOptionsCenterFacebook(selectedComponent, title, subtitle
 		},
 	];
 }
+
+/**
+ * Funcion que permite retornar un color de acuerdo a la colección
+ * @param { nombre de la colección} collection 
+ */
+export const returnColor = (collection) => {
+	if (collection === 'comedogs') {
+		return 'orange';
+	}
+	if (collection === 'missingPets') {
+		return 'red';
+	}
+	if (collection === 'petCenters') {
+		return '#84CD58';
+	}
+};
+
+
+export const returnNameFormView = (collection) => {
+	if (collection === 'comedogs') {
+		return 'ViewComedog';
+	}
+	if (collection === 'missingPets') {
+		return 'ViewMissingPet';
+	}
+	if (collection === 'petCenters') {
+		return 'ViewPetCenter';
+	}
+};
