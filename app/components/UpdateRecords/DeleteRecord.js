@@ -18,17 +18,16 @@ function DeleteRecord(props) {
 	const { navigation, route } = props.props;
 	const { cliente } = props;
 
-	const [user, setUser] = useState(false);
-	const [currentUser, setCurrentUser] = useState('');
+	const [ user, setUser ] = useState(false);
+	const [ currentUser, setCurrentUser ] = useState('');
 
 	const returnData = () => {
-
 		const data = route.state.routes;
 
 		var collectionName = '';
 		var record_id = '';
 		var current_user_id = '';
-		console.log(data)
+		console.log(data);
 		for (let index = 0; index < data.length; index++) {
 			if (data[index].params != undefined) {
 				if (data[index].params.collectionName) {
@@ -42,7 +41,7 @@ function DeleteRecord(props) {
 		return {
 			collectionName,
 			record_id,
-			current_user_id,
+			current_user_id
 		};
 	};
 
@@ -96,7 +95,7 @@ function DeleteRecord(props) {
 
 const mapStateToProps = (state) => ({
 	cliente: state.cliente.cliente,
-	login: state.login.cliente,
+	login: state.login.cliente
 });
 
 export default connect(mapStateToProps)(DeleteRecord);

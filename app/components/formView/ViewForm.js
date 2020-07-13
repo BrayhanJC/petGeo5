@@ -20,6 +20,9 @@ const ViewForm = (props) => {
 	const [ item, setItem ] = useState(null);
 	const [ rating, setRating ] = useState(0);
 
+
+	const [selectItem, setSelectItem] = useState('')
+
 	navigation.setOptions({
 		title: name
 	});
@@ -87,6 +90,13 @@ const ViewForm = (props) => {
 	if (collection == 'petCenters') {
 		listInfo = [
 			{
+				text: 'Veterinarios:',
+				iconName: 'account-supervisor-circle',
+				iconType: 'material-community',
+				
+				onPress: () => setSelectItem('veterinary'),
+			},
+			{
 				text: 'Dirección: ' + item.address,
 				iconName: 'map-marker',
 				iconType: 'material-community',
@@ -125,9 +135,16 @@ const ViewForm = (props) => {
 		];
 	}
 
+
+	if (selectItem){
+		navigation.navigate('Profile')
+	}
+
 	return (
 		<ScrollView vertical style={viewFormStyle.viewBody}>
+			
 			<CarouselImages image_ids={item.image} height={200} width={screenWidth} />
+			
 			<TitleItem
 				name={item.name}
 				description={item.description}
@@ -139,6 +156,7 @@ const ViewForm = (props) => {
 				item={item}
 				
 			/>
+				
 			<InfoItem
 				location={item.location}
 				name={item.name}
@@ -147,6 +165,7 @@ const ViewForm = (props) => {
 				showMap={true}
 				nameInfo={nameInfo}
 			/>
+		
 			<ListReview
 				navigation={navigation}
 				idItem={item.id}
@@ -154,6 +173,9 @@ const ViewForm = (props) => {
 				navigateTo={navigateTo}
 				collection_name={collection}
 			/>
+
+			
+
 		</ScrollView>
 	);
 };

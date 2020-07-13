@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView, Alert, TextInput, StyleSheet, Picker } from 'react-native';
 import { Icon, Avatar, Image, Input, Button, Divider } from 'react-native-elements';
-import { Dropdown } from 'react-native-material-dropdown';
 import { styleCreateForm } from '../../src/css/CreateForm';
 import {SPECIALITY} from '../../utils/Configurations'
 import RNPickerSelect from 'react-native-picker-select';

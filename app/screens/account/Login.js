@@ -13,7 +13,7 @@ function Login() {
 
 	return (
 		<ScrollView>
-			<Image source={require('../../../assets/img/login.png')} style={styles.logo} resizeMode="contain" />
+			<Image source={require('../../../assets/img/logo.png')} style={styles.logo} resizeMode="contain" />
 			<View style={styles.viewContainer}>
 				<LoginForm toastRef={toastRef} />
 				<LinkCreateAccount />
@@ -32,13 +32,11 @@ export default Login;
 const styles = StyleSheet.create({
 	logo: {
 		width: '100%',
-		height: '80%',
-
-		marginTop: 10,
-		alignItems:'center'
+		height: 170,
+		marginTop: 20,
 	},
 	viewContainer: {
-		marginTop: 1,
+		marginTop: 20,
 		marginRight: 40,
 		marginLeft: 40,
 	},

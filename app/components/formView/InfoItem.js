@@ -8,15 +8,6 @@ import ViewMap from './ViewMap';
 const InfoItem = (props) => {
 	const { location, name, address, showMap, nameInfo, listInfo } = props;
 
-	// const listInfo = [
-	// 	{
-	// 		text: address,
-	// 		iconName: 'map-marker',
-	// 		iconType: 'material-community',
-	// 		action: null
-	// 	}
-	// ];
-
 	return (
 		<View style={viewInfoStyle.viewItemInfo}>
 			<Text style={viewInfoStyle.infoTitle}>Informacion sobre {nameInfo}</Text>
@@ -28,8 +19,14 @@ const InfoItem = (props) => {
 						name: item.iconName,
 						type: item.iconType,
 						color: '#1A89E7'
+					}}
+					rightIcon={{
+						name: 'chevron-right',
+						type: item.iconType,
+						color: '#1A89E7'
                     }}
 					containerStyle={viewInfoStyle.listStyle}
+					onPress={item.onPress}
 				/>
 			))}
 			{showMap && <ViewMap location={location} name={name} height={100} /> }

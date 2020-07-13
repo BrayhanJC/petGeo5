@@ -11,9 +11,16 @@ import { styleImageMain } from '../../src/css/ImageMain';
 import AddForm from '../formMain/AddForm';
 import UploadImage from '../formMain/UploadImage';
 import ImageMain from '../formMain/ImageMain';
-import Map from '../formMain/Map';
+import Map from '../formMain/Map'
+
+import {  Notifications} from 'expo'
+
+import * as Permissions from 'expo-permissions';
+
 //devuelve el ancho de la screen
 const widhtScreen = Dimensions.get('window').width;
+
+
 function CreateNewsForm(props) {
 	const { toastRef, setIsLoading, navigation } = props;
 	const [ loading, setloading ] = useState(false);
@@ -25,7 +32,11 @@ function CreateNewsForm(props) {
 	const [ locationNew, setLocationNew ] = useState(null);
 	const [ phone, setPhone ] = useState('');
 
-	const addNews = () => {
+	const addNews = async () => {
+		await	sendNotification()
+
+
+
 		setIsLoading(false);
 		console.log(firebase.auth().currentUser)
 		if (!title || !address || !description) {
@@ -65,6 +76,31 @@ function CreateNewsForm(props) {
 			});
 		}
 	};
+
+
+	const sendNotification = async () => {
+
+		console.log('hola')
+
+		const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+		let finalStatus = status
+
+		if (status !== 'granted'){
+			const { status: existingStatus } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+			 finalStatus = status
+		}
+
+		console.log(finalStatus)
+		// if (finalStatus !== 'granted' ){
+		// 	return
+		// }
+		console.log('token es:')
+		let token = (await Notifications.getExpoPushTokenAsync()).data
+		
+		console.log(token)
+	}
+
+
 
 	//const {title, setTitle, address, setAddress, description, setDescription, btnName, addressVisible} = props
 

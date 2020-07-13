@@ -8,6 +8,8 @@ import CreateNews from '../../screens/news/CreateNews';
 import NewsView from '../../screens/news/NewsView';
 import CreateReview from '../../screens/review/CreateReview';
 import DeleteRecord from '../../components/UpdateRecords/DeleteRecord';
+
+import EditNews from '../../screens/news/EditNews'
 const Stack = createStackNavigator();
 
 /***
@@ -40,6 +42,12 @@ function NewsStack(props) {
 				options={{
 					headerRight: () => <DeleteRecord props={props} />,
 				}}
+			/>
+
+
+			<Stack.Screen
+				name="ViewEditNews"
+				component={EditNews}
 			/>
 
 			<Stack.Screen

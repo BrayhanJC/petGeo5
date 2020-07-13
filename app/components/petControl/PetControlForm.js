@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, ScrollView, Alert, TextInput, StyleSheet, Picker } from 'react-native';
 import { Icon, Avatar, Image, Input, Button, Divider } from 'react-native-elements';
-import { Dropdown } from 'react-native-material-dropdown';
 import { styleCreateForm } from '../../src/css/CreateForm';
 import RNPickerSelect from 'react-native-picker-select';
 import firebase from 'firebase/app';
@@ -71,23 +70,6 @@ function PetForm(props) {
 					return <View style={stylePicker.iconStyle} />;
 				}}
 			/>
-
-			{/* <Dropdown
-				label="Tipo de Control"
-				data={TYPE_CONTROL}
-				//value=""
-				error={errorType}
-				onChangeText={(itemValue, itemIndex) => setTypeControl(itemValue)}
-			/>
-
-			<Dropdown
-				label="Mascota"
-				data={PET_LOAD}
-				error={errorPet}
-				//value={valueTypePet}
-				itemCount={3}
-				onChangeText={(itemValue, itemIndex) => setPet(itemValue)}
-			/> */}
 
 			<Input
 				placeholder="Nombre Control"
