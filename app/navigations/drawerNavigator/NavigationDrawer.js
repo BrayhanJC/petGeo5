@@ -16,13 +16,9 @@ import { connect } from 'react-redux';
 import { actions } from '../../store';
 import { obtenerUsuarios } from '../../utils/SaveRecord';
 
-
-
-
 const Drawer = createDrawerNavigator();
 
 function NavigatorDrawer(props) {
-
 	const { cliente, login } = props;
 
 	const [user, setUser] = useState(null);
@@ -30,19 +26,19 @@ function NavigatorDrawer(props) {
 	const [elements, setElements] = useState('');
 	const [modalVisible, setModalVisible] = useState(false);
 	const [userType, setUserType] = useState('');
-	const [userFirebase, setUserFirebase] = useState('')
+	const [userFirebase, setUserFirebase] = useState('');
 	var typeUser = '';
 
 	useEffect(() => {
 		firebase.auth().onAuthStateChanged((userInfo) => {
-			setUserFirebase(userInfo)
+			setUserFirebase(userInfo);
 			onObtenerUsuario(userInfo);
 		});
 	}, []);
 
 	/**
 	 * Funcion que permite obtener el usuario actual
-	 * @param { variable que contiene la data del usuario de firebase} userInfo 
+	 * @param { variable que contiene la data del usuario de firebase} userInfo
 	 */
 	const onObtenerUsuario = async (userInfo) => {
 		await obtenerUsuarios(userInfo?.uid, (r) => {
@@ -87,7 +83,7 @@ function NavigatorDrawer(props) {
 				}}
 			/>
 
-			{(isUser && userFirebase) && (
+			{isUser && userFirebase && (
 				<Drawer.Screen
 					name="PetDrawer"
 					component={PetDrawer}
@@ -99,7 +95,7 @@ function NavigatorDrawer(props) {
 					}}
 				/>
 			)}
-			{(isUser && userFirebase) && (
+			{isUser && userFirebase && (
 				<Drawer.Screen
 					name="PetControlDrawer"
 					component={PetControlDrawer}
@@ -120,7 +116,7 @@ function NavigatorDrawer(props) {
 					drawerIcon: ({ color, size }) => <MaterialCommunityIcons name="rocket" color="#1A89E7" size={24} />,
 				}}
 			/>
-			{(isCenter && userFirebase) && (
+			{isCenter && userFirebase && (
 				<Drawer.Screen
 					name="PetDoctorDrawer"
 					component={PetDoctorDrawer}
@@ -132,7 +128,6 @@ function NavigatorDrawer(props) {
 					}}
 				/>
 			)}
-
 		</Drawer.Navigator>
 	);
 }

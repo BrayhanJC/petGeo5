@@ -138,13 +138,14 @@ function AccountOptions(props) {
 				//console.log(props.userInfo.providerData[0].providerId);
 				//menuOptions = [ generateOptionsUser(selectedComponent, petCenter, userInfo)[1] ];
 
-				if (petCenter) {
+				if (cliente.userType == 'veterinary') {
 					menuOptions = generateOptionsCenterFacebook(selectedComponent, petCenter, [cliente]);
 				} else {
 					menuOptions = generateOptionsUserFacebook(selectedComponent, petCenter, [cliente]);
 				}
 			} else {
-				if (petCenter) {
+				if (cliente.userType == 'veterinary') {
+					console.log('AccountOptions', cliente);
 					menuOptions = generateOptionsCenter(selectedComponent, petCenter, [cliente]);
 				} else {
 					menuOptions = generateOptionsUser(selectedComponent, petCenter, [cliente]);
@@ -154,7 +155,7 @@ function AccountOptions(props) {
 	}
 
 	//console.log('AccountOptions 22', datUserInfo);
-	console.log('AccountOptions', cliente);
+	//console.log('AccountOptions', cliente);
 
 	//console.log('AccountOptions menuOptions', menuOptions);
 

@@ -9,6 +9,7 @@ import { reauthenticate } from '../../utils/Api';
 
 import { connect } from 'react-redux';
 import { actions } from '../../store';
+import { updateInfoUserCenter } from '../../utils/SaveRecord';
 /***
  * Funcion que permite inicializar la variable formData
  */
@@ -22,7 +23,7 @@ function defaultFormValue() {
 function ChangeEmailForm(props) {
 	const { cliente, login } = props;
 
-	const { email, setShowModal, toastRef, setReloadUserInfo, petCenter } = props;
+	const { email, setShowModal, toastRef, setReloadUserInfo, user_id, petCenter } = props;
 
 	//variable donde se almacenaran los datos de email y contraseña
 	const [formData, setFormData] = useState(defaultFormValue);
@@ -86,16 +87,15 @@ function ChangeEmailForm(props) {
 								});
 							}
 
-							props.dispatch(
-								actions.actualizarCliente({ ...cliente, create_name: nameComplete, name: nameComplete })
-							);
+							props.dispatch(actions.actualizarCliente({ ...cliente, email: formData.email }));
 							updateInfoUserCenter('petCenters', user_id, {
 								email: formData.email,
 							});
 							toastRef.current.show('Email Actualizado con Exito', 1500);
 							setShowModal(false);
 						})
-						.catch(() => {
+						.catch((err) => {
+							console.log('ChangeEmailForm', err);
 							toastRef.current.show('Error al actualizar el email');
 							setShowError({
 								email: 'Error al actualizar el email.',

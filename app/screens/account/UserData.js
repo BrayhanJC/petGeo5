@@ -28,8 +28,8 @@ const UserData = (props) => {
 	const [time, setTime] = useState(0);
 	const [errorDescription, setErrorDescription] = useState('');
 
-	const [nameUser, setNameUser] = useState('')
-	const [nameUserError, setNameUserError] = useState('')
+	const [nameUser, setNameUser] = useState('');
+	const [nameUserError, setNameUserError] = useState('');
 
 	const [isVisibleMap, setIsVisibleMap] = useState(false);
 
@@ -37,12 +37,11 @@ const UserData = (props) => {
 		if (!location) {
 			setMessage('');
 		}
-		if (!nameUser){
-			setNameUserError('El nombre es requerido')
-		}else{
-			setNameUserError('')
+		if (!nameUser) {
+			setNameUserError('El nombre es requerido');
+		} else {
+			setNameUserError('');
 		}
-
 
 		if (userType == 0) {
 			//console.log('SOMOS USUARIOS');
@@ -62,39 +61,31 @@ const UserData = (props) => {
 				};
 
 				const update = {
-					displayName: nameUser
+					displayName: nameUser,
 				};
 
 				firebase
 					.auth()
 					.currentUser.updateProfile(update)
 					.then(() => {
-
 						//console.log(data);
 						saveUserInfo(data, 'userInfo', () => {
 							setModalVisible();
 							props.dispatch(actions.actualizarCliente(data));
 						});
 						//navigation.navigate('Profile');
-
-
 					})
 					.catch(() => {
 						setError('Error al actualizar el nombre');
 						setIsLoading(false);
 					});
-
-
-
 			} else {
-
-				if (!phone){
+				if (!phone) {
 					setErrorPhone('El celular es requerido');
-				}else{
-					setErrorPhone('')
+				} else {
+					setErrorPhone('');
 				}
 				setErrorStreet('');
-			
 			}
 		}
 		if (userType == 1 || userType == 2) {
@@ -150,6 +141,7 @@ const UserData = (props) => {
 
 				saveCenter(data, 'petCenters');
 				saveUserInfo(data, 'userInfo', () => {
+					alert(data.userType);
 					props.dispatch(actions.actualizarCliente(data));
 					setModalVisible();
 				});

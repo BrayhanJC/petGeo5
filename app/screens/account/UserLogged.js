@@ -62,7 +62,7 @@ function UserLogged() {
 		setReloadUserInfo(false);
 	}, [reloadUserInfo]);
 
-	console.log('UserLogged modalVisible', modalVisible);
+	//console.log('UserLogged modalVisible', modalVisible);
 
 	return (
 		<View style={styles.viewUserInfo}>
@@ -99,14 +99,14 @@ function UserLogged() {
 			<Toast ref={toastRef} position="center" opacity={0.9} />
 			<Loading text={loadingText} isVisible={loading} />
 
-			{
-				/***
-				 * Modal que sirve para registrar el tipo de usuario
-				 */
+			{/*
+				
+				 //Modal que sirve para registrar el tipo de usuario
+				 
 				modalVisible && (
 					<UserData modalVisible={modalVisible} setModalVisible={setModalVisible} userInfo={userInfo} />
 				)
-			}
+			*/}
 		</View>
 	);
 }
