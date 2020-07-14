@@ -33,7 +33,7 @@ function CreateNewsForm(props) {
 	const [ phone, setPhone ] = useState('');
 
 	const addNews = async () => {
-		await	sendNotification()
+		//await	sendNotification()
 
 
 
