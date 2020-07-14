@@ -65,16 +65,6 @@ function DeleteRecord(props) {
 		}
 	};
 
-	// useFocusEffect(
-	// 	useCallback(() => {
-	// 		const data = returnData();
-	// 		const user_id = firebase.auth().currentUser.uid;
-	// 		if (user_id == data.current_user_id) {
-	// 			setUser(true);
-	// 		}
-	// 	}, [])
-	// );
-
 	return (
 		<View style={{ flex: 1, alignItems: 'center', margin: 5 }}>
 			{isOwner && (
@@ -85,7 +75,13 @@ function DeleteRecord(props) {
 					icon={{ name: 'delete', type: 'material-community', color: 'white', size: 25 }}
 					onPress={deleteRecord}
 					activeOpacity={0.7}
-					containerStyle={{ marginLeft: 5, marginRight: 7 }}
+					containerStyle={{
+						marginLeft: 5,
+						marginRight: 7,
+						shadowColor: 'black',
+						shadowOffset: { width: 2, height: 2 },
+						shadowOpacity: 0.7
+					}}
 					overlayContainerStyle={{ backgroundColor: '#1A89E7' }}
 				/>
 			)}

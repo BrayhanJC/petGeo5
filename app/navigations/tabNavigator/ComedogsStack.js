@@ -24,32 +24,31 @@ function ComedogsStack(props) {
 				component={ComedogsScreen}
 				options={{
 					title: 'Comedogs',
-					headerLeft: () => <AvatarIcon />,
+					headerLeft: () => <AvatarIcon />
 				}}
 			/>
 			<Stack.Screen
 				name="CreateComedog"
 				component={CreateComedog}
 				options={{
-					title: 'Crear Comedog',
+					title: 'Crear Comedog'
 				}}
 			/>
 			<Stack.Screen
 				name="ViewComedog"
 				component={ComedogView}
 				options={{
-					headerRight: () => <DeleteRecord props={props} />,
+					headerRight: () => <DeleteRecord props={props} />
 				}}
 			/>
 
-<Stack.Screen name="ViewEditComedog" component={EditComedog} />
-
+			<Stack.Screen name="ViewEditComedog" component={EditComedog} />
 
 			<Stack.Screen
 				name="CreateReviewComedog"
 				component={CreateReview}
 				options={{
-					title: 'Nuevo Comentario',
+					title: 'Nuevo Comentario'
 				}}
 			/>
 		</Stack.Navigator>

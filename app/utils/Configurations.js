@@ -505,4 +505,10 @@ export const returnNameFormViewEdit = (collection) => {
 	if (collection === 'news') {
 		return 'ViewEditNews';
 	}
+	if (collection === 'pets') {
+		return 'ViewEditPet';
+	}
+	if (collection === 'petControl') {
+		return 'ViewEditPetControl';
+	}
 };

@@ -8,7 +8,10 @@ import Loading from '../../components/Loading';
 import CarouselImages from '../../components/CarouselImages';
 import TitleItem from '../../components/formView/TitleItem';
 import InfoItem from '../../components/formView/InfoItem';
+import EditRecord from '../../components/UpdateRecords/EditRecords';
+
 const screenWidth = Dimensions.get('window').width;
+const screenHeight = Dimensions.get('window').height;
 const db = firebase.firestore(firebaseApp);
 
 const PetView = (props) => {
@@ -74,6 +77,9 @@ const PetView = (props) => {
 			<CarouselImages image_ids={pet.image_id} height={200} width={screenWidth} />
 			<TitleItem name={pet.name} description={pet.description} showRating={false} showDescription={true}/>
 			<InfoItem name={pet.name} listInfo={listInfo} showMap={false} nameInfo="la Mascota" />
+			<View style={{ flex: 1, marginTop: 30  }}>
+				<EditRecord navigation={navigation} route={route} />
+			</View>
 		</ScrollView>
 	);
 };

@@ -10,7 +10,7 @@ import AvatarIcon from '../../components/AvatarIcon'
 import PetView from '../../screens/pet/PetView'
 const Stack = createStackNavigator();
 import DeleteRecord from '../../components/UpdateRecords/DeleteRecord'
-
+import EditPet from '../../screens/pet/EditPet';
 /***
  * Create stack nav pets 
  * show all pets register by user
@@ -44,6 +44,9 @@ function PetDrawer(props) {
 			<Stack.Screen name="ViewPet" component={PetView} options={{
 					headerRight: () => <DeleteRecord props={props} />
 				}}/>
+
+		<Stack.Screen name="ViewEditPet" component={EditPet} />
+
 		</Stack.Navigator>
 	);
 }

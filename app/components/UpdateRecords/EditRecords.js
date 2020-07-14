@@ -19,8 +19,6 @@ import { connect } from 'react-redux';
 function EditRecord(props) {
 	const { navigation, route } = props;
 	const { cliente } = props;
-	console.log('por aca en edicion de datos');
-	console.log(route);
 	const [ user, setUser ] = useState(false);
 	const [ currentUser, setCurrentUser ] = useState('');
 
@@ -44,9 +42,6 @@ function EditRecord(props) {
 		const data = returnData();
 		const user_id = firebase.auth().currentUser.uid;
 		if (user_id == data.current_user_id) {
-			//navigation.navigate('ViewEditNews');
-			console.log('name colection: ' + data.collectionName)
-			console.log('vista retornada: ' + returnNameFormViewEdit(data.collectionName))
 			navigation.navigate(returnNameFormViewEdit(data.collectionName), {
 				id: data.record_id,
 				name: data.name,

@@ -102,16 +102,7 @@ function PetsFound(props) {
 					<Text />
 				)
 			}
-			{user && (
-				<Icon
-					containerStyle={buttonFormFloating.btnContainer}
-					type="material-community"
-					name="plus"
-					color="#1A89E7"
-					reverse
-					onPress={() => navigation.navigate('add-missing-pet')}
-				/>
-			)}
+
 		</View>
 	);
 }

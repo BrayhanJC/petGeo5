@@ -10,7 +10,7 @@ import CarouselImages from '../../components/CarouselImages';
 import TitleItem from '../../components/formView/TitleItem';
 import InfoItem from '../../components/formView/InfoItem';
 import { viewFormStyle } from '../../src/css/ViewForm';
-
+import EditRecord from '../../components/UpdateRecords/EditRecords';
 const db = firebase.firestore(firebaseApp);
 const screenWidth = Dimensions.get('window').width;
 
@@ -89,6 +89,9 @@ const PetControlView = (props) => {
 
 			<TitleItem name={petControl.name} description={petControl.description} showRating={false} />
 			<InfoItem name={petControl.name} listInfo={listInfo} showMap={false} nameInfo="el Control" />
+			<View style={{ flex: 1, marginTop: 80 }}>
+				<EditRecord navigation={navigation} route={route} />
+			</View>
 		</ScrollView>
 	);
 };
