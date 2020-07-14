@@ -31,7 +31,6 @@
           "apiKey": "AIzaSyCyBPXGoYlIZSE5A2a6BmjlLJ442KAI6R0"
         }
       },
-      "useNextNotificationsApi": true,
       "permissions": [
         "CAMERA_ROLL",
         "READ_EXTERNAL_STORAGE",
