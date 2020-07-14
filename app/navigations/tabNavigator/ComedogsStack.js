@@ -8,6 +8,7 @@ import CreateComedog from '../../screens/comedog/CreateComedog';
 import ComedogView from '../../screens/comedog/ComedogView';
 import CreateReview from '../../screens/review/CreateReview';
 import DeleteRecord from '../../components/UpdateRecords/DeleteRecord';
+import EditComedog from '../../screens/comedog/EditComedog';
 
 const Stack = createStackNavigator();
 
@@ -40,6 +41,9 @@ function ComedogsStack(props) {
 					headerRight: () => <DeleteRecord props={props} />,
 				}}
 			/>
+
+<Stack.Screen name="ViewEditComedog" component={EditComedog} />
+
 
 			<Stack.Screen
 				name="CreateReviewComedog"

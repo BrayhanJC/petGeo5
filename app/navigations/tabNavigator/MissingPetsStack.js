@@ -7,7 +7,7 @@ import MissingPetView from '../../screens/missingPets/MissingPetView';
 import CreateReview from '../../screens/review/CreateReview';
 import DeleteRecord from '../../components/UpdateRecords/DeleteRecord';
 const Stack = createStackNavigator();
-
+import EditMissingPet from '../../screens/missingPets/EditMissingPet'
 /***
  * Create stack nav missing pets
  * Show all the missing pets registers
@@ -23,7 +23,7 @@ function MissingPetsStack(props) {
 					headerLeft: () => <AvatarIcon />
 				}}
 			/>
-      
+
 			<Stack.Screen
 				name="add-missing-pet"
 				component={AddMissingPet}
@@ -39,6 +39,8 @@ function MissingPetsStack(props) {
 					headerRight: () => <DeleteRecord props={props} />
 				}}
 			/>
+
+			<Stack.Screen name="ViewEditMissingPet" component={EditMissingPet} />
 
 			<Stack.Screen
 				name="CreateReviewMissingPet"

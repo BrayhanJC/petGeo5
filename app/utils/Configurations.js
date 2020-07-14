@@ -92,16 +92,13 @@ export const RAZA = [
 	{ label: 'Terrier Negro Ruso', value: 'Terrier Negro Ruso' },
 	{ label: 'Terrier Norfolk', value: 'Terrier Norfolk' },
 	{ label: 'Terrier Norwich', value: 'Terrier Norwich' },
-	{ label: 'Yorkshire Terrier', value: 'Yorkshire Terrier' },
+	{ label: 'Yorkshire Terrier', value: 'Yorkshire Terrier' }
 ];
 
 /**
  * Contiene el genero de la mascota
  */
-export const TYPE_SEX = [
-	{ label: 'Hembra', value: 'Hembra' },
-	{ label: 'Macho', value: 'Macho' },
-];
+export const TYPE_SEX = [ { label: 'Hembra', value: 'Hembra' }, { label: 'Macho', value: 'Macho' } ];
 
 /**
  * Tipos de mascotas
@@ -109,20 +106,20 @@ export const TYPE_SEX = [
 export const TYPE_PETS = [
 	{
 		label: 'Perro',
-		value: 'Perro',
+		value: 'Perro'
 	},
 	{
 		label: 'Gato',
-		value: 'Gato',
+		value: 'Gato'
 	},
 	{
 		label: 'Minipig',
-		value: 'Minipig',
+		value: 'Minipig'
 	},
 	{
 		label: 'Otro',
-		value: 'Otro',
-	},
+		value: 'Otro'
+	}
 ];
 
 /**
@@ -186,7 +183,7 @@ export const RAZA_CAT = [
 	{ label: 'Snowshoe', value: 'Snowshoe' },
 	{ label: 'Sphynx', value: 'Sphynx' },
 	{ label: 'Tonkinés', value: 'Tonkinés' },
-	{ label: 'Van Turco', value: 'Van Turco' },
+	{ label: 'Van Turco', value: 'Van Turco' }
 ];
 
 /**
@@ -197,7 +194,7 @@ export const TYPE_CONTROL = [
 	{ label: 'Desparacitación', value: 'Desparacitación' },
 	{ label: 'Baño', value: 'Baño' },
 	{ label: 'Control', value: 'Control' },
-	{ label: 'Otro', value: 'Otro' },
+	{ label: 'Otro', value: 'Otro' }
 ];
 
 /**
@@ -210,7 +207,7 @@ export const SPECIALITY = [
 	{ label: 'Rehabilitación', value: 'Rehabilitación' },
 	{ label: 'Imagenología (diagnóstico por imagen)', value: 'Imagenología (diagnóstico por imagen)' },
 	{ label: 'Fauna Silvestre', value: 'Fauna Silvestre' },
-	{ label: 'Otro', value: 'Otro' },
+	{ label: 'Otro', value: 'Otro' }
 ];
 
 /**
@@ -262,7 +259,7 @@ export function generateOptionsUser(selectedComponent, title, subtitle) {
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
 			subtitle: subtitle[0].name,
-			onPress: () => selectedComponent('displayName'),
+			onPress: () => selectedComponent('displayName')
 		},
 		{
 			title: 'Celular',
@@ -272,7 +269,7 @@ export function generateOptionsUser(selectedComponent, title, subtitle) {
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
 			subtitle: subtitle[0].phone,
-			onPress: () => selectedComponent('phone'),
+			onPress: () => selectedComponent('phone')
 		},
 		{
 			title: 'Email',
@@ -282,7 +279,7 @@ export function generateOptionsUser(selectedComponent, title, subtitle) {
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
 			subtitle: subtitle[0].email,
-			onPress: () => selectedComponent('email'),
+			onPress: () => selectedComponent('email')
 		},
 		{
 			title: 'Contraseña',
@@ -291,8 +288,8 @@ export function generateOptionsUser(selectedComponent, title, subtitle) {
 			iconNameRight: 'chevron-right',
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
-			onPress: () => selectedComponent('password'),
-		},
+			onPress: () => selectedComponent('password')
+		}
 	];
 }
 
@@ -311,7 +308,7 @@ export function generateOptionsCenter(selectedComponent, title, subtitle) {
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
 			subtitle: subtitle[0].name,
-			onPress: () => selectedComponent('displayName'),
+			onPress: () => selectedComponent('displayName')
 		},
 		{
 			title: 'Celular',
@@ -321,7 +318,7 @@ export function generateOptionsCenter(selectedComponent, title, subtitle) {
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
 			subtitle: subtitle[0].phone,
-			onPress: () => selectedComponent('phone'),
+			onPress: () => selectedComponent('phone')
 		},
 		{
 			title: 'Email',
@@ -331,7 +328,7 @@ export function generateOptionsCenter(selectedComponent, title, subtitle) {
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
 			subtitle: subtitle[0].email,
-			onPress: () => selectedComponent('email'),
+			onPress: () => selectedComponent('email')
 		},
 		{
 			title: 'Dirección',
@@ -341,7 +338,7 @@ export function generateOptionsCenter(selectedComponent, title, subtitle) {
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
 			subtitle: subtitle[0].address,
-			onPress: () => selectedComponent('street'),
+			onPress: () => selectedComponent('street')
 		},
 		{
 			title: 'Página Web',
@@ -351,7 +348,7 @@ export function generateOptionsCenter(selectedComponent, title, subtitle) {
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
 			subtitle: subtitle[0].website,
-			onPress: () => selectedComponent('website'),
+			onPress: () => selectedComponent('website')
 		},
 		{
 			title: 'Contraseña',
@@ -360,8 +357,8 @@ export function generateOptionsCenter(selectedComponent, title, subtitle) {
 			iconNameRight: 'chevron-right',
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
-			onPress: () => selectedComponent('password'),
-		},
+			onPress: () => selectedComponent('password')
+		}
 	];
 }
 
@@ -379,7 +376,7 @@ export function generateOptionsUserFacebook(selectedComponent, title, subtitle) 
 			iconNameRight: 'chevron-right',
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
-			subtitle: subtitle[0].name,
+			subtitle: subtitle[0].name
 		},
 		{
 			title: 'Celular',
@@ -388,7 +385,7 @@ export function generateOptionsUserFacebook(selectedComponent, title, subtitle) 
 			iconNameRight: 'chevron-right',
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
-			subtitle: subtitle[0].phone,
+			subtitle: subtitle[0].phone
 		},
 		{
 			title: 'Email',
@@ -397,8 +394,8 @@ export function generateOptionsUserFacebook(selectedComponent, title, subtitle) 
 			iconNameRight: 'chevron-right',
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
-			subtitle: subtitle[0].email,
-		},
+			subtitle: subtitle[0].email
+		}
 	];
 }
 
@@ -416,7 +413,7 @@ export function generateOptionsCenterFacebook(selectedComponent, title, subtitle
 			iconNameRight: 'chevron-right',
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
-			subtitle: subtitle[0].name,
+			subtitle: subtitle[0].name
 		},
 		{
 			title: 'Celular',
@@ -425,7 +422,7 @@ export function generateOptionsCenterFacebook(selectedComponent, title, subtitle
 			iconNameRight: 'chevron-right',
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
-			subtitle: subtitle[0].phone,
+			subtitle: subtitle[0].phone
 		},
 		{
 			title: 'Email',
@@ -434,7 +431,7 @@ export function generateOptionsCenterFacebook(selectedComponent, title, subtitle
 			iconNameRight: 'chevron-right',
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
-			subtitle: subtitle[0].email,
+			subtitle: subtitle[0].email
 		},
 		{
 			title: 'Dirección',
@@ -444,7 +441,7 @@ export function generateOptionsCenterFacebook(selectedComponent, title, subtitle
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
 			subtitle: subtitle[0].address,
-			onPress: () => selectedComponent('street'),
+			onPress: () => selectedComponent('street')
 		},
 		{
 			title: 'Página Web',
@@ -454,8 +451,8 @@ export function generateOptionsCenterFacebook(selectedComponent, title, subtitle
 			iconColorLeft: '#1A89E7',
 			iconColorRight: '#CCC',
 			subtitle: subtitle[0].website,
-			onPress: () => selectedComponent('website'),
-		},
+			onPress: () => selectedComponent('website')
+		}
 	];
 }
 
@@ -475,7 +472,10 @@ export const returnColor = (collection) => {
 	}
 };
 
-
+/**
+ * Funcion que permite retornar el nombre del stack para mostrar el contenido
+ * @param { nombre de la coleccion} collection 
+ */
 export const returnNameFormView = (collection) => {
 	if (collection === 'comedogs') {
 		return 'ViewComedog';
@@ -485,5 +485,24 @@ export const returnNameFormView = (collection) => {
 	}
 	if (collection === 'petCenters') {
 		return 'ViewPetCenter';
+	}
+};
+
+/**
+ * Funcion que permite retornar el nombre de la vista a editar
+ * @param { nombre de la coleccion} collection 
+ */
+export const returnNameFormViewEdit = (collection) => {
+	if (collection === 'comedogs') {
+		return 'ViewEditComedog';
+	}
+	if (collection === 'missingPets') {
+		return 'ViewEditMissingPet';
+	}
+	if (collection === 'petCenters') {
+		return 'ViewEditCenter';
+	}
+	if (collection === 'news') {
+		return 'ViewEditNews';
 	}
 };

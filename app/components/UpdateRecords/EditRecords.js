@@ -9,8 +9,7 @@ import { showAlertConfirm, showAlert } from '../../utils/validations';
 import { useFocusEffect } from '@react-navigation/native';
 import { size } from 'lodash';
 import { styleFloatButton } from '../../src/css/FloatButton';
-
-
+import { returnNameFormViewEdit } from '../../utils/Configurations'
 import { connect } from 'react-redux';
 
 /**
@@ -18,22 +17,15 @@ import { connect } from 'react-redux';
  * @param {*} props
  */
 function EditRecord(props) {
-
-
 	const { navigation, route } = props;
 	const { cliente } = props;
-	console.log('por aca en edicion de datos')
-	console.log(route)
+	console.log('por aca en edicion de datos');
+	console.log(route);
 	const [ user, setUser ] = useState(false);
 	const [ currentUser, setCurrentUser ] = useState('');
 
 	const returnData = () => {
 		const data = route.params;
-
-		var collectionName = '';
-		var record_id = '';
-		var current_user_id = '';
-
 
 		return {
 			collectionName: data.collectionName,
@@ -53,7 +45,9 @@ function EditRecord(props) {
 		const user_id = firebase.auth().currentUser.uid;
 		if (user_id == data.current_user_id) {
 			//navigation.navigate('ViewEditNews');
-			navigation.navigate('ViewEditNews', {
+			console.log('name colection: ' + data.collectionName)
+			console.log('vista retornada: ' + returnNameFormViewEdit(data.collectionName))
+			navigation.navigate(returnNameFormViewEdit(data.collectionName), {
 				id: data.record_id,
 				name: data.name,
 				collectionName: data.collectionName,
@@ -65,9 +59,8 @@ function EditRecord(props) {
 	};
 
 	return (
-		<View >
+		<View>
 			{isOwner && (
-
 				<Icon
 					type="material-community"
 					name="pencil"
@@ -76,8 +69,6 @@ function EditRecord(props) {
 					containerStyle={styleFloatButton.btnContainer}
 					onPress={editRecord}
 				/>
-
-
 			)}
 		</View>
 	);
