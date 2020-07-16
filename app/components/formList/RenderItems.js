@@ -16,7 +16,7 @@ import {
 
 function RendenderItems(props) {
 	const { elements, navigation, navigator, collectionName } = props;
-	const { id, image, name, address, description, create_name, create_uid } = elements.item;
+	const { id, image, name, address, description, create_name, create_uid, phone, location } = elements.item;
 	const mainImage = image[0];
 
 	const goElement = () => {
@@ -33,7 +33,10 @@ function RendenderItems(props) {
 			id,
 			name,
 			collectionName,
-			create_uid
+			create_uid,
+			data_collection:{
+				id, image, name, address, description, create_uid, phone, location
+			}
 		});
 	};
 

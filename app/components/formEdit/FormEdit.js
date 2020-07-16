@@ -22,30 +22,37 @@ function FormEdit(props) {
 		setIsVisibleMap,
 		locationForm,
 		setPhone,
+
+
+		placeholder_title,
+		placeholder_description,
+		default_name,
+		default_address,
+		default_description,
+		default_phone
 	} = props;
 
 
-
+	
 	return (
 		<View style={styleForm.viewForm}>
 			<Input
-				placeholder={title}
+				placeholder={placeholder_title}
 				containerStyle={styleForm.input}
 				inputContainerStyle={styleForm.inputForm}
 				errorStyle={{ color: 'red' }}
 				onChange={(even) => setTitle(even.nativeEvent.text)}
-				//autoCapitalize="characters"
 				rightIcon={{
 					type: 'material-community',
 					name: 'format-letter-case',
 					color: '#C2C2C2'
 				}}
-				
+				defaultValue={default_name}
 				
 			/>
 			{addressVisible && (
 				<Input
-					placeholder={address}
+					placeholder='Dirección'
 					containerStyle={styleForm.input}
 					inputContainerStyle={styleForm.inputForm}
 					errorStyle={{ color: 'red' }}
@@ -56,7 +63,7 @@ function FormEdit(props) {
 						color: locationForm ? '#1A89E7' : '#C2C2C2',
 						onPress: () => setIsVisibleMap(true)
 					}}
-					//defaultValue={pet ? (dataPet[0].address ? dataPet[0].address : '') : ''}
+					defaultValue={default_address}
 				/>
 			)}
 
@@ -72,18 +79,18 @@ function FormEdit(props) {
 					name: 'phone',
 					color: '#C2C2C2'
 				}}
-				//defaultValue={pet ? (dataPet[0].phone ? dataPet[0].phone : '') : ''}
+				defaultValue={default_phone}
 			/>
 
 			<View style={styleForm.textAreaContainer}>
 				<TextInput
 					style={styleForm.textArea}
 					underlineColorAndroid="transparent"
-					placeholder={description}
+					placeholder={placeholder_description}
 					placeholderTextColor="grey"
 					multiline={true}
 					onChange={(even) => setDescription(even.nativeEvent.text)}
-					//defaultValue={pet ? (dataPet[0].description ? dataPet[0].description: '') : ''}
+					defaultValue={default_description}
 				/>
 			</View>
 		</View>

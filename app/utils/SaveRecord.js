@@ -331,8 +331,6 @@ export const obtenerUsuarios = async (user_id, funcion) => {
 	}
 };
 
-
-
 /**
  * Funcion que permite crear el registro de una mascota encontrada
  * @param { contiene la informacion necesaria para la creacion} collectionData 
@@ -348,4 +346,58 @@ export const createPetFound = (collectionData, navigation) => {
 		.catch((response) => {
 			console.log('error al crear');
 		});
+};
+
+/**
+ * Funcion que permite retornar la informacion de la coleccion  
+ * @param { nombre de la coleccion} collection 
+ * @param { id del registro} record_id 
+ * @param { variabel para guardar la informacion} data 
+ */
+export const getInfoCollection = async (collection, record_id, data) => {
+	const resultElements = [];
+	if (record_id && collection) {
+		await db
+			.collection(collection)
+			.doc(record_id)
+			.get()
+			.then((response) => {
+				console.log('como que los datos que se consultaron son');
+
+				response.forEach((doc) => {
+					const element = doc.data();
+					element.id = doc.id;
+					resultElements.push(element);
+				});
+				data(resultElements);
+			})
+			.catch((response) => {});
+	}
+};
+
+/**
+ * Funcion que permite actualizar el objeto
+ * @param { nombre de la coleccion} collection 
+ * @param { id del registro} record_id 
+ * @param { datos para actualizar} data 
+ */
+export const updateCollectionRecord = async (collection, record_id, data, setIsLoading, navigation) => {
+	const resultElements = [];
+	if (record_id && collection) {
+		console.log(data)
+		setIsLoading(true);
+		await db
+			.collection(collection)
+			.doc(record_id)
+			.set(data,{ merge: true })
+			.then((response) => {
+				console.log('actalizado');
+				navigation.goBack();
+				setIsLoading(false);
+			})
+			.catch((response) => {
+				console.log('error');
+				setIsLoading(false);
+			});
+	}
 };

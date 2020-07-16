@@ -45,8 +45,8 @@ function DeleteRecord(props) {
 		};
 	};
 
-	console.log('DeleteRecord', returnData().current_user_id);
-	console.log('DeleteRecord cliente', cliente.create_uid);
+	//console.log('DeleteRecord', returnData().current_user_id);
+	//console.log('DeleteRecord cliente', cliente.create_uid);
 
 	let isOwner = returnData().current_user_id == cliente.create_uid;
 

@@ -14,7 +14,12 @@ function EditPetControl(props) {
 	return (
 		<View>
 			<Text>Est es para la edicion de control de mascota</Text>
-            <ViewEdit navigation={navigation} route={route}/>
+            <ViewEdit navigation={navigation} route={route}
+			
+			placeholder_title='Nombre Control'
+			placeholder_description='Describa en breves palabras en que consiste el control.'
+			text_button='Actualizar Control'
+			/>
 		</View>
 	);
 }

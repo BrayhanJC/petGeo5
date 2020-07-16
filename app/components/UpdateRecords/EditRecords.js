@@ -40,16 +40,18 @@ function EditRecord(props) {
 
 	const editRecord = () => {
 		const data = returnData();
+		console.log(props)
 		const user_id = firebase.auth().currentUser.uid;
 		if (user_id == data.current_user_id) {
 			navigation.navigate(returnNameFormViewEdit(data.collectionName), {
 				id: data.record_id,
 				name: data.name,
 				collectionName: data.collectionName,
-				create_uid: data.current_user_id
+				create_uid: data.current_user_id,
+				data_collection: route.params.data_collection
 			});
 		} else {
-			showAlert('No puede eliminar este registro, ya que no es de su propiedad');
+			showAlert('No puede editar este registro, ya que no es de su propiedad');
 		}
 	};
 
