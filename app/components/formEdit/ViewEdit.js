@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, Text, ScrollView, Alert, TextInput, Dimensions } from 'react-native';
 import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
 import { size } from 'lodash';
@@ -11,14 +11,20 @@ import { styleImageMain } from '../../src/css/ImageMain';
 import FormEdit from './FormEdit';
 import UploadImage from '../formMain/UploadImage';
 import ImageMain from '../formMain/ImageMain';
-import Loading from "../../components/Loading";
+import Loading from '../../components/Loading';
 import Map from '../formMain/Map';
+import Toast from 'react-native-easy-toast';
 
 const widhtScreen = Dimensions.get('window').width;
 
 function ViewEdit(props) {
-	const { toastRef, navigation, route, placeholder_title, placeholder_description, text_button } = props;
-	//const { name, id } = route.params;
+	const toastRef = useRef();
+	const { navigation, route, placeholder_title, placeholder_description, text_button, validation_basic } = props;
+	
+
+	navigation.setOptions({
+		title: route.params.name
+	});
 
 	console.log('capturando lso elementos');
 	const data_collection = route.params.data_collection;
@@ -34,7 +40,7 @@ function ViewEdit(props) {
 	const [ isVisibleMap, setIsVisibleMap ] = useState(false);
 	const [ location, setLocation ] = useState(data_collection.location ? data_collection.location : []);
 	const [ phone, setPhone ] = useState(data_collection.phone ? data_collection.phone : '');
-	
+
 	const onSubmit = () => {
 		console.log('Cpturarndo valores para guardar');
 		console.log(title);
@@ -51,8 +57,15 @@ function ViewEdit(props) {
 			location,
 			phone
 		};
+		if (validation_basic){
+			if (title && address && description && imageSelected && phone && location) {
+				updateCollectionRecord(route.params.collectionName, route.params.id, data, setloading, navigation);
+			} else {
+				toastRef.current.show('El comedog debe de tener por lo menos una imagen', 3000);
+			}
+		}
 
-		updateCollectionRecord(route.params.collectionName, route.params.id, data, setloading, navigation);
+
 	};
 
 	return (
@@ -97,6 +110,7 @@ function ViewEdit(props) {
 				setLocationForms={setLocation}
 			/>
 			<Loading isVisible={loading} text="Actualizando..." />
+			<Toast ref={toastRef} position="center" opacity={0.9} />
 		</ScrollView>
 	);
 }
