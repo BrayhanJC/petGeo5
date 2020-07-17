@@ -3,24 +3,23 @@ import { View, Text, ScrollView, Alert, TextInput, Dimensions } from 'react-nati
 import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
 import { size } from 'lodash';
 import firebase from 'firebase/app';
-import { uploadImageStorage } from '../../utils/UploadImageStorage';
-import { updateCollectionRecord } from '../../utils/SaveRecord';
-import { styleForm } from '../../src/css/AddForm';
-import { styleUploadImage } from '../../src/css/UploadImage';
-import { styleImageMain } from '../../src/css/ImageMain';
+import { uploadImageStorage } from '../../../utils/UploadImageStorage';
+import { updateCollectionRecord, createPetFound } from '../../../utils/SaveRecord';
+import { styleForm } from '../../../src/css/AddForm';
+import { styleUploadImage } from '../../../src/css/UploadImage';
+import { styleImageMain } from '../../../src/css/ImageMain';
 import FormEdit from './FormEdit';
-import UploadImage from '../formMain/UploadImage';
-import ImageMain from '../formMain/ImageMain';
-import Loading from '../../components/Loading';
-import Map from '../formMain/Map';
+import UploadImage from '../../formMain/UploadImage';
+import ImageMain from '../../formMain/ImageMain';
+import Loading from '../../Loading';
+import Map from '../../formMain/Map';
 import Toast from 'react-native-easy-toast';
 
 const widhtScreen = Dimensions.get('window').width;
 
 function ViewEdit(props) {
 	const toastRef = useRef();
-	const { navigation, route, placeholder_title, placeholder_description, text_button, validation_basic } = props;
-	
+	const { navigation, route, placeholder_title, placeholder_description, text_button, isMissingPet } = props;
 
 	navigation.setOptions({
 		title: route.params.name
@@ -41,6 +40,8 @@ function ViewEdit(props) {
 	const [ location, setLocation ] = useState(data_collection.location ? data_collection.location : []);
 	const [ phone, setPhone ] = useState(data_collection.phone ? data_collection.phone : '');
 
+	const [ petFound, setpetFound ] = useState('');
+
 	const onSubmit = () => {
 		console.log('Cpturarndo valores para guardar');
 		console.log(title);
@@ -55,17 +56,34 @@ function ViewEdit(props) {
 			description,
 			image: imageSelected,
 			location,
-			phone
+			phone,
+			create_name: data_collection.create_name,
+			create_uid: data_collection.create_uid,
+			create_date:data_collection.create_date
 		};
-		if (validation_basic){
-			if (title && address && description && imageSelected && phone && location) {
-				updateCollectionRecord(route.params.collectionName, route.params.id, data, setloading, navigation);
+
+		if (title && address && description && imageSelected && phone && location) {
+			console.log('la coleccion es asi : ' + route.params.collectionName.toString());
+			console.log(petFound);
+			console.log(petFound && route.params.collectionName == 'missingPets');
+			if (petFound && route.params.collectionName == 'missingPets') {
+				setloading(true)
+				uploadImageStorage(imageSelected, 'petsFound')
+					.then((response) => {
+						console.log('entrando en la imgen para guardar')
+						
+						createPetFound(data, toastRef, navigation, route.id, setloading);
+					})
+					.catch((response) => {
+						console.log('error');
+						setloading(false)
+					});
 			} else {
-				toastRef.current.show('El comedog debe de tener por lo menos una imagen', 3000);
+				updateCollectionRecord(route.params.collectionName, route.params.id, data, setloading, navigation);
 			}
+		} else {
+			toastRef.current.show('Todos los campos son requeridos para la Actualización', 3000);
 		}
-
-
 	};
 
 	return (
@@ -75,7 +93,7 @@ function ViewEdit(props) {
 				toastRef={toastRef}
 				widhtScreen={widhtScreen}
 				imageMain={imageSelected[0]}
-				image_default={require('../../../assets/img/default_comedog.jpg')}
+				image_default={require('../../../../assets/img/default_comedog.jpg')}
 			/>
 
 			<FormEdit
@@ -93,6 +111,9 @@ function ViewEdit(props) {
 				setDescription={setDescription}
 				setIsVisibleMap={setIsVisibleMap}
 				locationForm={location}
+				isMissingPet={isMissingPet}
+				petFound={petFound}
+				setpetFound={setpetFound}
 			/>
 			<UploadImage
 				styleUploadImage={styleUploadImage}

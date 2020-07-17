@@ -16,7 +16,7 @@ import {
 
 function RendenderItems(props) {
 	const { elements, navigation, navigator, collectionName } = props;
-	const { id, image, name, address, description, create_name, create_uid, phone, location } = elements.item;
+	const { id, image, name, address, description, create_name, create_uid, phone, location, create_date } = elements.item;
 	const mainImage = image[0];
 
 	const goElement = () => {
@@ -35,7 +35,7 @@ function RendenderItems(props) {
 			collectionName,
 			create_uid,
 			data_collection:{
-				id, image, name, address, description, create_uid, phone, location
+				id, image, name, address, description, create_uid, phone, location, create_name, create_uid, create_date
 			}
 		});
 	};
@@ -63,7 +63,7 @@ function RendenderItems(props) {
 					{/* <Text style={styletouchableAddressRecords.touchableAddressRecordsStyle}>Dirección: {address}</Text> */}
 					<Text style={styletouchableAddressRecords.touchableAddressRecordsStyle}>Autor: {create_name}</Text>
 					<Text style={styleTouchableDescriptionRecordsRecords.touchableDescriptionRecordsStyle}>
-						{description.substr(0, 60)}...
+						{description.substr(0, 75)}...
 					</Text>
 				</View>
 			</View>

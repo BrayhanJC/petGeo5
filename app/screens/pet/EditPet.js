@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import ViewEdit from '../../components/formEdit/ViewEdit';
+import ViewEditPet from '../../components/formEdit/formPet/ViewEditPet';
 
 function EditPet(props) {
 	console.log('recibiendo datos en la edicion de noticias');
@@ -13,8 +13,7 @@ function EditPet(props) {
 
 	return (
 		<View>
-			<Text>Est es para la edicion de mascota</Text>
-			<ViewEdit
+			<ViewEditPet
 				navigation={navigation}
 				route={route}
 				placeholder_title="Nombre Mascota"

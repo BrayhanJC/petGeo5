@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import ViewEdit from '../../components/formEdit/ViewEdit';
+import ViewEdit from '../../components/formEdit/formaBasic/ViewEdit';
 
 function EditComedog(props) {
 	const { navigation, route } = props;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import ViewEdit from '../../components/formEdit/ViewEdit'
+import ViewEditPetCenter from '../../components/formEdit/formPetCenter/ViewEditPetCenter'
 
 function EditCenter(props) {
 	
@@ -13,7 +13,7 @@ function EditCenter(props) {
 	return (
 		<View>
 			<Text>Esto es para la edicion de center</Text>
-            <ViewEdit navigation={navigation} route={route}/>
+            <ViewEditPetCenter navigation={navigation} route={route}/>
 		</View>
 	);
 }

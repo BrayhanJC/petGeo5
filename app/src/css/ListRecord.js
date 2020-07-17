@@ -13,8 +13,8 @@ export const touchableViewRecords = {
   touchableViewRecordsStyle: {
     flexDirection: "row",
     marginTop: 7,
-    marginLeft: 10,
-    marginRight:10,
+    marginLeft: 5,
+    marginRight:7,
     borderColor: "#C2C2C2",
     borderWidth: 3,
     borderBottomRightRadius:40,
@@ -44,7 +44,7 @@ export const touchableImageRecords = {
 export const touchableNameRecords = {
   touchableNameRecordsStyle: {
     fontWeight: "bold",
-    fontSize:18
+    fontSize:14.5
   },
 };
 
@@ -52,7 +52,8 @@ export const touchableAddressRecords = {
   touchableAddressRecordsStyle: {
     padding: 2,
     color: "black",
-    fontStyle: 'italic'
+    fontStyle: 'italic',
+    fontSize:11
   },
 };
 
@@ -61,6 +62,7 @@ export const touchableDescriptionRecords = {
     paddingTop: 2,
     color: "grey",
     width: 250,
+    fontSize:12
   },
 };
 
@@ -75,7 +77,7 @@ export const noFoundRecords = {
 
 export const textFormatView = {
   textFormat: {
-    margin: 10,
+    margin: 5,
 
   },
 };

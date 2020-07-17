@@ -6,10 +6,10 @@ import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
  * Componente que sirve para Editar:
  * ->  Noticias
  * ->  Mascotas Extraviadas
- * ->  Noticias
+ * ->  Comedogs
  * @param {*} props
  */
-function FormEdit(props) {
+function FormEditPet(props) {
 	const {
 		title,
 		setTitle,
@@ -97,4 +97,4 @@ function FormEdit(props) {
 	);
 }
 
-export default FormEdit;
+export default FormEditPet;

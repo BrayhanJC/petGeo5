@@ -336,14 +336,34 @@ export const obtenerUsuarios = async (user_id, funcion) => {
  * @param { contiene la informacion necesaria para la creacion} collectionData 
  * @param { permite regresar al menu principal} navigation 
  */
-export const createPetFound = (collectionData, navigation) => {
+export const createPetFound = (collectionData, toastRef, navigation, record_id, setloading) => {
+	console.log('creando mascota encontrada');
+	console.log(collectionData);
 	db
 		.collection('petsFound')
 		.add(collectionData)
 		.then(() => {
-			navigation.goBack();
+			//toastRef.current.show('Felicitaciones, por tener de vuelta tu Mascota', 3000);
+
+			setloading(false);
+			navigation.navigate('HomeStack');
+			// db
+			// 	.collection('missingPets')
+			// 	.doc(record_id)
+			// 	.delete()
+			// 	.then((response) => {
+			// 		setloading(false);
+			// 		console.log('Se ha eliminado el registro con exito');
+			// 		navigation.navigate('HomeStack');
+			// 	})
+			// 	.catch(function(error) {
+			// 		setloading(false);
+			// 		navigation.navigate('HomeStack');
+			// 		console.log('Ha Ocurrido un error al eliminar');
+			// 	});
 		})
 		.catch((response) => {
+			setloading(false);
 			console.log('error al crear');
 		});
 };
@@ -384,12 +404,11 @@ export const getInfoCollection = async (collection, record_id, data) => {
 export const updateCollectionRecord = async (collection, record_id, data, setIsLoading, navigation) => {
 	const resultElements = [];
 	if (record_id && collection) {
-		console.log(data)
 		setIsLoading(true);
 		await db
 			.collection(collection)
 			.doc(record_id)
-			.set(data,{ merge: true })
+			.set(data, { merge: true })
 			.then((response) => {
 				console.log('actalizado');
 				navigation.goBack();

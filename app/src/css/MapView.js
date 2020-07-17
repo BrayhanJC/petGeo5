@@ -22,6 +22,7 @@ export const styleMapForm = {
 
   viewMapBtnCancel: {
     backgroundColor: "#a60d0d",
+    borderRadius:40
   },
 
   viewMapBtnContainerSave: {
@@ -31,6 +32,7 @@ export const styleMapForm = {
 
   viewMapBtnSave: {
     backgroundColor: "#1A89E7",
+    borderRadius:40
   },
 };
 

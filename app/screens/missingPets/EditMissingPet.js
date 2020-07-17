@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import ViewEdit from '../../components/formEdit/ViewEdit';
+import ViewEdit from '../../components/formEdit/formaBasic/ViewEdit';
 
 function EditMissingPet(props) {
 	const { navigation, route } = props;
@@ -12,7 +12,7 @@ function EditMissingPet(props) {
 				placeholder_title="Titulo Reporte"
 				placeholder_description="Describa en breves palabras como es la mascota y cual fue el ultimo lugar en que lo vio ..."
 				text_button="Actualizar Reporte"
-				validation_basic={true}
+				isMissingPet={true}
 			/>
 		</View>
 	);
