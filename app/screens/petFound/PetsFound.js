@@ -67,7 +67,7 @@ function PetsFound(props) {
 				setItem={setItem}
 				item={item}
 				collection="petsFound"
-				placeholderDefault="Buscar Mascotas Encontradas..."
+				placeholderDefault="Buscar Mascotas Encontradas..." 
 			/>
 
 			{!isEmpty(search) && size(item) > 0 ? (

@@ -7,7 +7,7 @@ import { FireSQL } from 'firesql';
 import {size} from 'lodash'
 const fireSQL = new FireSQL(firebase.firestore(), { includeId: 'id' });
 const Search = (props) => {
-	const { navigation, search, setSearch, collection, item, setItem, placeholderDefault } = props;
+	const { navigation, search, setSearch, collection, item, setItem, placeholderDefault, userInfo } = props;
 
 	const [ loading, setLoading ] = useState(false);
 
@@ -15,8 +15,8 @@ const Search = (props) => {
 		() => {
 			if (search) {
 				setLoading(true);
-				//console.log(search)
 				//console.log(`SELECT * FROM ${collection} WHERE name LIKE '${search}%' `)
+				console.log(userInfo)
 				fireSQL
 					.query(`SELECT * FROM ${collection}`)
 					.then((response) => {
@@ -26,6 +26,13 @@ const Search = (props) => {
 							//console.log(valueItem.name.toLowerCase() + ' esta la palabra: ' + search + ' con valor de: ' + valueItem.name.toLowerCase().includes(search))
 							return valueItem.name.toLowerCase().includes(search.toLowerCase())
 						})
+						if ((collection == 'petDoctor') || collection == 'pet'){
+							data = data.filter( valueItem => {
+								return valueItem.create_uid == userInfo
+							})
+						}
+
+
 						//const result = words.filter(word => word.length > 6);
 						//console.log(data)
 						setItem(data);
