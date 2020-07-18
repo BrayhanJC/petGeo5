@@ -86,7 +86,7 @@ function ListRecords(props) {
 						}
 					}}
 					keyExtractor={(item, index) => index.toString()}
-					onEndReachedThreshold={0.5}
+					onEndReachedThreshold={0}
 					onEndReached={handleLoadMore}
 					ListFooterComponent={<FooterList isLoading={isLoading} />}
 				/>

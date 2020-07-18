@@ -2,20 +2,20 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { StyleSheet, View, Text, AsyncStorage } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { styles } from '../../src/css/News';
-import firebase from 'firebase/app';
 import { listRecords, handleLoadMore, getInfoByUser } from '../../utils/SaveRecord';
 import ListRecords from '../../components/formList/ListRecords';
 import { useFocusEffect } from '@react-navigation/native';
 import Search from '../../components/formSearch/Search';
 import NotFoundItem from '../../components/formSearch/NotFoundItem';
 import { size, isEmpty } from 'lodash';
-
+import firebase from 'firebase/app';
 import UserData from '../account/UserData';
 
 const INFO_USER = '@info_user:key';
 /***
  * Allows to see all the news of the veterinary centers and animal foundations
  */
+
 function News(props) {
 	//se puede obtener porque esta en la screen principal
 	const { navigation } = props;
@@ -25,7 +25,6 @@ function News(props) {
 	const [totalNews, setTotalNews] = useState(0);
 	const [startNews, setStartNews] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
-
 	//variables para el popup
 	const [elements, setElements] = useState('');
 	const [modalVisible, setModalVisible] = useState(false);
@@ -82,6 +81,8 @@ function News(props) {
 						navigation={navigation}
 						navigator="ViewNews"
 						collectionName="news"
+						setIsLoading={setIsLoading}
+						handleLoadMore={() => handleLoadMore('news', News, totalNews, isLoading,setIsLoading, startNews, setStartNews, setNews)}
 					/>
 				</View>
 			)}
