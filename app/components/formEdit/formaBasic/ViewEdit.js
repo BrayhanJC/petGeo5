@@ -59,7 +59,7 @@ function ViewEdit(props) {
 			phone,
 			create_name: data_collection.create_name,
 			create_uid: data_collection.create_uid,
-			create_date:data_collection.create_date
+			create_date: data_collection.create_date ? petFound : new Date() 
 		};
 
 		if (title && address && description && imageSelected && phone && location) {
@@ -67,16 +67,16 @@ function ViewEdit(props) {
 			console.log(petFound);
 			console.log(petFound && route.params.collectionName == 'missingPets');
 			if (petFound && route.params.collectionName == 'missingPets') {
-				setloading(true)
+				setloading(true);
 				uploadImageStorage(imageSelected, 'petsFound')
 					.then((response) => {
-						console.log('entrando en la imgen para guardar')
-						
+						console.log('entrando en la imgen para guardar');
+
 						createPetFound(data, toastRef, navigation, route.id, setloading);
 					})
 					.catch((response) => {
 						console.log('error');
-						setloading(false)
+						setloading(false);
 					});
 			} else {
 				updateCollectionRecord(route.params.collectionName, route.params.id, data, setloading, navigation);

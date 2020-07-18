@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, ScrollView, Alert, TextInput } from 'react-native';
 import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
-
+import { styleCreateForm } from '../../../src/css/CreateForm';
+import RNPickerSelect from 'react-native-picker-select';
+import firebase from 'firebase/app';
+import { stylePicker } from '../../../src/css/PickerSelect';
+import { TYPE_CONTROL } from '../../../utils/Configurations';
+import { getRecord } from '../../../utils/SaveRecord';
+import { useFocusEffect } from '@react-navigation/native';
 /**
  * Componente que sirve para Editar:
  * ->  Noticias
@@ -11,84 +17,111 @@ import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
  */
 function FormEditPetControl(props) {
 	const {
-		title,
-		setTitle,
-		address,
-		setAddress,
+
 		description,
 		setDescription,
-		addressVisible,
+		
 		styleForm,
-		setIsVisibleMap,
-		locationForm,
-		setPhone,
+
 
 
 		placeholder_title,
 		placeholder_description,
 		default_name,
-		default_address,
+
 		default_description,
-		default_phone
+
+
+
+		setNameControl,
+		setTypeControl,
+		setPet,
+
+		pet,
+		typeControl,
+		nameControl,
+
+
+
+
+
+
+
+
+
 	} = props;
 
 
+
+
+	const [ elements, setElements ] = useState(null);
+
+	useFocusEffect(
+		useCallback(() => {
+			getRecord('pet', firebase.auth().currentUser.uid, setElements);
+		}, [])
+	);
+
+	var list_pets = [];
+	if (elements) {
+		for (let index = 0; index < elements.length; index++) {
+			list_pets.push({
+				label: elements[index]['name'],
+				value: elements[index]['id'] + '*' + elements[index]['name']
+			});
+		}
+	}
 	
 	return (
 		<View style={styleForm.viewForm}>
+			<RNPickerSelect
+				onValueChange={(value) => setPet(value)}
+				placeholder={{
+					label: 'Mascota',
+					value: null,
+					color: '#1A89E7'
+				}}
+				value={pet}
+				style={stylePicker}
+				items={list_pets}
+				Icon={() => {
+					return <View style={stylePicker.iconStyle} />;
+				}}
+			/>
+
+			<RNPickerSelect
+				onValueChange={(value) => setTypeControl(value)}
+				placeholder={{
+					label: 'Tipo de Control',
+					value: null,
+					color: '#1A89E7'
+				}}
+				value={typeControl}
+				style={stylePicker}
+				items={TYPE_CONTROL}
+				Icon={() => {
+					return <View style={stylePicker.iconStyle} />;
+				}}
+			/>
+
 			<Input
 				placeholder={placeholder_title}
-				containerStyle={styleForm.input}
-				inputContainerStyle={styleForm.inputForm}
+				containerStyle={styleCreateForm.input}
+				inputContainerStyle={styleCreateForm.inputForm}
 				errorStyle={{ color: 'red' }}
-				onChange={(even) => setTitle(even.nativeEvent.text)}
-				rightIcon={{
-					type: 'material-community',
-					name: 'format-letter-case',
-					color: '#C2C2C2'
-				}}
-				defaultValue={default_name}
+				onChange={(even) => setNameControl(even.nativeEvent.text)}
 				
-			/>
-			{addressVisible && (
-				<Input
-					placeholder='Dirección'
-					containerStyle={styleForm.input}
-					inputContainerStyle={styleForm.inputForm}
-					errorStyle={{ color: 'red' }}
-					onChange={(even) => setAddress(even.nativeEvent.text)}
-					rightIcon={{
-						type: 'material-community',
-						name: 'google-maps',
-						color: locationForm ? '#1A89E7' : '#C2C2C2',
-						onPress: () => setIsVisibleMap(true)
-					}}
-					defaultValue={default_address}
-				/>
-			)}
-
-			<Input
-				placeholder="Teléfono o Celular"
-				containerStyle={styleForm.input}
-				inputContainerStyle={styleForm.inputForm}
-				errorStyle={{ color: 'red' }}
-				keyboardType="numeric"
-				onChange={(even) => setPhone(even.nativeEvent.text)}
-				rightIcon={{
-					type: 'material-community',
-					name: 'phone',
-					color: '#C2C2C2'
-				}}
-				defaultValue={default_phone}
+				defaultValue={default_name}
 			/>
 
-			<View style={styleForm.textAreaContainer}>
+			<View style={styleCreateForm.textAreaContainer}>
 				<TextInput
-					style={styleForm.textArea}
+					style={styleCreateForm.textArea}
 					underlineColorAndroid="transparent"
-					placeholder={placeholder_description}
+					placeholder="Describa en breves palabras en que consistio el actual procedimiento que se le va a realizar a su mascota"
 					placeholderTextColor="grey"
 					multiline={true}
+					
 					onChange={(even) => setDescription(even.nativeEvent.text)}
 					defaultValue={default_description}
 				/>

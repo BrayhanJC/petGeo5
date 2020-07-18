@@ -14,12 +14,12 @@ import Loading from '../../Loading';
 import Map from '../../formMain/Map';
 import Toast from 'react-native-easy-toast';
 import FormEditPetControl from './FormEditPetControl';
-
+import {isEmpty} from 'lodash'
 const widhtScreen = Dimensions.get('window').width;
 
 function ViewEditPetControl(props) {
 	const toastRef = useRef();
-	const { navigation, route, placeholder_title, placeholder_description, text_button, validation_basic, validation_pet, validation_petControl } = props;
+	const { navigation, route, placeholder_title, placeholder_description, text_button, petControl } = props;
 	
 
 	navigation.setOptions({
@@ -27,47 +27,47 @@ function ViewEditPetControl(props) {
 	});
 
 	console.log('capturando lso elementos');
-	const data_collection = route.params.data_collection;
+	const data_collection = route.params.petControl;
 	console.log(data_collection);
 
 	const [ loading, setloading ] = useState(false);
 
 	//campos basicos para las colecciones
-	const [ title, setTitle ] = useState(data_collection.name ? data_collection.name : '');
-	const [ address, setAddress ] = useState(data_collection.address ? data_collection.address : '');
+
+
+
+	const [ pet, setPet ] = useState(data_collection.pet ? data_collection.pet : '');
+	const [ typeControl, setTypeControl ] = useState(data_collection.type_control ? data_collection.type_control : '');
+	const [ nameControl, setNameControl ] = useState(data_collection.name ? data_collection.name : '');
 	const [ description, setDescription ] = useState(data_collection.description ? data_collection.description : '');
-	const [ imageSelected, setImageSelected ] = useState(data_collection.image ? data_collection.image : []);
-	const [ isVisibleMap, setIsVisibleMap ] = useState(false);
-	const [ location, setLocation ] = useState(data_collection.location ? data_collection.location : []);
-	const [ phone, setPhone ] = useState(data_collection.phone ? data_collection.phone : '');
+	const [ imageSelected, setImageSelected ] = useState(data_collection.image_id ? data_collection.image_id : []);
 
 	const onSubmit = () => {
-		console.log('Cpturarndo valores para guardar');
-		console.log(title);
-		console.log(address);
-		console.log(phone);
-		console.log(description);
-		console.log(location);
-		console.log(imageSelected);
+		console.log('Cpturarndo valores en control');
 		const data = {
-			name: title,
-			address,
+			name: nameControl,
+			type_control:typeControl, 
 			description,
-			image: imageSelected,
-			location,
-			phone
+			image_id: imageSelected,
+			pet_id:pet
 		};
-		if (validation_basic){
-			if (title && address && description && imageSelected && phone && location) {
-				updateCollectionRecord(route.params.collectionName, route.params.id, data, setloading, navigation);
-			} else {
-				toastRef.current.show('El comedog debe de tener por lo menos una imagen', 3000);
+	
+		if (nameControl && typeControl && description && imageSelected && pet) {
+			updateCollectionRecord('petControl', route.params.id, data, setloading, navigation);
+		} else {
+			if (isEmpty(nameControl)){
+				toastRef.current.show('Debe incluir el nombre del Control', 3000);
+			}else if (!pet){
+				toastRef.current.show('Debe seleccionar una Mascota', 3000);
+			}else if (!typeControl){
+				toastRef.current.show('Debe seleccionar un Tipo de Control', 3000);
+			}else if (!description){
+				toastRef.current.show('Debe incluir una descripción para el control actual', 3000);
+			}else{
+				toastRef.current.show('Asegurese de llenar los datos principales', 3000);
 			}
 		}
-
-
-
-
+		
 
 	};
 
@@ -82,20 +82,29 @@ function ViewEditPetControl(props) {
 			/>
 
 			<FormEditPetControl
+
 				placeholder_title={placeholder_title}
 				placeholder_description={placeholder_description}
 				default_name={data_collection.name}
-				default_address={data_collection.address}
+				
 				default_description={data_collection.description}
-				default_phone={data_collection.phone}
-				addressVisible={true}
+				
+			
 				styleForm={styleForm}
-				setTitle={setTitle}
-				setAddress={setAddress}
-				setPhone={setPhone}
+				
+
+				setNameControl={setNameControl}
+				setTypeControl={setTypeControl}
 				setDescription={setDescription}
-				setIsVisibleMap={setIsVisibleMap}
-				locationForm={location}
+				setPet={setPet}
+
+				pet={pet}
+				typeControl={typeControl}
+				nameControl={nameControl}
+				description={description}
+				
+
+				
 			/>
 			<UploadImage
 				styleUploadImage={styleUploadImage}
@@ -106,12 +115,6 @@ function ViewEditPetControl(props) {
 
 			<Button buttonStyle={styleForm.btnCreate} title={text_button} onPress={onSubmit} />
 
-			<Map
-				isVisibleMap={isVisibleMap}
-				setIsVisibleMap={setIsVisibleMap}
-				toastRef={toastRef}
-				setLocationForms={setLocation}
-			/>
 			<Loading isVisible={loading} text="Actualizando..." />
 			<Toast ref={toastRef} position="center" opacity={0.9} />
 		</ScrollView>

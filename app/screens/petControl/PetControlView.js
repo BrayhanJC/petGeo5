@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, ScrollView, Dimensions } from 'react-native';
 import { firebaseApp } from '../../utils/FireBase';
 import firebase from 'firebase/app';
@@ -13,7 +13,7 @@ import { viewFormStyle } from '../../src/css/ViewForm';
 import EditRecord from '../../components/UpdateRecords/EditRecords';
 const db = firebase.firestore(firebaseApp);
 const screenWidth = Dimensions.get('window').width;
-
+import { useFocusEffect } from '@react-navigation/native';
 const PetControlView = (props) => {
 	const { navigation, route } = props;
 	const { name, id } = route.params;
@@ -24,8 +24,9 @@ const PetControlView = (props) => {
 
 	const [ petControl, setPetControl ] = useState(null);
 
-	useEffect(() => {
-		db
+	useFocusEffect(
+		useCallback(() => {
+			db
 			.collection('petControl')
 			.doc(id)
 			.get()
@@ -35,7 +36,9 @@ const PetControlView = (props) => {
 				setPetControl(data);
 			})
 			.catch();
-	}, []);
+		}, [])
+	);
+
 
 	if (!petControl) return <Loading isVisible={true} text="Cargando..." />;
 
@@ -90,7 +93,7 @@ const PetControlView = (props) => {
 			<TitleItem name={petControl.name} description={petControl.description} showRating={false} />
 			<InfoItem name={petControl.name} listInfo={listInfo} showMap={false} nameInfo="el Control" />
 			<View style={{ flex: 1, marginTop: 80 }}>
-				<EditRecord navigation={navigation} route={route} />
+				<EditRecord navigation={navigation} route={route} petControl={petControl}/>
 			</View>
 		</ScrollView>
 	);

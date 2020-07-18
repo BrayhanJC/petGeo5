@@ -14,61 +14,70 @@ import ImageMain from '../../formMain/ImageMain';
 import Loading from '../../Loading';
 import Map from '../../formMain/Map';
 import Toast from 'react-native-easy-toast';
-
+import {isEmpty} from 'lodash'
 const widhtScreen = Dimensions.get('window').width;
 
 function ViewEditPet(props) {
 	const toastRef = useRef();
-	const { navigation, route, placeholder_title, placeholder_description, text_button, validation_basic, validation_pet, validation_petControl } = props;
-	
+	const {
+		navigation,
+		route,
+		placeholder_title,
+		placeholder_description,
+		text_button,
+		pet
 
+	} = props;
+	console.log('***********************************')
+	console.log(pet)
 	navigation.setOptions({
 		title: route.params.name
 	});
 
-	console.log('capturando lso elementos');
-	const data_collection = route.params.data_collection;
+	console.log('capturando los datos de la mascota');
+	const data_collection = route.params.pet;
 	console.log(data_collection);
 
 	const [ loading, setloading ] = useState(false);
 
-	//campos basicos para las colecciones
-	const [ title, setTitle ] = useState(data_collection.name ? data_collection.name : '');
-	const [ address, setAddress ] = useState(data_collection.address ? data_collection.address : '');
+	const [ valueTypePet, setValueTypePet ] = useState(data_collection.type ? data_collection.type : '');
+	const [ valueSex, setValueSex ] = useState(data_collection.sex ? data_collection.sex : '');
+	const [ namePet, setNamePet ] = useState(data_collection.name ? data_collection.name : '');
 	const [ description, setDescription ] = useState(data_collection.description ? data_collection.description : '');
+	const [ valueRaza, setValueRaza ] = useState(data_collection.raza ? data_collection.raza : '');
+	const [ valueDate, setValueDate ] = useState({ date: new Date() });
 	const [ imageSelected, setImageSelected ] = useState(data_collection.image ? data_collection.image : []);
-	const [ isVisibleMap, setIsVisibleMap ] = useState(false);
-	const [ location, setLocation ] = useState(data_collection.location ? data_collection.location : []);
-	const [ phone, setPhone ] = useState(data_collection.phone ? data_collection.phone : '');
+	const [ error, setError ] = useState('');
 
 	const onSubmit = () => {
-		console.log('Cpturarndo valores para guardar');
-		console.log(title);
-		console.log(address);
-		console.log(phone);
-		console.log(description);
-		console.log(location);
-		console.log(imageSelected);
 		const data = {
-			name: title,
-			address,
-			description,
+			name: namePet,
 			image: imageSelected,
-			location,
-			phone
+			raza: valueRaza,
+			sex: valueSex,
+			type:valueTypePet,
+			description,
+			date_birth:valueDate
+			
 		};
-		if (validation_basic){
-			if (title && address && description && imageSelected && phone && location) {
-				updateCollectionRecord(route.params.collectionName, route.params.id, data, setloading, navigation);
-			} else {
-				toastRef.current.show('El comedog debe de tener por lo menos una imagen', 3000);
+
+		if (namePet && valueRaza && valueTypePet  && valueDate && valueSex) {
+			updateCollectionRecord('pet', route.params.id, data, setloading, navigation);
+		} else {
+			if (isEmpty(namePet)){
+				toastRef.current.show('Debe incluir el nombre de la Mascota', 3000);
+			}else if (!valueTypePet){
+				toastRef.current.show('Debe seleccionar el Tipo de Mascota', 3000);
+			}else if (!valueRaza){
+				toastRef.current.show('Debe seleccionar la Raza', 3000);
+			}else if (!valueSex){
+				toastRef.current.show('Debe seleccionar el Género de la Mascota', 3000);
+			}else{
+				toastRef.current.show('Asegurese de llenar los datos principales', 3000);
 			}
+			
+			
 		}
-
-
-
-
-
 	};
 
 	return (
@@ -78,24 +87,31 @@ function ViewEditPet(props) {
 				toastRef={toastRef}
 				widhtScreen={widhtScreen}
 				imageMain={imageSelected[0]}
-				image_default={require('../../../../assets/img/default_comedog.jpg')}
+				image_default={require('../../../../assets/img/avatar_dog.png')}
 			/>
 
 			<FormEditPet
 				placeholder_title={placeholder_title}
 				placeholder_description={placeholder_description}
 				default_name={data_collection.name}
-				default_address={data_collection.address}
+				default_raza={data_collection.raza}
+				default_sex={data_collection.sex}
+				default_type={data_collection.type}
 				default_description={data_collection.description}
-				default_phone={data_collection.phone}
-				addressVisible={true}
+				default_date={data_collection.date_birth}
 				styleForm={styleForm}
-				setTitle={setTitle}
-				setAddress={setAddress}
-				setPhone={setPhone}
+				valueTypePet={valueTypePet}
+				setValueTypePet={setValueTypePet}
+				valueSex={valueSex}
+				setValueSex={setValueSex}
+				namePet={namePet}
+				setNamePet={setNamePet}
 				setDescription={setDescription}
-				setIsVisibleMap={setIsVisibleMap}
-				locationForm={location}
+				valueRaza={valueRaza}
+				setValueRaza={setValueRaza}
+				valueDate={valueDate}
+				setValueDate={setValueDate}
+				error={error}
 			/>
 			<UploadImage
 				styleUploadImage={styleUploadImage}
@@ -106,12 +122,6 @@ function ViewEditPet(props) {
 
 			<Button buttonStyle={styleForm.btnCreate} title={text_button} onPress={onSubmit} />
 
-			<Map
-				isVisibleMap={isVisibleMap}
-				setIsVisibleMap={setIsVisibleMap}
-				toastRef={toastRef}
-				setLocationForms={setLocation}
-			/>
 			<Loading isVisible={loading} text="Actualizando..." />
 			<Toast ref={toastRef} position="center" opacity={0.9} />
 		</ScrollView>

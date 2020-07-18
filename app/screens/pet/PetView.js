@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, ScrollView, Dimensions } from 'react-native';
 import { firebaseApp } from '../../utils/FireBase';
 import firebase from 'firebase/app';
@@ -9,6 +9,7 @@ import CarouselImages from '../../components/CarouselImages';
 import TitleItem from '../../components/formView/TitleItem';
 import InfoItem from '../../components/formView/InfoItem';
 import EditRecord from '../../components/UpdateRecords/EditRecords';
+import { useFocusEffect } from '@react-navigation/native';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -24,8 +25,9 @@ const PetView = (props) => {
 
 	const [ pet, setPet ] = useState(null);
 
-	useEffect(() => {
-		db
+	useFocusEffect(
+		useCallback(() => {
+			db
 			.collection('pet')
 			.doc(id)
 			.get()
@@ -35,9 +37,17 @@ const PetView = (props) => {
 				setPet(data);
 			})
 			.catch();
-	}, []);
+		}, [])
+	);
+
+
+
+
+
 
 	if (!pet) return <Loading isVisible={true} text="Cargando..." />;
+
+
 
 	const listInfo = [
 		{
@@ -65,7 +75,7 @@ const PetView = (props) => {
 			action: null
 		},
 		{
-			text: 'Nacimiento: ' + pet.date_birth,
+			text: 'Nacimiento:' + pet.date_birth ,
 			iconName: 'balloon',
 			iconType: 'material-community',
 			action: null
@@ -78,7 +88,7 @@ const PetView = (props) => {
 			<TitleItem name={pet.name} description={pet.description} showRating={false} showDescription={true}/>
 			<InfoItem name={pet.name} listInfo={listInfo} showMap={false} nameInfo="la Mascota" />
 			<View style={{ flex: 1, marginTop: 30  }}>
-				<EditRecord navigation={navigation} route={route} />
+				<EditRecord navigation={navigation} route={route} pet={pet}/>
 			</View>
 		</ScrollView>
 	);

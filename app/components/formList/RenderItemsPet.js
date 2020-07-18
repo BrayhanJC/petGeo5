@@ -16,7 +16,7 @@ import {
 
 function RendenderItemsPet(props) {
 	const { elements, navigation, collectionName } = props;
-	const { id, image_id, name, type, sex, raza, create_uid, date_birth } = elements.item;
+	const { id, image_id, name, type, sex, raza, create_uid, date_birth, description } = elements.item;
 	const mainImage = image_id[0];
 
 	const goElement = () => {
@@ -26,7 +26,7 @@ function RendenderItemsPet(props) {
 			collectionName,
 			create_uid,
 			data_collection:{
-				id, image:image_id, name, type, sex, raza, date_birth
+				id, image:image_id, name, type, sex, raza, date_birth, description
 			}
 		});
 	};
