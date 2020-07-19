@@ -53,6 +53,7 @@ function MenuTabs(props) {
 
 	return (
 		<Tab.Navigator
+			lazy={false}
 			activeColor="#e91e63"
 			style={{ backgroundColor: 'tomato' }}
 			tabBarOptions={{
