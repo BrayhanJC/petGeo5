@@ -45,7 +45,7 @@ function ListRecords(props) {
 	}
 
 	return (
-		<View>
+		<View style={{flex: 1}}>
 			{size(dataRender) > 0 ? (
 				<FlatList
 					data={dataRender}
