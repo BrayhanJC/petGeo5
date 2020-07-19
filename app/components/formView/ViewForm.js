@@ -37,7 +37,8 @@ const ViewForm = (props) => {
 					const data = response.data();
 					data.id = response.id;
 					setItem(data);
-					setRating(data.rating);
+					//setRating(data.rating);
+					data.rating && setRating(data.rating);
 				})
 				.catch();
 		}, [])

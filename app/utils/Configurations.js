@@ -514,4 +514,7 @@ export const returnNameFormViewEdit = (collection) => {
 	if (collection === 'petControl') {
 		return 'ViewEditPetControl';
 	}
+	if (collection === 'petDoctor') {
+		return 'ViewEditDoctor';
+	}
 };

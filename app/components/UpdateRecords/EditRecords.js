@@ -17,7 +17,7 @@ import { connect } from 'react-redux';
  * @param {*} props
  */
 function EditRecord(props) {
-	const { navigation, route, pet, petControl } = props;
+	const { navigation, route, pet, petControl, petDoctor } = props;
 	const { cliente } = props;
 	const [ user, setUser ] = useState(false);
 	const [ currentUser, setCurrentUser ] = useState('');
@@ -50,7 +50,8 @@ function EditRecord(props) {
 				create_uid: data.current_user_id,
 				data_collection: route.params.data_collection,
 				pet,
-				petControl
+				petControl,
+				petDoctor
 			});
 		} else {
 			showAlert('No puede editar este registro, ya que no es de su propiedad');
