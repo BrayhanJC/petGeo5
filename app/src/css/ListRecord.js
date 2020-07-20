@@ -15,21 +15,24 @@ export const touchableViewRecords = {
     marginTop: 7,
     marginLeft: 10,
     marginRight:10,
-    borderColor: "#C2C2C2",
-    borderWidth: 3,
-    borderBottomRightRadius:40,
-    borderTopRightRadius: 40,
-    borderBottomLeftRadius: 20,
-    borderTopLeftRadius: 20,
-    shadowOffset: { width: 2, height: 2 },
-    shadowOpacity: 0.2
+    backgroundColor: 'white',
+    borderRadius: 15,
+    shadowColor: '#000',
+    shadowOffset: {
+        width: 0,
+        height: 1
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    elevation: 3,
+    paddingVertical: '1%'
   },
 };
 
 export const touchableViewImageRecords = {
   touchableViewImageRecordsStyle: {
     marginLeft: 1,
-
+    justifyContent: 'center'
   },
 };
 
