@@ -33,15 +33,12 @@ function EditRecord(props) {
 		};
 	};
 
-	console.log('editando Record', returnData().current_user_id);
-	console.log('editando Record cliente', cliente.create_uid);
 
 	let isOwner = returnData().current_user_id == cliente.create_uid;
 
 	const editRecord = () => {
 		const data = returnData();
 		
-		console.log(props)
 		const user_id = firebase.auth().currentUser.uid;
 		if (user_id == data.current_user_id) {
 			navigation.navigate(returnNameFormViewEdit(data.collectionName ? data.collectionName : props.collection), {

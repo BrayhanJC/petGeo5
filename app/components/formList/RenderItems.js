@@ -20,10 +20,10 @@ function RendenderItems(props) {
 	const mainImage = image[0];
 
 	const goElement = () => {
-		console.log(collectionName)
+		//console.log(collectionName)
 		if (collectionName == 'petCenters'){
-			console.log('**************************')
-			console.log('entramos en solo centros')
+			//console.log('**************************')
+			//console.log('entramos en solo centros')
 			navigation.navigate(navigator, {
 				id,
 				name,
@@ -34,8 +34,8 @@ function RendenderItems(props) {
 				}
 			});
 		}else{
-			console.log('---------------------------')
-			console.log('entramos en el normal')
+			//console.log('---------------------------')
+			//console.log('entramos en el normal')
 			navigation.navigate(navigator, {
 				id,
 				name,

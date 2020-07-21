@@ -27,7 +27,6 @@ function DeleteRecord(props) {
 		var collectionName = '';
 		var record_id = '';
 		var current_user_id = '';
-		console.log(data);
 		for (let index = 0; index < data.length; index++) {
 			if (data[index].params != undefined) {
 				if (data[index].params.collectionName) {

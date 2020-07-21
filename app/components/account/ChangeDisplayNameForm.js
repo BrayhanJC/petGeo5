@@ -115,9 +115,9 @@ function ChangeDisplayNameForm(props) {
 				setError('El nombre no puede ser igual al actual.');
 			} else {
 				setError('');
-				console.log('entrando');
+				//console.log('entrando');
 				if (newDisplayName) {
-					console.log('sdsds');
+					//console.log('sdsds');
 					setErrorNames(null);
 					setErrorLastNames(null);
 					const update = {

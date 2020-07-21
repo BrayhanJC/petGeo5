@@ -38,7 +38,7 @@ function CreateNewsForm(props) {
 
 
 		setIsLoading(false);
-		console.log(firebase.auth().currentUser)
+		
 		if (!title || !address || !description) {
 			toastRef.current.show('Todos los campos del formulario son obligatorios');
 		} else if (size(imageSelected) === 0) {
@@ -80,7 +80,6 @@ function CreateNewsForm(props) {
 
 	const sendNotification = async () => {
 
-		console.log('hola')
 
 		const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
 		let finalStatus = status
@@ -90,11 +89,11 @@ function CreateNewsForm(props) {
 			 finalStatus = status
 		}
 
-		console.log(finalStatus)
+
 		// if (finalStatus !== 'granted' ){
 		// 	return
 		// }
-		console.log('token es:')
+		
 		let token = (await Notifications.getExpoPushTokenAsync()).data
 		
 		console.log(token)

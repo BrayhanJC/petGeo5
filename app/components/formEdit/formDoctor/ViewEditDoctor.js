@@ -34,9 +34,9 @@ function ViewEditVeterinary(props) {
 		title: route.params.name
 	});
 
-	console.log('capturando lso elementos');
+	//console.log('capturando lso elementos');
 	const data_collection = route.params.petDoctor;
-	console.log(data_collection);
+	//console.log(data_collection);
 
 	const [ loading, setloading ] = useState(false);
 

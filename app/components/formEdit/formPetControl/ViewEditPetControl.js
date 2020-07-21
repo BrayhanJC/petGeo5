@@ -26,9 +26,9 @@ function ViewEditPetControl(props) {
 		title: route.params.name
 	});
 
-	console.log('capturando lso elementos');
+	//console.log('capturando lso elementos');
 	const data_collection = route.params.petControl;
-	console.log(data_collection);
+	//console.log(data_collection);
 
 	const [ loading, setloading ] = useState(false);
 
@@ -43,7 +43,7 @@ function ViewEditPetControl(props) {
 	const [ imageSelected, setImageSelected ] = useState(data_collection.image_id ? data_collection.image_id : []);
 
 	const onSubmit = () => {
-		console.log('Cpturarndo valores en control');
+		//console.log('Cpturarndo valores en control');
 		const data = {
 			name: nameControl,
 			type_control:typeControl, 

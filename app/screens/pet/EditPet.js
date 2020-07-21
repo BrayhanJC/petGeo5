@@ -3,8 +3,6 @@ import { View, Text } from 'react-native';
 import ViewEditPet from '../../components/formEdit/formPet/ViewEditPet';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 function EditPet(props) {
-	console.log('recibiendo datos en la edicion de noticias');
-
 	const { navigation, route } = props;
 	const { name, id } = route.params;
 	navigation.setOptions({

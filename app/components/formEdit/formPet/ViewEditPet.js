@@ -28,15 +28,15 @@ function ViewEditPet(props) {
 		pet
 
 	} = props;
-	console.log('***********************************')
-	console.log(pet)
+	// console.log('***********************************')
+	// console.log(pet)
 	navigation.setOptions({
 		title: route.params.name
 	});
 
-	console.log('capturando los datos de la mascota');
+	//console.log('capturando los datos de la mascota');
 	const data_collection = route.params.pet;
-	console.log(data_collection);
+	//console.log(data_collection);
 
 	const [ loading, setloading ] = useState(false);
 

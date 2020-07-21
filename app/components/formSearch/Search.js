@@ -11,26 +11,21 @@ const Search = (props) => {
 
 	const [ loading, setLoading ] = useState(false);
 
-		console.log('la coleccion es: ' + collection)
-		console.log(`SELECT * FROM ${collection}`)
 	useEffect(
 		() => {
 			if (search) {
 				setLoading(true);
 				//console.log(`SELECT * FROM ${collection} WHERE name LIKE '${search}%' `)
-				
 				fireSQL
 					.query(`SELECT * FROM ${collection}`)
 					.then((response) => {
-						//console.log('capturando')
-						//console.log(size(response))
 						var data = response.filter( valueItem => {
 							//console.log(valueItem.name.toLowerCase() + ' esta la palabra: ' + search + ' con valor de: ' + valueItem.name.toLowerCase().includes(search))
 							return valueItem.name.toLowerCase().includes(search.toLowerCase())
 						})
 						if ((collection == 'petDoctor') || collection == 'pet'){
 							data = data.filter( valueItem => {
-								return valueItem.create_uid == userInfo
+								return valueItem.create_uid == userInfo.uid
 							})
 						}
 
@@ -39,7 +34,7 @@ const Search = (props) => {
 					})
 					.catch((response) => {
 						console.log(response)
-						console.log('chanfle')
+						//console.log('chanfle')
 						setLoading(false);
 					});
 			}

@@ -250,7 +250,7 @@ export const deleteRecordBD = async (collectionName, record_id, navigation) => {
 			.doc(record_id)
 			.delete()
 			.then((response) => {
-				console.log('Se ha eliminado el registro con exito');
+				//console.log('Se ha eliminado el registro con exito');
 				navigation.goBack();
 			})
 			.catch(function(error) {
@@ -337,8 +337,7 @@ export const obtenerUsuarios = async (user_id, funcion) => {
  * @param { permite regresar al menu principal} navigation 
  */
 export const createPetFound = (collectionData, toastRef, navigation, record_id, setloading) => {
-	console.log('creando mascota encontrada');
-	console.log(collectionData);
+
 	db
 		.collection('petsFound')
 		.add(collectionData)
@@ -382,7 +381,6 @@ export const getInfoCollection = async (collection, record_id, data) => {
 			.doc(record_id)
 			.get()
 			.then((response) => {
-				console.log('como que los datos que se consultaron son');
 
 				response.forEach((doc) => {
 					const element = doc.data();
@@ -410,12 +408,10 @@ export const updateCollectionRecord = async (collection, record_id, data, setIsL
 			.doc(record_id)
 			.set(data, { merge: true })
 			.then((response) => {
-				console.log('actalizado');
 				navigation.goBack();
 				setIsLoading(false);
 			})
 			.catch((response) => {
-				console.log('error');
 				setIsLoading(false);
 			});
 	}

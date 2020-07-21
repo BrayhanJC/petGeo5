@@ -27,19 +27,20 @@ function LoginFacebook(props){
             if (type === 'success') {
                 setLoading(true)
                 const credentials = firebase.auth.FacebookAuthProvider.credential(token);
-                //console.log(credentials)
+                console.log(credentials)
                 firebase
                 .auth()
                 .signInWithCredential(credentials)
-                .then( () => {
-                    //console.log('ingreso con exito')
+                .then( (response) => {
+                    console.log('ingreso con exito en el facebook')
                     setLoading(false)
                     navigation.navigate('Profile')
                 })
                 .catch( (error) => {
-                    //console.log(error)
+                    console.log('error al inciar sesion con facebook')
+                    console.log(error)
                     toastRef.current.show('Email o contraseña incorrectas')
-                    console.log('algo salio mal')
+                    //console.log('algo salio mal')
                     setLoading(false)
                   
                 })

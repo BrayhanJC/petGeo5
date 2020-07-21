@@ -25,9 +25,9 @@ function ViewEdit(props) {
 		title: route.params.name
 	});
 
-	console.log('capturando lso elementos');
+	//console.log('capturando lso elementos');
 	const data_collection = route.params.data_collection;
-	console.log(data_collection);
+	//console.log(data_collection);
 
 	const [ loading, setloading ] = useState(false);
 
@@ -43,13 +43,13 @@ function ViewEdit(props) {
 	const [ petFound, setpetFound ] = useState('');
 
 	const onSubmit = () => {
-		console.log('Cpturarndo valores para guardar');
-		console.log(title);
-		console.log(address);
-		console.log(phone);
-		console.log(description);
-		console.log(location);
-		console.log(imageSelected);
+		// console.log('Cpturarndo valores para guardar');
+		// console.log(title);
+		// console.log(address);
+		// console.log(phone);
+		// console.log(description);
+		// console.log(location);
+		// console.log(imageSelected);
 		const data = {
 			name: title,
 			address,
@@ -63,14 +63,14 @@ function ViewEdit(props) {
 		};
 
 		if (title && address && description && imageSelected && phone && location) {
-			console.log('la coleccion es asi : ' + route.params.collectionName.toString());
-			console.log(petFound);
-			console.log(petFound && route.params.collectionName == 'missingPets');
+			// console.log('la coleccion es asi : ' + route.params.collectionName.toString());
+			// console.log(petFound);
+			// console.log(petFound && route.params.collectionName == 'missingPets');
 			if (petFound && route.params.collectionName == 'missingPets') {
 				setloading(true);
 				uploadImageStorage(imageSelected, 'petsFound')
 					.then((response) => {
-						console.log('entrando en la imgen para guardar');
+						//console.log('entrando en la imgen para guardar');
 
 						createPetFound(data, toastRef, navigation, route.id, setloading);
 					})
