@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, ScrollView, Alert, TextInput } from 'react-native';
 import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
 
+
 /**
  * Componente que sirve para:
  * -> Crear Noticias
@@ -32,7 +33,9 @@ function AddForm(props) {
 		}
 
 	return (
+	
 		<View style={styleForm.viewForm}>
+			
 			<Input
 				placeholder={title}
 				containerStyle={styleForm.input}
@@ -48,6 +51,7 @@ function AddForm(props) {
 				
 				
 			/>
+			
 			{addressVisible && (
 				<Input
 					placeholder={address}
@@ -91,7 +95,9 @@ function AddForm(props) {
 					defaultValue={pet ? (dataPet[0].description ? dataPet[0].description: '') : ''}
 				/>
 			</View>
+			
 		</View>
+	
 	);
 }
 

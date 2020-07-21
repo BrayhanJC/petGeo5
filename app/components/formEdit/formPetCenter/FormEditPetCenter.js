@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView, Alert, TextInput } from 'react-native';
-import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
+import { Icon, Avatar, Image, Input, Button, ButtonGroup } from 'react-native-elements';
 
 /**
  * Componente que sirve para Editar:
@@ -23,17 +23,22 @@ function FormEditPetCenter(props) {
 		locationForm,
 		setPhone,
 
-
 		placeholder_title,
 		placeholder_description,
 		default_name,
 		default_address,
 		default_description,
-		default_phone
+		default_phone,
+		default_time,
+		default_website,
+		buttonTime,
+		time,
+		setTime,
+		setWebsite
 	} = props;
 
 
-	
+
 	return (
 		<View style={styleForm.viewForm}>
 			<Input
@@ -48,11 +53,10 @@ function FormEditPetCenter(props) {
 					color: '#C2C2C2'
 				}}
 				defaultValue={default_name}
-				
 			/>
 			{addressVisible && (
 				<Input
-					placeholder='Dirección'
+					placeholder="Dirección"
 					containerStyle={styleForm.input}
 					inputContainerStyle={styleForm.inputForm}
 					errorStyle={{ color: 'red' }}
@@ -80,6 +84,42 @@ function FormEditPetCenter(props) {
 					color: '#C2C2C2'
 				}}
 				defaultValue={default_phone}
+			/>
+
+			<Text
+				style={{
+					color: 'gray',
+					alignItems: 'center',
+					textAlign: 'center',
+					fontSize: 19
+				}}
+			>
+				Horario de Atención
+			</Text>
+			<ButtonGroup
+				onPress={(even) => setTime(even)}
+				selectedIndex={time}
+				buttons={buttonTime}
+				containerStyle={{
+					height: 35,
+					borderRadius: 50,
+					borderColor: '#C2C2C2',
+					borderWidth: 2
+				}}
+			/>
+
+<Input
+				placeholder="Sitio Web"
+				containerStyle={styleForm.input}
+				inputContainerStyle={styleForm.inputForm}
+				errorStyle={{ color: 'red' }}
+				onChange={(even) => setWebsite(even.nativeEvent.text)}
+				rightIcon={{
+					type: 'material-community',
+					name: 'phone',
+					color: '#C2C2C2'
+				}}
+				defaultValue={default_website}
 			/>
 
 			<View style={styleForm.textAreaContainer}>

@@ -40,10 +40,11 @@ function EditRecord(props) {
 
 	const editRecord = () => {
 		const data = returnData();
+		
 		console.log(props)
 		const user_id = firebase.auth().currentUser.uid;
 		if (user_id == data.current_user_id) {
-			navigation.navigate(returnNameFormViewEdit(data.collectionName), {
+			navigation.navigate(returnNameFormViewEdit(data.collectionName ? data.collectionName : props.collection), {
 				id: data.record_id,
 				name: data.name,
 				collectionName: data.collectionName,

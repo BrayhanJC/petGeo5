@@ -11,12 +11,14 @@ const Search = (props) => {
 
 	const [ loading, setLoading ] = useState(false);
 
+		console.log('la coleccion es: ' + collection)
+		console.log(`SELECT * FROM ${collection}`)
 	useEffect(
 		() => {
 			if (search) {
 				setLoading(true);
 				//console.log(`SELECT * FROM ${collection} WHERE name LIKE '${search}%' `)
-				console.log(userInfo)
+				
 				fireSQL
 					.query(`SELECT * FROM ${collection}`)
 					.then((response) => {
@@ -32,13 +34,11 @@ const Search = (props) => {
 							})
 						}
 
-
-						//const result = words.filter(word => word.length > 6);
-						//console.log(data)
 						setItem(data);
 						setLoading(false);
 					})
 					.catch((response) => {
+						console.log(response)
 						console.log('chanfle')
 						setLoading(false);
 					});

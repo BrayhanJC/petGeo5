@@ -14,13 +14,22 @@ import ImageMain from '../../formMain/ImageMain';
 import Loading from '../../Loading';
 import Map from '../../formMain/Map';
 import Toast from 'react-native-easy-toast';
-
+import { isEmpty } from 'lodash';
+import { returnSchedule } from '../../../utils/Configurations';
 const widhtScreen = Dimensions.get('window').width;
 
 function ViewEditPetCenter(props) {
 	const toastRef = useRef();
-	const { navigation, route, placeholder_title, placeholder_description, text_button, validation_basic, validation_pet, validation_petControl } = props;
-	
+	const {
+		navigation,
+		route,
+		placeholder_title,
+		placeholder_description,
+		text_button,
+		validation_basic,
+		validation_pet,
+		validation_petControl
+	} = props;
 
 	navigation.setOptions({
 		title: route.params.name
@@ -41,34 +50,45 @@ function ViewEditPetCenter(props) {
 	const [ location, setLocation ] = useState(data_collection.location ? data_collection.location : []);
 	const [ phone, setPhone ] = useState(data_collection.phone ? data_collection.phone : '');
 
+	const buttonTime = [ '12 Horas', '24 Horas' ];
+	var val_schedule = 0
+	if (data_collection.schedule == '12'){
+		val_schedule = 0
+	}else if (data_collection.schedule == '24'){
+		val_schedule = 1
+	}
+
+	const [ time, setTime ] = useState(val_schedule);
+	const [ website, setWebsite ] = useState(data_collection.website ? data_collection.website : '');
+
 	const onSubmit = () => {
 		console.log('Cpturarndo valores para guardar');
-		console.log(title);
-		console.log(address);
-		console.log(phone);
-		console.log(description);
-		console.log(location);
-		console.log(imageSelected);
 		const data = {
 			name: title,
 			address,
 			description,
 			image: imageSelected,
 			location,
-			phone
+			phone,
+			schedule: returnSchedule(time),
+			website
 		};
-		if (validation_basic){
-			if (title && address && description && imageSelected && phone && location) {
-				updateCollectionRecord(route.params.collectionName, route.params.id, data, setloading, navigation);
+		console.log(data);
+		if (title && address && description && imageSelected && phone && location && website) {
+			updateCollectionRecord('petCenters', route.params.id, data, setloading, navigation);
+		} else {
+			if (isEmpty(title)) {
+				toastRef.current.show('Debe incluir el nombre del Centro', 3000);
+			} else if (isEmpty(address)) {
+				toastRef.current.show('Debe incluir una Dirección', 3000);
+			} else if (isEmpty(description)) {
+				toastRef.current.show('Debe incluir una Descripción', 3000);
+			} else if (isEmpty(website)) {
+				toastRef.current.show('Debe incluir el Sitio Web', 3000);
 			} else {
-				toastRef.current.show('El comedog debe de tener por lo menos una imagen', 3000);
+				toastRef.current.show('Asegurese de llenar los datos principales', 3000);
 			}
 		}
-
-
-
-
-
 	};
 
 	return (
@@ -88,6 +108,8 @@ function ViewEditPetCenter(props) {
 				default_address={data_collection.address}
 				default_description={data_collection.description}
 				default_phone={data_collection.phone}
+				default_time={data_collection.schedule}
+				default_website={data_collection.website}
 				addressVisible={true}
 				styleForm={styleForm}
 				setTitle={setTitle}
@@ -96,6 +118,10 @@ function ViewEditPetCenter(props) {
 				setDescription={setDescription}
 				setIsVisibleMap={setIsVisibleMap}
 				locationForm={location}
+				buttonTime={buttonTime}
+				setTime={setTime}
+				time={time}
+				setWebsite={setWebsite}
 			/>
 			<UploadImage
 				styleUploadImage={styleUploadImage}

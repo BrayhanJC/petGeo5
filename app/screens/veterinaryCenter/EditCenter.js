@@ -1,20 +1,26 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import ViewEditPetCenter from '../../components/formEdit/formPetCenter/ViewEditPetCenter'
-
+import ViewEditPetCenter from '../../components/formEdit/formPetCenter/ViewEditPetCenter';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 function EditCenter(props) {
-	
-    const { navigation, route } = props;
-    const { name, id } = route.params;
-    navigation.setOptions({
+	const { navigation, route } = props;
+	const { name, id } = route.params;
+	navigation.setOptions({
 		title: name
-    });
-    
+	});
+
 	return (
-		<View>
-			<Text>Esto es para la edicion de center</Text>
-            <ViewEditPetCenter navigation={navigation} route={route}/>
-		</View>
+		<KeyboardAwareScrollView>
+			<View>
+				<ViewEditPetCenter
+					navigation={navigation}
+					route={route}
+					placeholder_title="Nombre Centro"
+					placeholder_description="Describa en breves palabras que servicios ofrece el centro..."
+					text_button="Actualizar Centro"
+				/>
+			</View>
+		</KeyboardAwareScrollView>
 	);
 }
 
