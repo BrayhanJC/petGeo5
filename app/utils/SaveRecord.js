@@ -6,7 +6,7 @@ import { size } from 'lodash';
 
 const db = firebase.firestore(firebaseApp);
 
-const limitRecords = 10000;
+const limitRecords = 10;
 
 export const saveCollection = (
 	collectionData,
@@ -94,13 +94,21 @@ export const handleLoadMore = (
 	collectionName,
 	element,
 	totalElement,
+	isLoading,
 	setIsLoading,
 	startElement,
 	setStartElement,
 	setElements
 ) => {
 	const resultElements = [];
-	element.length < totalElement && setIsLoading(true);
+	if(isLoading) {
+		return;
+	}
+	if(!(element.length < totalElement - 1)) {
+		setIsLoading(false);
+		return;
+	}
+	setIsLoading(true);
 	db
 		.collection(collectionName)
 		.orderBy('create_date', 'desc')
@@ -110,14 +118,13 @@ export const handleLoadMore = (
 		.then((response) => {
 			if (response.docs.length > 0) {
 				setStartElement(response.docs[response.docs.length - 1]);
-			} else {
-				setIsLoading(false);
 			}
 			response.forEach((doc) => {
 				const elementDoc = doc.data();
 				elementDoc.id = doc.id;
 				resultElements.push(elementDoc);
 			});
+			setIsLoading(false);
 			setElements([ ...element, ...resultElements ]);
 		});
 };

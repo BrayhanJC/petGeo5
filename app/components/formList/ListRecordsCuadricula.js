@@ -21,7 +21,7 @@ import RenderItemsPetControl from './RenderItemsPetControl';
 import RenderItemsPetDoctor from './RenderItemsPetDoctor';
 //import { USER_FACING_NOTIFICATIONS } from 'expo-permissions';
 
-function ListRecords(props) {
+function ListRecordsCuadricula(props) {
 	const navigation = useNavigation();
 	const {
 		elements,
@@ -48,6 +48,7 @@ function ListRecords(props) {
 		<View style={{flex: 1}}>
 			{size(dataRender) > 0 ? (
 				<FlatList
+					numColumns={2}
 					data={dataRender}
 					renderItem={(elementData) => {
 						if (showPet) {
