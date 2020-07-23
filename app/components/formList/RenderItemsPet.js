@@ -16,7 +16,7 @@ import {
 
 function RendenderItemsPet(props) {
 	const { elements, navigation, collectionName } = props;
-	const { id, image_id, name, type, sex, raza, create_uid } = elements.item;
+	const { id, image_id, name, type, sex, raza, create_uid, description } = elements.item;
 	const mainImage = image_id[0];
 
 	const goElement = () => {
@@ -30,8 +30,8 @@ function RendenderItemsPet(props) {
 
 	return (
 		<TouchableOpacity onPress={goElement}>
-			<View style={styleTouchableViewRecords.touchableViewRecordsStyle}>
-				<View style={styleTouchableViewImageRecords.touchableViewImageRecordsStyle}>
+			<View style={styleTouchableViewRecords.itemColum}>
+				<View style={styleTouchableViewImageRecords.touchableViewImageRecordsStyleColumn}>
 					<Avatar
 						xlarge
 						style={touchableImageRecords.touchableImageRecordsStyle}
@@ -40,29 +40,31 @@ function RendenderItemsPet(props) {
 					/>
 				</View>
 				<View style={styleViewFormat.textFormat}>
-					<View>
+					<View style={{alignItems: 'center'}}>
 						<Text style={styleTouchableNameRecords.touchableNameRecordsStyle}>{name}</Text>
 					</View>
-					<View style={{ flexDirection: 'row', margin: 5 }}>
-						<View style={{ width: '15%' }}>
-							<Text>Tipo: </Text>
-							<Text style={styleTouchableDescriptionRecordsRecords.touchableDescriptionRecordsStyle}>
-								{type}
-							</Text>
+					<View style={{ flexDirection: 'column', margin: 5 }}>
+
+						<View style={{flexDirection: 'row'}}>
+							<View style={{ width: '50%' }}>
+								<Text>Tipo: </Text>
+								<Text style={styleTouchableDescriptionRecordsRecords.touchableDescriptionRecordsStyle}>
+									{type}
+								</Text>
+							</View>
+							<View style={{ width: '50%' }}>
+								<Text>Genero: </Text>
+								<Text style={styleTouchableDescriptionRecordsRecords.touchableDescriptionRecordsStyle}>
+									{sex}
+								</Text>
+							</View>
 						</View>
-						<View style={{ width: '18%' }}>
-							<Text>Genero: </Text>
-							<Text style={styleTouchableDescriptionRecordsRecords.touchableDescriptionRecordsStyle}>
-								{sex}
-							</Text>
-						</View>
-						<View style={{ width: '95%' }}>
-						<Text>Raza: </Text>
+						<View style={{ width: '100%' }}>
+							<Text>Raza: </Text>
 							<Text style={styleTouchableDescriptionRecordsRecords.touchableDescriptionRecordsStyle}>
 								{raza}
 							</Text>
 						</View>
-
 					</View>
 				</View>
 			</View>

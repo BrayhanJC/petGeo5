@@ -1,4 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export const loadingRecords = {
   loadingRecordsStyle: {
@@ -27,6 +29,21 @@ export const touchableViewRecords = {
     elevation: 3,
     paddingVertical: '1%'
   },
+  itemColum: {
+    width: windowHeight * 0.215,
+    flexDirection: "column",
+    backgroundColor: 'white',
+    borderRadius: 15,
+    shadowColor: '#000',
+    shadowOffset: {
+        width: 0,
+        height: 1
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    elevation: 3,
+    margin: '2%'
+  }
 };
 
 export const touchableViewImageRecords = {
@@ -34,6 +51,10 @@ export const touchableViewImageRecords = {
     marginLeft: 1,
     justifyContent: 'center'
   },
+  touchableViewImageRecordsStyleColumn: {
+    marginLeft: 1,
+    alignItems: 'center'
+  }
 };
 
 export const touchableImageRecords = {
@@ -102,5 +123,3 @@ export const styleTouchableDescriptionRecordsRecords = StyleSheet.create(
   touchableDescriptionRecords
 );
 export const styleNoFoundRecords = StyleSheet.create(noFoundRecords);
-
-
