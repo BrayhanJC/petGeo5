@@ -1,20 +1,23 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import ViewEdit from '../../components/formEdit/ViewEdit'
+import ViewEdit from '../../components/formEdit/formaBasic/ViewEdit';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 function EditMissingPet(props) {
-	
-    const { navigation, route } = props;
-    const { name, id } = route.params;
-    navigation.setOptions({
-		title: name
-    });
-    
+	const { navigation, route } = props;
 	return (
-		<View>
-			<Text>Esto es para la edicion de mascotas desaparcidas</Text>
-            <ViewEdit navigation={navigation} route={route}/>
-		</View>
+		<KeyboardAwareScrollView>
+			<View>
+				<ViewEdit
+					navigation={navigation}
+					route={route}
+					placeholder_title="Titulo Reporte"
+					placeholder_description="Describa en breves palabras como es la mascota y cual fue el ultimo lugar en que lo vio ..."
+					text_button="Actualizar Reporte"
+					isMissingPet={true}
+				/>
+			</View>
+		</KeyboardAwareScrollView>
 	);
 }
 

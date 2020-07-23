@@ -18,20 +18,20 @@ import UserData from '../account/UserData';
  */
 function PetsFound(props) {
 	const { navigation } = props;
-	const [user, setUser] = useState(null);
+	const [ user, setUser ] = useState(null);
 
-	const [petFound, setPetFound] = useState([]);
-	const [totalPetFound, setTotalPetFound] = useState(0);
-	const [startPetFound, setStartPetFound] = useState(null);
-	const [isLoading, setIsLoading] = useState(false);
+	const [ petFound, setPetFound ] = useState([]);
+	const [ totalPetFound, setTotalPetFound ] = useState(0);
+	const [ startPetFound, setStartPetFound ] = useState(null);
+	const [ isLoading, setIsLoading ] = useState(false);
 
 	//variables para el popup
-	const [elements, setElements] = useState('');
-	const [modalVisible, setModalVisible] = useState(false);
+	const [ elements, setElements ] = useState('');
+	const [ modalVisible, setModalVisible ] = useState(false);
 
 	//variables para el buscador
-	const [item, setItem] = useState([]);
-	const [search, setSearch] = useState('');
+	const [ item, setItem ] = useState([]);
+	const [ search, setSearch ] = useState('');
 
 	useEffect(() => {
 		(async () => {
@@ -67,7 +67,7 @@ function PetsFound(props) {
 				setItem={setItem}
 				item={item}
 				collection="petsFound"
-				placeholderDefault="Buscar Mascotas Entradas..."
+				placeholderDefault="Buscar Mascotas Encontradas..." 
 			/>
 
 			{!isEmpty(search) && size(item) > 0 ? (
@@ -92,17 +92,14 @@ function PetsFound(props) {
 				/>
 			)}
 
-			{
-				/***
+			{/***
 				 * Modal que sirve para registrar el tipo de usuario
 				 */
-				modalVisible ? (
-					<UserData modalVisible={modalVisible} setModalVisible={setModalVisible} userInfo={user} />
-				) : (
-					<Text />
-				)
-			}
-
+			modalVisible ? (
+				<UserData modalVisible={modalVisible} setModalVisible={setModalVisible} userInfo={user} />
+			) : (
+				<Text />
+			)}
 		</View>
 	);
 }

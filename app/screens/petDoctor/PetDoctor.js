@@ -64,6 +64,7 @@ function PetDoctor(props) {
 				item={item}
 				collection="petDoctor"
 				placeholderDefault="Buscar Veterinarios..."
+				userInfo={user}
 			/>
 
 			{!isEmpty(search) && size(item) > 0 ? (

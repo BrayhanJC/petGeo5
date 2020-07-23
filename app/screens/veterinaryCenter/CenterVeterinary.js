@@ -51,12 +51,6 @@ function CenterVeterinary(props) {
 	useFocusEffect(
 		useCallback(() => {
 			listRecords('petCenters', setTotalcenterVeterinary, setcenterVeterinary, setStartcenterVeterinary);
-
-			if (user) {
-				if (user.uid) {
-					getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
-				}
-			}
 		}, [])
 	);
 
@@ -79,6 +73,7 @@ function CenterVeterinary(props) {
 						isLoading={isLoading}
 						navigation={navigation}
 						navigator="ViewPetCenter"
+						collectionName="petCenters"
 					/>
 				</View>
 			) : (
@@ -91,6 +86,7 @@ function CenterVeterinary(props) {
 					isLoading={isLoading}
 					navigation={navigation}
 					navigator="ViewPetCenter"
+					collectionName="petCenters"
 				/>
 			)}
 

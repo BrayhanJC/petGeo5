@@ -172,13 +172,13 @@ function LocalizationMap(props) {
 									onPress={() => goElement(returnNameFormView(record.collection), record.id, record.name)}
 								>
 									<ScrollView vertical>
-										<CarouselImages image_ids={record.image} height={85} width={170} />
+										<CarouselImages image_ids={record.image} height={85} width={180} style={{margin:2}}/>
 
 										<View style={mapInfoStyle.viewComponent}>
 											<Text style={mapInfoStyle.nameItem}>{record.name}</Text>
 										</View>
 										<Text style={mapInfoStyle.description}>
-											{record.description.substr(0, 85)}...
+											{record.description.substr(0, 105)}...
 										</Text>
 									</ScrollView>
 								</Callout>
@@ -225,7 +225,11 @@ const styles = StyleSheet.create({
 	callout: {
 		width: 180,
 		height: 170,
-		margin: 10
+		margin: 10,
+		
+		borderColor: '#C2C2C2',
+		borderWidth:2,
+		borderRadius: 30
 	},
 	view: {
 		padding: 5

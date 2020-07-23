@@ -95,7 +95,7 @@ function ChangeEmailForm(props) {
 							setShowModal(false);
 						})
 						.catch((err) => {
-							console.log('ChangeEmailForm', err);
+							//console.log('ChangeEmailForm', err);
 							toastRef.current.show('Error al actualizar el email');
 							setShowError({
 								email: 'Error al actualizar el email.',

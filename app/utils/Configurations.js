@@ -194,7 +194,7 @@ export const RAZA_CAT = [
  */
 export const TYPE_CONTROL = [
 	{ label: 'Vacunación', value: 'Vacunación' },
-	{ label: 'Desparacitación', value: 'Desparacitación' },
+	{ label: 'Desparasitación', value: 'Desparasitación' },
 	{ label: 'Baño', value: 'Baño' },
 	{ label: 'Control', value: 'Control' },
 	{ label: 'Otro', value: 'Otro' },
@@ -513,5 +513,8 @@ export const returnNameFormViewEdit = (collection) => {
 	}
 	if (collection === 'petControl') {
 		return 'ViewEditPetControl';
+	}
+	if (collection === 'petDoctor') {
+		return 'ViewEditDoctor';
 	}
 };

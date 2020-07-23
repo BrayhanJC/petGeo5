@@ -1,20 +1,24 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import ViewEdit from '../../components/formEdit/ViewEdit'
-function EditNews(props) {
-	console.log('recibiendo datos en la edicion de noticias');
+import ViewEdit from '../../components/formEdit/formaBasic/ViewEdit';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-    const { navigation, route } = props;
-    const { name, id } = route.params;
-    navigation.setOptions({
-		title: name
-    });
-    
+function EditNews(props) {
+	const { navigation, route } = props;
+
 	return (
-		<View>
-			<Text>Est es para la edicion</Text>
-            <ViewEdit navigation={navigation} route={route}/>
-		</View>
+		<KeyboardAwareScrollView>
+			<View>
+				<ViewEdit
+					navigation={navigation}
+					route={route}
+					placeholder_title="Nombre Noticia"
+					placeholder_description="Describa en breves palabras la noticia que esta por publicar..."
+					text_button="Actualizar Noticia"
+					validation_basic={true}
+				/>
+			</View>
+		</KeyboardAwareScrollView>
 	);
 }
 

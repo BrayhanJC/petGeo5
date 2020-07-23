@@ -257,7 +257,7 @@ export const deleteRecordBD = async (collectionName, record_id, navigation) => {
 			.doc(record_id)
 			.delete()
 			.then((response) => {
-				console.log('Se ha eliminado el registro con exito');
+				//console.log('Se ha eliminado el registro con exito');
 				navigation.goBack();
 			})
 			.catch(function(error) {
@@ -338,21 +338,88 @@ export const obtenerUsuarios = async (user_id, funcion) => {
 	}
 };
 
-
-
 /**
  * Funcion que permite crear el registro de una mascota encontrada
  * @param { contiene la informacion necesaria para la creacion} collectionData 
  * @param { permite regresar al menu principal} navigation 
  */
-export const createPetFound = (collectionData, navigation) => {
+export const createPetFound = (collectionData, toastRef, navigation, record_id, setloading) => {
+
 	db
 		.collection('petsFound')
 		.add(collectionData)
 		.then(() => {
-			navigation.goBack();
+			//toastRef.current.show('Felicitaciones, por tener de vuelta tu Mascota', 3000);
+
+			setloading(false);
+			navigation.navigate('HomeStack');
+			// db
+			// 	.collection('missingPets')
+			// 	.doc(record_id)
+			// 	.delete()
+			// 	.then((response) => {
+			// 		setloading(false);
+			// 		console.log('Se ha eliminado el registro con exito');
+			// 		navigation.navigate('HomeStack');
+			// 	})
+			// 	.catch(function(error) {
+			// 		setloading(false);
+			// 		navigation.navigate('HomeStack');
+			// 		console.log('Ha Ocurrido un error al eliminar');
+			// 	});
 		})
 		.catch((response) => {
+			setloading(false);
 			console.log('error al crear');
 		});
+};
+
+/**
+ * Funcion que permite retornar la informacion de la coleccion  
+ * @param { nombre de la coleccion} collection 
+ * @param { id del registro} record_id 
+ * @param { variabel para guardar la informacion} data 
+ */
+export const getInfoCollection = async (collection, record_id, data) => {
+	const resultElements = [];
+	if (record_id && collection) {
+		await db
+			.collection(collection)
+			.doc(record_id)
+			.get()
+			.then((response) => {
+
+				response.forEach((doc) => {
+					const element = doc.data();
+					element.id = doc.id;
+					resultElements.push(element);
+				});
+				data(resultElements);
+			})
+			.catch((response) => {});
+	}
+};
+
+/**
+ * Funcion que permite actualizar el objeto
+ * @param { nombre de la coleccion} collection 
+ * @param { id del registro} record_id 
+ * @param { datos para actualizar} data 
+ */
+export const updateCollectionRecord = async (collection, record_id, data, setIsLoading, navigation) => {
+	const resultElements = [];
+	if (record_id && collection) {
+		setIsLoading(true);
+		await db
+			.collection(collection)
+			.doc(record_id)
+			.set(data, { merge: true })
+			.then((response) => {
+				navigation.goBack();
+				setIsLoading(false);
+			})
+			.catch((response) => {
+				setIsLoading(false);
+			});
+	}
 };

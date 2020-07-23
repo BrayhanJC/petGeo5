@@ -68,7 +68,7 @@ export const touchableImageRecords = {
 export const touchableNameRecords = {
   touchableNameRecordsStyle: {
     fontWeight: "bold",
-    fontSize:18
+    fontSize:14.5
   },
 };
 
@@ -76,7 +76,8 @@ export const touchableAddressRecords = {
   touchableAddressRecordsStyle: {
     padding: 2,
     color: "black",
-    fontStyle: 'italic'
+    fontStyle: 'italic',
+    fontSize:11
   },
 };
 
@@ -85,6 +86,7 @@ export const touchableDescriptionRecords = {
     paddingTop: 2,
     color: "grey",
     width: 250,
+    fontSize:12
   },
 };
 
@@ -99,7 +101,7 @@ export const noFoundRecords = {
 
 export const textFormatView = {
   textFormat: {
-    margin: 10,
+    margin: 5,
 
   },
 };

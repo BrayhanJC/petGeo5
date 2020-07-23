@@ -58,6 +58,7 @@ function Pet(props) {
 				item={item}
 				collection="pet"
 				placeholderDefault="Buscar Mascotas..."
+				userInfo={user}
 			/>
 
 			{!isEmpty(search) && size(item) > 0 ? (

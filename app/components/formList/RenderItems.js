@@ -16,25 +16,37 @@ import {
 
 function RendenderItems(props) {
 	const { elements, navigation, navigator, collectionName } = props;
-	const { id, image, name, address, description, create_name, create_uid } = elements.item;
+	const { id, image, name, address, description, create_name, create_uid, phone, location, create_date } = elements.item;
 	const mainImage = image[0];
 
 	const goElement = () => {
+		//console.log(collectionName)
+		if (collectionName == 'petCenters'){
+			//console.log('**************************')
+			//console.log('entramos en solo centros')
+			navigation.navigate(navigator, {
+				id,
+				name,
+				collectionName,
+				create_uid,
+				data_collection:{
+					id, image, name, address, description, create_uid, phone, location, create_name, create_uid, create_date, website: elements.item.website, schedule:elements.item.schedule 
+				}
+			});
+		}else{
+			//console.log('---------------------------')
+			//console.log('entramos en el normal')
+			navigation.navigate(navigator, {
+				id,
+				name,
+				collectionName,
+				create_uid,
+				data_collection:{
+					id, image, name, address, description, create_uid, phone, location, create_name, create_uid, create_date
+				}
+			});
+		}
 
-		console.log({
-			id,
-			name,
-			collectionName,
-			create_uid
-		})
-
-
-		navigation.navigate(navigator, {
-			id,
-			name,
-			collectionName,
-			create_uid
-		});
 	};
 
 	return (
@@ -60,7 +72,7 @@ function RendenderItems(props) {
 					{/* <Text style={styletouchableAddressRecords.touchableAddressRecordsStyle}>Dirección: {address}</Text> */}
 					<Text style={styletouchableAddressRecords.touchableAddressRecordsStyle}>Autor: {create_name}</Text>
 					<Text style={styleTouchableDescriptionRecordsRecords.touchableDescriptionRecordsStyle}>
-						{description.substr(0, 60)}...
+						{description.substr(0, 75)}...
 					</Text>
 				</View>
 			</View>

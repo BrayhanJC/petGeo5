@@ -17,7 +17,7 @@ import { connect } from 'react-redux';
  * @param {*} props
  */
 function EditRecord(props) {
-	const { navigation, route } = props;
+	const { navigation, route, pet, petControl, petDoctor } = props;
 	const { cliente } = props;
 	const [ user, setUser ] = useState(false);
 	const [ currentUser, setCurrentUser ] = useState('');
@@ -33,23 +33,26 @@ function EditRecord(props) {
 		};
 	};
 
-	console.log('editando Record', returnData().current_user_id);
-	console.log('editando Record cliente', cliente.create_uid);
 
 	let isOwner = returnData().current_user_id == cliente.create_uid;
 
 	const editRecord = () => {
 		const data = returnData();
+		
 		const user_id = firebase.auth().currentUser.uid;
 		if (user_id == data.current_user_id) {
-			navigation.navigate(returnNameFormViewEdit(data.collectionName), {
+			navigation.navigate(returnNameFormViewEdit(data.collectionName ? data.collectionName : props.collection), {
 				id: data.record_id,
 				name: data.name,
 				collectionName: data.collectionName,
-				create_uid: data.current_user_id
+				create_uid: data.current_user_id,
+				data_collection: route.params.data_collection,
+				pet,
+				petControl,
+				petDoctor
 			});
 		} else {
-			showAlert('No puede eliminar este registro, ya que no es de su propiedad');
+			showAlert('No puede editar este registro, ya que no es de su propiedad');
 		}
 	};
 

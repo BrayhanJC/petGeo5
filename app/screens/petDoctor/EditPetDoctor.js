@@ -1,8 +1,11 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import ViewEditPetCenter from '../../components/formEdit/formPetCenter/ViewEditPetCenter';
+import ViewEditDoctor from '../../components/formEdit/formDoctor/ViewEditDoctor';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-function EditCenter(props) {
+
+function EditPetControl(props) {
+	console.log('recibiendo datos en la edicion de noticias');
+
 	const { navigation, route } = props;
 	const { name, id } = route.params;
 	navigation.setOptions({
@@ -12,16 +15,16 @@ function EditCenter(props) {
 	return (
 		<KeyboardAwareScrollView>
 			<View>
-				<ViewEditPetCenter
+				<ViewEditDoctor
 					navigation={navigation}
 					route={route}
-					placeholder_title="Nombre Centro"
-					placeholder_description="Describa en breves palabras que servicios ofrece el centro..."
-					text_button="Actualizar Centro"
+					placeholder_title="Nombre Veterinario"
+					placeholder_description="Escriba una Biografía"
+					text_button="Actualizar Veterinario"
 				/>
 			</View>
 		</KeyboardAwareScrollView>
 	);
 }
 
-export default EditCenter;
+export default EditPetControl;

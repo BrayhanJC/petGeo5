@@ -50,7 +50,6 @@ function AddMissinPetForm(props) {
 		}
 	}
 
-	console.log(pet);
 
 	var data = [];
 	if (pet) {
@@ -58,7 +57,7 @@ function AddMissinPetForm(props) {
 			if (elements[index].id == pet) {
 				var descriptionComplete = elements[index].description ? elements[index].description : '';
 				descriptionComplete += elements[index].raza ? '. De raza: ' + elements[index].raza : '';
-				console;
+				
 				data.push({
 					description: descriptionComplete,
 					phone: userData[0].phone ? userData[0].phone : '',
@@ -69,8 +68,6 @@ function AddMissinPetForm(props) {
 			}
 		}
 	}
-
-	console.log(data);
 
 	const addMissingPets = () => {
 		//setIsLoading(true);

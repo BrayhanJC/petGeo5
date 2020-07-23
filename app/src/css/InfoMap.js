@@ -7,7 +7,8 @@ export const info = {
 	viewComponent: {
 		flexDirection: 'row',
 		justifyContent: 'center',
-		alignItems: 'center'
+		alignItems: 'center',
+
 	},
 	nameItem: {
 		fontSize: 14,

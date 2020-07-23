@@ -57,7 +57,7 @@ function RegisterForm(props) {
 					})
 					.catch((error) => {
 						toastRef.current.show('Ya hay un usuario con este mismo email');
-						setloading(true);
+						setloading(false);
 					});
 			}
 		}

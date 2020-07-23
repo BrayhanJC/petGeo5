@@ -9,7 +9,7 @@ const PetCenterView = (props) => {
     return (
         <View style={viewFormStyle.viewBody}>
             <ViewForm navigation={navigation} route={route} collection='petCenters' nameInfo='sobre el centro' navigateTo='CreateReviewCenter' collection_name='petCenters'/>
-            <EditRecord navigation={navigation} route={route}/>
+            <EditRecord navigation={navigation} route={route} collection='petCenters'/>
         </View>
     )
 }

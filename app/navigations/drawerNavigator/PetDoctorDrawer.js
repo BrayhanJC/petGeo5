@@ -6,6 +6,7 @@ import PetDoctorScreen from '../../screens/petDoctor/PetDoctor';
 import CreatePetDoctor from '../../screens/petDoctor/CreatePetDoctor';
 import PetDoctorView from '../../screens/petDoctor/PetDoctorView';
 import DeleteRecord from '../../components/UpdateRecords/DeleteRecord'
+import EditPetDoctor from '../../screens/petDoctor/EditPetDoctor';
 const Stack = createStackNavigator();
 
 /***
@@ -41,6 +42,8 @@ function PetDoctorDrawer(props) {
 			<Stack.Screen name="ViewPetDoctor" component={PetDoctorView} options={{
 					headerRight: () => <DeleteRecord props={props} />
 				}}/>
+
+			<Stack.Screen name="ViewEditDoctor" component={EditPetDoctor} />
 		</Stack.Navigator>
 	);
 }

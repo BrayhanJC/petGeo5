@@ -65,7 +65,7 @@ const ListReview = (props) => {
 			) : (
 				<View>
 					<Text style={styleReview.textMessage} onPress={() => navigation.navigate('Login')}>
-						Para escribir un comentario debe estar logueado {' '}
+						Para escribir un comentario debe estar logueado. {' '}
 						<Text style={styleReview.textMessage}>Pulsa Aquí para Iniciar Sesión</Text>
 					</Text>
 				</View>
