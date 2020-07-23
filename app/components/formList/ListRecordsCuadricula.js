@@ -101,4 +101,4 @@ function ListRecordsCuadricula(props) {
 	);
 }
 
-export default ListRecords;
+export default ListRecordsCuadricula;

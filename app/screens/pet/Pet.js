@@ -76,7 +76,7 @@ function Pet(props) {
 			)}
 
 			{isEmpty(search) && (
-				<ListRecords elements={Pets} navigation={navigation} isLoading={isLoading} showPet={true} user={user} />
+				<ListRecordsCuadricula elements={Pets} navigation={navigation} isLoading={isLoading} showPet={true} user={user} />
 			)}
 
 			{/***

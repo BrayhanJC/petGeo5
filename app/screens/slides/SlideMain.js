@@ -1,14 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import {useValue} from 'react-native-redash'
+//import {useValue} from 'react-native-redash'
 import Slide, {SLIDE_HEIGHT} from './Slide';
 import Animated from 'react-native-reanimated';
 
 const { width, height } = Dimensions.get('window');
 export default function SlideMain() {
 
-	const x = useValue(0)
+	//const x = useValue(0)
 	return (
 		<View style={styles.container}>
 			<View style={styles.slider}>
