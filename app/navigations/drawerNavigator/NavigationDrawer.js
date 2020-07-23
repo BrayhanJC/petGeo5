@@ -9,7 +9,7 @@ import PetDrawer from './PetDrawer';
 import MyAccountDrawer from './MyAccountDrawer';
 import MenuTab from '../tabNavigator/MenuTab';
 import PetFoundDrawer from './PetFoundDrawer';
-
+import SlidesDrawer from './SlidesDrawer.js'
 import firebase from 'firebase/app';
 
 import { connect } from 'react-redux';
@@ -128,6 +128,17 @@ function NavigatorDrawer(props) {
 					}}
 				/>
 			)}
+
+<Drawer.Screen
+					name="slideDrawer"
+					component={SlidesDrawer}
+					options={{
+						title: 'Primeros Pasos',
+						drawerIcon: ({ color, size }) => (
+							<MaterialCommunityIcons name="account-multiple" color="#1A89E7" size={27} />
+						),
+					}}
+				/>
 		</Drawer.Navigator>
 	);
 }
