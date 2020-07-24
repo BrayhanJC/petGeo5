@@ -9,7 +9,7 @@ import PetDrawer from './PetDrawer';
 import MyAccountDrawer from './MyAccountDrawer';
 import MenuTab from '../tabNavigator/MenuTab';
 import PetFoundDrawer from './PetFoundDrawer';
-import SlidesDrawer from './SlidesDrawer.js'
+import SlidesDrawer from './SlidesDrawer.js';
 import firebase from 'firebase/app';
 
 import { connect } from 'react-redux';
@@ -21,12 +21,12 @@ const Drawer = createDrawerNavigator();
 function NavigatorDrawer(props) {
 	const { cliente, login } = props;
 
-	const [user, setUser] = useState(null);
+	const [ user, setUser ] = useState(null);
 	//variables para el popup
-	const [elements, setElements] = useState('');
-	const [modalVisible, setModalVisible] = useState(false);
-	const [userType, setUserType] = useState('');
-	const [userFirebase, setUserFirebase] = useState('');
+	const [ elements, setElements ] = useState('');
+	const [ modalVisible, setModalVisible ] = useState(false);
+	const [ userType, setUserType ] = useState('');
+	const [ userFirebase, setUserFirebase ] = useState('');
 	var typeUser = '';
 
 	useEffect(() => {
@@ -41,7 +41,7 @@ function NavigatorDrawer(props) {
 	 * @param { variable que contiene la data del usuario de firebase} userInfo
 	 */
 	const onObtenerUsuario = async (userInfo) => {
-		await obtenerUsuarios(userInfo?.uid, (r) => {
+		await obtenerUsuarios(userInfo.uid, (r) => {
 			props.dispatch(actions.actualizarLogin(userInfo));
 			r.forEach((doc) => {
 				setUser(doc.data());
@@ -60,7 +60,7 @@ function NavigatorDrawer(props) {
 			initialRouteName="Pets"
 			drawerContentOptions={{
 				activeTintColor: '#1A89E7',
-				inactiveTintColor: '#C2C2C2',
+				inactiveTintColor: '#C2C2C2'
 			}}
 			//drawerContent={(props) => <Menu {...props} />}
 		>
@@ -69,7 +69,7 @@ function NavigatorDrawer(props) {
 				component={MenuTab}
 				options={{
 					title: 'Inicio',
-					drawerIcon: ({ color, size }) => <MaterialCommunityIcons name="home" color="#1A89E7" size={24} />,
+					drawerIcon: ({ color, size }) => <MaterialCommunityIcons name="home" color="#1A89E7" size={24} />
 				}}
 			/>
 			<Drawer.Screen
@@ -77,25 +77,23 @@ function NavigatorDrawer(props) {
 				component={MyAccountDrawer}
 				options={{
 					title: userFirebase ? 'Perfil' : 'Iniciar Sesión',
-					drawerIcon: ({ color, size }) => (
-						<MaterialCommunityIcons name="account" color="#1A89E7" size={24} />
-					),
+					drawerIcon: ({ color, size }) => <MaterialCommunityIcons name="account" color="#1A89E7" size={24} />
 				}}
 			/>
 
-			{isUser && userFirebase && (
+			{isUser &&
+			userFirebase && (
 				<Drawer.Screen
 					name="PetDrawer"
 					component={PetDrawer}
 					options={{
 						title: 'Mascotas',
-						drawerIcon: ({ color, size }) => (
-							<MaterialCommunityIcons name="paw" color="#1A89E7" size={24} />
-						),
+						drawerIcon: ({ color, size }) => <MaterialCommunityIcons name="paw" color="#1A89E7" size={24} />
 					}}
 				/>
 			)}
-			{isUser && userFirebase && (
+			{isUser &&
+			userFirebase && (
 				<Drawer.Screen
 					name="PetControlDrawer"
 					component={PetControlDrawer}
@@ -103,7 +101,7 @@ function NavigatorDrawer(props) {
 						title: 'Controles',
 						drawerIcon: ({ color, size }) => (
 							<MaterialCommunityIcons name="hospital-building" color="#1A89E7" size={24} />
-						),
+						)
 					}}
 				/>
 			)}
@@ -113,10 +111,11 @@ function NavigatorDrawer(props) {
 				component={PetFoundDrawer}
 				options={{
 					title: 'Mascotas Encontradas',
-					drawerIcon: ({ color, size }) => <MaterialCommunityIcons name="rocket" color="#1A89E7" size={24} />,
+					drawerIcon: ({ color, size }) => <MaterialCommunityIcons name="rocket" color="#1A89E7" size={24} />
 				}}
 			/>
-			{isCenter && userFirebase && (
+			{isCenter &&
+			userFirebase && (
 				<Drawer.Screen
 					name="PetDoctorDrawer"
 					component={PetDoctorDrawer}
@@ -124,28 +123,28 @@ function NavigatorDrawer(props) {
 						title: 'Veterinarios',
 						drawerIcon: ({ color, size }) => (
 							<MaterialCommunityIcons name="account-multiple" color="#1A89E7" size={27} />
-						),
+						)
 					}}
 				/>
 			)}
 
-<Drawer.Screen
-					name="slideDrawer"
-					component={SlidesDrawer}
-					options={{
-						title: 'Primeros Pasos',
-						drawerIcon: ({ color, size }) => (
-							<MaterialCommunityIcons name="account-multiple" color="#1A89E7" size={27} />
-						),
-					}}
-				/>
+			<Drawer.Screen
+				name="slideDrawer"
+				component={SlidesDrawer}
+				options={{
+					title: 'Primeros Pasos',
+					drawerIcon: ({ color, size }) => (
+						<MaterialCommunityIcons name="account-multiple" color="#1A89E7" size={27} />
+					)
+				}}
+			/>
 		</Drawer.Navigator>
 	);
 }
 
 const mapStateToProps = (state) => ({
 	cliente: state.cliente.cliente,
-	login: state.login.login,
+	login: state.login.login
 });
 export default connect(mapStateToProps)(NavigatorDrawer);
 //export default connect(mapStateToProps)(NavigatorDrawer);
