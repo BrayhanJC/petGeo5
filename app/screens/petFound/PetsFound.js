@@ -77,6 +77,17 @@ function PetsFound(props) {
 						isLoading={isLoading}
 						navigation={navigation}
 						navigator="petFoundView"
+						handleLoadMore={() =>
+							handleLoadMore(
+								'petsFound',
+								petFound,
+								totalPetFound,
+								isLoading,
+								setIsLoading,
+								startPetFound,
+								setStartPetFound,
+								setPetFound
+							)}
 					/>
 				</View>
 			) : (
@@ -89,6 +100,17 @@ function PetsFound(props) {
 					isLoading={isLoading}
 					navigation={navigation}
 					navigator="petFoundView"
+					handleLoadMore={() =>
+						handleLoadMore(
+							'petsFound',
+							petFound,
+							totalPetFound,
+							isLoading,
+							setIsLoading,
+							startPetFound,
+							setStartPetFound,
+							setPetFound
+						)}
 				/>
 			)}
 

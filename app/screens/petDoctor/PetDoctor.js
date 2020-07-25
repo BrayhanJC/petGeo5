@@ -76,6 +76,17 @@ function PetDoctor(props) {
 						showPetControl={false}
 						showPetDoctor={true}
 						navigation={navigation}
+						handleLoadMore={() =>
+							handleLoadMore(
+								'petDoctor',
+								Comedog,
+								totalComedog,
+								isLoading,
+								setIsLoading,
+								startComedog,
+								setStartComedog,
+								setComedog
+							)}
 					/>
 				</View>
 			) : (

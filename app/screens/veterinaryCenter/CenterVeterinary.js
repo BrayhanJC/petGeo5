@@ -74,6 +74,17 @@ function CenterVeterinary(props) {
 						navigation={navigation}
 						navigator="ViewPetCenter"
 						collectionName="petCenters"
+						handleLoadMore={() =>
+							handleLoadMore(
+								'petCenters',
+								centerVeterinary,
+								totalcenterVeterinary,
+								isLoading,
+								setIsLoading,
+								startcenterVeterinary,
+								setStartcenterVeterinary,
+								setcenterVeterinary
+							)}
 					/>
 				</View>
 			) : (
@@ -87,6 +98,17 @@ function CenterVeterinary(props) {
 					navigation={navigation}
 					navigator="ViewPetCenter"
 					collectionName="petCenters"
+					handleLoadMore={() =>
+						handleLoadMore(
+							'petCenters',
+							centerVeterinary,
+							totalcenterVeterinary,
+							isLoading,
+							setIsLoading,
+							startcenterVeterinary,
+							setStartcenterVeterinary,
+							setcenterVeterinary
+						)}
 				/>
 			)}
 

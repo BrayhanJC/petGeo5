@@ -64,6 +64,17 @@ function PetControl(props) {
 						showPet={false}
 						showPetControl={true}
 						user={user}
+						handleLoadMore={() =>
+							handleLoadMore(
+								'petControl',
+								PetControl,
+								totalPetControl,
+								isLoading,
+								setIsLoading,
+								startPetControl,
+								setStartPetControl,
+								setPetControl
+							)}
 					/>
 				</View>
 			) : (
@@ -78,6 +89,17 @@ function PetControl(props) {
 					showPet={false}
 					showPetControl={true}
 					user={user}
+					handleLoadMore={() =>
+						handleLoadMore(
+							'petControl',
+							PetControl,
+							totalPetControl,
+							isLoading,
+							setIsLoading,
+							startPetControl,
+							setStartPetControl,
+							setPetControl
+						)}
 				/>
 			)}
 

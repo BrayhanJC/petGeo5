@@ -11,7 +11,6 @@ import { size, isEmpty } from 'lodash';
 import firebase from 'firebase/app';
 import UserData from '../account/UserData';
 
-const INFO_USER = '@info_user:key';
 /***
  * Allows to see all the news of the veterinary centers and animal foundations
  */
@@ -19,19 +18,19 @@ const INFO_USER = '@info_user:key';
 function News(props) {
 	//se puede obtener porque esta en la screen principal
 	const { navigation } = props;
-	const [user, setUser] = useState(null);
+	const [ user, setUser ] = useState(null);
 
-	const [News, setNews] = useState([]);
-	const [totalNews, setTotalNews] = useState(0);
-	const [startNews, setStartNews] = useState(null);
-	const [isLoading, setIsLoading] = useState(false);
+	const [ News, setNews ] = useState([]);
+	const [ totalNews, setTotalNews ] = useState(0);
+	const [ startNews, setStartNews ] = useState(null);
+	const [ isLoading, setIsLoading ] = useState(false);
 	//variables para el popup
-	const [elements, setElements] = useState('');
-	const [modalVisible, setModalVisible] = useState(false);
+	const [ elements, setElements ] = useState('');
+	const [ modalVisible, setModalVisible ] = useState(false);
 
 	//variables para el buscador
-	const [item, setItem] = useState([]);
-	const [search, setSearch] = useState('');
+	const [ item, setItem ] = useState([]);
+	const [ search, setSearch ] = useState('');
 
 	useEffect(() => {
 		firebase.auth().onAuthStateChanged((userInfo) => {
@@ -67,6 +66,17 @@ function News(props) {
 						navigation={navigation}
 						navigator="ViewNews"
 						collectionName="news"
+						handleLoadMore={() =>
+							handleLoadMore(
+								'news',
+								News,
+								totalNews,
+								isLoading,
+								setIsLoading,
+								startNews,
+								setStartNews,
+								setNews
+							)}
 					/>
 				</View>
 			) : (
@@ -82,19 +92,25 @@ function News(props) {
 						navigator="ViewNews"
 						collectionName="news"
 						setIsLoading={setIsLoading}
-						handleLoadMore={() => handleLoadMore('news', News, totalNews, isLoading,setIsLoading, startNews, setStartNews, setNews)}
+						handleLoadMore={() =>
+							handleLoadMore(
+								'news',
+								News,
+								totalNews,
+								isLoading,
+								setIsLoading,
+								startNews,
+								setStartNews,
+								setNews
+							)}
 					/>
 				</View>
 			)}
 
-			{
-				/***
+			{/***
 				 * Modal que sirve para registrar el tipo de usuario
 				 */
-				modalVisible && (
-					<UserData modalVisible={modalVisible} setModalVisible={setModalVisible} userInfo={user} />
-				)
-			}
+			modalVisible && <UserData modalVisible={modalVisible} setModalVisible={setModalVisible} userInfo={user} />}
 
 			{user && (
 				<Icon

@@ -42,11 +42,11 @@ function Comedogs(props) {
 				//cargando datos al userInfo, contiene toda la informacion del usuario
 				setUser(user);
 	
-				if (user) {
-					if (user.uid) {
-						getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
-					}
-				}
+				// if (user) {
+				// 	if (user.uid) {
+				// 		getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
+				// 	}
+				// }
 			})();
 		
 		}, []);
@@ -54,11 +54,9 @@ function Comedogs(props) {
 	useFocusEffect(
 		useCallback(() => {
 			listRecords('comedogs', setTotalComedog, setComedog, setStartComedog);
-
 			if (user) {
 				if (user.uid) {
 					getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
-
 				}
 			}
 
@@ -85,6 +83,17 @@ function Comedogs(props) {
 						navigator="ViewComedog"
 						user={user}
 						collectionName="comedogs"
+						handleLoadMore={() =>
+							handleLoadMore(
+								'comedogs',
+								Comedog,
+								totalComedog,
+								isLoading,
+								setIsLoading,
+								startComedog,
+								setStartComedog,
+								setComedog
+							)}
 					/>
 				</View>
 			) : (
@@ -99,6 +108,17 @@ function Comedogs(props) {
 					navigator="ViewComedog"
 					user={user}
 					collectionName="comedogs"
+					handleLoadMore={() =>
+					handleLoadMore(
+						'comedogs',
+						Comedog,
+						totalComedog,
+						isLoading,
+						setIsLoading,
+						startComedog,
+						setStartComedog,
+						setComedog
+					)}
 				/>
 			)}
 

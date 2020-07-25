@@ -8,6 +8,16 @@ const db = firebase.firestore(firebaseApp);
 
 const limitRecords = 10;
 
+/**
+ * Funcion que permite guardar los datos de una coleccion dada
+ * @param { datos de la coleccion } collectionData 
+ * @param { nombre de la coleccion } collectionName 
+ * @param { navegacion } navigation 
+ * @param { permite navegar hacia un lugar de la app} navigateTo 
+ * @param { toastRef } toastRef 
+ * @param { modificador de carga } setIsLoading 
+ * @param { mensaje de error } msgError 
+ */
 export const saveCollection = (
 	collectionData,
 	collectionName,
@@ -25,7 +35,6 @@ export const saveCollection = (
 			navigation.navigate(navigateTo);
 		})
 		.catch((e) => {
-			//console.log(e);
 			setIsLoading(false);
 			toastRef.current.show(msgError);
 		});
@@ -90,6 +99,18 @@ export const listRecordsById = (collectionName, create_uid, setTotalElements, se
 	}
 };
 
+/**
+ * Funcion que es utilizada para poder cargar mas elementos a medida de que el usuario
+ * haga el respectivo slide
+ * @param { nombre de la coleccion } collectionName 
+ * @param { datos de la coleccion} element 
+ * @param { cantidad total de elementos encontrados } totalElement 
+ * @param { indicador de carga} isLoading 
+ * @param { modifica el indicador de carga } setIsLoading 
+ * @param { item en el cual va a empezar a cargar los nuevos elementos} startElement 
+ * @param { modifica el item en el cual se va a empezar a cargar los nuevos elementos} setStartElement 
+ * @param { modifica los elmentos encontrados } setElements 
+ */
 export const handleLoadMore = (
 	collectionName,
 	element,
@@ -101,10 +122,12 @@ export const handleLoadMore = (
 	setElements
 ) => {
 	const resultElements = [];
-	if(isLoading) {
+
+	if (isLoading) {
 		return;
 	}
-	if(!(element.length < totalElement - 1)) {
+
+	if (!(element.length < totalElement - 1)) {
 		setIsLoading(false);
 		return;
 	}
@@ -136,9 +159,6 @@ export const handleLoadMore = (
  * @param {variable que modica los elementos a retornar} setElements
  */
 export const getInfoByUser = async (collectionName, user_id, setElements, setModalVisible) => {
-	// console.log('****');
-	// console.log(collectionName);
-	// console.log(user_id);
 	const resultElements = [];
 	if (user_id) {
 		await db
@@ -146,10 +166,7 @@ export const getInfoByUser = async (collectionName, user_id, setElements, setMod
 			.where('create_uid', '==', user_id)
 			.get()
 			.then((response) => {
-				//console.log('sisas aqui')
 				if (response.doc !== undefined) {
-					// console.log('como asi')
-					// console.log(response.doc)
 					setModalVisible(false);
 				} else {
 					setModalVisible(true);
@@ -158,17 +175,14 @@ export const getInfoByUser = async (collectionName, user_id, setElements, setMod
 				response.forEach((doc) => {
 					const element = doc.data();
 					element.id = doc.id;
-					//console.log(element)
+				
 					resultElements.push(element);
-					//console.log('esto es lo que obtuvimos de la pinche consulta ' + element);
 					if (size(element) > 0) {
 						setModalVisible(false);
 					} else {
 						setModalVisible(true);
 					}
 				});
-
-				//console.log('como que no '+ resultElements)
 
 				setElements(resultElements);
 			})
@@ -323,6 +337,11 @@ export const isCenter = async (user_id, data) => {
 	}
 };
 
+/**
+ * Obtiene los datos del usuario
+ * @param { id del usuario } user_id 
+ * @param { funcion a utilizar } funcion 
+ */
 export const obtenerUsuarios = async (user_id, funcion) => {
 	if (user_id) {
 		await db
@@ -344,7 +363,6 @@ export const obtenerUsuarios = async (user_id, funcion) => {
  * @param { permite regresar al menu principal} navigation 
  */
 export const createPetFound = (collectionData, toastRef, navigation, record_id, setloading) => {
-
 	db
 		.collection('petsFound')
 		.add(collectionData)
@@ -388,7 +406,6 @@ export const getInfoCollection = async (collection, record_id, data) => {
 			.doc(record_id)
 			.get()
 			.then((response) => {
-
 				response.forEach((doc) => {
 					const element = doc.data();
 					element.id = doc.id;

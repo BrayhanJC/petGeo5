@@ -78,6 +78,17 @@ function MissingPets(props) {
 						navigation={navigation}
 						navigator="ViewMissingPet"
 						collectionName="missingPets"
+						handleLoadMore={() =>
+							handleLoadMore(
+								'missingPets',
+								missingPets,
+								totalMissingPets,
+								isLoading,
+								setIsLoading,
+								startMissingPets,
+								setStartMissingPets,
+								setMissingPets
+							)}
 					/>
 				</View>
 			) : (
@@ -91,6 +102,17 @@ function MissingPets(props) {
 					navigation={navigation}
 					navigator="ViewMissingPet"
 					collectionName="missingPets"
+					handleLoadMore={() =>
+						handleLoadMore(
+							'missingPets',
+							missingPets,
+							totalMissingPets,
+							isLoading,
+							setIsLoading,
+							startMissingPets,
+							setStartMissingPets,
+							setMissingPets
+						)}
 				/>
 			)}
 
