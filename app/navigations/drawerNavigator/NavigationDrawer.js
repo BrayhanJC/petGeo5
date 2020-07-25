@@ -134,10 +134,11 @@ function NavigatorDrawer(props) {
 				options={{
 					title: 'Primeros Pasos',
 					drawerIcon: ({ color, size }) => (
-						<MaterialCommunityIcons name="account-multiple" color="#1A89E7" size={27} />
+						<MaterialCommunityIcons name="gesture-double-tap" color="#1A89E7" size={27} />
 					)
 				}}
 			/>
+			
 		</Drawer.Navigator>
 	);
 }

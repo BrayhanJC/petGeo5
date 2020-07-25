@@ -18,15 +18,15 @@ export const touchableViewRecords = {
     marginLeft: 10,
     marginRight:10,
     backgroundColor: 'white',
-    borderRadius: 15,
+    borderRadius: 18,
     shadowColor: '#000',
     shadowOffset: {
         width: 0,
-        height: 1
+        height: 5
     },
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
-    elevation: 3,
+    elevation: 4,
     paddingVertical: '1%'
   },
   itemColum: {
@@ -68,16 +68,18 @@ export const touchableImageRecords = {
 export const touchableNameRecords = {
   touchableNameRecordsStyle: {
     fontWeight: "bold",
-    fontSize:14.5
+    fontSize:14.5,
+    width: 280,
   },
 };
 
 export const touchableAddressRecords = {
   touchableAddressRecordsStyle: {
-    padding: 2,
+    padding: 1,
     color: "black",
     fontStyle: 'italic',
-    fontSize:11
+    fontSize:11,
+    width: 280,
   },
 };
 
@@ -85,8 +87,8 @@ export const touchableDescriptionRecords = {
   touchableDescriptionRecordsStyle: {
     paddingTop: 2,
     color: "grey",
-    width: 250,
-    fontSize:12
+    width: 280,
+    fontSize:11
   },
 };
 

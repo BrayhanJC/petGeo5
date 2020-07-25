@@ -70,9 +70,9 @@ function RendenderItems(props) {
 				<View style={styleViewFormat.textFormat}>
 					<Text style={styleTouchableNameRecords.touchableNameRecordsStyle}>{name}</Text>
 					{/* <Text style={styletouchableAddressRecords.touchableAddressRecordsStyle}>Dirección: {address}</Text> */}
-					<Text style={styletouchableAddressRecords.touchableAddressRecordsStyle}>Autor: {create_name}</Text>
+					<Text style={styletouchableAddressRecords.touchableAddressRecordsStyle}><Text style={{fontWeight:'bold'}}>Autor:</Text> {create_name}</Text>
 					<Text style={styleTouchableDescriptionRecordsRecords.touchableDescriptionRecordsStyle}>
-						{description.substr(0, 75)}...
+						{description.substr(0, 85)}...
 					</Text>
 				</View>
 			</View>
