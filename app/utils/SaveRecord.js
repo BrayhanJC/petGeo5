@@ -3,11 +3,35 @@ import firebase from 'firebase/app';
 import 'firebase/storage';
 import 'firebase/firestore';
 import { size } from 'lodash';
-
+import {sendNotification} from './Notifications'
 const db = firebase.firestore(firebaseApp);
 
 const limitRecords = 10;
 
+export const notify_user = (collection_name, title, description) => {
+	console.log('entro por aca')
+	console.log(title)
+	console.log(description)
+		if (collection_name){
+			if (collection_name == 'news'){
+
+				sendNotification('Evento: ' + title, description)
+			}
+			if (collection_name == 'comedogs'){
+				sendNotification('Nuevo Comedog registrado: ', description)
+			}
+			if (collection_name == 'missingPets'){
+				sendNotification('Se ha reportado una Mascota Extraviada: :O', description)
+			}
+			if (collection_name == 'petCenters'){
+				sendNotification('Nuevo Centro disponible para ti: ', description)
+			}
+			if (collection_name == 'petsFound'){
+				sendNotification('Mascota Encontrada: :)' + title, description)
+			}
+		}
+
+}
 /**
  * Funcion que permite guardar los datos de una coleccion dada
  * @param { datos de la coleccion } collectionData 
@@ -32,6 +56,7 @@ export const saveCollection = (
 		.add(collectionData)
 		.then(() => {
 			setIsLoading(false);
+			notify_user(collectionName, collectionData.name, collectionData.description)
 			navigation.navigate(navigateTo);
 		})
 		.catch((e) => {

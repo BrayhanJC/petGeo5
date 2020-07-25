@@ -40,7 +40,6 @@ function LocalizationMap(props) {
 	const [ modalVisible, setModalVisible ] = useState(false);
 
 	const resultElements = [];
-	const collections = [ 'comedogs', 'missingPets' ];
 
 	//estados para manejar el filtro de los botones
 	const [ filterGreen, setFilterGreen ] = useState(true);
@@ -102,23 +101,7 @@ function LocalizationMap(props) {
 		}, [])
 	);
 
-	//console.log(result[0]);
-
-
-
-
-
-
 	const goElement = (view, id, name) => {
-		//console.log(navigation)
-		//navigation.goBack()
-		//navigation.navigate('ViewComedog');
-		console.log({
-			view,
-			id,
-			name
-		})
-		
 		navigation.navigate(view, {
 			id,
 			name
