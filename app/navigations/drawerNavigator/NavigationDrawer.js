@@ -57,6 +57,7 @@ function NavigatorDrawer(props) {
 
 	return (
 		<Drawer.Navigator
+			lazy={false}
 			initialRouteName="Pets"
 			drawerContentOptions={{
 				activeTintColor: '#1A89E7',

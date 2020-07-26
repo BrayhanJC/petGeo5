@@ -94,8 +94,9 @@ const ViewForm = (props) => {
 				text: 'Veterinarios:',
 				iconName: 'account-supervisor-circle',
 				iconType: 'material-community',
-				
-				onPress: () => setSelectItem('veterinary'),
+				//CenterDoctorStack
+				//PetDoctors
+				onPress: () => {navigation.navigate('CenterDoctorStack',)},
 			},
 			{
 				text: 'Dirección: ' + item.address,
@@ -137,9 +138,7 @@ const ViewForm = (props) => {
 	}
 
 
-	if (selectItem){
-		navigation.navigate('Profile')
-	}
+
 
 	return (
 		<ScrollView vertical style={viewFormStyle.viewBody}>

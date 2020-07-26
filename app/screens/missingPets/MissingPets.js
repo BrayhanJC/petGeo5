@@ -124,7 +124,7 @@ function MissingPets(props) {
 			) : (
 				<Text />
 			)}
-			{user && (
+			{firebase.auth().currentUser && (
 				<Icon
 					containerStyle={buttonFormFloating.btnContainer}
 					type="material-community"

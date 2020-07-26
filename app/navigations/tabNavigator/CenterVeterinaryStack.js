@@ -6,7 +6,7 @@ import AvatarIcon from '../../components/AvatarIcon';
 import CreateReview from '../../screens/review/CreateReview';
 import PetCenterView from '../../screens/veterinaryCenter/PetCenterView';
 import EditCenter from '../../screens/veterinaryCenter/EditCenter';
-
+import { MaterialCommunityIcons } from 'react-native-vector-icons';
 const Stack = createStackNavigator();
 
 /***
@@ -16,13 +16,12 @@ const Stack = createStackNavigator();
 function CenterVeterinary() {
 	return (
 		<Stack.Navigator>
-
 			<Stack.Screen
 				name="CenterStack"
 				component={PetCenterScreen}
 				options={{
 					title: 'Centros',
-					headerLeft: () => <AvatarIcon />,
+					headerLeft: () => <AvatarIcon />
 				}}
 			/>
 
@@ -34,9 +33,10 @@ function CenterVeterinary() {
 				name="CreateReviewCenter"
 				component={CreateReview}
 				options={{
-					title: 'Nuevo Comentario',
+					title: 'Nuevo Comentario'
 				}}
 			/>
+
 
 		</Stack.Navigator>
 	);

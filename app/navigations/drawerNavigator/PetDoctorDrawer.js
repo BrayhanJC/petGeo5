@@ -7,6 +7,7 @@ import CreatePetDoctor from '../../screens/petDoctor/CreatePetDoctor';
 import PetDoctorView from '../../screens/petDoctor/PetDoctorView';
 import DeleteRecord from '../../components/UpdateRecords/DeleteRecord'
 import EditPetDoctor from '../../screens/petDoctor/EditPetDoctor';
+import CenterDoctorScreen from '../../screens/petDoctor/CenterDoctors';
 const Stack = createStackNavigator();
 
 /***
@@ -32,6 +33,24 @@ function PetDoctorDrawer(props) {
 					)
 				}}
 			/>
+
+			<Stack.Screen
+				name="CenterDoctorStack"
+				component={CenterDoctorScreen}
+				options={{
+					title: 'Veterinarios',
+					headerLeft: ({ color, size }) => (
+						<MaterialCommunityIcons
+							name="chevron-left"
+							color={color}
+							size={32}
+							onPress={() => navigation.goBack()}
+						/>
+					)
+				}}
+			/>
+
+
 			<Stack.Screen
 				name="CreatePetDoctor"
 				component={CreatePetDoctor}

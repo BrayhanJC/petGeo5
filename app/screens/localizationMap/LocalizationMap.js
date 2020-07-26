@@ -22,6 +22,8 @@ import { getInfoByUser } from '../../utils/SaveRecord';
 import UserData from '../account/UserData';
 import FilterMap from './FilterMap';
 import { returnColor, returnNameFormView } from '../../utils/Configurations';
+import { sendEmail } from '../../utils/Email';
+
 
 /***
  * Allows to see all the news of the veterinary centers and animal foundations
@@ -106,6 +108,13 @@ function LocalizationMap(props) {
 			id,
 			name
 		});
+		// sendEmail(
+		// 	'ktktmurillo@hotmail.com',
+		// 	'Quiero más información!',
+		// 	'Buen día. \n Me he dado cuenta que la mascota 🐶 la están dando en adopción. \n Deseo mas información. Mi número telefonico es: 32323232 \n\n Quedo Atento.  \n Mensaje enviado desde PetGe🌎 🙂'
+		// ).then(() => {
+		// 	console.log('Our email successful provided to device mail ');
+		// });
 	};
 
 	var aux = result.filter((valueItem) => {

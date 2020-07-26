@@ -5,17 +5,19 @@ import firebase from 'firebase/app';
 import { styleFloatButton } from '../../src/css/FloatButton';
 import { useFocusEffect } from '@react-navigation/native';
 import { listRecordsById, listRecords, handleLoadMore, getInfoByUser } from '../../utils/SaveRecord';
-import ListRecords from '../../components/formList/ListRecords';
+import ListDoctor from '../../components/formList/petDoctor/ListDoctor';
 import { useNavigation } from '@react-navigation/native';
 import Search from '../../components/formSearch/Search';
 import NotFoundItem from '../../components/formSearch/NotFoundItem';
 import { size, isEmpty } from 'lodash';
 import UserData from '../account/UserData';
 
-function PetDoctor(props) {
+function CenterDoctors(props) {
 	//se puede obtener porque esta en la screen principal
 	//const { navigation } = props;
-	const navigation = useNavigation();
+    const navigation = useNavigation();
+ 
+
 	const [ user, setUser ] = useState(null);
 
 	const [ PetDoctor, setPetDoctor ] = useState([]);
@@ -63,7 +65,7 @@ function PetDoctor(props) {
 
 			{!isEmpty(search) && size(item) > 0 ? (
 				<View style={styleFloatButton.viewBody}>
-					<ListRecords
+					<ListDoctor
 						elements={item}
 						isLoading={isLoading}
 						showPet={false}
@@ -89,7 +91,7 @@ function PetDoctor(props) {
 			)}
 
 			{isEmpty(search) && (
-				<ListRecords
+				<ListDoctor
 					elements={PetDoctor}
 					isLoading={isLoading}
 					showPet={false}
@@ -97,28 +99,22 @@ function PetDoctor(props) {
 					showPetDoctor={true}
 					navigation={navigation}
 					user={user}
-					handleLoadMore={() =>
-						handleLoadMore(
-							'petDoctor',
-							PetDoctor,
-							totalPetDoctor,
-							isLoading,
-							setIsLoading,
-							startPetDoctor,
-							setStartPetDoctor,
-							setPetDoctor
-						)}
+                    handleLoadMore={() =>
+                        handleLoadMore(
+                            'petDoctor',
+                            PetDoctor,
+                            totalPetDoctor,
+                            isLoading,
+                            setIsLoading,
+                            startPetDoctor,
+                            setStartPetDoctor,
+                            setPetDoctor
+                        )}
 				/>
+
 			)}
 
-			{/***
-			 * Modal que sirve para registrar el tipo de usuario
-			 */
-			modalVisible ? (
-				<UserData modalVisible={modalVisible} setModalVisible={setModalVisible} userInfo={user} />
-			) : (
-				<Text />
-			)}
+
 			{user && (
 				<Icon
 					type="material-community"
@@ -133,4 +129,4 @@ function PetDoctor(props) {
 	);
 }
 
-export default PetDoctor;
+export default CenterDoctors;

@@ -131,7 +131,7 @@ function Comedogs(props) {
 				<Text />
 			)}
 
-			{user && (
+			{firebase.auth().currentUser && (
 				<Icon
 					type="material-community"
 					name="plus"
