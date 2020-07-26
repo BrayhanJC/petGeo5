@@ -96,7 +96,11 @@ const ViewForm = (props) => {
 				iconType: 'material-community',
 				//CenterDoctorStack
 				//PetDoctors
-				onPress: () => {navigation.navigate('CenterDoctorStack',)},
+				onPress: () => {navigation.navigate('CenterVeterinayDoctorStack',
+				{
+					navigation,
+					create_uid: item.create_uid
+				})},
 			},
 			{
 				text: 'Dirección: ' + item.address,

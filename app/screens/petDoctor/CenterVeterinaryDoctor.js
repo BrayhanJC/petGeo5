@@ -1,3 +1,7 @@
+
+
+CenterVeterinaryDoctor
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
@@ -12,7 +16,7 @@ import NotFoundItem from '../../components/formSearch/NotFoundItem';
 import { size, isEmpty } from 'lodash';
 import UserData from '../account/UserData';
 
-function CenterDoctors(props) {
+function CenterVeterinaryDoctor(props) {
 	//se puede obtener porque esta en la screen principal
 	//const { navigation } = props;
 
@@ -130,18 +134,8 @@ function CenterDoctors(props) {
 			)}
 
 
-			{user && (
-				<Icon
-					type="material-community"
-					name="plus"
-					color="#1A89E7"
-					reverse
-					containerStyle={styleFloatButton.btnContainer}
-					onPress={() => navigation.navigate('CreatePetDoctor')}
-				/>
-			)}
 		</View>
 	);
 }
 
-export default CenterDoctors;
+export default CenterVeterinaryDoctor;

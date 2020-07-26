@@ -18,7 +18,7 @@ function PetDoctorDrawer(props) {
 	const navigation = useNavigation();
 	return (
 		<Stack.Navigator>
-			<Stack.Screen
+			{/* <Stack.Screen
 				name="PetDoctors"
 				component={PetDoctorScreen}
 				options={{
@@ -32,7 +32,7 @@ function PetDoctorDrawer(props) {
 						/>
 					)
 				}}
-			/>
+			/> */}
 
 			<Stack.Screen
 				name="CenterDoctorStack"

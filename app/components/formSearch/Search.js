@@ -23,13 +23,7 @@ const Search = (props) => {
 							//console.log(valueItem.name.toLowerCase() + ' esta la palabra: ' + search + ' con valor de: ' + valueItem.name.toLowerCase().includes(search))
 							return valueItem.name.toLowerCase().includes(search.toLowerCase())
 						})
-						if ((collection == 'petDoctor') || collection == 'pet'){
-							
-							data = data.filter( valueItem => {
-								
-								return valueItem.create_uid == userInfo.uid
-							})
-						}
+						console.log(data)
 
 						setItem(data);
 						setLoading(false);

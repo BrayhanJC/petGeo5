@@ -14,7 +14,7 @@ function RenderDoctor(props) {
 
 
 	const goElement = () => {
-		navigation.navigate('ViewPetDoctor', {
+		navigation.navigate('ViewPetDoctorStack', {
 			id,
 			name,
 			collectionName,
@@ -38,8 +38,8 @@ function RenderDoctor(props) {
 				<Avatar
 					size="large"
 					rounded
-					//source={mainImage ? { uri: mainImage } : require('../../../../assets/img/doctor.png')}
-					source={require('../../../../assets/img/doctor.png')}
+					source={mainImage ? { uri: mainImage } : require('../../../../assets/img/doctor.png')}
+					//source={require('../../../../assets/img/doctor.png')}
 					activeOpacity={0.7}
 				/>
 			</View>
