@@ -12,8 +12,18 @@ export default function SubSlide(props) {
 					<Text style={styles.description}>{description}</Text>
 				</View>
 			</View>
-			<View style={{ alignContent: 'flex-end', alignItems: 'flex-end', borderRadius:90 }}>
-	<Text style={{ alignContent: 'flex-end', alignItems: 'flex-end', color:'white', fontWeight:'bold', fontSize:17 }}>{next}</Text>
+			<View style={{ alignContent: 'flex-end', alignItems: 'flex-end', borderRadius: 90 }}>
+				<Text
+					style={{
+						alignContent: 'flex-end',
+						alignItems: 'flex-end',
+						color: 'white',
+						fontWeight: 'bold',
+						fontSize: 17
+					}}
+				>
+					{next}
+				</Text>
 			</View>
 		</View>
 	);

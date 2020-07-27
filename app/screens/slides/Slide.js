@@ -7,9 +7,8 @@ export const SLIDE_HEIGHT = 0.61 * height;
 export default function Slide(props) {
 	const { label, color } = props;
 
-
 	return (
-		<View style={[ styles.slider, {backgroundColor: color} ]}>
+		<View style={[ styles.slider, { backgroundColor: color } ]}>
 			<View style={styles.container}>
 				<View style={[ styles.titleContainer ]}>
 					<Text style={styles.title}>{label}</Text>
@@ -28,7 +27,7 @@ const styles = StyleSheet.create({
 		fontSize: 42,
 		color: 'white',
 		textAlign: 'center',
-		fontWeight:'bold'
+		fontWeight: 'bold'
 		//lineHeight: 80
 	},
 	titleContainer: {

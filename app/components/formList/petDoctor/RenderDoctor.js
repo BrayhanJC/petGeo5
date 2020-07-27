@@ -5,13 +5,7 @@ function RenderDoctor(props) {
 	const { elements, navigation, collectionName, width } = props;
 	const { id, image_id, name, description, specialty, create_uid, empty } = elements.item;
 
-	console.log('capturando imagen');
-	console.log(image_id);
-
-	// const mainImage = image_id[0] ? image_id : '';
-
 	var mainImage = '';
-
 
 	const goElement = () => {
 		navigation.navigate('ViewPetDoctorStack', {
@@ -25,30 +19,27 @@ function RenderDoctor(props) {
 	if (empty) {
 		return <View style={[ styles.item_blank, { backgroundColor: 'white' } ]} />;
 	} else {
-	
 		mainImage = image_id[0];
-
 	}
 
-	console.log(mainImage);
 	return (
-		<TouchableOpacity onPress={goElement} style={{flex:1}}>
-		<View style={[ styles.item, { height: width / 2 } ]}>
-			<View style={styles.avatar}>
-				<Avatar
-					size="large"
-					rounded
-					source={mainImage ? { uri: mainImage } : require('../../../../assets/img/doctor.png')}
-					//source={require('../../../../assets/img/doctor.png')}
-					activeOpacity={0.7}
-				/>
-			</View>
-			<Text style={styles.title}>{name.substr(0, 18)}</Text>
+		<TouchableOpacity onPress={goElement} style={{ flex: 1 }}>
+			<View style={[ styles.item, { height: width / 2 } ]}>
+				<View style={styles.avatar}>
+					<Avatar
+						size="large"
+						rounded
+						source={mainImage ? { uri: mainImage } : require('../../../../assets/img/doctor.png')}
+						//source={require('../../../../assets/img/doctor.png')}
+						activeOpacity={0.7}
+					/>
+				</View>
+				<Text style={styles.title}>{name.substr(0, 18)}</Text>
 
-			<View style={styles.containerDescription}>
-				<Text style={styles.description}>{description.substr(0, 95)}...</Text>
+				<View style={styles.containerDescription}>
+					<Text style={styles.description}>{description.substr(0, 95)}...</Text>
+				</View>
 			</View>
-		</View>
 		</TouchableOpacity>
 	);
 }

@@ -35,9 +35,15 @@ function ListRecordsCuadricula(props) {
 		collectionName
 	} = props;
 
+	var data = elements.filter( valueItem => {
+		//console.log(valueItem.name.toLowerCase() + ' esta la palabra: ' + search + ' con valor de: ' + valueItem.name.toLowerCase().includes(search))
+		console.log(valueItem.create_uid + ' el id actual '  + user.uid)
+	})
+
 	var dataRender = elements;
+
 	if (user) {
-		if (showPet || showPetControl || showPetDoctor) {
+		if (showPet) {
 			const filtro = (elements) => elements.create_uid == user.uid;
 			var elementsRender = elements.filter(filtro);
 			dataRender = elementsRender;

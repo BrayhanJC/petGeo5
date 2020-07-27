@@ -24,7 +24,11 @@ const Search = (props) => {
 							return valueItem.name.toLowerCase().includes(search.toLowerCase())
 						})
 						console.log(data)
-
+						if ((collection == 'petDoctor') || collection == 'pet'){
+							data = data.filter( valueItem => {
+								return valueItem.create_uid == userInfo.uid
+							})
+						}
 						setItem(data);
 						setLoading(false);
 					})

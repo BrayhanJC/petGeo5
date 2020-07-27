@@ -16,23 +16,21 @@ function CenterDoctors(props) {
 	//se puede obtener porque esta en la screen principal
 	//const { navigation } = props;
 
-	var navegacion = undefined
-	var showDoctor = false
-	var create_uid = false
-	if (props.route.params){
-		navegacion = props.route.params.navigation
-		create_uid = props.route.params.create_uid
-	}
-	console.log(navegacion)
-	var navigation = undefined
-	if (!navegacion){
-		navigation = useNavigation();
-	}else{
-		showDoctor = true
-		navigation = navegacion
+	var navegacion = undefined;
+	var showDoctor = false;
+	var create_uid = false;
+	if (props.route.params) {
+		navegacion = props.route.params.navigation;
+		create_uid = props.route.params.create_uid;
 	}
 
- 
+	var navigation = undefined;
+	if (!navegacion) {
+		navigation = useNavigation();
+	} else {
+		showDoctor = true;
+		navigation = navegacion;
+	}
 
 	const [ user, setUser ] = useState(null);
 
@@ -67,7 +65,7 @@ function CenterDoctors(props) {
 		}, [])
 	);
 
-	console.log(elements)
+	console.log(elements);
 	return (
 		<View style={styleFloatButton.viewBody}>
 			<Search
@@ -114,21 +112,19 @@ function CenterDoctors(props) {
 					navigation={navigation}
 					user={user}
 					create_uid={create_uid}
-                    handleLoadMore={() =>
-                        handleLoadMore(
-                            'petDoctor',
-                            PetDoctor,
-                            totalPetDoctor,
-                            isLoading,
-                            setIsLoading,
-                            startPetDoctor,
-                            setStartPetDoctor,
-                            setPetDoctor
-                        )}
+					handleLoadMore={() =>
+						handleLoadMore(
+							'petDoctor',
+							PetDoctor,
+							totalPetDoctor,
+							isLoading,
+							setIsLoading,
+							startPetDoctor,
+							setStartPetDoctor,
+							setPetDoctor
+						)}
 				/>
-
 			)}
-
 
 			{user && (
 				<Icon

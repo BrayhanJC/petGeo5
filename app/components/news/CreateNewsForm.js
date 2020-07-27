@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, Alert, Dimensions } from 'react-native';
-import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
+import { View, Text, ScrollView, Alert, Dimensions, StyleSheet } from 'react-native';
+import { Icon, Avatar, Image, Input, Button, CheckBox } from 'react-native-elements';
 import { size } from 'lodash';
 import firebase from 'firebase/app';
 import { uploadImageStorage } from '../../utils/UploadImageStorage';
@@ -11,15 +11,14 @@ import { styleImageMain } from '../../src/css/ImageMain';
 import AddForm from '../formMain/AddForm';
 import UploadImage from '../formMain/UploadImage';
 import ImageMain from '../formMain/ImageMain';
-import Map from '../formMain/Map'
+import Map from '../formMain/Map';
 
-import {  Notifications} from 'expo'
+import { Notifications } from 'expo';
 
 import * as Permissions from 'expo-permissions';
 
 //devuelve el ancho de la screen
 const widhtScreen = Dimensions.get('window').width;
-
 
 function CreateNewsForm(props) {
 	const { toastRef, setIsLoading, navigation } = props;
@@ -31,14 +30,11 @@ function CreateNewsForm(props) {
 	const [ isVisibleMap, setIsVisibleMap ] = useState(false);
 	const [ locationNew, setLocationNew ] = useState(null);
 	const [ phone, setPhone ] = useState('');
+	const [ isAdoption, setisAdoption ] = useState(false);
 
 	const addNews = async () => {
-		//await	sendNotification()
-
-
-
 		setIsLoading(false);
-		
+
 		if (!title || !address || !description) {
 			toastRef.current.show('Todos los campos del formulario son obligatorios');
 		} else if (size(imageSelected) === 0) {
@@ -62,6 +58,7 @@ function CreateNewsForm(props) {
 						create_uid: firebase.auth().currentUser.uid,
 						create_name: firebase.auth().currentUser.displayName,
 						phone,
+						isAdoption,
 						quantityVoting: 0,
 						rating: 0,
 						ratingTotal: 0
@@ -77,30 +74,6 @@ function CreateNewsForm(props) {
 		}
 	};
 
-
-	const sendNotification = async () => {
-
-
-		const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
-		let finalStatus = status
-
-		if (status !== 'granted'){
-			const { status: existingStatus } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-			 finalStatus = status
-		}
-
-
-		// if (finalStatus !== 'granted' ){
-		// 	return
-		// }
-		
-		let token = (await Notifications.getExpoPushTokenAsync()).data
-		
-		console.log(token)
-	}
-
-
-
 	//const {title, setTitle, address, setAddress, description, setDescription, btnName, addressVisible} = props
 
 	return (
@@ -113,6 +86,36 @@ function CreateNewsForm(props) {
 					imageMain={imageSelected[0]}
 					image_default={require('../../../assets/img/avatar_dog.png')}
 				/>
+
+				<View style={{}} />
+
+				<View style={styles.container}>
+					<View style={styles.checkboxContainer}>
+						<CheckBox
+							center
+							style={styles.checkbox}
+							containerStyle={{
+								borderColor: '#C2C2C2',
+								flex:1,
+								borderWidth: 2,
+								borderRadius: 30,
+								backgroundColor: '#ffffff',
+								height: 35,
+								paddingTop: 1,
+								paddingBottom: 1,
+								alignItems: 'flex-start',
+							}}
+							title="¿Es una Adopción?"
+							checkedIcon="dot-circle-o"
+							uncheckedIcon="circle-o"
+							onPress={(state) => {
+								setisAdoption(!isAdoption);
+							}}
+							checked={isAdoption}
+						/>
+					</View>
+				</View>
+
 				<AddForm
 					title="Titulo Noticia o Evento"
 					address="Dirección"
@@ -147,3 +150,22 @@ function CreateNewsForm(props) {
 }
 
 export default CreateNewsForm;
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		alignItems: 'flex-start',
+		marginLeft: 20,
+		marginRight:20
+	},
+	checkboxContainer: {
+		flexDirection: 'row',
+		marginBottom: -10
+	},
+	checkbox: {
+		alignSelf: 'flex-start'
+	},
+	label: {
+		margin: 8
+	}
+});

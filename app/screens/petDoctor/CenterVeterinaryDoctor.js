@@ -27,7 +27,7 @@ function CenterVeterinaryDoctor(props) {
 		navegacion = props.route.params.navigation
 		create_uid = props.route.params.create_uid
 	}
-	console.log(navegacion)
+
 	var navigation = undefined
 	if (!navegacion){
 		navigation = useNavigation();
@@ -35,8 +35,6 @@ function CenterVeterinaryDoctor(props) {
 		showDoctor = true
 		navigation = navegacion
 	}
-
- 
 
 	const [ user, setUser ] = useState(null);
 

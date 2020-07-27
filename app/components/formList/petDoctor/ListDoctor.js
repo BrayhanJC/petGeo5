@@ -47,7 +47,7 @@ function ListDoctor(props) {
 	};
 
 	formatData(dataRender, COLUMNS);
-	//console.log(dataRender)
+
 	return (
 		<View style={{ flex: 1, paddingTop: 5, marginLeft: 4, marginRight: 4 }}>
 			{size(dataRender) > 0 ? (
