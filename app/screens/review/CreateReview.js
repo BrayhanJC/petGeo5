@@ -38,7 +38,7 @@ const CreateReview = (props) => {
 	if (props.route.name === 'CreateReviewCenter') {
 		type = 'petCenters';
 	}
-	const updateRestaurant = () => {
+	const updateCollection = () => {
 		const itemRef = db.collection(type).doc(idItem);
 		itemRef
 			.get()
@@ -47,11 +47,21 @@ const CreateReview = (props) => {
 				const ratingTotal = itemData.ratingTotal + rating;
 				const quantityVoting = itemData.quantityVoting + 1;
 				const ratingResult = ratingTotal / quantityVoting;
+				var active = true;
+				if (quantityVoting >= 12) {
+					if (ratingResult < 3) {
+						//console.log('esta publicacion se tiene que eliminar');
+						active = false;
+					}
+				}
+
 				const val = {
 					rating: ratingResult,
 					ratingTotal,
-					quantityVoting
+					quantityVoting,
+					active
 				};
+
 				itemRef
 					.update(val)
 					.then(() => {
@@ -89,7 +99,7 @@ const CreateReview = (props) => {
 				.add(payload)
 				.then(() => {
 					//setIsLoading(false)
-					updateRestaurant();
+					updateCollection();
 				})
 				.catch(() => {
 					toastRef.current.show('Error al enviar el comentario');
@@ -118,7 +128,6 @@ const CreateReview = (props) => {
 				/>
 				<View style={styleCreateReview.textAreaContainer}>
 					<TextInput
-					
 						underlineColorAndroid="transparent"
 						placeholder="Escribe tu comentario..."
 						placeholderTextColor="grey"

@@ -150,16 +150,18 @@ function LocalizationMap(props) {
 								}}
 								pinColor={returnColor(record.collection)}
 								title={record.name}
-								//description={record.description}
-								//image={require('../../../assets/img/comedog_icon.png')}
+
 							>
 								<Callout
 									style={styles.callout}
+									
 									onPress={() => goElement(returnNameFormView(record.collection), record.id, record.name)}
 								>
 									<ScrollView vertical>
-										<CarouselImages image_ids={record.image} height={85} width={180} style={{margin:2}}/>
+										<View style={{borderRadius:35,  marginRight:4}}>
+										<CarouselImages image_ids={record.image} height={85} width={180} style={{margin:2, borderRadius:30}}/>
 
+										</View>
 										<View style={mapInfoStyle.viewComponent}>
 											<Text style={mapInfoStyle.nameItem}>{record.name}</Text>
 										</View>
@@ -212,7 +214,6 @@ const styles = StyleSheet.create({
 		width: 180,
 		height: 170,
 		margin: 10,
-		
 		borderColor: '#C2C2C2',
 		borderWidth:2,
 		borderRadius: 30

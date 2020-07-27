@@ -61,7 +61,8 @@ function CreateNewsForm(props) {
 						isAdoption,
 						quantityVoting: 0,
 						rating: 0,
-						ratingTotal: 0
+						ratingTotal: 0,
+						active:true
 					},
 					'news',
 					navigation,

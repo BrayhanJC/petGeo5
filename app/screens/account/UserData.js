@@ -137,6 +137,7 @@ const UserData = (props) => {
 					quantityVoting: 0,
 					rating: 0,
 					ratingTotal: 0,
+					active:true
 				};
 
 				saveCenter(data, 'petCenters');

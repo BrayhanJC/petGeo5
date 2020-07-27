@@ -37,7 +37,8 @@ function CreatePetDoctorForm(props) {
 						//biography: description,
 						image_id: response,
 						create_uid: firebase.auth().currentUser.uid,
-						create_date: new Date()
+						create_date: new Date(),
+						active:true
 					};
 
 					saveCollection(

@@ -54,7 +54,8 @@ function CreateComedogForm(props) {
 						phone,
 						quantityVoting: 0,
 						rating: 0,
-						ratingTotal: 0
+						ratingTotal: 0,
+						active:true
 					},
 					'comedogs',
 					navigation,

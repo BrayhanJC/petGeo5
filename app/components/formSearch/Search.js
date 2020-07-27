@@ -34,7 +34,6 @@ const Search = (props) => {
 					})
 					.catch((response) => {
 						console.log(response)
-						//console.log('chanfle')
 						setLoading(false);
 					});
 			}
