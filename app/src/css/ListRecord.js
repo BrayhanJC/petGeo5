@@ -1,6 +1,5 @@
 import { StyleSheet, Dimensions } from "react-native";
 const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 
 export const loadingRecords = {
   loadingRecordsStyle: {
@@ -30,7 +29,7 @@ export const touchableViewRecords = {
     paddingVertical: '1%'
   },
   itemColum: {
-    width: windowHeight * 0.215,
+    width: windowWidth * 0.47,
     flexDirection: "column",
     backgroundColor: 'white',
     borderRadius: 15,
@@ -69,7 +68,6 @@ export const touchableNameRecords = {
   touchableNameRecordsStyle: {
     fontWeight: "bold",
     fontSize:14.5,
-    width: 280,
   },
 };
 

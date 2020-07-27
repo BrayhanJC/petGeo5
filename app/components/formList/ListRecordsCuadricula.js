@@ -87,7 +87,7 @@ function ListRecordsCuadricula(props) {
 						}
 					}}
 					keyExtractor={(item, index) => index.toString()}
-					onEndReachedThreshold={0}
+					onEndReachedThreshold={0.1}
 					onEndReached={handleLoadMore}
 					ListFooterComponent={<FooterList isLoading={isLoading} />}
 				/>
