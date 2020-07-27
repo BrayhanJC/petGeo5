@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, ScrollView, Dimensions, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, Dimensions, StyleSheet, Alert } from 'react-native';
 import { Button } from 'react-native-elements';
 import { firebaseApp } from '../../utils/FireBase';
 import firebase from 'firebase/app';
@@ -13,7 +13,8 @@ import InfoItem from './InfoItem';
 import ListReview from '../../components/review/ListReview';
 import { viewFormStyle } from '../../src/css/ViewForm';
 import { sendEmail } from '../../utils/Email';
-import {getRecord} from '../../utils/SaveRecord'
+import { getRecord } from '../../utils/SaveRecord';
+import { Linking } from 'react-native';
 
 const db = firebase.firestore(firebaseApp);
 const screenWidth = Dimensions.get('window').width;
@@ -35,8 +36,8 @@ const ViewForm = (props) => {
 
 	const [ selectItem, setSelectItem ] = useState('');
 
-	const [newsUser, setnewsUser] = useState('');
-	const [userCurrent, setUserCurrent] = useState('');
+	const [ newsUser, setnewsUser ] = useState('');
+	const [ userCurrent, setUserCurrent ] = useState('');
 	navigation.setOptions({
 		title: name
 	});
@@ -73,33 +74,30 @@ const ViewForm = (props) => {
 		(createRecord.getMinutes() < 10 ? '0' : '') +
 		createRecord.getMinutes();
 
-		var contact = async () => {
-			
-			await getRecord('userInfo', firebase.auth().currentUser.uid, setUserCurrent)
+	var contact = async () => {
+		await getRecord('userInfo', firebase.auth().currentUser.uid, setUserCurrent);
 
-			await getRecord('userInfo', item.create_uid, setnewsUser)
+		await getRecord('userInfo', item.create_uid, setnewsUser);
 
-			if (userCurrent && newsUser){
+		if (userCurrent && newsUser) {
+			var saludo = 'Buen día. \n\n Me he interesado mucho la siguiente publicación. \n\n';
+			var title = item.name + '\n';
+			var description = item.description + '\n\n';
+			var wish_info = 'Deseo mas información. ';
+			var number_phone = 'Mi número es: ' + userCurrent[0].phone + '\n\n';
+			var msg_final = 'Quedo Atento.  \n Mensaje enviado desde PetGe🌎';
+			var message = saludo + title + description + wish_info + number_phone + msg_final + message;
 
-				var saludo = 'Buen día. \n\n Me he interesado mucho la siguiente publicación. \n\n'
-				var title= item.name + '\n'
-				var description = item.description + '\n\n'
-				var wish_info = 'Deseo mas información. '
-				var number_phone = 'Mi número es: ' + userCurrent[0].phone + '\n\n'
-				var msg_final = 'Quedo Atento.  \n Mensaje enviado desde PetGe🌎'
-				var message = saludo + title + description  + wish_info + number_phone + msg_final + message
-	
-				await sendEmail(
-					newsUser[0].email,
-					'Quiero más información!',
-					message
-				).then(() => {
-					console.log('Our email successful provided to device mail ');
-				});
-			}
-
+			await sendEmail(newsUser[0].email, 'Quiero más información!', message).then(() => {
+				console.log('Our email successful provided to device mail ');
+			});
 		}
+	};
 
+	var number_phone = '';
+	if (item.phone) {
+		number_phone = 'tel:${' + item.phone + '}';
+	}
 	var listInfo = [
 		{
 			text: 'Creado por: ' + item.create_name,
@@ -111,7 +109,15 @@ const ViewForm = (props) => {
 			text: 'Teléfono: ' + item.phone,
 			iconName: 'phone',
 			iconType: 'material-community',
-			action: null
+			onPress: () => {
+				Linking.canOpenURL(number_phone).then((supported) => {
+					if (!supported) {
+						Alert.alert('El número no esta disponible');
+					} else {
+						return Linking.openURL(number_phone);
+					}
+				});
+			}
 		},
 		{
 			text: 'Dirección: ' + item.address,
@@ -169,7 +175,16 @@ const ViewForm = (props) => {
 				text: 'Página Web: ' + item.website,
 				iconName: 'web',
 				iconType: 'material-community',
-				action: null
+				onPress: () => {
+					const supportedURL = "https://" + item.website;
+					Linking.canOpenURL(supportedURL).then((supported) => {
+						if (!supported) {
+							Alert.alert('No se ha podido abrir la página web');
+						} else {
+							return Linking.openURL(supportedURL);
+						}
+					});
+				}
 			},
 			{
 				text: 'Fecha Creación: ' + date_control,

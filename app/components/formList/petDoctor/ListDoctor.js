@@ -46,7 +46,12 @@ function ListDoctor(props) {
 		}
 	};
 
+	// var dataRender = dataRender.filter( valueItem => {
+	// 	return valueItem.active == true
+	// })
+
 	formatData(dataRender, COLUMNS);
+
 
 	return (
 		<View style={{ flex: 1, paddingTop: 5, marginLeft: 4, marginRight: 4 }}>

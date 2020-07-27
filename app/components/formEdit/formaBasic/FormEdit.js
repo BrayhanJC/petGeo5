@@ -22,7 +22,6 @@ function FormEdit(props) {
 		setIsVisibleMap,
 		locationForm,
 		setPhone,
-
 		placeholder_title,
 		placeholder_description,
 		default_name,
@@ -35,6 +34,7 @@ function FormEdit(props) {
 	} = props;
 
 	const [ valor, setvalor ] = useState('');
+	
 	const onChangePetMissing = (response, setVal, value) => {
 		const collectionName = 'missingPets';
 		// if (response) {
@@ -60,10 +60,9 @@ function FormEdit(props) {
 					style={{
 						flex: 1,
 						justifyContent: 'space-between',
-						
-						
+
 						marginLeft: 15,
-						marginBottom:10
+						marginBottom: 10
 					}}
 				>
 					<Text style={{ fontWeight: 'bold' }}>Mascota Encontrada</Text>
@@ -73,9 +72,9 @@ function FormEdit(props) {
 							position: 'absolute',
 							alignContent: 'flex-end',
 							left: 200,
-							marginBottom:10,
+							marginBottom: 10
 						}}
-						trackColor={{true: '#1A89E7', false: 'grey'}}
+						trackColor={{ true: '#1A89E7', false: 'grey' }}
 						onValueChange={(response) => setpetFound(response)}
 						value={petFound}
 					/>

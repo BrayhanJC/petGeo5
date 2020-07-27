@@ -388,31 +388,29 @@ export const obtenerUsuarios = async (user_id, funcion) => {
  * @param { permite regresar al menu principal} navigation 
  */
 export const createPetFound = (collectionData, toastRef, navigation, record_id, setloading) => {
+	collectionData['create_date'] = new Date()
 	db
 		.collection('petsFound')
 		.add(collectionData)
 		.then(() => {
 			//toastRef.current.show('Felicitaciones, por tener de vuelta tu Mascota', 3000);
-
 			setloading(false);
-			navigation.navigate('HomeStack');
-			// db
-			// 	.collection('missingPets')
-			// 	.doc(record_id)
-			// 	.delete()
-			// 	.then((response) => {
-			// 		setloading(false);
-			// 		console.log('Se ha eliminado el registro con exito');
-			// 		navigation.navigate('HomeStack');
-			// 	})
-			// 	.catch(function(error) {
-			// 		setloading(false);
-			// 		navigation.navigate('HomeStack');
-			// 		console.log('Ha Ocurrido un error al eliminar');
-			// 	});
+			db
+			.collection('missingPets')
+			.doc(record_id)
+			.set({active:false}, { merge: true })
+			.then((response) => {
+				navigation.navigate('HomeStack');
+				setloading(false);
+			})
+			.catch((response) => {
+				setloading(false);
+			});
+
 		})
 		.catch((response) => {
 			setloading(false);
+			console.log(response)
 			console.log('error al crear');
 		});
 };
