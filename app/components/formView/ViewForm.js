@@ -96,7 +96,7 @@ const ViewForm = (props) => {
 
 	var number_phone = '';
 	if (item.phone) {
-		number_phone = 'tel:${' + item.phone + '}';
+		number_phone = 'tel:' + item.phone + '';
 	}
 	var listInfo = [
 		{
@@ -157,7 +157,15 @@ const ViewForm = (props) => {
 				text: 'Teléfono: ' + item.phone,
 				iconName: 'phone',
 				iconType: 'material-community',
-				action: null
+				onPress: () => {
+					Linking.canOpenURL(number_phone).then((supported) => {
+						if (!supported) {
+							Alert.alert('El número no esta disponible');
+						} else {
+							return Linking.openURL(number_phone);
+						}
+					});
+				}
 			},
 			{
 				text: 'Horario de Atención: ' + item.schedule + ' Horas',

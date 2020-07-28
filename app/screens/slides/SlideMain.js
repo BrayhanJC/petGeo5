@@ -8,9 +8,7 @@ const { width, height } = Dimensions.get('window');
 const BORDER_RADIUS = 75;
 export const SLIDE_HEIGHT = 0.61 * height;
 
-import pet from '../../../assets/animations/pet.json'
-import center from '../../../assets/animations/center.json'
-import control from '../../../assets/animations/control.json'
+
 
 const slides = [
 	{
