@@ -44,9 +44,9 @@ function ListRecords(props) {
 		}
 	}
 
-	var dataRender = dataRender.filter( valueItem => {
-		return valueItem.active == true
-	})
+	// var dataRender = dataRender.filter( valueItem => {
+	// 	return valueItem.active == true
+	// })
 
 
 	return (
