@@ -45,7 +45,8 @@ function CreatePetControlForm(props) {
 						description: description,
 						create_date: new Date(),
 						create_uid: firebase.auth().currentUser.uid,
-						image_id: response
+						image_id: response,
+						active:true
 					};
 
 					saveCollection(

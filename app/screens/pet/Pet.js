@@ -7,7 +7,7 @@ import { listRecords, handleLoadMore, getInfoByUser } from '../../utils/SaveReco
 import ListRecordsCuadricula from '../../components/formList/ListRecordsCuadricula';
 //import ListRecordsForm from "../../components/formMain/ListRecordsForm";
 import { useFocusEffect } from '@react-navigation/native';
-
+import ListRecords from '../../components/formList/ListRecords';
 import Search from '../../components/formSearch/Search';
 import NotFoundItem from '../../components/formSearch/NotFoundItem';
 import UserData from '../account/UserData';
@@ -49,6 +49,8 @@ function Pet(props) {
 		}, [])
 	);
 
+
+
 	return (
 		<View style={styleFloatButton.viewBody}>
 			<Search
@@ -76,7 +78,13 @@ function Pet(props) {
 			)}
 
 			{isEmpty(search) && (
-				<ListRecordsCuadricula elements={Pets} navigation={navigation} isLoading={isLoading} showPet={true} user={user} />
+				<ListRecordsCuadricula
+					elements={Pets}
+					navigation={navigation}
+					isLoading={isLoading}
+					showPet={true}
+					user={user}
+				/>
 			)}
 
 			{/***

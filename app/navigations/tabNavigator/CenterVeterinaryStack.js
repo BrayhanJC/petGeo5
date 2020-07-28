@@ -20,7 +20,7 @@ const Stack = createStackNavigator();
 function CenterVeterinary(props) {
 	const { navigation } = props;
 	return (
-		<Stack.Navigator screenOptions={{headerTitleAlign: 'center'}}>
+		<Stack.Navigator screenOptions={{ headerTitleAlign: 'center' }}>
 			<Stack.Screen
 				name="CenterStack"
 				component={PetCenterScreen}

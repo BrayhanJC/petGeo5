@@ -43,13 +43,6 @@ function ViewEdit(props) {
 	const [ petFound, setpetFound ] = useState('');
 
 	const onSubmit = () => {
-		// console.log('Cpturarndo valores para guardar');
-		// console.log(title);
-		// console.log(address);
-		// console.log(phone);
-		// console.log(description);
-		// console.log(location);
-		// console.log(imageSelected);
 		const data = {
 			name: title,
 			address,
@@ -59,7 +52,8 @@ function ViewEdit(props) {
 			phone,
 			create_name: data_collection.create_name,
 			create_uid: data_collection.create_uid,
-			create_date: data_collection.create_date ? petFound : new Date() 
+			create_date: data_collection.create_date,
+			active:true 
 		};
 
 		if (title && address && description && imageSelected && phone && location) {
@@ -71,10 +65,10 @@ function ViewEdit(props) {
 				uploadImageStorage(imageSelected, 'petsFound')
 					.then((response) => {
 						//console.log('entrando en la imgen para guardar');
-
-						createPetFound(data, toastRef, navigation, route.id, setloading);
+						createPetFound(data, toastRef, navigation, route.params.id, setloading);
 					})
 					.catch((response) => {
+						console.log(response)
 						console.log('error');
 						setloading(false);
 					});

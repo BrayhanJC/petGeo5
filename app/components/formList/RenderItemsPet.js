@@ -45,7 +45,7 @@ function RendenderItemsPet(props) {
 				</View>
 				<View style={styleViewFormat.textFormat}>
 					<View style={{alignItems: 'center'}}>
-						<Text style={styleTouchableNameRecords.touchableNameRecordsStyle}>{name}</Text>
+						<Text >{name}</Text>
 					</View>
 					<View style={{ flexDirection: 'column', margin: 5 }}>
 

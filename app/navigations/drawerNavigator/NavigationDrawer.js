@@ -41,13 +41,17 @@ function NavigatorDrawer(props) {
 	 * @param { variable que contiene la data del usuario de firebase} userInfo
 	 */
 	const onObtenerUsuario = async (userInfo) => {
-		await obtenerUsuarios(userInfo.uid, (r) => {
-			props.dispatch(actions.actualizarLogin(userInfo));
-			r.forEach((doc) => {
-				setUser(doc.data());
-				props.dispatch(actions.actualizarCliente(doc.data()));
+
+		if (userInfo){
+			await obtenerUsuarios(userInfo.uid, (r) => {
+				props.dispatch(actions.actualizarLogin(userInfo));
+				r.forEach((doc) => {
+					setUser(doc.data());
+					props.dispatch(actions.actualizarCliente(doc.data()));
+				});
 			});
-		});
+		}
+
 	};
 
 	//console.log('NavigatorDrawer', cliente.userType);

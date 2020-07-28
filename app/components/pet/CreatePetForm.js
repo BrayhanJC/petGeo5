@@ -50,6 +50,7 @@ function CreatePetForm(props) {
 						create_uid: firebase.auth().currentUser.uid,
 						create_date: new Date(),
 						description,
+						active:true
 
 					};
 

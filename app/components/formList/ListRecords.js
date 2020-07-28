@@ -44,6 +44,11 @@ function ListRecords(props) {
 		}
 	}
 
+	// var dataRender = dataRender.filter( valueItem => {
+	// 	return valueItem.active == true
+	// })
+
+
 	return (
 		<View style={{flex: 1}}>
 			{size(dataRender) > 0 ? (

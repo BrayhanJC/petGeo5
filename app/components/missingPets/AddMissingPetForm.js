@@ -93,7 +93,8 @@ function AddMissinPetForm(props) {
 						phone,
 						quantityVoting: 0,
 						rating: 0,
-						ratingTotal: 0
+						ratingTotal: 0,
+						active:true
 					},
 					'missingPets',
 					navigation,
