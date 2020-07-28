@@ -11,5 +11,20 @@ const firebaseConfig = {
 	measurementId: 'G-1RE99FMEX1'
 };
 
+
+// Configuracion produccion
+// var firebaseConfig = {
+//     apiKey: "AIzaSyB_HWG6PjnkwEgqlPwMtEregp4iTvdcNOk",
+//     authDomain: "petgeoproduction.firebaseapp.com",
+//     databaseURL: "https://petgeoproduction.firebaseio.com",
+//     projectId: "petgeoproduction",
+//     storageBucket: "petgeoproduction.appspot.com",
+//     messagingSenderId: "534726125204",
+//     appId: "1:534726125204:web:fdd39bb364a04a9b54f681",
+//     measurementId: "G-K5M6FNY12Y"
+//   };
+
+
+
 export const firebaseApp = firebase.initializeApp(firebaseConfig);
 //export const db = firebase.firestore(firebaseApp);
