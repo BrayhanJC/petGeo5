@@ -16,30 +16,31 @@ const ListReview = (props) => {
 
 	const [ userLogged, setUserLogged ] = useState(false);
 	const [ reviews, setReviews ] = useState([]);
+	
 	firebase.auth().onAuthStateChanged((user) => {
 		user ? setUserLogged(true) : setUserLogged(false);
 	});
 
 	useFocusEffect(
 		useCallback(() => {
-			if (idItem){
+			if (idItem) {
 				db
-				.collection('reviews')
-				.where('idItem', '==', idItem)
-				.get()
-				.then((response) => {
-					const resultReview = [];
+					.collection('reviews')
+					.where('idItem', '==', idItem)
+					.get()
+					.then((response) => {
+						const resultReview = [];
 
-					response.forEach((doc) => {
-						const data = doc.data();
-						data.id = doc.id;
-						resultReview.push(data);
-						//console.log(doc.data());
-					});
-					setReviews(resultReview);
-					//console.log(reviews);
-				})
-				.catch();				
+						response.forEach((doc) => {
+							const data = doc.data();
+							data.id = doc.id;
+							resultReview.push(data);
+							//console.log(doc.data());
+						});
+						setReviews(resultReview);
+						//console.log(reviews);
+					})
+					.catch();
 			}
 		}, [])
 	);

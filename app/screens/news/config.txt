@@ -1,0 +1,9 @@
+Api key: AIzaSyBcaEjskn_rHK1l2jak10_BPp9Pa3qT2rg
+package: com.brayhanjcjuanzuluaga.petgeocinco
+expo fetch:android:hashes
+
+
+Google Certificate Fingerprint:     D3:BB:A8:6B:2C:6E:81:D5:13:21:1B:B6:7F:17:DD:8A:E4:A1:FC:45
+Google Certificate Hash (SHA-1):    D3BBA86B2C6E81D513211BB67F17DD8AE4A1FC45
+Google Certificate Hash (SHA-256):  CE55FAC7376E4484C14B27F3C6441E3D3807C69336279A80B1381BFB57B99093
+Facebook Key Hash:                  07uoayxugdUTIRu2fxfdiuSh/EU=

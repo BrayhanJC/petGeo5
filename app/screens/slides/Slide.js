@@ -1,13 +1,12 @@
 import React from 'react';
 import { View, Text, Dimensions, StyleSheet, Image } from 'react-native';
-import LottieView from 'lottie-react-native';
 
 const { width, height } = Dimensions.get('window');
 
 export const SLIDE_HEIGHT = 0.61 * height;
 export default function Slide(props) {
 	const { label, color, isAnimation, url, size } = props;
-	console.log(url);
+	
 	const url_image = '../../../assets/animations/control.json';
 
 	return (
@@ -18,12 +17,12 @@ export default function Slide(props) {
 				</View>
 				{isAnimation &&
 				label == 'Centros' && (
-					<View style={{ alignItems: 'center' }}>
+					<View style={{ alignItems: 'center', marginTop: -35 }}>
 						
 						<Image
 							style={{
-								height: 400,
-								width: 550,
+								height: 310,
+								width: 350,
 								
 							}}
 							source={require('../../../assets/animations/centers.gif')}

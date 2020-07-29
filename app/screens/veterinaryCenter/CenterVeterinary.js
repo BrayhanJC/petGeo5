@@ -4,7 +4,7 @@ import { Icon } from 'react-native-elements';
 import firebase from 'firebase/app';
 import { viewBody, buttonFormFloating } from '../../src/css/GeneralStyles';
 import { listRecords, handleLoadMore, getInfoByUser } from '../../utils/SaveRecord';
-//import ListRecordsForm from "../../components/formMain/ListRecordsForm";
+import ListPetCenter from '../../components/formList/petCenter/ListPetCenter'
 import ListRecords from '../../components/formList/ListRecords';
 import { useFocusEffect } from '@react-navigation/native';
 import Search from '../../components/formSearch/Search';
@@ -68,7 +68,7 @@ function CenterVeterinary(props) {
 
 			{!isEmpty(search) && size(item) > 0 ? (
 				<View style={viewBody.viewBody}>
-					<ListRecords
+					<ListPetCenter
 						elements={item}
 						isLoading={isLoading}
 						navigation={navigation}
@@ -92,7 +92,7 @@ function CenterVeterinary(props) {
 			)}
 
 			{isEmpty(search) && (
-				<ListRecords
+				<ListPetCenter
 					elements={centerVeterinary}
 					isLoading={isLoading}
 					navigation={navigation}

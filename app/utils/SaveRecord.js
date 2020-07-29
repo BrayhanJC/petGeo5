@@ -9,9 +9,7 @@ const db = firebase.firestore(firebaseApp);
 const limitRecords = 10;
 
 export const notify_user = (collection_name, title, description) => {
-	console.log('entro por aca')
-	console.log(title)
-	console.log(description)
+
 		if (collection_name){
 			if (collection_name == 'news'){
 
