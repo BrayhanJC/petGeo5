@@ -59,7 +59,7 @@ function RenderDoctor(props) {
 					<Avatar
 						size="large"
 						rounded
-						source={mainImage ? { uri: mainImage } : require('../../../../assets/img/doctor.png')}
+						source={mainImage ? { uri: mainImage } : require('../../../../assets/img/centers.png')}
 						//source={require('../../../../assets/img/doctor.png')}
 						activeOpacity={0.7}
 					/>

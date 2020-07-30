@@ -74,6 +74,48 @@ export default function Slide(props) {
 						/>
 					</View>
 				)}
+
+{isAnimation &&
+				label == 'Controles' && (
+					<View style={{ alignItems: 'center' }}>
+						{/* <LottieView
+							autoPlay
+							loop
+							style={{ height: size, width: size }}		
+							source={require('../../../assets/animations/news.json')}
+							//source={require(url)}
+						/> */}
+
+						<Image
+							style={{
+								height: size,
+								width: size
+							}}
+							source={require('../../../assets/img/control_pet.png')}
+						/>
+					</View>
+				)}
+
+{isAnimation &&
+				label == 'Extraviados' && (
+					<View style={{ alignItems: 'center', marginTop: -35 }}>
+						{/* <LottieView
+							autoPlay
+							loop
+							style={{ height: size, width: size }}		
+							source={require('../../../assets/animations/news.json')}
+							//source={require(url)}
+						/> */}
+
+						<Image
+							style={{
+								height: 370,
+								width: 370
+							}}
+							source={require('../../../assets/img/lost_pet.png')}
+						/>
+					</View>
+				)}
 			</View>
 		</View>
 	);

@@ -94,13 +94,15 @@ const styles = StyleSheet.create({
 	image: {
 		height: 300,
 		width: '100%',
-		marginBottom: 40
+		marginBottom: 40,
+		marginTop:-15
 	},
 	slider: {
 		height: SLIDE_HEIGHT,
 		borderBottomRightRadius: 95,
 		borderTopLeftRadius: 40,
-		backgroundColor: 'cyan'
+		backgroundColor: 'cyan',
+		
 	},
 	title: {
 		fontSize: 42,

@@ -48,7 +48,7 @@ const slides = [
 		label: 'Extraviados',
 		color: '#FA5D5F',
 		title: 'Mascotas Extraviadas',
-		isAnimation: false,
+		isAnimation: true,
 		url: '',
 		size:300,
 		next: 'Desliza para avanzar...',
