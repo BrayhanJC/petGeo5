@@ -19,6 +19,11 @@ import { Linking } from 'react-native';
 
 const db = firebase.firestore(firebaseApp);
 const screenWidth = Dimensions.get('window').width;
+
+/**
+ * Permite ver la informacion de las diferentes colecciones
+ * @param {*} props 
+ */
 const ViewForm = (props) => {
 	const {
 		navigation,
@@ -75,6 +80,9 @@ const ViewForm = (props) => {
 		(createRecord.getMinutes() < 10 ? '0' : '') +
 		createRecord.getMinutes();
 
+	/**
+	 * Permite abrir un wizar para enviar un email
+	 */
 	var contact = async () => {
 		await getRecord('userInfo', firebase.auth().currentUser.uid, setUserCurrent);
 
@@ -185,7 +193,7 @@ const ViewForm = (props) => {
 				iconName: 'web',
 				iconType: 'material-community',
 				onPress: () => {
-					const supportedURL = "https://" + item.website;
+					const supportedURL = 'https://' + item.website;
 					Linking.canOpenURL(supportedURL).then((supported) => {
 						if (!supported) {
 							Alert.alert('No se ha podido abrir la página web');
@@ -204,11 +212,11 @@ const ViewForm = (props) => {
 		];
 	}
 
-	var image_default = return_image_default(collection)
+	var image_default = return_image_default(collection);
 
 	return (
 		<ScrollView vertical style={viewFormStyle.viewBody}>
-			<CarouselImages image_ids={item.image} height={200} width={screenWidth} image_default={image_default}/>
+			<CarouselImages image_ids={item.image} height={200} width={screenWidth} image_default={image_default} />
 
 			<TitleItem
 				name={item.name}

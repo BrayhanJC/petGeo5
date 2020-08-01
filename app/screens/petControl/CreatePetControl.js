@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect , useCallback} from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { View, Text } from 'react-native';
 
 import Toast from 'react-native-easy-toast';
@@ -8,6 +8,11 @@ import firebase from 'firebase/app';
 
 import CreatePetControlForm from '../../components/petControl/CreatePetControlForm';
 import { useFocusEffect } from '@react-navigation/native';
+
+/**
+ * Componente principal para la creacion de controles
+ * @param {navigation} props 
+ */
 function CreatePetControl(props) {
 	const { navigation } = props;
 	const [ isLoading, setIsLoading ] = useState(false);
@@ -17,11 +22,6 @@ function CreatePetControl(props) {
 
 	//cargamos los datos del usuario
 	useEffect(() => {
-		// (async () => {
-		//     const user = await firebase.auth().currentUser
-		//     //cargando datos al userInfo, contiene toda la informacion del usuario
-		//     setUserInfo(user)
-		// })()
 		(async () => {
 			firebase.auth().onAuthStateChanged((user) => {
 				setUserInfo(user);
@@ -29,16 +29,13 @@ function CreatePetControl(props) {
 		})();
 	}, []);
 
-
 	useFocusEffect(
 		useCallback(() => {
 			(async () => {
 				firebase.auth().onAuthStateChanged((user) => {
-					setUserInfo(user)
+					setUserInfo(user);
 				});
 			})();
-
-
 		}, [])
 	);
 

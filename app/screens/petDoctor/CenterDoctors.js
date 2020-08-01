@@ -10,12 +10,13 @@ import { useNavigation } from '@react-navigation/native';
 import Search from '../../components/formSearch/Search';
 import NotFoundItem from '../../components/formSearch/NotFoundItem';
 import { size, isEmpty } from 'lodash';
-import UserData from '../account/UserData';
 
+
+/**
+ * Permite listar todos los centros veterinarios por usuario y/o centro veterinario
+ * @param {*} props 
+ */
 function CenterDoctors(props) {
-	//se puede obtener porque esta en la screen principal
-	//const { navigation } = props;
-
 	var navegacion = undefined;
 	var showDoctor = false;
 	var create_uid = false;

@@ -3,9 +3,11 @@ import { View, Text } from 'react-native';
 import ViewEditDoctor from '../../components/formEdit/formDoctor/ViewEditDoctor';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-function EditPetControl(props) {
-	console.log('recibiendo datos en la edicion de noticias');
-
+/**
+ * Componente principal que permite la edicion del veterinario
+ * @param {*} props 
+ */
+function EditPetDoctor(props) {
 	const { navigation, route } = props;
 	const { name, id } = route.params;
 	navigation.setOptions({
@@ -27,4 +29,4 @@ function EditPetControl(props) {
 	);
 }
 
-export default EditPetControl;
+export default EditPetDoctor;

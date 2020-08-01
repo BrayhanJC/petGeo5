@@ -8,8 +8,11 @@ import AvatarIcon from '../../components/AvatarIcon'
 const Stack = createStackNavigator();
 
 /***
- * Create stack nav news
- * Show all the news of the veterinary centers and animal foundations
+ * Screens para poder dirigir al usuario a:
+ * -> Mapa principal. Donde podra ver en diferentes marcodores
+ * 		-> Comedogs (color naranja)
+ * 		-> Mascotas extraviadas (color rojo)
+ * 		-> Centros (color verde)
  */
 function LocalizationMapStack() {
 

@@ -5,32 +5,12 @@ import { useNavigation } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
 export const SLIDE_HEIGHT = 0.61 * height;
+
 /***
- * Retorna el componente para usuario no logueado
+ * Retorna el componente para usuario no logueado, e invita al usuario a iniciar sesion o registrase
  */
 function UserGuest() {
 	const navigation = useNavigation();
-
-	{
-		/* <Image source={require('../../../assets/img/user_guest.png')} style={styles.image} resizeMode="contain" />
-			<Text style={styles.title}>PetGeo</Text>
-			<Text style={styles.description}>
-				¿Como encontrarías tu mascotas si es extraviada? Buscala y administra los datos de tu mascota
-			</Text>
-			<View style={styles.viewBtn}>
-				<Button
-					buttonStyle={styles.btnStyle}
-					containerStyle={styles.btnContainer}
-					title="Ver tu Perfil"
-					accessibilityLabel="Learn more about this purple button"
-					onPress={() => {
-						//console.log('estamos en el perfil');
-						navigation.navigate('Login');
-					}}
-				/>
-			</View> */
-	}
-
 	return (
 		<View
 			style={{
@@ -92,17 +72,16 @@ export default UserGuest;
 
 const styles = StyleSheet.create({
 	image: {
-		height: 300,
+		height: 280,
 		width: '100%',
 		marginBottom: 40,
-		marginTop:-15
+		marginTop: -18
 	},
 	slider: {
 		height: SLIDE_HEIGHT,
 		borderBottomRightRadius: 95,
 		borderTopLeftRadius: 40,
-		backgroundColor: 'cyan',
-		
+		backgroundColor: 'cyan'
 	},
 	title: {
 		fontSize: 42,

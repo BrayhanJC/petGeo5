@@ -17,6 +17,10 @@ import { showAlert } from '../../utils/validations';
 //devuelve el ancho de la screen
 const widhtScreen = Dimensions.get('window').width;
 
+/**
+ * Permite crear un nuevo control
+ * @param {*} props 
+ */
 function CreatePetControlForm(props) {
 	const { toastRef, setIsLoading, navigation, userInfo } = props;
 	const [ loading, setloading ] = useState(false);
@@ -32,8 +36,10 @@ function CreatePetControlForm(props) {
 	const [ imageSelected, setImageSelected ] = useState([]);
 	const [ errorDescription, setErrorDescription ] = useState('');
 
+	/**
+	 * Funcion que valida la información suministrada por el usuario para poder crear un control
+	 */
 	const addPetControl = () => {
-
 		if (pet && typeControl && nameControl && description) {
 			setIsLoading(true);
 			uploadImageStorage(imageSelected, 'petControls')
@@ -46,17 +52,17 @@ function CreatePetControlForm(props) {
 						create_date: new Date(),
 						create_uid: firebase.auth().currentUser.uid,
 						image_id: response,
-						active:true
+						active: true
 					};
 
 					saveCollection(
-					  data,
-					  "petControl",
-					  navigation,
-					  "PetControl",
-					  toastRef,
-					  setIsLoading,
-					  "Error al guardar el control de la mascota"
+						data,
+						'petControl',
+						navigation,
+						'PetControl',
+						toastRef,
+						setIsLoading,
+						'Error al guardar el control de la mascota'
 					);
 				})
 				.catch(() => {
@@ -64,7 +70,7 @@ function CreatePetControlForm(props) {
 					toastRef.current.show('Algo salio mal');
 				});
 		} else {
-			showAlert('Todos los campos son requeridos')
+			showAlert('Todos los campos son requeridos');
 		}
 	};
 
@@ -86,7 +92,6 @@ function CreatePetControlForm(props) {
 				/>
 			</View>
 			<View style={styleCreateForm.viewForm}>
-
 				<PetControlForm
 					setPet={setPet}
 					setTypeControl={setTypeControl}

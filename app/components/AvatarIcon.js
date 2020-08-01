@@ -29,12 +29,5 @@ function AvatarIcon() {
 		</View>
 	);
 }
-/* function LogoTitle(props) {
 
-	return (
-		<View  style={{ flex: 1, justifyContent: 'left', alignItems: 'center' }}>
-			<Image style={{ width: 30, height: 30, }} source={require('../../../assets/img/center_veterinary.png')} />
-		</View>
-	);
-} */
 export default AvatarIcon;

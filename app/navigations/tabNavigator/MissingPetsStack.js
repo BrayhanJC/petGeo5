@@ -7,10 +7,16 @@ import MissingPetView from '../../screens/missingPets/MissingPetView';
 import CreateReview from '../../screens/review/CreateReview';
 import DeleteRecord from '../../components/UpdateRecords/DeleteRecord';
 const Stack = createStackNavigator();
-import EditMissingPet from '../../screens/missingPets/EditMissingPet'
-/***
- * Create stack nav missing pets
- * Show all the missing pets registers
+import EditMissingPet from '../../screens/missingPets/EditMissingPet';
+
+/**
+ * Screens para poder dirigir al usuario a:
+ * -> Mascotas Extraviados
+ * -> Añadir Extraviados
+ * -> Ver Mascota extraviada
+ * -> Editar Mascota extraviada
+ * -> Crear y ver Comentarios
+ * @param {*} props 
  */
 function MissingPetsStack(props) {
 	return (

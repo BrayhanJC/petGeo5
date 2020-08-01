@@ -2,6 +2,16 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { styleReview } from '../../src/css/Review';
 import { Avatar, Rating } from 'react-native-elements';
+
+/**
+ * Estructura de los comentarios en las colecciones.
+ * Consta de:
+ * -> Imagen
+ * -> Nombre del comentario
+ * -> Descripción del comentario
+ * -> Puntuación o ranking
+ * @param {*} props 
+ */
 const Review = (props) => {
 	const { title, review, rating, create_date, avatar } = props.review;
 	const createReview = new Date(create_date.seconds * 1000);

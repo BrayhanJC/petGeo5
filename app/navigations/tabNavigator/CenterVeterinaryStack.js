@@ -13,9 +13,15 @@ import CenterDoctorScreen from '../../screens/petDoctor/CenterDoctors';
 import CenterVeterinaryDoctorScreen from '../../screens/petDoctor/CenterVeterinaryDoctor';
 const Stack = createStackNavigator();
 
-/***
- * Create stack nav pets center
- * show all pets controls register by user
+/**
+ * Screens para poder dirigir al usuario a:
+ * -> Centros veterinarios
+ * -> Añadir Centros veterinarios
+ * -> Ver centro veterinario
+ * -> Editar centro veterinario
+ * -> Ver veterinarios
+ * -> Crear y ver Comentarios
+ * @param {*} props 
  */
 function CenterVeterinary(props) {
 	const { navigation } = props;

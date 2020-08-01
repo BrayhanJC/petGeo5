@@ -13,6 +13,10 @@ import NotFoundItem from '../../components/formSearch/NotFoundItem';
 import UserData from '../account/UserData';
 import { size, isEmpty } from 'lodash';
 
+/**
+ * Componente que permite listar en forma de cuadricula todas las mascotas registradas por usuario
+ * @param {navigation} props 
+ */
 function Pet(props) {
 	//se puede obtener porque esta en la screen principal
 	const { navigation } = props;
@@ -48,8 +52,6 @@ function Pet(props) {
 			listRecords('pet', setTotalPets, setPets, setStartPets);
 		}, [])
 	);
-
-
 
 	return (
 		<View style={styleFloatButton.viewBody}>

@@ -3,33 +3,37 @@ import firebase from 'firebase/app';
 import 'firebase/storage';
 import 'firebase/firestore';
 import { size } from 'lodash';
-import {sendNotification} from './Notifications'
+import { sendNotification } from './Notifications';
 const db = firebase.firestore(firebaseApp);
 
 const limitRecords = 10;
 
+/**
+ * Función que permite validar el mensaje apropiado para el envio de la notificación con expo
+ * @param {nombre de la colección } collection_name 
+ * @param {titulo} title 
+ * @param {mensaje} description 
+ */
 export const notify_user = (collection_name, title, description) => {
-
-		if (collection_name){
-			if (collection_name == 'news'){
-
-				sendNotification('Evento: ' + title, description)
-			}
-			if (collection_name == 'comedogs'){
-				sendNotification('Nuevo Comedog registrado: ', description)
-			}
-			if (collection_name == 'missingPets'){
-				sendNotification('Se ha reportado una Mascota Extraviada: :O', description)
-			}
-			if (collection_name == 'petCenters'){
-				sendNotification('Nuevo Centro disponible para ti: ', description)
-			}
-			if (collection_name == 'petsFound'){
-				sendNotification('Mascota Encontrada: :)' + title, description)
-			}
+	if (collection_name) {
+		if (collection_name == 'news') {
+			sendNotification('Evento: ' + title, description);
 		}
+		if (collection_name == 'comedogs') {
+			sendNotification('Nuevo Comedog registrado: ', description);
+		}
+		if (collection_name == 'missingPets') {
+			sendNotification('Se ha reportado una Mascota Extraviada: :O', description);
+		}
+		if (collection_name == 'petCenters') {
+			sendNotification('Nuevo Centro disponible para ti: ', description);
+		}
+		if (collection_name == 'petsFound') {
+			sendNotification('Mascota Encontrada: :)' + title, description);
+		}
+	}
+};
 
-}
 /**
  * Funcion que permite guardar los datos de una coleccion dada
  * @param { datos de la coleccion } collectionData 
@@ -198,7 +202,7 @@ export const getInfoByUser = async (collectionName, user_id, setElements, setMod
 				response.forEach((doc) => {
 					const element = doc.data();
 					element.id = doc.id;
-				
+
 					resultElements.push(element);
 					if (size(element) > 0) {
 						setModalVisible(false);
@@ -386,7 +390,7 @@ export const obtenerUsuarios = async (user_id, funcion) => {
  * @param { permite regresar al menu principal} navigation 
  */
 export const createPetFound = (collectionData, toastRef, navigation, record_id, setloading) => {
-	collectionData['create_date'] = new Date()
+	collectionData['create_date'] = new Date();
 	db
 		.collection('petsFound')
 		.add(collectionData)
@@ -394,21 +398,20 @@ export const createPetFound = (collectionData, toastRef, navigation, record_id, 
 			//toastRef.current.show('Felicitaciones, por tener de vuelta tu Mascota', 3000);
 			setloading(false);
 			db
-			.collection('missingPets')
-			.doc(record_id)
-			.set({active:false}, { merge: true })
-			.then((response) => {
-				navigation.navigate('HomeStack');
-				setloading(false);
-			})
-			.catch((response) => {
-				setloading(false);
-			});
-
+				.collection('missingPets')
+				.doc(record_id)
+				.set({ active: false }, { merge: true })
+				.then((response) => {
+					navigation.navigate('HomeStack');
+					setloading(false);
+				})
+				.catch((response) => {
+					setloading(false);
+				});
 		})
 		.catch((response) => {
 			setloading(false);
-			console.log(response)
+			console.log(response);
 			console.log('error al crear');
 		});
 };

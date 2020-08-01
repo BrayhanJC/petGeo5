@@ -14,6 +14,11 @@ import EditRecord from '../../components/UpdateRecords/EditRecords';
 const db = firebase.firestore(firebaseApp);
 const screenWidth = Dimensions.get('window').width;
 import { useFocusEffect } from '@react-navigation/native';
+
+/**
+ * Componente que permite ver los datos del control
+ * @param {navigation, route} props 
+ */
 const PetControlView = (props) => {
 	const { navigation, route } = props;
 	const { name, id } = route.params;
@@ -27,24 +32,19 @@ const PetControlView = (props) => {
 	useFocusEffect(
 		useCallback(() => {
 			db
-			.collection('petControl')
-			.doc(id)
-			.get()
-			.then((response) => {
-				const data = response.data();
-				data.id = response.id;
-				setPetControl(data);
-			})
-			.catch();
+				.collection('petControl')
+				.doc(id)
+				.get()
+				.then((response) => {
+					const data = response.data();
+					data.id = response.id;
+					setPetControl(data);
+				})
+				.catch();
 		}, [])
 	);
 
-
 	if (!petControl) return <Loading isVisible={true} text="Cargando..." />;
-
-	// {createReview.getDate() - 1}/{createReview.getMonth()}/{createReview.getFullYear()} -{' '}
-	// 				{createReview.getHours()}:{createReview.getMinutes() < 10 ? '0' : ''}
-	// 				{createReview.getMinutes()}
 
 	const createControl = new Date(petControl.create_date.seconds * 1000);
 	var date_control =
@@ -93,7 +93,7 @@ const PetControlView = (props) => {
 			<TitleItem name={petControl.name} description={petControl.description} showRating={false} />
 			<InfoItem name={petControl.name} listInfo={listInfo} showMap={false} nameInfo="el Control" />
 			<View style={{ flex: 1, marginTop: 80 }}>
-				<EditRecord navigation={navigation} route={route} petControl={petControl}/>
+				<EditRecord navigation={navigation} route={route} petControl={petControl} />
 			</View>
 		</ScrollView>
 	);

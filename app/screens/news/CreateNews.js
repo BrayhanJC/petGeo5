@@ -6,6 +6,10 @@ import Loading from '../../components/Loading';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import CreateNewsForm from '../../components/news/CreateNewsForm';
 
+/**
+ * Componente principal para la creación de noticias
+ * @param {navigation} props 
+ */
 function CreateNews(props) {
 	const { navigation } = props;
 	const [ isLoading, setIsLoading ] = useState(false);

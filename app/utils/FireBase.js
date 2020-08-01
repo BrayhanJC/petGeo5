@@ -1,5 +1,8 @@
 import firebase from 'firebase/app';
 
+/**
+ * variable que contiene la información principal del firebase
+ */
 const firebaseConfig = {
 	apiKey: 'AIzaSyBl0foFZIoEj0lW-uszRVMvtBvU9zvfPWE',
 	authDomain: 'petgeo-cacec.firebaseapp.com',
@@ -10,7 +13,6 @@ const firebaseConfig = {
 	appId: '1:17591487987:web:7136184a56bf6d7f3e9686',
 	measurementId: 'G-1RE99FMEX1'
 };
-
 
 // Configuracion produccion
 // var firebaseConfig = {
@@ -24,7 +26,4 @@ const firebaseConfig = {
 //     measurementId: "G-K5M6FNY12Y"
 //   };
 
-
-
 export const firebaseApp = firebase.initializeApp(firebaseConfig);
-//export const db = firebase.firestore(firebaseApp);

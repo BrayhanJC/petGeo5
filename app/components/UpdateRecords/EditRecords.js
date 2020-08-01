@@ -13,7 +13,7 @@ import { returnNameFormViewEdit } from '../../utils/Configurations'
 import { connect } from 'react-redux';
 
 /**
- * Permite eliminar el registro actual
+ * Permite eliminar el registro actual siempre y cuando sea el propietario del registro
  * @param {*} props
  */
 function EditRecord(props) {
@@ -36,6 +36,9 @@ function EditRecord(props) {
 
 	let isOwner = returnData().current_user_id == cliente.create_uid;
 
+	/**
+	 * Funcion que permite editar el registro
+	 */
 	const editRecord = () => {
 		const data = returnData();
 		

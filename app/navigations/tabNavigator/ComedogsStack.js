@@ -13,8 +13,13 @@ import EditComedog from '../../screens/comedog/EditComedog';
 const Stack = createStackNavigator();
 
 /***
- * Create stack nav news
- * Show all the news of the veterinary centers and animal foundations
+ * Screens para poder dirigir al usuario a:
+ * -> Centros comedogs
+ * -> Añadir Centros comedogs
+ * -> Ver comedog
+ * -> Editar comedog
+ * -> Ver comedogs
+ * -> Crear y ver Comentarios
  */
 function ComedogsStack(props) {
 	return (

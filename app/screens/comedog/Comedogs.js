@@ -14,8 +14,10 @@ import NotFoundItem from '../../components/formSearch/NotFoundItem';
 import { size, isEmpty } from 'lodash';
 
 import UserData from '../account/UserData';
-/***
- * Allows to see all the news of the veterinary centers and animal foundations
+
+/**
+ * Componente que permite listar los comedogs que estan creados
+ * @param {navigation} props 
  */
 function Comedogs(props) {
 	//se puede obtener porque esta en la screen principal
@@ -35,21 +37,20 @@ function Comedogs(props) {
 	const [ item, setItem ] = useState([]);
 	const [ search, setSearch ] = useState('');
 
-		//cargamos los datos del usuario
-		useEffect(() => {
-			(async () => {
-				const user = await firebase.auth().currentUser;
-				//cargando datos al userInfo, contiene toda la informacion del usuario
-				setUser(user);
-	
-				// if (user) {
-				// 	if (user.uid) {
-				// 		getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
-				// 	}
-				// }
-			})();
-		
-		}, []);
+	//cargamos los datos del usuario
+	useEffect(() => {
+		(async () => {
+			const user = await firebase.auth().currentUser;
+			//cargando datos al userInfo, contiene toda la informacion del usuario
+			setUser(user);
+
+			// if (user) {
+			// 	if (user.uid) {
+			// 		getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
+			// 	}
+			// }
+		})();
+	}, []);
 
 	useFocusEffect(
 		useCallback(() => {
@@ -59,7 +60,6 @@ function Comedogs(props) {
 					getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
 				}
 			}
-
 		}, [])
 	);
 
@@ -109,16 +109,16 @@ function Comedogs(props) {
 					user={user}
 					collectionName="comedogs"
 					handleLoadMore={() =>
-					handleLoadMore(
-						'comedogs',
-						Comedog,
-						totalComedog,
-						isLoading,
-						setIsLoading,
-						startComedog,
-						setStartComedog,
-						setComedog
-					)}
+						handleLoadMore(
+							'comedogs',
+							Comedog,
+							totalComedog,
+							isLoading,
+							setIsLoading,
+							startComedog,
+							setStartComedog,
+							setComedog
+						)}
 				/>
 			)}
 

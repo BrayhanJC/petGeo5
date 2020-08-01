@@ -4,6 +4,11 @@ import { viewTitleStyle } from '../../src/css/ViewTitle';
 import { Rating } from 'react-native-elements';
 import { uploadImageStorage } from '../../utils/UploadImageStorage';
 import { createPetFound } from '../../utils/SaveRecord'
+
+/**
+ * Permite mostrar el raking o puntuacion, como tambien el titulo
+ * @param {*} props 
+ */
 const TitleItem = (props) => {
 	const {
 		name,

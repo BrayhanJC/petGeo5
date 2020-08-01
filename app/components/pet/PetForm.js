@@ -8,6 +8,10 @@ import DatePicker from 'react-native-datepicker';
 import { styleCreateForm } from '../../src/css/CreateForm';
 import { RAZA, TYPE_SEX, TYPE_PETS, RAZA_CAT } from '../../utils/Configurations';
 
+/**
+ * Formulario que es utilizado para poder crear la mascota
+ * @param {*} props 
+ */
 function PetForm(props) {
 	const {
 		setNamePet,

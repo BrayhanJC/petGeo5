@@ -44,9 +44,14 @@ function screenOptions(route, color) {
 	return <Icon type="material-community" name={iconName} size={28} color={color} />;
 }
 
-/***
- * Create stack nav pets center
- * show all pets controls register by user
+/**
+ * Permite monstrar el menu en la parte de abajo
+ * -> Noticias
+ * -> Centros
+ * -> Comedogs
+ * -> Extraviados
+ * -> Mapa
+ * @param {*} props 
  */
 function MenuTabs(props) {
 	const navigation = useNavigation();

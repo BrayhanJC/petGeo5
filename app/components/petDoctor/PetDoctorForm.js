@@ -6,7 +6,11 @@ import {SPECIALITY} from '../../utils/Configurations'
 import RNPickerSelect from 'react-native-picker-select';
 import { stylePicker } from '../../src/css/PickerSelect';
 
-function PetForm(props) {
+/**
+ * Formulario para poder crear un veterinario
+ * @param {*} props 
+ */
+function PetDoctorForm(props) {
 	const { setSpecialty, setName, setDescription, errorName, errorDescription } = props;
 
 	return (
@@ -51,4 +55,4 @@ function PetForm(props) {
 	);
 }
 
-export default PetForm;
+export default PetDoctorForm;

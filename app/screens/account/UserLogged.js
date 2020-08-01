@@ -7,11 +7,13 @@ import Loading from '../../components/Loading';
 
 import InfoUser from '../../components/account/InfoUser';
 import AccountOptions from '../../components/account/AccountOptions';
-import UserData from './UserData';
 import { getInfoByUser, isCenter, getRecord } from '../../utils/SaveRecord';
 import firebase from 'firebase/app';
 import { useNavigation } from '@react-navigation/native';
 
+/**
+ * Componente que permite visualizar la información completa de usuario
+ */
 function UserLogged() {
 	const [loading, setLoading] = useState(false);
 	const [loadingText, setLoadingText] = useState('');
@@ -30,18 +32,6 @@ function UserLogged() {
 	const [reloadUserInfo, setReloadUserInfo] = useState(false);
 
 	const [datUserInfo, setDatUserInfo] = useState('');
-
-	//    //cargamos los datos del usuario
-	//    useEffect(() => {
-	//     (async () => {
-	//         const user = await firebase.auth().currentUser
-	//         console.log(user)
-	//         //cargando datos al userInfo, contiene toda la informacion del usuario
-	// 		setUserInfo(user)
-	// 		isCenter(user.uid, setpetCenter)
-	// 	})()
-	// 	setReloadUserInfo(false)
-	// }, [reloadUserInfo])
 
 	//cargamos los datos del usuario
 	useEffect(() => {
@@ -62,7 +52,7 @@ function UserLogged() {
 		setReloadUserInfo(false);
 	}, [reloadUserInfo]);
 
-	//console.log('UserLogged modalVisible', modalVisible);
+
 
 	return (
 		<View style={styles.viewUserInfo}>
@@ -99,14 +89,6 @@ function UserLogged() {
 			<Toast ref={toastRef} position="center" opacity={0.9} />
 			<Loading text={loadingText} isVisible={loading} />
 
-			{/*
-				
-				 //Modal que sirve para registrar el tipo de usuario
-				 
-				modalVisible && (
-					<UserData modalVisible={modalVisible} setModalVisible={setModalVisible} userInfo={userInfo} />
-				)
-			*/}
 		</View>
 	);
 }

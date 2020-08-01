@@ -2,6 +2,11 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import ViewEditPetControl from '../../components/formEdit/formPetControl/ViewEditPetControl';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+/**
+ * Componente que permite la edición de controles
+ * @param {navigation, route} props 
+ */
 function EditPetControl(props) {
 	const { navigation, route } = props;
 	const { name, id } = route.params;

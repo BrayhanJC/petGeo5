@@ -9,7 +9,11 @@ import { TYPE_CONTROL } from '../../utils/Configurations';
 import { getRecord } from '../../utils/SaveRecord';
 import { useFocusEffect } from '@react-navigation/native';
 
-function PetForm(props) {
+/**
+ * Formulario para la creacion de un nuevo control
+ * @param {*} props 
+ */
+function PetControlForm(props) {
 	const {
 		setPet,
 		setTypeControl,
@@ -95,4 +99,4 @@ function PetForm(props) {
 	);
 }
 
-export default PetForm;
+export default PetControlForm;

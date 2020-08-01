@@ -11,12 +11,17 @@ import { useFocusEffect } from '@react-navigation/native';
 
 const db = firebase.firestore(firebaseApp);
 
+/**
+ * Permite listar todos los comentarios que tiene una coleccion, como tambien se valida si ha iniciado seision
+ * e indica al usuario que debe iniciar sesion para poder crear un nuevo comentario en el registro
+ * @param {*} props 
+ */
 const ListReview = (props) => {
 	const { navigation, idItem, setRating, navigateTo } = props;
 
 	const [ userLogged, setUserLogged ] = useState(false);
 	const [ reviews, setReviews ] = useState([]);
-	
+
 	firebase.auth().onAuthStateChanged((user) => {
 		user ? setUserLogged(true) : setUserLogged(false);
 	});
@@ -57,7 +62,6 @@ const ListReview = (props) => {
 						name: 'square-edit-outline',
 						color: '#1A89E7'
 					}}
-					//navigateTo
 					onPress={() =>
 						navigation.navigate(navigateTo, {
 							idItem: idItem

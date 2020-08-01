@@ -20,6 +20,10 @@ import * as Permissions from 'expo-permissions';
 //devuelve el ancho de la screen
 const widhtScreen = Dimensions.get('window').width;
 
+/**
+ * Permite crear un nuevo registro de noticias o eventos
+ * @param {*} props 
+ */
 function CreateNewsForm(props) {
 	const { toastRef, setIsLoading, navigation } = props;
 	const [ loading, setloading ] = useState(false);
@@ -32,6 +36,9 @@ function CreateNewsForm(props) {
 	const [ phone, setPhone ] = useState('');
 	const [ isAdoption, setisAdoption ] = useState(false);
 
+	/**
+	 * Funcion que valida la información suministrada por el usuario para poder crear una noticia
+	 */
 	const addNews = async () => {
 		setIsLoading(false);
 

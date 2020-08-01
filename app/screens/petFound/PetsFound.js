@@ -13,8 +13,9 @@ import { size, isEmpty } from 'lodash';
 
 import UserData from '../account/UserData';
 
-/***
- * Allows to see all the news of the veterinary centers and animal foundations
+/**
+ * Componente que permite listar las mascotas encontradas
+ * @param {navigation} props 
  */
 function PetsFound(props) {
 	const { navigation } = props;

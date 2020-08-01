@@ -3,6 +3,10 @@ import { View, Text } from 'react-native';
 import ViewEdit from '../../components/formEdit/formaBasic/ViewEdit';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
+/**
+ * Componente principal para editar la mascota extraviada
+ * @param {navigation, route} props 
+ */
 function EditMissingPet(props) {
 	const { navigation, route } = props;
 	return (

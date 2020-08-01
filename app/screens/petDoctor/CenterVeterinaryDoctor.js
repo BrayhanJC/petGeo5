@@ -1,7 +1,3 @@
-
-
-CenterVeterinaryDoctor
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
@@ -14,26 +10,26 @@ import { useNavigation } from '@react-navigation/native';
 import Search from '../../components/formSearch/Search';
 import NotFoundItem from '../../components/formSearch/NotFoundItem';
 import { size, isEmpty } from 'lodash';
-import UserData from '../account/UserData';
 
+/**
+ * Componente que permite listar los centros veterinarios en forma de cuadricula
+ * @param {props} props 
+ */
 function CenterVeterinaryDoctor(props) {
-	//se puede obtener porque esta en la screen principal
-	//const { navigation } = props;
-
-	var navegacion = undefined
-	var showDoctor = false
-	var create_uid = false
-	if (props.route.params){
-		navegacion = props.route.params.navigation
-		create_uid = props.route.params.create_uid
+	var navegacion = undefined;
+	var showDoctor = false;
+	var create_uid = false;
+	if (props.route.params) {
+		navegacion = props.route.params.navigation;
+		create_uid = props.route.params.create_uid;
 	}
 
-	var navigation = undefined
-	if (!navegacion){
+	var navigation = undefined;
+	if (!navegacion) {
 		navigation = useNavigation();
-	}else{
-		showDoctor = true
-		navigation = navegacion
+	} else {
+		showDoctor = true;
+		navigation = navegacion;
 	}
 
 	const [ user, setUser ] = useState(null);
@@ -69,7 +65,7 @@ function CenterVeterinaryDoctor(props) {
 		}, [])
 	);
 
-	console.log(elements)
+	console.log(elements);
 	return (
 		<View style={styleFloatButton.viewBody}>
 			<Search
@@ -116,22 +112,19 @@ function CenterVeterinaryDoctor(props) {
 					navigation={navigation}
 					user={user}
 					create_uid={create_uid}
-                    handleLoadMore={() =>
-                        handleLoadMore(
-                            'petDoctor',
-                            PetDoctor,
-                            totalPetDoctor,
-                            isLoading,
-                            setIsLoading,
-                            startPetDoctor,
-                            setStartPetDoctor,
-                            setPetDoctor
-                        )}
+					handleLoadMore={() =>
+						handleLoadMore(
+							'petDoctor',
+							PetDoctor,
+							totalPetDoctor,
+							isLoading,
+							setIsLoading,
+							startPetDoctor,
+							setStartPetDoctor,
+							setPetDoctor
+						)}
 				/>
-
 			)}
-
-
 		</View>
 	);
 }

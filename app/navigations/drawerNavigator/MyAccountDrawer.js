@@ -10,34 +10,18 @@ import { useNavigation } from '@react-navigation/native';
 
 import { DrawerActions } from '@react-navigation/native';
 
-/***
- * Create stack nav my account
- * show all info of user
- */
+
 const Stack = createStackNavigator();
 
-function LogoTitle(props) {
-	const navigation = useNavigation();
-	//console.log(navigation);
-	const { title } = props;
-	return (
-		<View style={{ flex: 1, alignItems: 'center' }}>
-			<Image style={{ width: 50, height: 50, marginTop: -10 }} source={require('../../../assets/img/icon.png')} />
-
-			<Button
-				title="dsf"
-				onPress={() => {
-					//navigation.navigate('centerPet')
-					navigation.dispatch(DrawerActions.openDrawer());
-				}}
-			/>
-		</View>
-	);
-}
-
+/**
+ * Screens que son utilizadas para dirigir a:
+ * -> Perfil
+ * -> Inicio de sesion
+ * -> Registro de usuario
+ */
 function MyAccountStack() {
 	const navigation = useNavigation();
-	//console.log(navigation);
+
 	return (
 		<Stack.Navigator>
 			<Stack.Screen
@@ -52,7 +36,7 @@ function MyAccountStack() {
 							size={32}
 							onPress={() => navigation.goBack()}
 						/>
-					),
+					)
 				}}
 			/>
 			<Stack.Screen
@@ -61,12 +45,12 @@ function MyAccountStack() {
 				options={{
 					title: 'Inicio de Sesión',
 					headerStyle: {
-						backgroundColor: '#E0E0E0',
+						backgroundColor: '#E0E0E0'
 					},
 					headerTintColor: '#1A89E7',
 					headerTitleStyle: {
-						fontWeight: 'bold',
-					},
+						fontWeight: 'bold'
+					}
 				}}
 			/>
 			<Stack.Screen name="Register" component={RegisterScreen} options={{ title: 'Registro Usuario' }} />

@@ -2,6 +2,11 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import ViewEditPetCenter from '../../components/formEdit/formPetCenter/ViewEditPetCenter';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+/**
+ * Componente que permite la edición del centro veterinario o fundación
+ * @param {navigation, route} props 
+ */
 function EditCenter(props) {
 	const { navigation, route } = props;
 	const { name, id } = route.params;

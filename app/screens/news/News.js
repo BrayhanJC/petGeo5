@@ -11,10 +11,10 @@ import { size, isEmpty } from 'lodash';
 import firebase from 'firebase/app';
 import UserData from '../account/UserData';
 
-/***
- * Allows to see all the news of the veterinary centers and animal foundations
+/**
+ * Componente que permite listar todas las noticias registradas
+ * @param {navigation} props 
  */
-
 function News(props) {
 	//se puede obtener porque esta en la screen principal
 	const { navigation } = props;

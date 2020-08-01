@@ -13,13 +13,14 @@ import { styleAvatarMain } from '../src/css/AvatarMain';
  * o al crear los veterinarios
  */
 function AvatarMain(props) {
-	//capturando datos del usuario
-	//console.log(props);
 	const { imageDefault, imageSelected, setImageSelected, toastRef } = props;
 
+	/**
+	 * Permite remover una imagen anteriormente carga de la lista de imagenes
+	 * se valia por el id de la imagen
+	 * @param { imagen a eliminar} image 
+	 */
 	const removeImage = (image) => {
-		//console.log('removiendo');
-
 		Alert.alert(
 			'Eliminar Imagen',
 			'¿Estas seguro de que quieres eliminar la imagen?',
@@ -32,7 +33,6 @@ function AvatarMain(props) {
 					text: 'Eliminar',
 
 					onPress: () => {
-						//console.log('eliminada');
 						setImageSelected(filter(imageSelected, (imageUri) => imageUri !== image));
 					}
 				}
@@ -43,6 +43,9 @@ function AvatarMain(props) {
 		);
 	};
 
+	/**
+	 * Permite seleccionar una imagen de la galeria de imagenes del celular
+	 */
 	const imageSelect = async () => {
 		const resultPermissions = await Permissions.askAsync(Permissions.CAMERA_ROLL);
 

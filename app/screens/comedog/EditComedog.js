@@ -2,6 +2,11 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import ViewEdit from '../../components/formEdit/formaBasic/ViewEdit';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+/**
+ * Componente principal que permite editar el comedog
+ * @param {navigation, route} props 
+ */
 function EditComedog(props) {
 	const { navigation, route } = props;
 

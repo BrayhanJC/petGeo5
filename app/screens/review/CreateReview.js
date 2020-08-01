@@ -12,6 +12,10 @@ import 'firebase/firestore';
 
 const db = firebase.firestore(firebaseApp);
 
+/**
+ * Componente que permite crear un comentario
+ * @param {*} props 
+ */
 const CreateReview = (props) => {
 	const { navigation, route } = props;
 
@@ -73,6 +77,9 @@ const CreateReview = (props) => {
 			.catch();
 	};
 
+	/**
+	 * Permite validar los datos que son requeridos para crear un comentario
+	 */
 	const addReview = () => {
 		if (!rating) {
 			toastRef.current.show('No has dado ninguna puntuación', 1500);

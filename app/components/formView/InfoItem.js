@@ -5,6 +5,10 @@ import { map } from 'lodash';
 import { viewInfoStyle } from '../../src/css/InfoView';
 import ViewMap from './ViewMap';
 
+/**
+ * Permite mostrar la informacion de los diferentes colecciones
+ * @param {*} props 
+ */
 const InfoItem = (props) => {
 	const { location, name, address, showMap, nameInfo, listInfo } = props;
 

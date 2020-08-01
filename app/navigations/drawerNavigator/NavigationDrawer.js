@@ -18,6 +18,35 @@ import { obtenerUsuarios } from '../../utils/SaveRecord';
 
 const Drawer = createDrawerNavigator();
 
+/**
+ * Menu lateral que permite el acceso a colecciones u otras acciones, tales como:
+ * -> Inicio => Inicio de la app
+ * -> Perfil => Muestra informacion del usuario actual
+ * -> Mascotas => Lista las mascotas que tiene el usuario actual
+ * -> Controles => Lista los controles que tiene el usuario actual
+ * -> Veterinarios => Lista los veterinarios que tienen el usuario actual
+ * -> Mascotas encontradas => Lista las mascotas que fueron encontradas
+ * -> Primeros Pasos => Muestra un breve contenido de lo que tiene la app
+ * 
+ * Tambien se valida el tipo de usuario y de acuerdo al usuario muestra u oculta ciertos
+ * -> Tipo usuario: user
+ * 		Menus
+ * 			=> Inicio
+ * 			=> Perfil
+ * 			=> Mascotas
+ * 			=> Controles
+ * 			=> Mascotas Encontradas
+ * 			=> Primeros pasos
+ * 
+ *  * -> Tipo usuario: veterinary or fundation
+ * 		Menus
+ * 			=> Inicio
+ * 			=> Perfil
+ * 			=> Veterinarios
+ * 			=> Mascotas Encontradas
+ * 			=> Primeros pasos
+ * @param {*} props 
+ */
 function NavigatorDrawer(props) {
 	const { cliente, login } = props;
 
@@ -41,8 +70,7 @@ function NavigatorDrawer(props) {
 	 * @param { variable que contiene la data del usuario de firebase} userInfo
 	 */
 	const onObtenerUsuario = async (userInfo) => {
-
-		if (userInfo){
+		if (userInfo) {
 			await obtenerUsuarios(userInfo.uid, (r) => {
 				props.dispatch(actions.actualizarLogin(userInfo));
 				r.forEach((doc) => {
@@ -51,10 +79,7 @@ function NavigatorDrawer(props) {
 				});
 			});
 		}
-
 	};
-
-	//console.log('NavigatorDrawer', cliente.userType);
 
 	const isUser = cliente.userType == 'user';
 	const isCenter = cliente.userType == 'veterinary' || cliente.userType == 'fundation';
@@ -143,7 +168,6 @@ function NavigatorDrawer(props) {
 					)
 				}}
 			/>
-			
 		</Drawer.Navigator>
 	);
 }
@@ -153,4 +177,3 @@ const mapStateToProps = (state) => ({
 	login: state.login.login
 });
 export default connect(mapStateToProps)(NavigatorDrawer);
-//export default connect(mapStateToProps)(NavigatorDrawer);

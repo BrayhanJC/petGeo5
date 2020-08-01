@@ -8,12 +8,17 @@ const Stack = createStackNavigator();
 import PetControlScreen from '../../screens/petControl/PetControl';
 import CreatePetControl from '../../screens/petControl/CreatePetControl';
 import AvatarIcon from '../../components/AvatarIcon';
-import PetControlView from '../../screens/petControl/PetControlView'
-import DeleteRecord from '../../components/UpdateRecords/DeleteRecord'
+import PetControlView from '../../screens/petControl/PetControlView';
+import DeleteRecord from '../../components/UpdateRecords/DeleteRecord';
 import EditPetControl from '../../screens/petControl/EditPetControl';
-/***
- * Create stack nav pets control
- * show all pets controls register by user
+
+/**
+ * Screens para poder dirigir al usuario a:
+ * -> Controles
+ * -> Añadir Controles
+ * -> Ver Control
+ * -> Editar Control
+ * @param {*} props 
  */
 function PetControlDrawer(props) {
 	const navigation = useNavigation();
@@ -39,16 +44,19 @@ function PetControlDrawer(props) {
 				name="CreatePetControl"
 				component={CreatePetControl}
 				options={{
-					title: 'Añadir Control',
+					title: 'Añadir Control'
 				}}
 			/>
 
-			<Stack.Screen name="ViewPetControl" component={PetControlView} options={{
+			<Stack.Screen
+				name="ViewPetControl"
+				component={PetControlView}
+				options={{
 					headerRight: () => <DeleteRecord props={props} />
-				}}/>
-			
-			<Stack.Screen name="ViewEditPetControl" component={EditPetControl} />
+				}}
+			/>
 
+			<Stack.Screen name="ViewEditPetControl" component={EditPetControl} />
 		</Stack.Navigator>
 	);
 }

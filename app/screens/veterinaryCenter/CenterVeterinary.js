@@ -1,20 +1,18 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text } from 'react-native';
-import { Icon } from 'react-native-elements';
 import firebase from 'firebase/app';
 import { viewBody, buttonFormFloating } from '../../src/css/GeneralStyles';
 import { listRecords, handleLoadMore, getInfoByUser } from '../../utils/SaveRecord';
 import ListPetCenter from '../../components/formList/petCenter/ListPetCenter'
-import ListRecords from '../../components/formList/ListRecords';
 import { useFocusEffect } from '@react-navigation/native';
 import Search from '../../components/formSearch/Search';
 import NotFoundItem from '../../components/formSearch/NotFoundItem';
 import { size, isEmpty } from 'lodash';
-
 import UserData from '../account/UserData';
 
-/***
- * Allows to see all the news of the veterinary centers and animal foundations
+/**
+ * Componente que permite listar los centros veterinarios o fundaciones
+ * @param {navigation} props 
  */
 function CenterVeterinary(props) {
 	const { navigation } = props;

@@ -11,6 +11,11 @@ import InfoItem from '../../components/formView/InfoItem';
 import EditRecord from '../../components/UpdateRecords/EditRecords';
 const db = firebase.firestore(firebaseApp);
 import { useFocusEffect } from '@react-navigation/native';
+
+/**
+ * Componente que permite ver los datos del veterinario
+ * @param {navigation, route} props 
+ */
 const PetDoctorView = (props) => {
 	const { navigation, route } = props;
 	const { name, id } = route.params;

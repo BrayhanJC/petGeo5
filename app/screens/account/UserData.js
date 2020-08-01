@@ -9,33 +9,39 @@ import { returnUserType, returnSchedule } from '../../utils/Configurations';
 import * as firebase from 'firebase';
 import { connect } from 'react-redux';
 import { actions } from '../../store';
-import Loading from "../../components/Loading";
+import Loading from '../../components/Loading';
 
+/**
+ * Modal que permite verificar que tipo de usuario es el que se va a registrar
+ * -> Usuario => user
+ * -> Veterinaria => veterinary
+ * -> Fundacion => fundation
+ * @param {} props 
+ */
 const UserData = (props) => {
 	const { modalVisible, setModalVisible, userInfo } = props;
 	const toastRef = useRef();
-	const buttons = ['Usuario', 'Veterinaria', 'Fundación'];
-	const buttonTime = ['12 Horas', '24 Horas'];
-	const [isLoading, setIsLoading] = useState(false);
-	const [message, setMessage] = useState('');
-	const [street, setStreet] = useState('');
-	const [location, setLocation] = useState('');
-	const [phone, setphone] = useState('');
-	const [userType, setUserType] = useState(0);
-	const [errorStreet, setErrorStreet] = useState('');
-	const [errorPhone, setErrorPhone] = useState('');
-	const [errorMap, setErrorMap] = useState('');
-	const [description, setDescription] = useState('');
-	const [time, setTime] = useState(0);
-	const [errorDescription, setErrorDescription] = useState('');
+	const buttons = [ 'Usuario', 'Veterinaria', 'Fundación' ];
+	const buttonTime = [ '12 Horas', '24 Horas' ];
+	const [ isLoading, setIsLoading ] = useState(false);
+	const [ message, setMessage ] = useState('');
+	const [ street, setStreet ] = useState('');
+	const [ location, setLocation ] = useState('');
+	const [ phone, setphone ] = useState('');
+	const [ userType, setUserType ] = useState(0);
+	const [ errorStreet, setErrorStreet ] = useState('');
+	const [ errorPhone, setErrorPhone ] = useState('');
+	const [ errorMap, setErrorMap ] = useState('');
+	const [ description, setDescription ] = useState('');
+	const [ time, setTime ] = useState(0);
+	const [ errorDescription, setErrorDescription ] = useState('');
 
-	const [nameUser, setNameUser] = useState('');
-	const [nameUserError, setNameUserError] = useState('');
+	const [ nameUser, setNameUser ] = useState('');
+	const [ nameUserError, setNameUserError ] = useState('');
 
-	const [isVisibleMap, setIsVisibleMap] = useState(false);
+	const [ isVisibleMap, setIsVisibleMap ] = useState(false);
 
 	const onSubmit = () => {
-		
 		if (!location) {
 			setMessage('');
 		}
@@ -46,12 +52,10 @@ const UserData = (props) => {
 		}
 
 		if (userType == 0) {
-			//console.log('SOMOS USUARIOS');
 			if (phone && nameUser) {
-				//console.log('todo ok usuario');
 				setErrorPhone('');
 				setErrorStreet('');
-				setIsLoading(true)
+				setIsLoading(true);
 
 				const data = {
 					create_uid: userInfo.uid,
@@ -60,18 +64,18 @@ const UserData = (props) => {
 					email: userInfo.email,
 					phone,
 					street,
-					userType: returnUserType(userType),
+					userType: returnUserType(userType)
 				};
 
 				const update = {
-					displayName: nameUser,
+					displayName: nameUser
 				};
 
 				firebase
 					.auth()
 					.currentUser.updateProfile(update)
 					.then(() => {
-						setIsLoading(false)
+						setIsLoading(false);
 						//console.log(data);
 						saveUserInfo(data, 'userInfo', () => {
 							setModalVisible();
@@ -80,12 +84,12 @@ const UserData = (props) => {
 						//navigation.navigate('Profile');
 					})
 					.catch(() => {
-						setIsLoading(false)
+						setIsLoading(false);
 						setError('Error al actualizar el nombre');
 						setIsLoading(false);
 					});
 			} else {
-				setIsLoading(false)
+				setIsLoading(false);
 				if (!phone) {
 					setErrorPhone('El celular es requerido');
 				} else {
@@ -95,15 +99,12 @@ const UserData = (props) => {
 			}
 		}
 		if (userType == 1 || userType == 2) {
-			//console.log('somos veterinarios o el otro');
 			if (phone) {
-				//console.log('phone ok');
 				setErrorPhone('');
 			} else {
 				setErrorPhone('El celular es requerido');
 			}
 			if (street) {
-				//console.log('stret ok');
 				setErrorStreet('');
 			} else {
 				setErrorStreet('La dirección es requerida');
@@ -125,7 +126,7 @@ const UserData = (props) => {
 				setErrorPhone('');
 				setErrorStreet('');
 				setErrorDescription('');
-				setIsLoading(true)
+				setIsLoading(true);
 
 				const data = {
 					create_uid: userInfo.uid,
@@ -144,18 +145,16 @@ const UserData = (props) => {
 					quantityVoting: 0,
 					rating: 0,
 					ratingTotal: 0,
-					active:true
+					active: true
 				};
 
-					saveCenter(data, 'petCenters');
-					saveUserInfo(data, 'userInfo', () => {
-						props.dispatch(actions.actualizarCliente(data));
-						setModalVisible();
-					});
-		
-
-			}else{
-				setIsLoading(false)
+				saveCenter(data, 'petCenters');
+				saveUserInfo(data, 'userInfo', () => {
+					props.dispatch(actions.actualizarCliente(data));
+					setModalVisible();
+				});
+			} else {
+				setIsLoading(false);
 			}
 		}
 	};
@@ -189,7 +188,7 @@ const UserData = (props) => {
 								rightIcon={{
 									type: 'material-community',
 									name: 'account-circle',
-									color: '#C2C2C2',
+									color: '#C2C2C2'
 								}}
 								errorMessage={nameUserError}
 								onChange={(even) => setNameUser(even.nativeEvent.text)}
@@ -203,7 +202,7 @@ const UserData = (props) => {
 								rightIcon={{
 									type: 'material-community',
 									name: 'phone',
-									color: '#C2C2C2',
+									color: '#C2C2C2'
 								}}
 								errorMessage={errorPhone}
 								onChange={(even) => setphone(even.nativeEvent.text)}
@@ -219,7 +218,7 @@ const UserData = (props) => {
 										type: 'material-community',
 										name: 'google-maps',
 										color: location ? '#1A89E7' : '#C2C2C2',
-										onPress: () => setIsVisibleMap(true),
+										onPress: () => setIsVisibleMap(true)
 									}}
 									errorMessage={!street ? errorStreet : errorMap}
 									onChange={(even) => setStreet(even.nativeEvent.text)}
@@ -281,19 +280,19 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		paddingTop: 0,
-		backgroundColor: '#ecf0f1',
+		backgroundColor: '#ecf0f1'
 	},
 	paragraph: {
 		margin: 10,
 		fontSize: 18,
 		fontWeight: 'bold',
 		textAlign: 'center',
-		color: '#34495e',
-	},
+		color: '#34495e'
+	}
 });
 
 const mapStateToProps = (state) => ({
 	cliente: state.cliente.cliente,
-	login: state.login.login,
+	login: state.login.login
 });
 export default connect(mapStateToProps)(UserData);

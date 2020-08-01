@@ -23,10 +23,20 @@ import UserData from '../account/UserData';
 import FilterMap from './FilterMap';
 import { returnColor, returnNameFormView } from '../../utils/Configurations';
 
-
-
-/***
- * Allows to see all the news of the veterinary centers and animal foundations
+/**
+ * Permite localizar todos los registros:
+ * -> Comedogs (naranja)
+ * -> Centros (verde)
+ * -> Mascotas extraviadas (rojo)
+ * -> Refrescar información (gris)
+ * 
+ * Si se pulsa sobre cada uno de los marcadores que aparecen en el mapa, saldra una ventana
+ * emergente con los siguientes datos:
+ * -> Imagen
+ * -> Descripción
+ * 
+ * Al pulsar sobre este, lo llevara hasta el registro correspondiente.
+ * @param { navigation } props 
  */
 function LocalizationMap(props) {
 	const { navigation } = props;
@@ -34,8 +44,6 @@ function LocalizationMap(props) {
 	const [ resultAux, setResultAux ] = useState([]);
 	const [ location, setLocation ] = useState(null);
 	const [ user, setUser ] = useState(null);
-
-	//console.log('mapa');
 
 	//variables para el popup
 	const [ elements, setElements ] = useState('');
@@ -99,18 +107,24 @@ function LocalizationMap(props) {
 					getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
 				}
 			}
-			//setReload(false)
 		}, [])
 	);
 
+	/**
+	 * Permite validar hacia que coleccion vamos a dirigirnos
+	 * @param { nombre de la vista} view 
+	 * @param {* id del registro} id 
+	 * @param { nombre o titulo para el registro actual} name 
+	 */
 	const goElement = (view, id, name) => {
 		navigation.navigate(view, {
 			id,
 			name
 		});
-
 	};
 
+	//filtro que permite ocultar o mostrar información de los comedogs, centros o mascotas extraviadas
+	//sin tener que refrescar el componente, de esta manera se logra una respuesta mas rapida
 	var aux = result.filter((valueItem) => {
 		if (!filterOrange && filterGreen && filterRed) {
 			return valueItem.collection != 'comedogs';
@@ -140,7 +154,6 @@ function LocalizationMap(props) {
 			<View>
 				{location && (
 					<MapView style={styles.mapStyle} initialRegion={location} showsUserLocation={true}>
-
 						{map(aux, (record, index) => (
 							<MapView.Marker
 								key={index}
@@ -150,17 +163,20 @@ function LocalizationMap(props) {
 								}}
 								pinColor={returnColor(record.collection)}
 								title={record.name}
-
 							>
 								<Callout
 									style={styles.callout}
-									
-									onPress={() => goElement(returnNameFormView(record.collection), record.id, record.name)}
+									onPress={() =>
+										goElement(returnNameFormView(record.collection), record.id, record.name)}
 								>
 									<ScrollView vertical>
-										<View style={{borderRadius:35,  marginRight:4}}>
-										<CarouselImages image_ids={record.image} height={85} width={180} style={{margin:2, borderRadius:30}}/>
-
+										<View style={{ borderRadius: 35, marginRight: 4 }}>
+											<CarouselImages
+												image_ids={record.image}
+												height={85}
+												width={180}
+												style={{ margin: 2, borderRadius: 30 }}
+											/>
 										</View>
 										<View style={mapInfoStyle.viewComponent}>
 											<Text style={mapInfoStyle.nameItem}>{record.name}</Text>
@@ -215,7 +231,7 @@ const styles = StyleSheet.create({
 		height: 170,
 		margin: 10,
 		borderColor: '#C2C2C2',
-		borderWidth:2,
+		borderWidth: 2,
 		borderRadius: 30
 	},
 	view: {

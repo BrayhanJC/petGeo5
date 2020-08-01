@@ -13,6 +13,11 @@ import PetForm from '../pet/PetForm';
 import { uploadImageStorage } from '../../utils/UploadImageStorage';
 import { saveCollection } from '../../utils/SaveRecord';
 const widhtScreen = Dimensions.get('window').width;
+
+/**
+ * Funcion que permite crear una mascota nueva
+ * @param {*} props 
+ */
 function CreatePetForm(props) {
 	const { toastRef, setIsLoading, navigation, userInfo } = props;
 	const [ loading, setloading ] = useState(false);
@@ -25,6 +30,10 @@ function CreatePetForm(props) {
 	const [ valueDate, setValueDate ] = useState({ date: new Date() });
 	const [ imageSelected, setImageSelected ] = useState([]);
 	const [ error, setError ] = useState('');
+
+	/**
+	 * Funcion que valida la información suministrada por el usuario para poder crear una mascota
+	 */
 
 	const addPet = () => {
 		if (isEmpty(namePet)) {

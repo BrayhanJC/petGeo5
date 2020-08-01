@@ -11,7 +11,7 @@ import { size } from 'lodash';
 import { connect } from 'react-redux';
 
 /**
- * Permite eliminar el registro actual
+ * Permite eliminar el registro actual, siempre y cuando sea el propietario del registro
  * @param {*} props
  */
 function DeleteRecord(props) {
@@ -44,11 +44,11 @@ function DeleteRecord(props) {
 		};
 	};
 
-	//console.log('DeleteRecord', returnData().current_user_id);
-	//console.log('DeleteRecord cliente', cliente.create_uid);
-
 	let isOwner = returnData().current_user_id == cliente.create_uid;
 
+	/**
+	 * Funcion que permite eliminar el registro
+	 */
 	const deleteRecord = () => {
 		const data = returnData();
 		const user_id = firebase.auth().currentUser.uid;

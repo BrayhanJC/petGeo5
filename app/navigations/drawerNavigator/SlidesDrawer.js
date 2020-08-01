@@ -7,9 +7,10 @@ import Slidemain from '../../screens/slides/SlideMain'
 
 const Stack = createStackNavigator();
 
-/***
- * Create stack nav pets 
- * show all pets register by user
+/**
+ *  * Screens para poder dirigir al usuario a:
+ * -> Primeros Pasos
+ * @param {*} props 
  */
 function SlidesDrawer(props) {
 	const navigation = useNavigation();

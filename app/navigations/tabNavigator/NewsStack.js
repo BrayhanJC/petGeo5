@@ -9,16 +9,21 @@ import NewsView from '../../screens/news/NewsView';
 import CreateReview from '../../screens/review/CreateReview';
 import DeleteRecord from '../../components/UpdateRecords/DeleteRecord';
 
-import EditNews from '../../screens/news/EditNews'
+import EditNews from '../../screens/news/EditNews';
 const Stack = createStackNavigator();
 
-/***
- * Create stack nav news
- * Show all the news of the veterinary centers and animal foundations
+/**
+ * Screens para poder dirigir al usuario a:
+ * -> Noticias
+ * -> Añadir Noticia
+ * -> Ver Noticia
+ * -> Editar Noticia
+ * -> Crear y ver Comentarios
+ * @param {*} props 
  */
 function NewsStack(props) {
 	//const navigation = useNavigation();
-	//console.log('Navegando por las noticias');
+
 	return (
 		<Stack.Navigator>
 			<Stack.Screen
@@ -26,35 +31,31 @@ function NewsStack(props) {
 				component={NewsScreen}
 				options={{
 					title: 'Noticias',
-					headerLeft: () => <AvatarIcon />,
+					headerLeft: () => <AvatarIcon />
 				}}
 			/>
 			<Stack.Screen
 				name="CreateNews"
 				component={CreateNews}
 				options={{
-					title: 'Añadir Nueva Noticia',
+					title: 'Añadir Nueva Noticia'
 				}}
 			/>
 			<Stack.Screen
 				name="ViewNews"
 				component={NewsView}
 				options={{
-					headerRight: () => <DeleteRecord props={props} />,
+					headerRight: () => <DeleteRecord props={props} />
 				}}
 			/>
 
-
-			<Stack.Screen
-				name="ViewEditNews"
-				component={EditNews}
-			/>
+			<Stack.Screen name="ViewEditNews" component={EditNews} />
 
 			<Stack.Screen
 				name="CreateReviewNews"
 				component={CreateReview}
 				options={{
-					title: 'Nuevo Comentario',
+					title: 'Nuevo Comentario'
 				}}
 			/>
 		</Stack.Navigator>

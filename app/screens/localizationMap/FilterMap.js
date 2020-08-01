@@ -1,12 +1,19 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Text, View, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
-import MapView, { Marker, Callout } from 'react-native-maps';
-import * as Location from 'expo-location';
-import { useFocusEffect } from '@react-navigation/native';
-import { styleMap } from '../../src/css/MapView';
-import * as Permissions from 'expo-permissions';
 
+/**
+ * Componente que permite realizar un filtro por:
+ * -> Comedogs (naranja)
+ * -> Centros (verde)
+ * -> Mascotas extraviadas (rojo)
+ * -> Refrescar información (gris)
+ * 
+ * Si se pulsa sobre comedogs, centros o extraviados se activara o no el filtro.
+ * -> Boton con color, indica que esta activo el filtro
+ * -> Boton con color claro, indica que el filtro esta inactivo
+ * @param { filterGreen, setFilterGreen, filterOrange, setFilterOrange, filterRed, setFilterRed, setReload } props 
+ */
 function FilterMap(props) {
 	const { filterGreen, setFilterGreen, filterOrange, setFilterOrange, filterRed, setFilterRed, setReload } = props;
 
@@ -27,8 +34,7 @@ function FilterMap(props) {
 					borderRadius: 20
 				}}
 				onPress={() => {
-                    setFilterGreen(!filterGreen);
-                    //setReload(true)
+					setFilterGreen(!filterGreen);
 				}}
 			/>
 			<Button
@@ -46,8 +52,7 @@ function FilterMap(props) {
 					borderRadius: 20
 				}}
 				onPress={() => {
-                    setFilterOrange(!filterOrange);
-                    //setReload(true)
+					setFilterOrange(!filterOrange);
 				}}
 			/>
 			<Button
@@ -65,12 +70,10 @@ function FilterMap(props) {
 					borderRadius: 20
 				}}
 				onPress={() => {
-                    setFilterRed(!filterRed);
-                    //setReload(true)
+					setFilterRed(!filterRed);
 				}}
 			/>
 			<Button
-				
 				icon={{ name: 'refresh', type: 'material-community', color: 'white', size: 25 }}
 				containerStyle={{
 					marginLeft: 10,
@@ -85,7 +88,7 @@ function FilterMap(props) {
 					borderRadius: 50
 				}}
 				onPress={() => {
-                    setReload(true)
+					setReload(true);
 				}}
 			/>
 		</View>

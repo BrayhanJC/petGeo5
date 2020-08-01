@@ -19,6 +19,10 @@ import { getRecord } from '../../utils/SaveRecord';
 import { useFocusEffect } from '@react-navigation/native';
 import RNPickerSelect from 'react-native-picker-select';
 
+/**
+ * Crea un nuevo registro de mascotas extraviadas
+ * @param {*} props 
+ */
 function AddMissinPetForm(props) {
 	const { toastRef, setIsLoading, navigation } = props;
 	const [ locationMissingPet, setLocationMissingPet ] = useState(null);
@@ -50,14 +54,13 @@ function AddMissinPetForm(props) {
 		}
 	}
 
-
 	var data = [];
 	if (pet) {
 		for (let index = 0; index < elements.length; index++) {
 			if (elements[index].id == pet) {
 				var descriptionComplete = elements[index].description ? elements[index].description : '';
 				descriptionComplete += elements[index].raza ? '. De raza: ' + elements[index].raza : '';
-				
+
 				data.push({
 					description: descriptionComplete,
 					phone: userData[0].phone ? userData[0].phone : '',
@@ -69,6 +72,9 @@ function AddMissinPetForm(props) {
 		}
 	}
 
+	/**
+	 * Funcion que valida la información suministrada por el usuario para poder crear una mascota extraviada o desaparecida
+	 */
 	const addMissingPets = () => {
 		//setIsLoading(true);
 		if (!title || !address || !description) {
@@ -94,7 +100,7 @@ function AddMissinPetForm(props) {
 						quantityVoting: 0,
 						rating: 0,
 						ratingTotal: 0,
-						active:true
+						active: true
 					},
 					'missingPets',
 					navigation,

@@ -5,6 +5,10 @@ const { width, height } = Dimensions.get('window');
 
 export const SLIDE_HEIGHT = 0.61 * height;
 
+/**
+ * Permite mostrar un titulo y una imagen para el slide
+ * @param {label, color, isAnimation, url, size} props 
+ */
 export default function Slide(props) {
 	const { label, color, isAnimation, url, size } = props;
 
@@ -30,7 +34,7 @@ export default function Slide(props) {
 				)}
 				{isAnimation &&
 				label == 'Mascotas' && (
-					<View style={{ alignItems: 'center', marginTop:-5 }}>
+					<View style={{ alignItems: 'center', marginTop: -5 }}>
 						<Image
 							style={{
 								height: size,
@@ -56,7 +60,6 @@ export default function Slide(props) {
 				{isAnimation &&
 				label == 'Noticias' && (
 					<View style={{ alignItems: 'center' }}>
-
 						<Image
 							style={{
 								height: size,
@@ -70,7 +73,6 @@ export default function Slide(props) {
 				{isAnimation &&
 				label == 'Controles' && (
 					<View style={{ alignItems: 'center' }}>
-
 						<Image
 							style={{
 								height: size,
@@ -84,7 +86,6 @@ export default function Slide(props) {
 				{isAnimation &&
 				label == 'Extraviados' && (
 					<View style={{ alignItems: 'center', marginTop: -35 }}>
-
 						<Image
 							style={{
 								height: 370,
@@ -125,10 +126,9 @@ const styles = StyleSheet.create({
 	},
 	titleContainer: {
 		height: 100,
-		justifyContent: 'center',
+		justifyContent: 'center'
 	},
 	slider: {
-
 		height: SLIDE_HEIGHT,
 		borderBottomRightRadius: 75,
 		backgroundColor: 'cyan'

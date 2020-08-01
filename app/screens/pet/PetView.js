@@ -15,6 +15,10 @@ const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 const db = firebase.firestore(firebaseApp);
 
+/**
+ * Componente que permite ver los datos de la mascota
+ * @param {*} props 
+ */
 const PetView = (props) => {
 	const { navigation, route } = props;
 	const { name, id } = route.params;

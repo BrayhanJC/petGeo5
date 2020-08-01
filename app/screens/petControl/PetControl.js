@@ -10,8 +10,10 @@ import Search from '../../components/formSearch/Search';
 import NotFoundItem from '../../components/formSearch/NotFoundItem';
 import { size, isEmpty } from 'lodash';
 import UserData from '../account/UserData';
-/***
- * Allows create controls of pets, to create controls
+
+/**
+ * Componente que permite listar todos los controles registrados por usuario
+ * @param {navigation} props 
  */
 function PetControl(props) {
 	//se puede obtener porque esta en la screen principal

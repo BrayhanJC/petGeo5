@@ -12,6 +12,10 @@ import NotFoundItem from '../../components/formSearch/NotFoundItem';
 import { size, isEmpty } from 'lodash';
 import UserData from '../account/UserData';
 
+/**
+ * Componente que permite listar los veterinarios
+ * @param {*} props 
+ */
 function PetDoctor(props) {
 	//se puede obtener porque esta en la screen principal
 	//const { navigation } = props;

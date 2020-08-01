@@ -7,6 +7,10 @@ import { DrawerItemList } from '@react-navigation/drawer';
 import firebase from 'firebase/app';
 import { Icon } from 'react-native-elements';
 
+/**
+ * Brinda un estilo al menu lateral
+ * @param {*} props 
+ */
 export default function Menu(props) {
 	return (
 		<View style={style.container}>
@@ -20,9 +24,11 @@ export default function Menu(props) {
 						<Image
 							style={style.userImagen}
 							source={
-								firebase.auth().currentUser
-									? { url: firebase.auth().currentUser.photoURL }
-									: require('../../../assets/img/avatar_dog.png')
+								firebase.auth().currentUser ? (
+									{ url: firebase.auth().currentUser.photoURL }
+								) : (
+									require('../../../assets/img/avatar_dog.png')
+								)
 							}
 						/>
 					</View>

@@ -13,6 +13,10 @@ import { uploadImageStorage } from '../../utils/UploadImageStorage';
 import { saveCollection } from '../../utils/SaveRecord';
 import { showAlert } from '../../utils/validations';
 
+/**
+ * Permite crear un nuevo veterinario
+ * @param {*} props 
+ */
 function CreatePetDoctorForm(props) {
 	const { toastRef, setIsLoading, navigation, userInfo } = props;
 	const [ loading, setloading ] = useState(false);
@@ -25,6 +29,9 @@ function CreatePetDoctorForm(props) {
 	const [ errorName, setErrorName ] = useState('');
 	const [ errorDescription, setErrorDescription ] = useState('');
 
+	/**
+	 * Funcion que valida la información suministrada por el usuario para poder crear un veterinario
+	 */
 	const addPetDoctor = () => {
 		if (name && description && specialty) {
 			setIsLoading(true);

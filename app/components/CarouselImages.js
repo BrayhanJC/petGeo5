@@ -2,10 +2,14 @@ import React from 'react';
 import { View, Text, Slider } from 'react-native';
 import { Image } from 'react-native-elements';
 import Carousel from 'react-native-snap-carousel';
-import {size} from 'lodash'
+import { size } from 'lodash';
+
+/**
+ * Muestra una serie de imagenes, las cuales fueron guardadas anteriormente por el celular
+ * @param {*} props 
+ */
 const CarouselImages = (props) => {
 	const { image_ids, height, width, image_default } = props;
-
 
 	const renderItem = ({ item }) => {
 		return (
@@ -16,8 +20,7 @@ const CarouselImages = (props) => {
 		);
 	};
 
-	if (size(image_ids) > 0){
-
+	if (size(image_ids) > 0) {
 		return (
 			<Carousel
 				layout={'default'}
@@ -29,14 +32,8 @@ const CarouselImages = (props) => {
 				containerCustomStyle={{ borderRadius: 20 }}
 			/>
 		);
-	}else{
-
-		return (
-			<Image
-				style={{ width, height }}
-				source={image_default}
-			/>
-		)
+	} else {
+		return <Image style={{ width, height }} source={image_default} />;
 	}
 };
 

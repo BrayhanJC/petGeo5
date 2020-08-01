@@ -11,9 +11,15 @@ import PetView from '../../screens/pet/PetView'
 const Stack = createStackNavigator();
 import DeleteRecord from '../../components/UpdateRecords/DeleteRecord'
 import EditPet from '../../screens/pet/EditPet';
-/***
- * Create stack nav pets 
- * show all pets register by user
+
+
+/**
+ * Screens para poder dirigir al usuario a:
+ * -> Mascotas
+ * -> Añadir Mascotas
+ * -> Ver Mascota
+ * -> Editar Mascota
+ * @param {*} props 
  */
 function PetDrawer(props) {
 	const navigation = useNavigation();

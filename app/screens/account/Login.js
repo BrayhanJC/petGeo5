@@ -8,6 +8,11 @@ import LinkCreateAccount from './LinkCreateAccount';
 import LoginForm from '../../components/account/LoginForm';
 import LoginFacebook from '../../components/account/LoginFacebook';
 
+/**
+ * Componente principal para el inicio de sesion
+ * -> Iniciar sesion con credenciales
+ * -> Iniciar sesion con facebook
+ */
 function Login() {
 	const toastRef = useRef();
 
@@ -33,16 +38,16 @@ const styles = StyleSheet.create({
 	logo: {
 		width: '100%',
 		height: 170,
-		marginTop: 20,
+		marginTop: 20
 	},
 	viewContainer: {
 		marginTop: 20,
 		marginRight: 40,
-		marginLeft: 40,
+		marginLeft: 40
 	},
 	divider: {
 		backgroundColor: '#C2C2C2',
 		marginRight: 40,
-		marginLeft: 40,
-	},
+		marginLeft: 40
+	}
 });

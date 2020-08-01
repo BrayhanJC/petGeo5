@@ -6,6 +6,8 @@ import Menu from './drawerNavigator/NavigationDrawer';
 /**
  * NavigationContainer
  * -> Contiene todos los elementos de navegacion
+ * -> Drawer
+ * -> BottomNavigation
  */
 function Navigation() {
 	return (

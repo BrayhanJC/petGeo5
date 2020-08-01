@@ -4,6 +4,12 @@ import 'firebase/storage';
 import 'firebase/firestore';
 const db = firebase.firestore(firebaseApp);
 
+/**
+ * Funcion que retorna los elementos para mostrarlos en el mapa
+ * @param { nombre de la colección} collectionName 
+ * @param { modificador de los elementos } setElements 
+ * @param { elementos } resultElements 
+ */
 export const ListMap = (collectionName, setElements, resultElements) => {
 	db
 		.collection(collectionName)

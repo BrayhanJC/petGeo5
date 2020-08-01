@@ -12,9 +12,8 @@
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
-      
-      "height":50,
-      "weight":50,
+      "height": 50,
+      "weight": 50,
       "backgroundColor": "#FFF"
     },
     "updates": {
