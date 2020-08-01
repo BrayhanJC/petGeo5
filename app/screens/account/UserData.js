@@ -9,13 +9,14 @@ import { returnUserType, returnSchedule } from '../../utils/Configurations';
 import * as firebase from 'firebase';
 import { connect } from 'react-redux';
 import { actions } from '../../store';
+import Loading from "../../components/Loading";
 
 const UserData = (props) => {
 	const { modalVisible, setModalVisible, userInfo } = props;
 	const toastRef = useRef();
 	const buttons = ['Usuario', 'Veterinaria', 'Fundación'];
 	const buttonTime = ['12 Horas', '24 Horas'];
-
+	const [isLoading, setIsLoading] = useState(false);
 	const [message, setMessage] = useState('');
 	const [street, setStreet] = useState('');
 	const [location, setLocation] = useState('');
@@ -34,6 +35,7 @@ const UserData = (props) => {
 	const [isVisibleMap, setIsVisibleMap] = useState(false);
 
 	const onSubmit = () => {
+		
 		if (!location) {
 			setMessage('');
 		}
@@ -49,6 +51,7 @@ const UserData = (props) => {
 				//console.log('todo ok usuario');
 				setErrorPhone('');
 				setErrorStreet('');
+				setIsLoading(true)
 
 				const data = {
 					create_uid: userInfo.uid,
@@ -68,6 +71,7 @@ const UserData = (props) => {
 					.auth()
 					.currentUser.updateProfile(update)
 					.then(() => {
+						setIsLoading(false)
 						//console.log(data);
 						saveUserInfo(data, 'userInfo', () => {
 							setModalVisible();
@@ -76,10 +80,12 @@ const UserData = (props) => {
 						//navigation.navigate('Profile');
 					})
 					.catch(() => {
+						setIsLoading(false)
 						setError('Error al actualizar el nombre');
 						setIsLoading(false);
 					});
 			} else {
+				setIsLoading(false)
 				if (!phone) {
 					setErrorPhone('El celular es requerido');
 				} else {
@@ -119,6 +125,7 @@ const UserData = (props) => {
 				setErrorPhone('');
 				setErrorStreet('');
 				setErrorDescription('');
+				setIsLoading(true)
 
 				const data = {
 					create_uid: userInfo.uid,
@@ -140,12 +147,15 @@ const UserData = (props) => {
 					active:true
 				};
 
-				saveCenter(data, 'petCenters');
-				saveUserInfo(data, 'userInfo', () => {
-					alert(data.userType);
-					props.dispatch(actions.actualizarCliente(data));
-					setModalVisible();
-				});
+					saveCenter(data, 'petCenters');
+					saveUserInfo(data, 'userInfo', () => {
+						props.dispatch(actions.actualizarCliente(data));
+						setModalVisible();
+					});
+		
+
+			}else{
+				setIsLoading(false)
 			}
 		}
 	};
@@ -256,6 +266,7 @@ const UserData = (props) => {
 									setLocationForms={setLocation}
 								/>
 							)}
+							<Loading isVisible={isLoading} text="Cargando..." />
 						</View>
 					</View>
 				</Modal>

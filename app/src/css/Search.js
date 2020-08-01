@@ -10,7 +10,7 @@ export const search = {
         
     },
     image:{
-        height:200,
+        height:600,
      
     },
     textCenter:{

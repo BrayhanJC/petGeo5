@@ -14,6 +14,14 @@ import {
 	styleViewFormat
 } from '../../src/css/ListRecord';
 
+/**
+ * Permite renderizar los controles que se han creado
+ * Muestra los datos tales como:
+ * -> Imagen
+ * -> Fecha
+ * -> Descripción
+ * @param {*} props 
+ */
 function RenderItemsPetControl(props) {
 	const { elements, navigation, collectionName } = props;
 	const { id, image_id, name, description, create_date, create_uid, pet_id, type_control  } = elements.item;

@@ -1,6 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Avatar } from 'react-native-elements';
+
+/**
+ * Permite crear una cuadricula en la cual se mostraran los datos del veterinario
+ * -> Imagen
+ * -> Nombre
+ * -> Descripción
+ * @param {*} props 
+ */
 function RenderDoctor(props) {
 	const { elements, navigation, collectionName, width } = props;
 	const { id, image_id, name, description, specialty, create_uid, empty } = elements.item;
@@ -94,7 +102,7 @@ const styles = StyleSheet.create({
 		marginRight: 5
 	},
 	description: {
-		fontSize: 12,
-		marginTop: 8
+		fontSize: 10,
+		marginTop: 4
 	}
 });

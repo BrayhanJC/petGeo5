@@ -21,6 +21,10 @@ function defaultFormValue() {
 	};
 }
 
+/**
+ * Permite editar el teléfono
+ * @param {*} props 
+ */
 function EditPhone(props) {
 	//console.log("cambiando nombre");
 

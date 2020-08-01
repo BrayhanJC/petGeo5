@@ -4,9 +4,10 @@ import { View, Text, Dimensions, StyleSheet, Image } from 'react-native';
 const { width, height } = Dimensions.get('window');
 
 export const SLIDE_HEIGHT = 0.61 * height;
+
 export default function Slide(props) {
 	const { label, color, isAnimation, url, size } = props;
-	
+
 	const url_image = '../../../assets/animations/control.json';
 
 	return (
@@ -18,12 +19,10 @@ export default function Slide(props) {
 				{isAnimation &&
 				label == 'Centros' && (
 					<View style={{ alignItems: 'center', marginTop: -35 }}>
-						
 						<Image
 							style={{
 								height: 310,
-								width: 350,
-								
+								width: 350
 							}}
 							source={require('../../../assets/animations/centers.gif')}
 						/>
@@ -31,7 +30,7 @@ export default function Slide(props) {
 				)}
 				{isAnimation &&
 				label == 'Mascotas' && (
-					<View style={{ alignItems: 'center' }}>
+					<View style={{ alignItems: 'center', marginTop:-5 }}>
 						<Image
 							style={{
 								height: size,
@@ -44,7 +43,7 @@ export default function Slide(props) {
 				{isAnimation && label == 'Controles' && <View style={{ alignItems: 'center' }} />}
 				{isAnimation &&
 				label.includes('Geolocalizaci') && (
-					<View style={{ alignItems: 'center', marginTop: -35 }}>
+					<View style={{ alignItems: 'center', marginTop: -25 }}>
 						<Image
 							style={{
 								height: size,
@@ -57,13 +56,6 @@ export default function Slide(props) {
 				{isAnimation &&
 				label == 'Noticias' && (
 					<View style={{ alignItems: 'center' }}>
-						{/* <LottieView
-							autoPlay
-							loop
-							style={{ height: size, width: size }}		
-							source={require('../../../assets/animations/news.json')}
-							//source={require(url)}
-						/> */}
 
 						<Image
 							style={{
@@ -75,16 +67,9 @@ export default function Slide(props) {
 					</View>
 				)}
 
-{isAnimation &&
+				{isAnimation &&
 				label == 'Controles' && (
 					<View style={{ alignItems: 'center' }}>
-						{/* <LottieView
-							autoPlay
-							loop
-							style={{ height: size, width: size }}		
-							source={require('../../../assets/animations/news.json')}
-							//source={require(url)}
-						/> */}
 
 						<Image
 							style={{
@@ -96,16 +81,9 @@ export default function Slide(props) {
 					</View>
 				)}
 
-{isAnimation &&
+				{isAnimation &&
 				label == 'Extraviados' && (
 					<View style={{ alignItems: 'center', marginTop: -35 }}>
-						{/* <LottieView
-							autoPlay
-							loop
-							style={{ height: size, width: size }}		
-							source={require('../../../assets/animations/news.json')}
-							//source={require(url)}
-						/> */}
 
 						<Image
 							style={{
@@ -113,6 +91,18 @@ export default function Slide(props) {
 								width: 370
 							}}
 							source={require('../../../assets/img/lost_pet.png')}
+						/>
+					</View>
+				)}
+				{isAnimation &&
+				label == 'Comedogs' && (
+					<View style={{ alignItems: 'center', marginTop: -20 }}>
+						<Image
+							style={{
+								height: 320,
+								width: 320
+							}}
+							source={require('../../../assets/img/main_comedog.png')}
 						/>
 					</View>
 				)}
@@ -135,9 +125,10 @@ const styles = StyleSheet.create({
 	},
 	titleContainer: {
 		height: 100,
-		justifyContent: 'center'
+		justifyContent: 'center',
 	},
 	slider: {
+
 		height: SLIDE_HEIGHT,
 		borderBottomRightRadius: 75,
 		backgroundColor: 'cyan'

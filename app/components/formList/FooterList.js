@@ -4,15 +4,14 @@ import { Image } from 'react-native-elements';
 import { size } from 'lodash';
 import {
 	styleLoadingRecords,
-	styleTouchableViewRecords,
-	styleTouchableViewImageRecords,
-	touchableImageRecords,
-	styleTouchableNameRecords,
-	styletouchableAddressRecords,
-	styleTouchableDescriptionRecordsRecords,
 	styleNoFoundRecords
 } from '../../src/css/ListRecord';
 
+
+/**
+ * Permite retornar un indicador de carga o indica al usuario que no hay mas elementos por cargar
+ * @param {*} props 
+ */
 function FooterList(props) {
 	const { isLoading } = props;
 	if (isLoading) {

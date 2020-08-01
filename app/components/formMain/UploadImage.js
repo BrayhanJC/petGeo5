@@ -6,17 +6,25 @@ import * as ImagePicker from 'expo-image-picker';
 
 import { map, size, filter } from 'lodash';
 
+/**
+ * Permite cargar una serie de imagenes para ser alamacenadas en el firebase
+ * @param {*} props 
+ */
 function UploadImage(props) {
 	const { styleUploadImage, toastRef, imageSelected, setImageSelected, dataPet, pet } = props;
 
-	if (pet){
-		if (dataPet){
-			if (dataPet[0].image_id){
-				setImageSelected(dataPet[0].image_id    )
+	if (pet) {
+		if (dataPet) {
+			if (dataPet[0].image_id) {
+				setImageSelected(dataPet[0].image_id);
 			}
 		}
 	}
-	
+
+	/**
+	 * Remueve la imagen que ha seleccionado
+	 * @param { id de la imagen a eliminar} image 
+	 */
 	const removeImage = (image) => {
 		Alert.alert(
 			'Eliminar Imagen',
@@ -39,6 +47,11 @@ function UploadImage(props) {
 			}
 		);
 	};
+
+
+	/**
+	 * Permite seleccionar una imagen de la galeria del celular
+	 */
 	const imageSelect = async () => {
 		const resultPermissions = await Permissions.askAsync(Permissions.CAMERA_ROLL);
 
@@ -52,8 +65,6 @@ function UploadImage(props) {
 				allowsEditing: true,
 				aspect: [ 4, 3 ]
 			});
-
-			//console.log(result);
 
 			if (result.cancelled) {
 				toastRef.current.show('Haz cerrado la galeria sin seleccionar ninguna imagen', 2000);

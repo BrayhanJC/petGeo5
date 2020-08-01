@@ -7,6 +7,11 @@ import * as ImagePicker from 'expo-image-picker';
 import { connect } from 'react-redux';
 import { actions } from '../../store';
 
+
+/**
+ * Permite mostrar el avatar, nombre y correo del usuario
+ * @param {*} props 
+ */
 function InfoUser(props) {
 	//capturando datos del usuario
 	const {

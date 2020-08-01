@@ -57,7 +57,7 @@ function NavigatorDrawer(props) {
 	//console.log('NavigatorDrawer', cliente.userType);
 
 	const isUser = cliente.userType == 'user';
-	const isCenter = cliente.userType == 'veterinary';
+	const isCenter = cliente.userType == 'veterinary' || cliente.userType == 'fundation';
 
 	return (
 		<Drawer.Navigator

@@ -76,7 +76,7 @@ function CreatePetControlForm(props) {
 					toastRef={toastRef}
 					widhtScreen={widhtScreen}
 					imageMain={imageSelected[0]}
-					image_default={require('../../../assets/img/controlPet.jpg')}
+					image_default={require('../../../assets/img/control_pet.png')}
 				/>
 				<UploadImage
 					styleUploadImage={styleUploadImage}

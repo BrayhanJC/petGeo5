@@ -10,6 +10,9 @@ import { useNavigation } from '@react-navigation/native';
 import { connect } from 'react-redux';
 import { actions } from '../../store';
 
+/**
+ * Funcion que permite inicializar la variable formData
+ */
 function defaultFormValue() {
 	return {
 		email: '',
@@ -17,8 +20,10 @@ function defaultFormValue() {
 		repeatPassword: '',
 	};
 }
+
 /**
- * Formulario de registro
+ * Formulario de registro, permite al usuario registrarse en la app
+ * @param {*} props 
  */
 function RegisterForm(props) {
 	const { toastRef } = props;

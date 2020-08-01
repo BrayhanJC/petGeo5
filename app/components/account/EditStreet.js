@@ -10,6 +10,10 @@ import { updateInfoUserCenter } from '../../utils/SaveRecord';
 import { connect } from 'react-redux';
 import { actions } from '../../store';
 
+/**
+ * Permite editar la direccion del usuario
+ * @param {*} props 
+ */
 function EditStreet(props) {
 	const { streetDefault, saveLocation, setShowModal, setReloadUserInfo, user_id, toastRef } = props;
 

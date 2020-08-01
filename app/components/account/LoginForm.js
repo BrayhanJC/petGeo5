@@ -15,19 +15,25 @@ import 'firebase/firestore';
 
 const db = firebase.firestore(firebaseApp);
 
+/**
+ * Funcion que permite inicializar la variable formData
+ */
 function defaultFormValue() {
 	return {
 		email: '',
-		password: '',
+		password: ''
 	};
 }
-
+/**
+ * Permite al usuario iniciar sesión en la aplicación
+ * @param {toastRef} props 
+ */
 function LoginForm(props) {
 	const navigation = useNavigation();
 	const { toastRef } = props;
-	const [showPassword, setshowPassword] = useState(true);
-	const [formData, setformData] = useState(defaultFormValue);
-	const [loading, setloading] = useState(false);
+	const [ showPassword, setshowPassword ] = useState(true);
+	const [ formData, setformData ] = useState(defaultFormValue);
+	const [ loading, setloading ] = useState(false);
 
 	var { email, password } = formData;
 
@@ -54,11 +60,10 @@ function LoginForm(props) {
 		}
 	};
 
-
 	const onChange = (even, type) => {
 		setformData({
 			...formData,
-			[type]: even.nativeEvent.text,
+			[type]: even.nativeEvent.text
 		});
 	};
 
@@ -106,28 +111,28 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
-		marginTop: 1,
+		marginTop: 1
 	},
 	inputForm: {
 		width: '100%',
 		marginTop: 15,
 		borderRadius: 30,
 		borderWidth: 2,
-		borderColor: '#C2C2C2',
+		borderColor: '#C2C2C2'
 	},
 	btnContainerLogin: {
 		marginTop: 20,
-		width: '97%',
+		width: '97%'
 	},
 	btnLogin: {
 		backgroundColor: '#1A89E7',
-		borderRadius: 30,
+		borderRadius: 30
 	},
 	iconRight: {
-		color: 'gray',
+		color: 'gray'
 	},
 	btnTitleStyle: {
-		fontWeight: 'bold',
-	},
+		fontWeight: 'bold'
+	}
 });
 export default LoginForm;

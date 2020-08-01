@@ -2,7 +2,6 @@ import React from 'react';
 import { Text, View, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { Image, Avatar, Icon } from 'react-native-elements';
 
-import { size } from 'lodash';
 import {
 	styleLoadingRecords,
 	styleTouchableViewRecords,
@@ -15,6 +14,10 @@ import {
 	styleViewFormat
 } from '../../src/css/ListRecord';
 
+/**
+ * Permite renderizar los docotores
+ * @param {*} props 
+ */
 function RenderItemsPetDoctor(props) {
 	//const navigation = useNavigation();
 	const { elements, navigation, collectionName } = props;

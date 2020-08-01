@@ -45,7 +45,7 @@ function CreatePetDoctorForm(props) {
 						data,
 						'petDoctor',
 						navigation,
-						'PetDoctors',
+						'CenterDoctorStack',
 						toastRef,
 						setIsLoading,
 						'Error al guardar el Veterinario ' + name

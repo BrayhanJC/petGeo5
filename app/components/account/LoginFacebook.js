@@ -16,11 +16,11 @@ function LoginFacebook(props){
 
         const login = async () => {
 
-            //console.log('Login ...');
-
             await Facebook.initializeAsync(FacebookApi.application_id);
 
-            const { type, token } = await Facebook.logInWithReadPermissionsAsync({
+            const { type, token } = await Facebook.logInWithReadPermissionsAsync(
+                FacebookApi.application_id,
+                {
                 permissions: FacebookApi.permissions
             });
 
@@ -39,21 +39,16 @@ function LoginFacebook(props){
                 .catch( (error) => {
                     console.log('error al inciar sesion con facebook')
                     console.log(error)
-                    toastRef.current.show('Email o contraseña incorrectas')
+                    toastRef.current.show('Error desconocido, intentelo nuevamente.');
                     //console.log('algo salio mal')
                     setLoading(false)
                   
                 })
             } else if (type === 'cancel') {
                 toastRef.current.show('Haz cancelado el inicio de sesión');
-            
             } else {
-
                 toastRef.current.show('Error desconocido, intentelo nuevamente.');
-                
             }
-
-
         }
     return (
         <>

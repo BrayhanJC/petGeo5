@@ -21,6 +21,15 @@ import RenderItemsPetControl from './RenderItemsPetControl';
 import RenderItemsPetDoctor from './RenderItemsPetDoctor';
 //import { USER_FACING_NOTIFICATIONS } from 'expo-permissions';
 
+
+/**
+ * Funcion que permite listar:
+ * -> Noticias
+ * -> Centros
+ * -> Comedgos
+ * -> Extraviados
+ * @param {*} props 
+ */
 function ListRecords(props) {
 	const navigation = useNavigation();
 	const {

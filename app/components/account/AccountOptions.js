@@ -16,28 +16,30 @@ import {
 	generateOptionsUser,
 	generateOptionsCenter,
 	generateOptionsUserFacebook,
-	generateOptionsCenterFacebook,
+	generateOptionsCenterFacebook
 } from '../../utils/Configurations';
 import { useFocusEffect } from '@react-navigation/native';
 
 import { connect } from 'react-redux';
 
+/**
+ * Permite mostrar la informacion completa  del usuario
+ * @param { userInfo, toastRef, setReloadUserInfo, petCenter, reloadUserInfo, datUserInfo, elements } props 
+ */
 function AccountOptions(props) {
 	const { userInfo, toastRef, setReloadUserInfo, petCenter, reloadUserInfo, datUserInfo, elements } = props;
-	const {
-		userInfo: { displayName, email, providerId, uid },
-	} = props;
+	const { userInfo: { displayName, email, providerId, uid } } = props;
 
 	const { cliente, login } = props;
 
 	// variables que nos permitiran la modificacion con un verdadero o un falso
 	// mostrar un modal para cambiar el nombre, email o contraseña
-	const [showModal, setShowModal] = useState(false);
+	const [ showModal, setShowModal ] = useState(false);
 	//const [ elements, setElements ] = useState('');
 	//Varaibles que nos permitiran pasar la informacion necesaria para el modal
-	const [renderComponent, setRenderComponent] = useState(null);
+	const [ renderComponent, setRenderComponent ] = useState(null);
 
-	const [updateData, setupdateData] = useState(false);
+	const [ updateData, setupdateData ] = useState(false);
 
 	//cargamos los datos del usuario
 
@@ -139,16 +141,16 @@ function AccountOptions(props) {
 				//menuOptions = [ generateOptionsUser(selectedComponent, petCenter, userInfo)[1] ];
 
 				if (cliente.userType == 'veterinary') {
-					menuOptions = generateOptionsCenterFacebook(selectedComponent, petCenter, [cliente]);
+					menuOptions = generateOptionsCenterFacebook(selectedComponent, petCenter, [ cliente ]);
 				} else {
-					menuOptions = generateOptionsUserFacebook(selectedComponent, petCenter, [cliente]);
+					menuOptions = generateOptionsUserFacebook(selectedComponent, petCenter, [ cliente ]);
 				}
 			} else {
 				if (cliente.userType == 'veterinary') {
 					console.log('AccountOptions', cliente);
-					menuOptions = generateOptionsCenter(selectedComponent, petCenter, [cliente]);
+					menuOptions = generateOptionsCenter(selectedComponent, petCenter, [ cliente ]);
 				} else {
-					menuOptions = generateOptionsUser(selectedComponent, petCenter, [cliente]);
+					menuOptions = generateOptionsUser(selectedComponent, petCenter, [ cliente ]);
 				}
 			}
 		}
@@ -169,13 +171,13 @@ function AccountOptions(props) {
 						type: menu.iconType,
 						name: menu.iconNameLeft,
 						color: menu.iconColorLeft,
-						size: 28,
+						size: 28
 					}}
 					rightIcon={{
 						type: menu.iconType,
 						name: menu.iconNameRight,
 						color: menu.iconColorRight,
-						size: 35,
+						size: 35
 					}}
 					containerStyle={styles.menuItem}
 					onPress={menu.onPress}
@@ -197,13 +199,13 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 1,
 		borderBottomColor: '#E3E3E3',
 		paddingTop: 5,
-		paddingBottom: 5,
-	},
+		paddingBottom: 5
+	}
 });
 
 const mapStateToProps = (state) => ({
 	cliente: state.cliente.cliente,
-	login: state.login.login,
+	login: state.login.login
 });
 
 export default connect(mapStateToProps)(AccountOptions);

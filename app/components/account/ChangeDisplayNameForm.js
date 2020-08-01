@@ -10,6 +10,11 @@ import { updateInfoUserCenter } from '../../utils/SaveRecord';
 import { connect } from 'react-redux';
 import { actions } from '../../store';
 
+
+/**
+ * Inicializa la data
+ * @param { nombre } displayName 
+ */
 function defaultFormValue(displayName) {
 	return {
 		names: '',
@@ -18,6 +23,10 @@ function defaultFormValue(displayName) {
 	};
 }
 
+/**
+ * Permite cambiar el nombre dle usuario
+ * @param { cliente, login } props 
+ */
 function ChangeDisplayNameForm(props) {
 	const { cliente, login } = props;
 

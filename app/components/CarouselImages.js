@@ -4,13 +4,14 @@ import { Image } from 'react-native-elements';
 import Carousel from 'react-native-snap-carousel';
 import {size} from 'lodash'
 const CarouselImages = (props) => {
-	const { image_ids, height, width } = props;
+	const { image_ids, height, width, image_default } = props;
+
 
 	const renderItem = ({ item }) => {
 		return (
 			<Image
 				style={{ width, height }}
-				source={item ? { uri: item } : require('../../assets/img/not_found.png')}
+				source={item ? { uri: item } : require('../../assets/img/comedog_icon.png')}
 			/>
 		);
 	};
@@ -33,7 +34,7 @@ const CarouselImages = (props) => {
 		return (
 			<Image
 				style={{ width, height }}
-				source={require('../../assets/img/not_found.png')}
+				source={image_default}
 			/>
 		)
 	}

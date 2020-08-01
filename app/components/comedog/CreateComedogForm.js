@@ -16,6 +16,11 @@ import Map from '../formMain/Map';
 
 //devuelve el ancho de la screen
 const widhtScreen = Dimensions.get('window').width;
+
+/**
+ * Crea un comedog
+ * @param {*} props 
+ */
 function CreateComedogForm(props) {
 	const { toastRef, setIsLoading, navigation } = props;
 	const [ loading, setloading ] = useState(false);
@@ -29,9 +34,6 @@ function CreateComedogForm(props) {
 
 	const addComedog = () => {
 		setIsLoading(false);
-		//console.log(title)
-		//console.log(address)
-		//console.log(description)
 		if (!title || !address || !description) {
 			toastRef.current.show('Todos los campos del formulario son obligatorios',3000);
 		} else if (size(imageSelected) === 0) {
@@ -67,10 +69,6 @@ function CreateComedogForm(props) {
 			});
 		}
 	};
-
-	//const {title, setTitle, address, setAddress, description, setDescription, btnName, addressVisible} = props
-
-
 
 	return (
 		<ScrollView style={styleForm.scrollView}>

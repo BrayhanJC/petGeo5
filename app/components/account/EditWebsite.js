@@ -10,6 +10,10 @@ import { updateInfoUserCenter } from '../../utils/SaveRecord';
 import { connect } from 'react-redux';
 import { actions } from '../../store';
 
+/**
+ * Permite editar el sitio web si es un centro veterinario o fundacion
+ * @param {*} props 
+ */
 function EditWebsite(props) {
 	const { websiteDefault, setShowModal, setReloadUserInfo, user_id, toastRef } = props;
 	const { cliente } = props;

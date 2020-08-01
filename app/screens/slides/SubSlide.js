@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		padding: 25
+		padding: 25,
+
 	},
 	title: {
 		fontSize: 24,
@@ -52,12 +53,14 @@ const styles = StyleSheet.create({
 	},
 	footer: {
 		flex: 1,
-		backgroundColor: 'green'
+		backgroundColor: 'green',
+
 	},
 	footerContent: {
 		flex: 1,
 		flexDirection: 'row',
 		backgroundColor: 'white',
-		borderTopLeftRadius: 95
+		borderTopLeftRadius: 95,
+		borderBottomStartRadius:95,	
 	}
 });

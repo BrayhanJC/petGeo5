@@ -20,10 +20,14 @@ function defaultFormValue() {
 	};
 }
 
+/**
+ * Permite cambiar el email del usuario
+ * @param {cliente, login, email, setShowModal, toastRef, setReloadUserInfo, user_id, petCenter} props 
+ */
 function ChangeEmailForm(props) {
-	const { cliente, login } = props;
 
-	const { email, setShowModal, toastRef, setReloadUserInfo, user_id, petCenter } = props;
+
+	const { cliente, login, email, setShowModal, toastRef, setReloadUserInfo, user_id, petCenter } = props;
 
 	//variable donde se almacenaran los datos de email y contraseña
 	const [formData, setFormData] = useState(defaultFormValue);

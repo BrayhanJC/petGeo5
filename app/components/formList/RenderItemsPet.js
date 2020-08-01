@@ -14,6 +14,15 @@ import {
 	styleViewFormat
 } from '../../src/css/ListRecord';
 
+/**
+ * Permite ver en cuadricula las mascotas que han sido creadas:
+ * Muestra los siguientes datos:
+ * -> Nombre
+ * -> Raza
+ * -> Genero
+ * -> Tipo (hembra o macho)
+ * @param {*} props 
+ */
 function RendenderItemsPet(props) {
 	const { elements, navigation, collectionName } = props;
 	const { id, image_id, name, type, sex, raza, create_uid, date_birth, description } = elements.item;

@@ -1,7 +1,18 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Avatar, Rating } from 'react-native-elements';
-function RenderDoctor(props) {
+
+/**
+ * Permite crear una cuadricula en la cual se mostraran los datos del centro veterinario
+ * -> Imagen
+ * -> Nombre
+ * -> Puntuación
+ * -> Dirección
+ * -> Celular
+ * -> Horario
+ * @param {*} props 
+ */
+function RenderCenter(props) {
 	var mainImage = '';
 	const { elements, navigation, collectionName, width } = props;
 	const {
@@ -104,7 +115,7 @@ function RenderDoctor(props) {
 	);
 }
 
-export default RenderDoctor;
+export default RenderCenter;
 
 const styles = StyleSheet.create({
 	item: {
@@ -155,11 +166,11 @@ const styles = StyleSheet.create({
 		alignItems: 'flex-start'
 	},
 	description: {
-		fontSize: 12,
+		fontSize: 9,
 		fontWeight: 'normal'
 	},
 	bold: {
-		fontSize: 13,
+		fontSize: 11,
 		fontWeight: 'bold'
 	}
 });

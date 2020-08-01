@@ -37,8 +37,6 @@ function FormEditPetCenter(props) {
 		setWebsite
 	} = props;
 
-
-
 	return (
 		<View style={styleForm.viewForm}>
 			<Input
@@ -108,7 +106,7 @@ function FormEditPetCenter(props) {
 				}}
 			/>
 
-<Input
+			<Input
 				placeholder="Sitio Web"
 				containerStyle={styleForm.input}
 				inputContainerStyle={styleForm.inputForm}
@@ -116,7 +114,7 @@ function FormEditPetCenter(props) {
 				onChange={(even) => setWebsite(even.nativeEvent.text)}
 				rightIcon={{
 					type: 'material-community',
-					name: 'phone',
+					name: 'web',
 					color: '#C2C2C2'
 				}}
 				defaultValue={default_website}

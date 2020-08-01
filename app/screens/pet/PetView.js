@@ -28,26 +28,19 @@ const PetView = (props) => {
 	useFocusEffect(
 		useCallback(() => {
 			db
-			.collection('pet')
-			.doc(id)
-			.get()
-			.then((response) => {
-				const data = response.data();
-				data.id = response.id;
-				setPet(data);
-			})
-			.catch();
+				.collection('pet')
+				.doc(id)
+				.get()
+				.then((response) => {
+					const data = response.data();
+					data.id = response.id;
+					setPet(data);
+				})
+				.catch();
 		}, [])
 	);
 
-
-
-
-
-
 	if (!pet) return <Loading isVisible={true} text="Cargando..." />;
-
-
 
 	const listInfo = [
 		{
@@ -75,7 +68,7 @@ const PetView = (props) => {
 			action: null
 		},
 		{
-			text: 'Nacimiento:' + pet.date_birth ,
+			text: 'Nacimiento:' + pet.date_birth,
 			iconName: 'balloon',
 			iconType: 'material-community',
 			action: null
@@ -84,11 +77,11 @@ const PetView = (props) => {
 
 	return (
 		<ScrollView vertical>
-			<CarouselImages image_ids={pet.image_id} height={200} width={screenWidth} />
-			<TitleItem name={pet.name} description={pet.description} showRating={false} showDescription={true}/>
+			<CarouselImages image_ids={pet.image_id} height={200} width={screenWidth} image_default={require('../../../assets/img/avatar_dog.png')}/>
+			<TitleItem name={pet.name} description={pet.description} showRating={false} showDescription={true} />
 			<InfoItem name={pet.name} listInfo={listInfo} showMap={false} nameInfo="la Mascota" />
-			<View style={{ flex: 1, marginTop: 30  }}>
-				<EditRecord navigation={navigation} route={route} pet={pet}/>
+			<View style={{ flex: 1, marginTop: 30 }}>
+				<EditRecord navigation={navigation} route={route} pet={pet} />
 			</View>
 		</ScrollView>
 	);

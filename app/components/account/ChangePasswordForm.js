@@ -19,6 +19,10 @@ function defaultFormValue() {
 	};
 }
 
+/**
+ * permite cambiar la contraseña del usuario
+ * @param {setShowModal} props 
+ */
 function ChangePasswordForm(props) {
 	const { setShowModal, toastRef, setReloadUserInfo } = props;
 

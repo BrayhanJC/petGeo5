@@ -10,8 +10,12 @@ import RenderPetCenter from './RenderPetCenter';
 
 const WIDTH = Dimensions.get('window').width;
 const COLUMNS = 2;
-function ListDoctor(props) {
 
+/**
+ * Lista los centros veterinarios que han sido creados
+ * @param {*} props 
+ */
+function ListPetCenter(props) {
 	const {
 		elements,
 		isLoading,
@@ -50,7 +54,6 @@ function ListDoctor(props) {
 
 	formatData(dataRender, COLUMNS);
 
-
 	return (
 		<View style={{ flex: 1, paddingTop: 5, marginLeft: 4, marginRight: 4 }}>
 			{size(dataRender) > 0 ? (
@@ -82,4 +85,4 @@ function ListDoctor(props) {
 	);
 }
 
-export default ListDoctor;
+export default ListPetCenter;

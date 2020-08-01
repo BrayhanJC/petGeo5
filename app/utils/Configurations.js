@@ -518,3 +518,28 @@ export const returnNameFormViewEdit = (collection) => {
 		return 'ViewEditDoctor';
 	}
 };
+
+
+/**
+ * Funcion que permite retornar una imagen por defecto para que se muestre al momento de creacion o edicion
+ * @param { nombre de la coleccion} collection_name 
+ */
+export var return_image_default = (collection_name) => {
+	var image_default = require('../../assets/img/not_found.png')
+	if (collection_name == 'petCenters'){
+		image_default = require('../../assets/img/centers.png')
+	}
+	if (collection_name == 'news'){
+		image_default = require('../../assets/img/news_main.png')
+	}
+	if (collection_name == 'comedogs'){
+		image_default = require('../../assets/img/default_comedog.jpg')
+	}
+	if (collection_name == 'missingPets'){
+		image_default = require('../../assets/img/lost_pet.png')
+	}
+	if (collection_name == 'pet'){
+		image_default = require('../../assets/img/avatar_dog.png')
+	}
+	return image_default
+}

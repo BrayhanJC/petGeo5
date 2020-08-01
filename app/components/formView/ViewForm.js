@@ -14,6 +14,7 @@ import ListReview from '../../components/review/ListReview';
 import { viewFormStyle } from '../../src/css/ViewForm';
 import { sendEmail } from '../../utils/Email';
 import { getRecord } from '../../utils/SaveRecord';
+import { return_image_default } from '../../utils/Configurations';
 import { Linking } from 'react-native';
 
 const db = firebase.firestore(firebaseApp);
@@ -203,9 +204,11 @@ const ViewForm = (props) => {
 		];
 	}
 
+	var image_default = return_image_default(collection)
+
 	return (
 		<ScrollView vertical style={viewFormStyle.viewBody}>
-			<CarouselImages image_ids={item.image} height={200} width={screenWidth} />
+			<CarouselImages image_ids={item.image} height={200} width={screenWidth} image_default={image_default}/>
 
 			<TitleItem
 				name={item.name}

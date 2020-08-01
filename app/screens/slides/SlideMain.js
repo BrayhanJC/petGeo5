@@ -37,7 +37,7 @@ const slides = [
 		label: 'Comedogs',
 		color: 'coral',
 		title: 'Dispensadores de Comida',
-		isAnimation: false,
+		isAnimation: true,
 		url: '',
 		size:300,
 		next: 'Desliza para avanzar...',
