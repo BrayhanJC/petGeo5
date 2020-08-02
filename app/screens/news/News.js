@@ -10,7 +10,9 @@ import NotFoundItem from '../../components/formSearch/NotFoundItem';
 import { size, isEmpty } from 'lodash';
 import firebase from 'firebase/app';
 import UserData from '../account/UserData';
-
+import * as Permissions from 'expo-permissions';
+import * as Location from 'expo-location';
+import { return_kms } from '../../utils/validations';
 /**
  * Componente que permite listar todas las noticias registradas
  * @param {navigation} props 
@@ -28,6 +30,8 @@ function News(props) {
 	const [ elements, setElements ] = useState('');
 	const [ modalVisible, setModalVisible ] = useState(false);
 
+	const [ location, setLocation ] = useState(null);
+
 	//variables para el buscador
 	const [ item, setItem ] = useState([]);
 	const [ search, setSearch ] = useState('');
@@ -39,6 +43,31 @@ function News(props) {
 				getInfoByUser('userInfo', userInfo.uid, setElements, setModalVisible);
 			}
 		});
+		
+			(async () => {
+				const resultPermissions = await Permissions.askAsync(Permissions.LOCATION);
+				const statusPermissions = resultPermissions.permissions.location.status;
+				//console.log(statusPermissions);
+				if (statusPermissions !== 'granted') {
+					toastRef.current.show(
+						'Tienes que Aceptar los permisos de localización para crear un Comedog',
+						3000
+					);
+				} else {
+					const loc = await Location.getCurrentPositionAsync({});
+					//console.log(loc);
+					setLocation({
+						latitude: loc.coords.latitude,
+						longitude: loc.coords.longitude,
+						latitudeDelta: 0.001,
+						longitudeDelta: 0.001
+					});
+				}
+
+			})();
+
+
+		
 	}, []);
 
 	useFocusEffect(
@@ -46,6 +75,21 @@ function News(props) {
 			listRecords('news', setTotalNews, setNews, setStartNews);
 		}, [])
 	);
+
+
+	for (let index = 0; index < News.length; index++) {
+		var distance = return_kms(
+			location.latitude,
+			location.longitude,
+			News[index].location.latitude,
+			News[index].location.longitude
+		);
+		News[index]['distance'] = distance;
+	}
+
+	News.sort(function(a, b) {
+		return a['distance'] - b['distance'];
+	});
 
 	return (
 		<View style={styles.viewBody}>

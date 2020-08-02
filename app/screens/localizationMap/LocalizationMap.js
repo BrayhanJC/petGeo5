@@ -13,16 +13,14 @@ import 'firebase/storage';
 import 'firebase/firestore';
 const db = firebase.firestore(firebaseApp);
 import { map, size, filter } from 'lodash';
-import ViewAvatar from '../../components/formView/ViewAvatar';
 import CarouselImages from '../../components/CarouselImages';
 import { mapInfoStyle } from '../../src/css/InfoMap';
-import { useNavigation } from '@react-navigation/native';
 import { getInfoByUser } from '../../utils/SaveRecord';
 
 import UserData from '../account/UserData';
 import FilterMap from './FilterMap';
 import { returnColor, returnNameFormView } from '../../utils/Configurations';
-
+import { return_kms } from '../../utils/validations';
 /**
  * Permite localizar todos los registros:
  * -> Comedogs (naranja)
@@ -122,6 +120,28 @@ function LocalizationMap(props) {
 			name
 		});
 	};
+
+
+
+
+
+	
+
+
+
+	// var points = [
+	// 	{ name: 'brayhan', distance: 40 },
+	// 	{ name: 'katherine', distance: 100 },
+	// 	{ name: 'martha', distance: 1 },
+	// 	{ name: 'gildardo', distance: 5 },
+	// 	{ name: 'sasha', distance: 25 },
+	// 	{ name: 'maria', distance: 10 }
+	// ];
+	// points.sort(function(a, b) {
+	// 	return a['distance'] - b['distance'];
+	// });
+
+
 
 	//filtro que permite ocultar o mostrar información de los comedogs, centros o mascotas extraviadas
 	//sin tener que refrescar el componente, de esta manera se logra una respuesta mas rapida
