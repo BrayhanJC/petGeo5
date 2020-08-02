@@ -19,7 +19,9 @@ export const title = {
     },
     rating:{
         position:'absolute',
-        right:0,
+		right:0,
+		marginRight:4,
+		marginTop:1
         
     }
 };

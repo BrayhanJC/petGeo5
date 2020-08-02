@@ -36,9 +36,9 @@ function ListRecordsCuadricula(props) {
 		collectionName
 	} = props;
 
-	var data = elements.filter( valueItem => {
-		console.log(valueItem.create_uid + ' el id actual '  + user.uid)
-	})
+	// var data = elements.filter( valueItem => {
+	// 	console.log(valueItem.create_uid + ' el id actual '  + user.uid)
+	// })
 
 	var dataRender = elements;
 

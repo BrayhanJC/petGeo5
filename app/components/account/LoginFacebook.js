@@ -27,18 +27,18 @@ function LoginFacebook(props){
             if (type === 'success') {
                 setLoading(true)
                 const credentials = firebase.auth.FacebookAuthProvider.credential(token);
-                console.log(credentials)
+                //console.log(credentials)
                 firebase
                 .auth()
                 .signInWithCredential(credentials)
                 .then( (response) => {
-                    console.log('ingreso con exito en el facebook')
+                    //console.log('ingreso con exito en el facebook')
                     setLoading(false)
                     navigation.navigate('Profile')
                 })
                 .catch( (error) => {
-                    console.log('error al inciar sesion con facebook')
-                    console.log(error)
+                    //console.log('error al inciar sesion con facebook')
+                    //console.log(error)
                     toastRef.current.show('Error desconocido, intentelo nuevamente.');
                     //console.log('algo salio mal')
                     setLoading(false)

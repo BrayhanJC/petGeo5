@@ -7,28 +7,20 @@ import * as ImagePicker from 'expo-image-picker';
 import { connect } from 'react-redux';
 import { actions } from '../../store';
 
-
 /**
  * Permite mostrar el avatar, nombre y correo del usuario
  * @param {*} props 
  */
 function InfoUser(props) {
 	//capturando datos del usuario
-	const {
-		userInfo: { uid, photoURL, displayName, email },
-		toastRef,
-		setLoading,
-		setLoadingText,
-	} = props;
+	const { userInfo: { uid, photoURL, displayName, email }, toastRef, setLoading, setLoadingText } = props;
 
 	const { cliente } = props;
 	const { login } = props;
 
 	//console.log('InfoUser', cliente);
-	console.log('InfoUser', cliente);
 
 	const changeAvatar = async () => {
-		//console.log('cambiando icono');
 		const resultPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
 		const resultPermissionCamera = resultPermission.permissions.cameraRoll.status;
 
@@ -37,21 +29,17 @@ function InfoUser(props) {
 		} else {
 			const result = await ImagePicker.launchImageLibraryAsync({
 				allowsEditing: true,
-				aspect: [4, 3],
+				aspect: [ 4, 3 ]
 			});
-
-			//console.log(result);
 
 			if (result.cancelled) {
 				toastRef.current.show('Haz cerrado la seleccion de imagenes');
 			} else {
 				uploadImage(result.uri)
 					.then((response) => {
-						//console.log('imagen subida');
 						updatePhotoUrl();
 					})
 					.catch((response) => {
-						console.log('Error! No se ha podido subir la imagen');
 						toastRef.current.show('Error! No se ha podido subir la imagen');
 					});
 			}
@@ -88,7 +76,7 @@ function InfoUser(props) {
 			.getDownloadURL()
 			.then(async (response) => {
 				const update = {
-					photoURL: response,
+					photoURL: response
 				};
 				await firebase.auth().currentUser.updateProfile(update);
 
@@ -126,22 +114,22 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		backgroundColor: '#F2F2F2',
 		paddingTop: 30,
-		paddingBottom: 30,
+		paddingBottom: 30
 	},
 	userInfoAvatar: {
-		marginRight: 20,
+		marginRight: 20
 	},
 
 	displayName: {
 		fontWeight: 'bold',
 		paddingBottom: 10,
-		fontSize: 18,
-	},
+		fontSize: 18
+	}
 });
 
 const mapStateToProps = (state) => ({
 	cliente: state.cliente.cliente,
-	login: state.login.login,
+	login: state.login.login
 });
 
 export default connect(mapStateToProps)(InfoUser);

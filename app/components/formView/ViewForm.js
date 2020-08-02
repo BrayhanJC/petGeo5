@@ -34,7 +34,8 @@ const ViewForm = (props) => {
 		collection_name,
 		showSwitch,
 		setValSwitch,
-		valSwitch
+		valSwitch,
+		isVisible
 	} = props;
 	const { name, id } = route.params;
 	const [ item, setItem ] = useState(null);
@@ -227,6 +228,7 @@ const ViewForm = (props) => {
 				setValSwitch={setValSwitch}
 				valSwitch={valSwitch}
 				item={item}
+				isVisible={isVisible}
 			/>
 
 			{item.isAdoption && (

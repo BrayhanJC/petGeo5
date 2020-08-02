@@ -411,8 +411,6 @@ export const createPetFound = (collectionData, toastRef, navigation, record_id, 
 		})
 		.catch((response) => {
 			setloading(false);
-			console.log(response);
-			console.log('error al crear');
 		});
 };
 

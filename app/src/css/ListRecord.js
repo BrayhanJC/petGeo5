@@ -48,7 +48,8 @@ export const touchableViewRecords = {
 export const touchableViewImageRecords = {
   touchableViewImageRecordsStyle: {
     marginLeft: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginTop:-1
   },
   touchableViewImageRecordsStyleColumn: {
     marginLeft: 1,
@@ -85,7 +86,8 @@ export const touchableDescriptionRecords = {
   touchableDescriptionRecordsStyle: {
     paddingTop: 2,
     color: "grey",
-    width: 280,
+    //width: 280,
+    marginRight:80,
     fontSize:11
   },
 };

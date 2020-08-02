@@ -9,7 +9,7 @@ import { showAlertConfirm, showAlert } from '../../utils/validations';
 import { useFocusEffect } from '@react-navigation/native';
 import { size } from 'lodash';
 import { styleFloatButton } from '../../src/css/FloatButton';
-import { returnNameFormViewEdit } from '../../utils/Configurations'
+import { returnNameFormViewEdit } from '../../utils/Configurations';
 import { connect } from 'react-redux';
 
 /**
@@ -17,7 +17,7 @@ import { connect } from 'react-redux';
  * @param {*} props
  */
 function EditRecord(props) {
-	const { navigation, route, pet, petControl, petDoctor } = props;
+	const { navigation, route, pet, petControl, petDoctor, setValSwitch, valSwitch, setIsVisible } = props;
 	const { cliente } = props;
 	const [ user, setUser ] = useState(false);
 	const [ currentUser, setCurrentUser ] = useState('');
@@ -33,15 +33,15 @@ function EditRecord(props) {
 		};
 	};
 
-
+	
 	let isOwner = returnData().current_user_id == cliente.create_uid;
-
+	setIsVisible(isOwner)
 	/**
 	 * Funcion que permite editar el registro
 	 */
 	const editRecord = () => {
 		const data = returnData();
-		
+
 		const user_id = firebase.auth().currentUser.uid;
 		if (user_id == data.current_user_id) {
 			navigation.navigate(returnNameFormViewEdit(data.collectionName ? data.collectionName : props.collection), {
@@ -58,6 +58,11 @@ function EditRecord(props) {
 			showAlert('No puede editar este registro, ya que no es de su propiedad');
 		}
 	};
+
+	if (valSwitch) {
+		setValSwitch(false);
+		editRecord();
+	}
 
 	return (
 		<View>

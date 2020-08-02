@@ -18,7 +18,7 @@ function FilterMap(props) {
 	const { filterGreen, setFilterGreen, filterOrange, setFilterOrange, filterRed, setFilterRed, setReload } = props;
 
 	return (
-		<View style={{ position: 'absolute', flexDirection: 'row', justifyContent: 'space-around' }}>
+		<View style={{ position: 'absolute', flexDirection: 'row', justifyContent: 'space-evenly', marginLeft:8, marginRight:8 }}>
 			<Button
 				title="Centros"
 				containerStyle={{
@@ -28,6 +28,10 @@ function FilterMap(props) {
 					marginTop: 10,
 					marginLeft: 10,
 					marginRight: 10
+				}}
+				titleStyle={{
+					fontWeight:'bold',
+					fontSize:17
 				}}
 				buttonStyle={{
 					backgroundColor: filterGreen ? '#70BA44' : '#B7E39D',
@@ -47,6 +51,10 @@ function FilterMap(props) {
 					shadowOffset: { width: 2, height: 2 },
 					shadowOpacity: 0.7
 				}}
+				titleStyle={{
+					fontWeight:'bold',
+					fontSize:17
+				}}
 				buttonStyle={{
 					backgroundColor: filterOrange ? '#FCA503' : '#F8D798',
 					borderRadius: 20
@@ -65,6 +73,10 @@ function FilterMap(props) {
 					shadowOffset: { width: 2, height: 2 },
 					shadowOpacity: 0.7
 				}}
+				titleStyle={{
+					fontWeight:'bold',
+					fontSize:17
+				}}
 				buttonStyle={{
 					backgroundColor: filterRed ? 'red' : '#F9A0A0',
 					borderRadius: 20
@@ -82,6 +94,10 @@ function FilterMap(props) {
 					shadowColor: 'black',
 					shadowOffset: { width: 2, height: 2 },
 					shadowOpacity: 0.7
+				}}
+				titleStyle={{
+					fontWeight:'bold',
+					fontSize:17
 				}}
 				buttonStyle={{
 					backgroundColor: '#C2C2C2',

@@ -37,7 +37,7 @@ function ViewEditPetCenter(props) {
 
 	//console.log('capturando lso elementos');
 	const data_collection = route.params.data_collection;
-	console.log(data_collection);
+	//console.log(data_collection);
 
 	const [ loading, setloading ] = useState(false);
 
@@ -62,7 +62,6 @@ function ViewEditPetCenter(props) {
 	const [ website, setWebsite ] = useState(data_collection.website ? data_collection.website : '');
 
 	const onSubmit = () => {
-		console.log('Cpturarndo valores para guardar');
 		const data = {
 			name: title,
 			address,
@@ -73,7 +72,7 @@ function ViewEditPetCenter(props) {
 			schedule: returnSchedule(time),
 			website
 		};
-		console.log(data);
+	
 		if (title && address && description && imageSelected && phone && location && website) {
 			setloading(true)
 			uploadImageStorage(imageSelected, 'petCenters').then((response) => {

@@ -140,14 +140,14 @@ function AccountOptions(props) {
 				//console.log(props.userInfo.providerData[0].providerId);
 				//menuOptions = [ generateOptionsUser(selectedComponent, petCenter, userInfo)[1] ];
 
-				if (cliente.userType == 'veterinary') {
+				if (cliente.userType == 'veterinary' || cliente.userType == 'fundation') {
 					menuOptions = generateOptionsCenterFacebook(selectedComponent, petCenter, [ cliente ]);
 				} else {
 					menuOptions = generateOptionsUserFacebook(selectedComponent, petCenter, [ cliente ]);
 				}
 			} else {
-				if (cliente.userType == 'veterinary') {
-					console.log('AccountOptions', cliente);
+				if (cliente.userType == 'veterinary' || cliente.userType == 'fundation') {
+					//console.log('AccountOptions', cliente);
 					menuOptions = generateOptionsCenter(selectedComponent, petCenter, [ cliente ]);
 				} else {
 					menuOptions = generateOptionsUser(selectedComponent, petCenter, [ cliente ]);

@@ -39,7 +39,7 @@ const Search = (props) => {
 						setLoading(false);
 					})
 					.catch((response) => {
-						console.log(response);
+						//console.log(response);
 						setLoading(false);
 					});
 			}

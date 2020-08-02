@@ -68,8 +68,8 @@ function ViewEdit(props) {
 						createPetFound(data, toastRef, navigation, route.params.id, setloading);
 					})
 					.catch((response) => {
-						console.log(response)
-						console.log('error');
+						//console.log(response)
+						//console.log('error');
 						setloading(false);
 					});
 			} else {

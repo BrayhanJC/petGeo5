@@ -65,7 +65,6 @@ function CenterVeterinaryDoctor(props) {
 		}, [])
 	);
 
-	console.log(elements);
 	return (
 		<View style={styleFloatButton.viewBody}>
 			<Search

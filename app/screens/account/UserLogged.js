@@ -37,7 +37,6 @@ function UserLogged() {
 	useEffect(() => {
 		(async () => {
 			const user = await firebase.auth().currentUser;
-			console.log(user.uid);
 
 			//cargando datos al userInfo, contiene toda la informacion del usuario
 			setUserInfo(user);

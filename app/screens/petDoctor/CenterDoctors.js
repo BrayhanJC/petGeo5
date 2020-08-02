@@ -66,7 +66,6 @@ function CenterDoctors(props) {
 		}, [])
 	);
 
-	console.log(elements);
 	return (
 		<View style={styleFloatButton.viewBody}>
 			<Search

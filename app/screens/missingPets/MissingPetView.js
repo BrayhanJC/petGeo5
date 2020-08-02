@@ -10,7 +10,8 @@ import EditRecord from '../../components/UpdateRecords/EditRecords';
  */
 const MissingPetView = (props) => {
 	const { navigation, route } = props;
-	const [ valSwitch, setValSwitch ] = useState('');
+	const [ valSwitch, setValSwitch ] = useState(false);
+	const [ isVisible, setIsVisible ] = useState(false);
 
 	return (
 		<View style={viewFormStyle.viewBody}>
@@ -24,8 +25,15 @@ const MissingPetView = (props) => {
 				showSwitch={true}
 				setValSwitch={setValSwitch}
 				valSwitch={valSwitch}
+				isVisible={isVisible}
 			/>
-			<EditRecord navigation={navigation} route={route} />
+			<EditRecord
+				navigation={navigation}
+				route={route}
+				setIsVisible={setIsVisible}
+				setValSwitch={setValSwitch}
+				valSwitch={valSwitch}
+			/>
 		</View>
 	);
 };

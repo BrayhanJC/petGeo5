@@ -46,12 +46,8 @@ function RendenderItems(props) {
 	const { image, name, description, address } = elements.item;
 	const mainImage = image[0];
 
-	const goElement = () => {
-		console.log('ok');
-	};
-
 	return (
-		<TouchableOpacity onPress={goElement}>
+		<TouchableOpacity>
 			<View style={styleTouchableViewRecords.touchableViewRecordsStyle}>
 				<View style={styleTouchableViewImageRecords.touchableViewImageRecordsStyle}>
 					<Image
