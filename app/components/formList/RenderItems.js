@@ -86,8 +86,12 @@ function RendenderItems(props) {
 
 	var total_distance = 0;
 	if (elements.item.distance) {
-		total_distance = elements.item.distance;
+		total_distance = parseInt(elements.item.distance) + ' mts';
+		if (elements.item.distance >= 1000) {
+			total_distance = parseInt(elements.item.distance / 1000) + ' kms';
+		}
 	}
+
 	return (
 		<TouchableOpacity onPress={goElement}>
 			<View style={styleTouchableViewRecords.touchableViewRecordsStyle}>
@@ -99,9 +103,18 @@ function RendenderItems(props) {
 						rounded
 					/>
 
-					<View style={{ flex: 1 }}>
+					<View
+						style={{
+							flex: 1,
+							paddingLeft: 5,
+							paddingRight: 5,
+							shadowColor: 'black',
+							shadowOffset: { width: 2, height: 2 },
+							shadowOpacity: 0.5
+						}}
+					>
 						<View style={{ alignItems: 'center', backgroundColor: '#C2C2C2', borderRadius: 30 }}>
-							<Text style={{ fontWeight: 'bold', fontSize: 10, color:'gray' }}>{total_distance} Metros</Text>
+							<Text style={{ fontWeight: 'bold', fontSize: 9, color: 'gray' }}>{total_distance} </Text>
 						</View>
 					</View>
 				</View>

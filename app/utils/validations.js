@@ -58,6 +58,13 @@ export function showAlertConfirm(message, collectionName, record_id, navigation)
 	);
 }
 
+/**
+ * Función que permite retornar la distancia aproximada entre la localización actual y la localización del registro
+ * @param { latitud actual} lat1 
+ * @param { longitud actual} lon1 
+ * @param {latitud del registro} lat2 
+ * @param {longitud del registro} lon2 
+ */
 export var return_kms = function(lat1, lon1, lat2, lon2) {
 	var rad = function(x) {
 		return x * Math.PI / 180;
@@ -70,9 +77,28 @@ export var return_kms = function(lat1, lon1, lat2, lon2) {
 		Math.cos(rad(lat1)) * Math.cos(rad(lat2)) * Math.sin(dLong / 2) * Math.sin(dLong / 2);
 	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 	var d = R * c;
-	d=d*1000
-	var result = parseInt(d)
+	d = d * 1000;
+	var result = parseInt(d);
 	//return d.toFixed(3); //Retorna tres decimales
 	//return Intl.NumberFormat().format(result)
-	return result
+	return result;
 };
+
+export var return_data_distance = (location, data) => {
+	for (let index = 0; index < data.length; index++) {
+		var distance = 0
+		if (data[index].location){
+			distance = return_kms(
+				location.latitude,
+				location.longitude,
+				data[index].location.latitude,
+				data[index].location.longitude 
+			);
+			data[index]['distance'] = distance;
+		}
+	}
+
+	data.sort(function(a, b) {
+		return a['distance'] - b['distance'];
+	});
+}

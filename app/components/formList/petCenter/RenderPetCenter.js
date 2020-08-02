@@ -63,25 +63,56 @@ function RenderCenter(props) {
 		mainImage = image[0];
 	}
 
+	var total_distance = 0;
+	if (elements.item.distance) {
+		total_distance = parseInt(elements.item.distance) + ' mts';
+		if (elements.item.distance >= 1000) {
+			total_distance = parseInt(elements.item.distance / 1000) + ' kms';
+		}
+	}
+
 	return (
 		<TouchableOpacity onPress={goElement} style={{ flex: 1 }}>
 			<View style={[ styles.item, { height: width / 2 } ]}>
-				<View style={styles.avatar}>
-					<Avatar
-						size="large"
-						rounded
-						source={mainImage ? { uri: mainImage } : require('../../../../assets/img/centers.png')}
-						//source={require('../../../../assets/img/doctor.png')}
-						activeOpacity={0.7}
-					/>
-					<Text style={styles.title}>{name.substr(0, 18)}</Text>
+				<View>
+					<View
+						style={{
+							alignItems: 'flex-end',
+							position: 'relative',
+							paddingLeft: 5,
+							paddingRight: 5,
+							marginBottom: 3,
+							shadowColor: 'black',
+							shadowOffset: { width: 2, height: 2 },
+							shadowOpacity: 0.5
+						}}
+					>
+						<View style={{ alignItems: 'center', backgroundColor: '#C2C2C2', borderRadius: 30 }}>
+							<Text style={{ fontWeight: 'bold', fontSize: 9, color: 'gray' }}>{total_distance} </Text>
+						</View>
+					</View>
+					<View style={styles.avatar}>
+						<Avatar
+							size="large"
+							rounded
+							source={mainImage ? { uri: mainImage } : require('../../../../assets/img/centers.png')}
+							//source={require('../../../../assets/img/doctor.png')}
+							containerStyle={{
+								shadowColor: 'black',
+								shadowOffset: { width: 2, height: 2 },
+								shadowOpacity: 0.5
+							}}
+						/>
+
+						<Text style={styles.title}>{name.substr(0, 18)}</Text>
+					</View>
 				</View>
 
-				<View style={{ position: 'relative' }}>
-					<Rating imageSize={10} startingValue={rating} readonly />
+				<View style={{ position: 'relative', marginTop: -4 }}>
+					<Rating imageSize={14} startingValue={rating} readonly />
 				</View>
 
-				<View style={{ flexDirection: 'column', marginTop: 5 }}>
+				<View style={{ flexDirection: 'column', marginTop: 2 }}>
 					<View style={{ flexDirection: 'row' }}>
 						<View
 							style={{
@@ -153,11 +184,13 @@ const styles = StyleSheet.create({
 	avatar: {
 		alignItems: 'center',
 		paddingBottom: 5,
+		//marginTop:-10,
 		backgroundColor: 'white'
 	},
 	title: {
+		marginTop: 1,
 		fontWeight: 'bold',
-		fontSize: 13,
+		fontSize: 12,
 		alignItems: 'center'
 	},
 	containerData: {

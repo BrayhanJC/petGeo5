@@ -12,7 +12,7 @@ import firebase from 'firebase/app';
 import UserData from '../account/UserData';
 import * as Permissions from 'expo-permissions';
 import * as Location from 'expo-location';
-import { return_kms } from '../../utils/validations';
+import { return_data_distance } from '../../utils/validations';
 /**
  * Componente que permite listar todas las noticias registradas
  * @param {navigation} props 
@@ -76,20 +76,9 @@ function News(props) {
 		}, [])
 	);
 
+	//retornar los datos en order de distancia
+	return_data_distance(location, News)
 
-	for (let index = 0; index < News.length; index++) {
-		var distance = return_kms(
-			location.latitude,
-			location.longitude,
-			News[index].location.latitude,
-			News[index].location.longitude
-		);
-		News[index]['distance'] = distance;
-	}
-
-	News.sort(function(a, b) {
-		return a['distance'] - b['distance'];
-	});
 
 	return (
 		<View style={styles.viewBody}>
