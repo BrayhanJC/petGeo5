@@ -84,6 +84,10 @@ function RendenderItems(props) {
 		}
 	};
 
+	var total_distance = 0;
+	if (elements.item.distance) {
+		total_distance = elements.item.distance;
+	}
 	return (
 		<TouchableOpacity onPress={goElement}>
 			<View style={styleTouchableViewRecords.touchableViewRecordsStyle}>
@@ -94,6 +98,12 @@ function RendenderItems(props) {
 						source={mainImage ? { uri: mainImage } : require('../../../assets/img/not_found.png')}
 						rounded
 					/>
+
+					<View style={{ flex: 1 }}>
+						<View style={{ alignItems: 'center', backgroundColor: '#C2C2C2', borderRadius: 30 }}>
+							<Text style={{ fontWeight: 'bold', fontSize: 10, color:'gray' }}>{total_distance} Metros</Text>
+						</View>
+					</View>
 				</View>
 				<View style={styleViewFormat.textFormat}>
 					<Text style={styleTouchableNameRecords.touchableNameRecordsStyle}>{name}</Text>
@@ -101,6 +111,7 @@ function RendenderItems(props) {
 					<Text style={styletouchableAddressRecords.touchableAddressRecordsStyle}>
 						<Text style={{ fontWeight: 'bold' }}>Autor:</Text> {create_name}
 					</Text>
+
 					<Text style={styleTouchableDescriptionRecordsRecords.touchableDescriptionRecordsStyle}>
 						{description.substr(0, 85)}...
 					</Text>

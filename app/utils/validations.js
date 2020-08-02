@@ -71,5 +71,8 @@ export var return_kms = function(lat1, lon1, lat2, lon2) {
 	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 	var d = R * c;
 	d=d*1000
-	return d.toFixed(3); //Retorna tres decimales
+	var result = parseInt(d)
+	//return d.toFixed(3); //Retorna tres decimales
+	//return Intl.NumberFormat().format(result)
+	return result
 };
