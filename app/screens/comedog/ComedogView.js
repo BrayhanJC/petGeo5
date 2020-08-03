@@ -20,8 +20,11 @@ const ComedogView = (props) => {
 				nameInfo="el Comedog"
 				navigateTo="CreateReviewComedog"
 				collection_name="comedogs"
+				isVisible={false}
+				setValSwitch={false}
+				valSwitch={false}
 			/>
-			<EditRecord navigation={navigation} route={route} />
+			<EditRecord navigation={navigation} route={route} activeButton={false}/>
 		</View>
 	);
 };

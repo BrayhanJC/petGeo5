@@ -24,7 +24,6 @@ const MissingPetView = (props) => {
 				collection_name="missingPets"
 				showSwitch={true}
 				setValSwitch={setValSwitch}
-				valSwitch={valSwitch}
 				isVisible={isVisible}
 			/>
 			<EditRecord
@@ -33,6 +32,7 @@ const MissingPetView = (props) => {
 				setIsVisible={setIsVisible}
 				setValSwitch={setValSwitch}
 				valSwitch={valSwitch}
+				activeButton={true}
 			/>
 		</View>
 	);

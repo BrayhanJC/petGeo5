@@ -17,7 +17,7 @@ import { connect } from 'react-redux';
  * @param {*} props
  */
 function EditRecord(props) {
-	const { navigation, route, pet, petControl, petDoctor, setValSwitch, valSwitch, setIsVisible } = props;
+	const { navigation, route, pet, petControl, petDoctor, setValSwitch, valSwitch, setIsVisible, activeButton } = props;
 	const { cliente } = props;
 	const [ user, setUser ] = useState(false);
 	const [ currentUser, setCurrentUser ] = useState('');
@@ -35,7 +35,10 @@ function EditRecord(props) {
 
 	
 	let isOwner = returnData().current_user_id == cliente.create_uid;
-	setIsVisible(isOwner)
+	if (activeButton){
+		setIsVisible(isOwner)
+	}
+	
 	/**
 	 * Funcion que permite editar el registro
 	 */

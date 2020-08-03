@@ -20,8 +20,11 @@ const PetCenterView = (props) => {
 				nameInfo="sobre el centro"
 				navigateTo="CreateReviewCenter"
 				collection_name="petCenters"
+				isVisible={false}
+				setValSwitch={false}
+				valSwitch={false}
 			/>
-			<EditRecord navigation={navigation} route={route} collection="petCenters" />
+			<EditRecord navigation={navigation} route={route} collection="petCenters" activeButton={false}/>
 		</View>
 	);
 };

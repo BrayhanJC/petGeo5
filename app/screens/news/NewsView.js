@@ -20,8 +20,13 @@ const NewsView = (props) => {
 				nameInfo="la Noticia"
 				navigateTo="CreateReviewNews"
 				collection_name="news"
+				isVisible={false}
+				setValSwitch={false}
+				setIsVisible={false}
+				valSwitch={false}
+				
 			/>
-			<EditRecord navigation={navigation} route={route} />
+			<EditRecord navigation={navigation} route={route} activeButton={false}/>
 		</View>
 	);
 };

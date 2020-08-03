@@ -19,6 +19,9 @@ const PetFoundView = (props) => {
 				nameInfo="sobre la Mascota Encontrada"
 				navigateTo=""
 				collection_name="petsFound"
+				isVisible={false}
+				setValSwitch={false}
+				valSwitch={false}
 			/>
 		</View>
 	);
