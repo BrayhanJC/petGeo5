@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { Icon } from 'react-native-elements';
-import Slidemain from '../../screens/slides/SlideMain'
+import Slidemain from '../../screens/slides/SlideMain';
 
 const Stack = createStackNavigator();
 
@@ -15,8 +15,14 @@ const Stack = createStackNavigator();
 function SlidesDrawer(props) {
 	const navigation = useNavigation();
 	return (
-		<Stack.Navigator>
-
+		<Stack.Navigator
+			screenOptions={{
+				headerTitleAlign: 'center',
+				headerTitleStyle: {
+					fontWeight: 'bold'
+				}
+			}}
+		>
 			<Stack.Screen
 				name="welcome"
 				component={Slidemain}
@@ -32,7 +38,6 @@ function SlidesDrawer(props) {
 					)
 				}}
 			/>
-            
 		</Stack.Navigator>
 	);
 }

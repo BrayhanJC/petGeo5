@@ -20,7 +20,14 @@ import EditMissingPet from '../../screens/missingPets/EditMissingPet';
  */
 function MissingPetsStack(props) {
 	return (
-		<Stack.Navigator>
+		<Stack.Navigator
+			screenOptions={{
+				headerTitleAlign: 'center',
+				headerTitleStyle: {
+					fontWeight: 'bold'
+				}
+			}}
+		>
 			<Stack.Screen
 				name="missing-pets"
 				component={MissingPetsScreen}

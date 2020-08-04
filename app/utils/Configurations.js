@@ -557,7 +557,7 @@ export const slides = [
 		size: 300,
 		url: '../../../assets/animations/news.json',
 		description:
-			'Accede a todo el contenido publicado por los diferentes centros o usuarios. Que han reportado recientemente una actividad en tu Ciudad.'
+			'Accede a todo el contenido publicado por los diferentes centros o usuarios que han reportado recientemente una actividad en tu Ciudad.'
 	},
 	{
 		label: 'Centros',
@@ -616,9 +616,19 @@ export const slides = [
 		color: '#A3D6D4',
 		title: 'Citas con el Veterinario',
 		isAnimation: true,
-		next: '',
+		next: 'Desliza para avanzar...',
 		url: '../../../assets/animations/pet.json',
 		size: 300,
 		description: 'Registra todas tus idas al veterinario de una manera fácil y divertida.'
+	},
+	{
+		label: 'Veterinarios',
+		color: '#ADD0E1',
+		title: 'Especialistas para tú Mascota',
+		isAnimation: true,
+		next: '',
+		url: '../../../assets/img/centers.png',
+		size: 300,
+		description: 'Visualiza los veterinarios que estan disponibles en los centros veterinarios.'
 	}
 ];

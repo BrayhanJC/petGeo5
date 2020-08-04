@@ -23,7 +23,14 @@ const Stack = createStackNavigator();
  */
 function ComedogsStack(props) {
 	return (
-		<Stack.Navigator>
+		<Stack.Navigator
+			screenOptions={{
+				headerTitleAlign: 'center',
+				headerTitleStyle: {
+					fontWeight: 'bold'
+				}
+			}}
+		>
 			<Stack.Screen
 				name="ComedogStack"
 				component={ComedogsScreen}

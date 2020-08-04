@@ -56,12 +56,17 @@ function News(props) {
 				} else {
 					const loc = await Location.getCurrentPositionAsync({});
 					//console.log(loc);
-					setLocation({
-						latitude: loc.coords.latitude,
-						longitude: loc.coords.longitude,
-						latitudeDelta: 0.001,
-						longitudeDelta: 0.001
-					});
+					if (loc){
+						if (loc.coords.latitude && loc.coords.longitude){
+							setLocation({
+								latitude: loc.coords.latitude,
+								longitude: loc.coords.longitude,
+								latitudeDelta: 0.001,
+								longitudeDelta: 0.001
+							});
+						}
+						
+					}
 				}
 
 			})();

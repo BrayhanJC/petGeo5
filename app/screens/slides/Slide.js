@@ -22,7 +22,7 @@ export default function Slide(props) {
 				</View>
 				{isAnimation &&
 				label == 'Centros' && (
-					<View style={{ alignItems: 'center', marginTop: -35 }}>
+					<View style={{ alignItems: 'center', marginTop: -30 }}>
 						<Image
 							style={{
 								height: 310,
@@ -107,6 +107,22 @@ export default function Slide(props) {
 						/>
 					</View>
 				)}
+				{isAnimation &&
+				label == 'Veterinarios' && (
+					<View style={{ alignItems: 'center'}}>
+						<Image
+							style={{
+								height: 320,
+								width: 320
+							}}
+							source={require('../../../assets/img/centers.png')}
+						/>
+					</View>
+				)}
+
+
+
+
 			</View>
 		</View>
 	);

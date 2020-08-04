@@ -25,13 +25,21 @@ function NewsStack(props) {
 	//const navigation = useNavigation();
 
 	return (
-		<Stack.Navigator>
+		<Stack.Navigator
+			screenOptions={{
+				headerTitleAlign: 'center',
+				headerTitleStyle: {
+					fontWeight: 'bold',
+				}
+			}}
+		>
 			<Stack.Screen
 				name="HomeStack"
 				component={NewsScreen}
 				options={{
 					title: 'Noticias',
-					headerLeft: () => <AvatarIcon />
+					headerLeft: () => <AvatarIcon />,
+					
 				}}
 			/>
 			<Stack.Screen

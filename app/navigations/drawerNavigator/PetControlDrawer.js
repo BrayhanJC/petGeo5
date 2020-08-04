@@ -23,7 +23,14 @@ import EditPetControl from '../../screens/petControl/EditPetControl';
 function PetControlDrawer(props) {
 	const navigation = useNavigation();
 	return (
-		<Stack.Navigator>
+		<Stack.Navigator
+			screenOptions={{
+				headerTitleAlign: 'center',
+				headerTitleStyle: {
+					fontWeight: 'bold'
+				}
+			}}
+		>
 			<Stack.Screen
 				name="PetControl"
 				component={PetControlScreen}

@@ -5,13 +5,12 @@ import { useNavigation } from '@react-navigation/native';
 import { Icon } from 'react-native-elements';
 
 import PetScreen from '../../screens/pet/Pet';
-import CreatePet from '../../screens/pet/CreatePet'
-import AvatarIcon from '../../components/AvatarIcon'
-import PetView from '../../screens/pet/PetView'
+import CreatePet from '../../screens/pet/CreatePet';
+import AvatarIcon from '../../components/AvatarIcon';
+import PetView from '../../screens/pet/PetView';
 const Stack = createStackNavigator();
-import DeleteRecord from '../../components/UpdateRecords/DeleteRecord'
+import DeleteRecord from '../../components/UpdateRecords/DeleteRecord';
 import EditPet from '../../screens/pet/EditPet';
-
 
 /**
  * Screens para poder dirigir al usuario a:
@@ -24,7 +23,14 @@ import EditPet from '../../screens/pet/EditPet';
 function PetDrawer(props) {
 	const navigation = useNavigation();
 	return (
-		<Stack.Navigator>
+		<Stack.Navigator
+			screenOptions={{
+				headerTitleAlign: 'center',
+				headerTitleStyle: {
+					fontWeight: 'bold'
+				}
+			}}
+		>
 			<Stack.Screen
 				name="Pets"
 				component={PetScreen}
@@ -44,15 +50,18 @@ function PetDrawer(props) {
 				name="CreatePet"
 				component={CreatePet}
 				options={{
-					title: 'Añadir Mascota',
+					title: 'Añadir Mascota'
 				}}
 			/>
-			<Stack.Screen name="ViewPet" component={PetView} options={{
+			<Stack.Screen
+				name="ViewPet"
+				component={PetView}
+				options={{
 					headerRight: () => <DeleteRecord props={props} />
-				}}/>
+				}}
+			/>
 
-		<Stack.Screen name="ViewEditPet" component={EditPet} />
-
+			<Stack.Screen name="ViewEditPet" component={EditPet} />
 		</Stack.Navigator>
 	);
 }

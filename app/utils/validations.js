@@ -88,12 +88,14 @@ export var return_data_distance = (location, data) => {
 	for (let index = 0; index < data.length; index++) {
 		var distance = 0
 		if (data[index].location){
-			distance = return_kms(
-				location.latitude,
-				location.longitude,
-				data[index].location.latitude,
-				data[index].location.longitude 
-			);
+			if (location){
+				distance = return_kms(
+					location.latitude,
+					location.longitude,
+					data[index].location.latitude,
+					data[index].location.longitude 
+				);
+			}
 			data[index]['distance'] = distance;
 		}
 	}

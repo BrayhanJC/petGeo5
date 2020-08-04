@@ -9,7 +9,7 @@ const NotFoundItem = () => {
 	return (
 		<View>
 			<View style={styleSearch.notFound}>
-				<Image source={require('../../../assets/img/404_.png')} resizeMode="cover" style={styleSearch.image} />
+				<Image source={require('../../../assets/img/404_.png')} resizeMode="contain" style={styleSearch.image} />
 			</View>
 			<View style={styleSearch.notFound}>
 				<Text style={styleSearch.textCenter}>No se ha encontrado ningun resultado coincidente</Text>

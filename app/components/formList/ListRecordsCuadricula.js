@@ -19,7 +19,7 @@ import FooterList from './FooterList';
 import RendenderItemsPet from './RenderItemsPet';
 import RenderItemsPetControl from './RenderItemsPetControl';
 import RenderItemsPetDoctor from './RenderItemsPetDoctor';
-import NotItem from './NotItem'
+import NotItem from './NotItem';
 //import { USER_FACING_NOTIFICATIONS } from 'expo-permissions';
 
 function ListRecordsCuadricula(props) {
@@ -50,15 +50,9 @@ function ListRecordsCuadricula(props) {
 		}
 	}
 
-
-
-
-
-
-
-	if ( size(dataRender) > 0 ){
+	if (size(dataRender) > 0) {
 		return (
-			<View style={{flex: 1}}>
+			<View style={{ flex: 1 }}>
 				{size(dataRender) > 0 ? (
 					<FlatList
 						numColumns={2}
@@ -112,16 +106,15 @@ function ListRecordsCuadricula(props) {
 				)}
 			</View>
 		);
+	} else {
+		return (
+			<NotItem
+				image_default={require('../../../assets/img/pet_not_found.png')}
+				title="Aún no ha creado mascotas"
+				subtitle="Por Favor, pulsa el icono azul para crear una mascota."
+			/>
+		);
 	}
-else {
-	return (
-		<NotItem
-			image_default={require('../../../assets/img/pet_not_found.png')}
-			title="Aún no ha creado mascotas"
-			subtitle="Por Favor, pulsa el icono azul para crear una mascota."
-		/>
-	);
-}
 }
 
 export default ListRecordsCuadricula;

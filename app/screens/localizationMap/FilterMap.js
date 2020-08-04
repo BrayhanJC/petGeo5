@@ -18,20 +18,28 @@ function FilterMap(props) {
 	const { filterGreen, setFilterGreen, filterOrange, setFilterOrange, filterRed, setFilterRed, setReload } = props;
 
 	return (
-		<View style={{ position: 'absolute', flexDirection: 'row', justifyContent: 'space-evenly', marginLeft:8, marginRight:8 }}>
+		<View
+			style={{
+				position: 'absolute',
+				flexDirection: 'row',
+				justifyContent: 'space-evenly',
+				marginLeft: 8,
+				marginRight: 8
+			}}
+		>
 			<Button
 				title="Centros"
 				containerStyle={{
 					shadowColor: 'black',
 					shadowOffset: { width: 2, height: 2 },
 					shadowOpacity: 0.7,
-					marginTop: 10,
+					marginTop: 5,
 					marginLeft: 10,
 					marginRight: 10
 				}}
 				titleStyle={{
-					fontWeight:'bold',
-					fontSize:17
+					fontWeight: 'bold',
+					fontSize: 17
 				}}
 				buttonStyle={{
 					backgroundColor: filterGreen ? '#70BA44' : '#B7E39D',
@@ -44,7 +52,7 @@ function FilterMap(props) {
 			<Button
 				title="Comedogs"
 				containerStyle={{
-					marginTop: 10,
+					marginTop: 5,
 					marginLeft: 10,
 					marginRight: 10,
 					shadowColor: 'black',
@@ -52,8 +60,8 @@ function FilterMap(props) {
 					shadowOpacity: 0.7
 				}}
 				titleStyle={{
-					fontWeight:'bold',
-					fontSize:17
+					fontWeight: 'bold',
+					fontSize: 17
 				}}
 				buttonStyle={{
 					backgroundColor: filterOrange ? '#FCA503' : '#F8D798',
@@ -66,7 +74,7 @@ function FilterMap(props) {
 			<Button
 				title="Extraviados"
 				containerStyle={{
-					marginTop: 10,
+					marginTop: 5,
 					marginLeft: 10,
 					marginRight: 10,
 					shadowColor: 'black',
@@ -74,8 +82,8 @@ function FilterMap(props) {
 					shadowOpacity: 0.7
 				}}
 				titleStyle={{
-					fontWeight:'bold',
-					fontSize:17
+					fontWeight: 'bold',
+					fontSize: 17
 				}}
 				buttonStyle={{
 					backgroundColor: filterRed ? 'red' : '#F9A0A0',
@@ -90,14 +98,14 @@ function FilterMap(props) {
 				containerStyle={{
 					marginLeft: 10,
 					marginRight: 10,
-					marginTop: 10,
+					marginTop: 5,
 					shadowColor: 'black',
 					shadowOffset: { width: 2, height: 2 },
 					shadowOpacity: 0.7
 				}}
 				titleStyle={{
-					fontWeight:'bold',
-					fontSize:17
+					fontWeight: 'bold',
+					fontSize: 17
 				}}
 				buttonStyle={{
 					backgroundColor: '#C2C2C2',

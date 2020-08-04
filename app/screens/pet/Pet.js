@@ -4,10 +4,8 @@ import { Icon } from 'react-native-elements';
 import firebase from 'firebase/app';
 import { styleFloatButton } from '../../src/css/FloatButton';
 import { listRecords, handleLoadMore, getInfoByUser } from '../../utils/SaveRecord';
-import ListRecordsCuadricula from '../../components/formList/ListRecordsCuadricula';
-//import ListRecordsForm from "../../components/formMain/ListRecordsForm";
+import ListPet from '../../components/formList/pet/ListPet'
 import { useFocusEffect } from '@react-navigation/native';
-import ListRecords from '../../components/formList/ListRecords';
 import Search from '../../components/formSearch/Search';
 import NotFoundItem from '../../components/formSearch/NotFoundItem';
 import UserData from '../account/UserData';
@@ -67,7 +65,7 @@ function Pet(props) {
 
 			{!isEmpty(search) && size(item) > 0 ? (
 				<View style={styleFloatButton.viewBody}>
-					<ListRecordsCuadricula
+					<ListPet
 						elements={item}
 						navigation={navigation}
 						isLoading={isLoading}
@@ -80,7 +78,7 @@ function Pet(props) {
 			)}
 
 			{isEmpty(search) && (
-				<ListRecordsCuadricula
+				<ListPet
 					elements={Pets}
 					navigation={navigation}
 					isLoading={isLoading}

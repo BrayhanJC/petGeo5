@@ -10,7 +10,6 @@ import { useNavigation } from '@react-navigation/native';
 
 import { DrawerActions } from '@react-navigation/native';
 
-
 const Stack = createStackNavigator();
 
 /**
@@ -23,7 +22,14 @@ function MyAccountStack() {
 	const navigation = useNavigation();
 
 	return (
-		<Stack.Navigator>
+		<Stack.Navigator
+			screenOptions={{
+				headerTitleAlign: 'center',
+				headerTitleStyle: {
+					fontWeight: 'bold'
+				}
+			}}
+		>
 			<Stack.Screen
 				name="Profile"
 				component={MyAccountScreen}

@@ -11,6 +11,7 @@ import MenuTab from '../tabNavigator/MenuTab';
 import PetFoundDrawer from './PetFoundDrawer';
 import SlidesDrawer from './SlidesDrawer.js';
 import firebase from 'firebase/app';
+import Menu from './Menu'
 
 import { connect } from 'react-redux';
 import { actions } from '../../store';
@@ -87,12 +88,14 @@ function NavigatorDrawer(props) {
 	return (
 		<Drawer.Navigator
 			lazy={false}
-			initialRouteName="Pets"
+			initialRouteName="Home"
 			drawerContentOptions={{
 				activeTintColor: '#1A89E7',
 				inactiveTintColor: '#C2C2C2'
 			}}
-			//drawerContent={(props) => <Menu {...props} />}
+
+			
+			drawerContent={(props) => <Menu {...props} />}
 		>
 			<Drawer.Screen
 				name="Home"

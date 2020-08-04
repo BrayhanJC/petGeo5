@@ -17,9 +17,10 @@ export default {
 	},
 
 	userImagen: {
-		width: 70,
-		height: 70,
+		width: 75,
+		height: 75,
 		borderRadius: 35,
+
 	},
 
 	camaraContainer: {
@@ -42,13 +43,14 @@ export default {
 	userTitulo: {
 		textAlign: 'center',
 		fontWeight: 'bold',
-		fontSize: 16,
+		fontSize: 15,
 	},
 
 	userSubTitulo: {
 		textAlign: 'center',
 		fontSize: 11,
 		color: 'gray',
+		fontWeight:'bold',
 		paddingVertical: 5,
 	},
 	menuContainer: {

@@ -9,9 +9,9 @@ import { styleSearch } from '../../src/css/Search';
 const NotItem = (props) => {
 	const { image_default, title, subtitle } = props;
 	return (
-		<View style={{marginTop:10}}>
+		<View style={{ marginTop: 15 }}>
 			<View style={styleSearch.notFound}>
-				<Image source={image_default} resizeMode="contain" style={{height:200}} />
+				<Image source={image_default} resizeMode="contain" style={{ height: 200 }} />
 			</View>
 			<View style={styleSearch.notFound}>
 				<Text style={styleSearch.textCenter}>{title}</Text>

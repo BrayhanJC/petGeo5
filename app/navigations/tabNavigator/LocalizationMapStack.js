@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 
 import LocalizationMapScreen from '../../screens/localizationMap/LocalizationMap';
-import AvatarIcon from '../../components/AvatarIcon'
+import AvatarIcon from '../../components/AvatarIcon';
 
 const Stack = createStackNavigator();
 
@@ -15,15 +15,21 @@ const Stack = createStackNavigator();
  * 		-> Centros (color verde)
  */
 function LocalizationMapStack() {
-
 	return (
-		<Stack.Navigator>
+		<Stack.Navigator
+			screenOptions={{
+				headerTitleAlign: 'center',
+				headerTitleStyle: {
+					fontWeight: 'bold'
+				}
+			}}
+		>
 			<Stack.Screen
 				name="LocalizationMapStack"
 				component={LocalizationMapScreen}
 				options={{
 					title: 'Localizador',
-					headerLeft: () => <AvatarIcon/>
+					headerLeft: () => <AvatarIcon />
 				}}
 			/>
 		</Stack.Navigator>

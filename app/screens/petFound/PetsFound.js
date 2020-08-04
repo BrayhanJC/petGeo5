@@ -78,6 +78,7 @@ function PetsFound(props) {
 						isLoading={isLoading}
 						navigation={navigation}
 						navigator="petFoundView"
+						collectionName='petsFound'
 						handleLoadMore={() =>
 							handleLoadMore(
 								'petsFound',
@@ -101,6 +102,7 @@ function PetsFound(props) {
 					isLoading={isLoading}
 					navigation={navigation}
 					navigator="petFoundView"
+					collectionName='petsFound'
 					handleLoadMore={() =>
 						handleLoadMore(
 							'petsFound',
