@@ -12,10 +12,7 @@ import AddForm from '../formMain/AddForm';
 import UploadImage from '../formMain/UploadImage';
 import ImageMain from '../formMain/ImageMain';
 import Map from '../formMain/Map';
-
-import { Notifications } from 'expo';
-
-import * as Permissions from 'expo-permissions';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 //devuelve el ancho de la screen
 const widhtScreen = Dimensions.get('window').width;
@@ -85,6 +82,7 @@ function CreateNewsForm(props) {
 	//const {title, setTitle, address, setAddress, description, setDescription, btnName, addressVisible} = props
 
 	return (
+		<KeyboardAwareScrollView>
 		<ScrollView style={styleForm.scrollView}>
 			<View>
 				<ImageMain
@@ -125,7 +123,7 @@ function CreateNewsForm(props) {
 				</View>
 
 				<AddForm
-					title="Titulo Noticia o Evento"
+					title="Título, noticia o evento"
 					address="Dirección"
 					addressVisible={true}
 					description="Describa en breves palabras la noticia que esta por publicar..."
@@ -154,6 +152,7 @@ function CreateNewsForm(props) {
 				/>
 			</View>
 		</ScrollView>
+		</KeyboardAwareScrollView>
 	);
 }
 

@@ -117,7 +117,7 @@ function RenderCenter(props) {
 						<View
 							style={{
 								width: '50%',
-								marginLeft: 5,
+								marginLeft: 15,
 								marginRight: 5
 							}}
 						>
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center'
 	},
 	containerData: {
-		marginLeft: 5,
+		marginLeft: 15,
 		marginRight: 5,
 		alignItems: 'flex-start'
 	},

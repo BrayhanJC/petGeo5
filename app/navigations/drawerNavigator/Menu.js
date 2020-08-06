@@ -6,17 +6,18 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { DrawerItemList } from '@react-navigation/drawer';
 import firebase from 'firebase/app';
 
-import { Icon } from 'react-native-elements';
+import { connect } from 'react-redux';
+import { actions } from '../../store';
+
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 /**
  * Brinda un estilo al menu lateral
  * @param {*} props 
  */
-export default function Menu(props) {
+function Menu(props) {
 	const [ user, setUser ] = useState(null);
-	useEffect(() => {
-		setUser(firebase.auth().currentUser);
-	}, []);
+	const { cliente } = props;
+	const { login } = props;
 
 	return (
 		<View style={style.container}>
@@ -31,8 +32,8 @@ export default function Menu(props) {
 							<Image
 								style={style.userImagen}
 								source={
-									firebase.auth().currentUser.photoURL ? (
-										{ url: firebase.auth().currentUser.photoURL }
+									login.photoURL ? (
+										{ uri: cliente.photoURL }
 									) : (
 										require('../../../assets/img/avatar_cat.png')
 									)
@@ -51,13 +52,10 @@ export default function Menu(props) {
 							}}
 						>
 							<View style={style.userNombre}>
-								<Text style={style.userTitulo}>
-									{' '}
-									{firebase.auth().currentUser ? firebase.auth().currentUser.displayName : ''}
-								</Text>
+								<Text style={style.userTitulo}> {firebase.auth().currentUser ? cliente.name : ''}</Text>
 								<Text style={style.userSubTitulo}>
 									{' '}
-									{firebase.auth().currentUser ? firebase.auth().currentUser.email : ''}
+									{firebase.auth().currentUser ? cliente.email : ''}
 								</Text>
 							</View>
 						</View>
@@ -78,3 +76,9 @@ export default function Menu(props) {
 		</View>
 	);
 }
+
+const mapStateToProps = (state) => ({
+	cliente: state.cliente.cliente,
+	login: state.login.login
+});
+export default connect(mapStateToProps)(Menu);

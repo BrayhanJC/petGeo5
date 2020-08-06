@@ -56,15 +56,12 @@ function Comedogs(props) {
 			const statusPermissions = resultPermissions.permissions.location.status;
 			//console.log(statusPermissions);
 			if (statusPermissions !== 'granted') {
-				toastRef.current.show(
-					'Tienes que Aceptar los permisos de localización para crear un Comedog',
-					3000
-				);
+				toastRef.current.show('Tienes que Aceptar los permisos de localización para crear un Comedog', 3000);
 			} else {
 				const loc = await Location.getCurrentPositionAsync({});
 				//console.log(loc);
-				if (loc){
-					if (loc.coords.latitude && loc.coords.longitude){
+				if (loc) {
+					if (loc.coords.latitude && loc.coords.longitude) {
 						setLocation({
 							latitude: loc.coords.latitude,
 							longitude: loc.coords.longitude,
@@ -72,10 +69,8 @@ function Comedogs(props) {
 							longitudeDelta: 0.001
 						});
 					}
-					
 				}
 			}
-
 		})();
 	}, []);
 
@@ -90,8 +85,9 @@ function Comedogs(props) {
 		}, [])
 	);
 
-		//retornar los datos en order de distancia
-		return_data_distance(location, Comedog)
+	//retornar los datos en order de distancia
+	return_data_distance(location, Comedog);
+	
 	return (
 		<View style={styles.viewBody}>
 			<Search

@@ -14,22 +14,14 @@ import ImageMain from '../../formMain/ImageMain';
 import Loading from '../../Loading';
 import Map from '../../formMain/Map';
 import Toast from 'react-native-easy-toast';
-import {isEmpty} from 'lodash'
+import { isEmpty } from 'lodash';
 const widhtScreen = Dimensions.get('window').width;
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 function ViewEditPet(props) {
 	const toastRef = useRef();
-	const {
-		navigation,
-		route,
-		placeholder_title,
-		placeholder_description,
-		text_button,
-		pet
+	const { navigation, route, placeholder_title, placeholder_description, text_button, pet } = props;
 
-	} = props;
-	// console.log('***********************************')
-	// console.log(pet)
 	navigation.setOptions({
 		title: route.params.name
 	});
@@ -55,76 +47,75 @@ function ViewEditPet(props) {
 			image: imageSelected,
 			raza: valueRaza,
 			sex: valueSex,
-			type:valueTypePet,
+			type: valueTypePet,
 			description,
-			date_birth:valueDate
-			
+			date_birth: valueDate
 		};
 
-		if (namePet && valueRaza && valueTypePet  && valueDate && valueSex) {
+		if (namePet && valueRaza && valueTypePet && valueDate && valueSex) {
 			updateCollectionRecord('pet', route.params.id, data, setloading, navigation);
 		} else {
-			if (isEmpty(namePet)){
+			if (isEmpty(namePet)) {
 				toastRef.current.show('Debe incluir el nombre de la Mascota', 3000);
-			}else if (!valueTypePet){
+			} else if (!valueTypePet) {
 				toastRef.current.show('Debe seleccionar el Tipo de Mascota', 3000);
-			}else if (!valueRaza){
+			} else if (!valueRaza) {
 				toastRef.current.show('Debe seleccionar la Raza', 3000);
-			}else if (!valueSex){
+			} else if (!valueSex) {
 				toastRef.current.show('Debe seleccionar el Género de la Mascota', 3000);
-			}else{
+			} else {
 				toastRef.current.show('Asegurese de llenar los datos principales', 3000);
 			}
-			
-			
 		}
 	};
 
 	return (
-		<ScrollView style={styleForm.scrollView}>
-			<ImageMain
-				styleImageMain={styleImageMain}
-				toastRef={toastRef}
-				widhtScreen={widhtScreen}
-				imageMain={imageSelected[0]}
-				image_default={require('../../../../assets/img/avatar_dog.png')}
-			/>
+		<KeyboardAwareScrollView>
+			<ScrollView style={styleForm.scrollView}>
+				<ImageMain
+					styleImageMain={styleImageMain}
+					toastRef={toastRef}
+					widhtScreen={widhtScreen}
+					imageMain={imageSelected[0]}
+					image_default={require('../../../../assets/img/avatar_dog.png')}
+				/>
 
-			<FormEditPet
-				placeholder_title={placeholder_title}
-				placeholder_description={placeholder_description}
-				default_name={data_collection.name}
-				default_raza={data_collection.raza}
-				default_sex={data_collection.sex}
-				default_type={data_collection.type}
-				default_description={data_collection.description}
-				default_date={data_collection.date_birth}
-				styleForm={styleForm}
-				valueTypePet={valueTypePet}
-				setValueTypePet={setValueTypePet}
-				valueSex={valueSex}
-				setValueSex={setValueSex}
-				namePet={namePet}
-				setNamePet={setNamePet}
-				setDescription={setDescription}
-				valueRaza={valueRaza}
-				setValueRaza={setValueRaza}
-				valueDate={valueDate}
-				setValueDate={setValueDate}
-				error={error}
-			/>
-			<UploadImage
-				styleUploadImage={styleUploadImage}
-				toastRef={toastRef}
-				imageSelected={imageSelected}
-				setImageSelected={setImageSelected}
-			/>
+				<FormEditPet
+					placeholder_title={placeholder_title}
+					placeholder_description={placeholder_description}
+					default_name={data_collection.name}
+					default_raza={data_collection.raza}
+					default_sex={data_collection.sex}
+					default_type={data_collection.type}
+					default_description={data_collection.description}
+					default_date={data_collection.date_birth}
+					styleForm={styleForm}
+					valueTypePet={valueTypePet}
+					setValueTypePet={setValueTypePet}
+					valueSex={valueSex}
+					setValueSex={setValueSex}
+					namePet={namePet}
+					setNamePet={setNamePet}
+					setDescription={setDescription}
+					valueRaza={valueRaza}
+					setValueRaza={setValueRaza}
+					valueDate={valueDate}
+					setValueDate={setValueDate}
+					error={error}
+				/>
+				<UploadImage
+					styleUploadImage={styleUploadImage}
+					toastRef={toastRef}
+					imageSelected={imageSelected}
+					setImageSelected={setImageSelected}
+				/>
 
-			<Button buttonStyle={styleForm.btnCreate} title={text_button} onPress={onSubmit} />
+				<Button buttonStyle={styleForm.btnCreate} title={text_button} onPress={onSubmit} />
 
-			<Loading isVisible={loading} text="Actualizando..." />
-			<Toast ref={toastRef} position="center" opacity={0.9} />
-		</ScrollView>
+				<Loading isVisible={loading} text="Actualizando..." />
+				<Toast ref={toastRef} position="center" opacity={0.9} />
+			</ScrollView>
+		</KeyboardAwareScrollView>
 	);
 }
 

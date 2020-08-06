@@ -14,6 +14,7 @@ import ImageMain from '../../formMain/ImageMain';
 import Loading from '../../Loading';
 import Map from '../../formMain/Map';
 import Toast from 'react-native-easy-toast';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const widhtScreen = Dimensions.get('window').width;
 
@@ -81,6 +82,7 @@ function ViewEdit(props) {
 	};
 
 	return (
+		<KeyboardAwareScrollView>
 		<ScrollView style={styleForm.scrollView}>
 			<ImageMain
 				styleImageMain={styleImageMain}
@@ -127,6 +129,7 @@ function ViewEdit(props) {
 			<Loading isVisible={loading} text="Actualizando..." />
 			<Toast ref={toastRef} position="center" opacity={0.9} />
 		</ScrollView>
+		</KeyboardAwareScrollView>
 	);
 }
 

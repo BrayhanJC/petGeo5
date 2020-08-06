@@ -86,13 +86,13 @@ function ChangeEmailForm(props) {
 							setIsLoadig(false);
 							setReloadUserInfo(true);
 							if (petCenter) {
-								updateInfoUserCenter('userInfo', user_id, {
+								updateInfoUserCenter('petCenters', user_id, {
 									email: formData.email,
 								});
 							}
 
 							props.dispatch(actions.actualizarCliente({ ...cliente, email: formData.email }));
-							updateInfoUserCenter('petCenters', user_id, {
+							updateInfoUserCenter('userInfo', user_id, {
 								email: formData.email,
 							});
 							toastRef.current.show('Email Actualizado con Exito', 1500);

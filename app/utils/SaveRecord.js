@@ -75,8 +75,19 @@ export const saveCollection = (
  * @param { contiene el elemento inicial en el cual se va a empezar a listar} setStartElement
  */
 export const listRecords = (collectionName, setTotalElements, setElements, setStartElement) => {
-	db.collection(collectionName).get().then((snap) => {
-		setTotalElements(snap.size);
+	db.collection(collectionName).get().then((response) => {
+		//console.log(snap.proto)
+		var sizeElement = 0
+		response.forEach((doc) => {
+			const element = doc.data();
+			
+			if (element.active){
+				sizeElement++;
+			}
+			setTotalElements(sizeElement);
+			
+		});
+		
 	});
 
 	const resultElements = [];
@@ -86,7 +97,10 @@ export const listRecords = (collectionName, setTotalElements, setElements, setSt
 		response.forEach((doc) => {
 			const element = doc.data();
 			element.id = doc.id;
-			resultElements.push(element);
+			if (element.active){
+				resultElements.push(element);
+			}
+			
 		});
 		setElements(resultElements);
 	});

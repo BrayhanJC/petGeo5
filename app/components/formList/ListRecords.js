@@ -53,9 +53,9 @@ function ListRecords(props) {
 		}
 	}
 
-	// var dataRender = dataRender.filter( valueItem => {
-	// 	return valueItem.active == false
-	// })
+	var dataRender = dataRender.filter( valueItem => {
+		return valueItem.active == true
+	})
 
 	if (size(dataRender) > 0) {
 		return (
@@ -113,8 +113,8 @@ function ListRecords(props) {
 			</View>
 		);
 	} else {
-		console.log('la colleciones:')
-		console.log(collectionName)
+		//console.log('la colleciones:')
+		//console.log(collectionName)
 		if (showPetControl) {
 			return (
 				<NotItem
@@ -129,7 +129,7 @@ function ListRecords(props) {
 				<NotItem
 					image_default={require('../../../assets/img/search_pet_found.png')}
 					title="Aún no se ha encontrado una mascota"
-					subtitle="Ayudanos a encontrar una..."
+					subtitle="Ayúdanos a encontrar una..."
 				/>
 			);
 		}
@@ -137,17 +137,29 @@ function ListRecords(props) {
 			return (
 				<NotItem
 					image_default={require('../../../assets/img/news_main.png')}
-					title="Aún no se ha encontrado una Noticia"
-					subtitle="Ayudanos a saber si hay algún evento en la Ciudad..."
+					title="Aún no se ha creado una Noticia"
+					subtitle="Ayudanos a saber si hay algún evento o noticia importante en la Ciudad..."
+					height={250}
 				/>
 			);
 		}
 		else if (collectionName == 'comedogs') {
 			return (
 				<NotItem
-					image_default={require('../../../assets/img/news_main.png')}
-					title="Aún no se ha encontrado una Noticia"
-					subtitle="Ayudanos a saber si hay algún evento en la Ciudad..."
+					image_default={require('../../../assets/img/default_comedog.jpg')}
+					title="Aún no se ha registrado un Comedog"
+					subtitle="Ayudanos a saber si hay alguno en la Ciudad..."
+					height={250}
+				/>
+			);
+		}
+		else if (collectionName == 'missingPets') {
+			return (
+				<NotItem
+					image_default={require('../../../assets/img/avatar_dog.png')}
+					title="Aún no hay registros de mascotas extraviadas"
+					subtitle="Ayudanos a saber si hay alguna mascota perdida en la Ciudad..."
+					
 				/>
 			);
 		}
@@ -155,8 +167,8 @@ function ListRecords(props) {
 			return (
 				<NotItem
 					image_default={require('../../../assets/img/search_control.png')}
-					title="Aún no ha creado mascotas"
-					subtitle="Por Favor, pulsa el icono azul para crear una mascota."
+					title="Aún no han creado registros"
+					subtitle="Por Favor, pulsa el icono azul para crear uno nuevo."
 				/>
 			);
 		}

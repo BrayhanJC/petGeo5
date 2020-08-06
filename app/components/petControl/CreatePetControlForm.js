@@ -13,6 +13,7 @@ import { uploadImageStorage } from '../../utils/UploadImageStorage';
 import { saveCollection } from '../../utils/SaveRecord';
 import UploadImage from '../formMain/UploadImage';
 import { showAlert } from '../../utils/validations';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 //devuelve el ancho de la screen
 const widhtScreen = Dimensions.get('window').width;
@@ -75,37 +76,39 @@ function CreatePetControlForm(props) {
 	};
 
 	return (
-		<ScrollView style={styleCreateForm.scrollView}>
-			<View style={styleCreateForm.viewFormm}>
-				<ImageMain
-					styleImageMain={styleImageMain}
-					toastRef={toastRef}
-					widhtScreen={widhtScreen}
-					imageMain={imageSelected[0]}
-					image_default={require('../../../assets/img/control_pet.png')}
-				/>
-				<UploadImage
-					styleUploadImage={styleUploadImage}
-					toastRef={toastRef}
-					imageSelected={imageSelected}
-					setImageSelected={setImageSelected}
-				/>
-			</View>
-			<View style={styleCreateForm.viewForm}>
-				<PetControlForm
-					setPet={setPet}
-					setTypeControl={setTypeControl}
-					setNameControl={setNameControl}
-					setDescription={setDescription}
-					setErrorPet={setErrorPet}
-					setErrorType={setErrorType}
-					setErrorName={setErrorName}
-					userInfo={userInfo}
-				/>
+		<KeyboardAwareScrollView>
+			<ScrollView style={styleCreateForm.scrollView}>
+				<View style={styleCreateForm.viewFormm}>
+					<ImageMain
+						styleImageMain={styleImageMain}
+						toastRef={toastRef}
+						widhtScreen={widhtScreen}
+						imageMain={imageSelected[0]}
+						image_default={require('../../../assets/img/control_pet.png')}
+					/>
+					<UploadImage
+						styleUploadImage={styleUploadImage}
+						toastRef={toastRef}
+						imageSelected={imageSelected}
+						setImageSelected={setImageSelected}
+					/>
+				</View>
+				<View style={styleCreateForm.viewForm}>
+					<PetControlForm
+						setPet={setPet}
+						setTypeControl={setTypeControl}
+						setNameControl={setNameControl}
+						setDescription={setDescription}
+						setErrorPet={setErrorPet}
+						setErrorType={setErrorType}
+						setErrorName={setErrorName}
+						userInfo={userInfo}
+					/>
 
-				<Button buttonStyle={styleCreateForm.btnCreate} title="Añadir Control" onPress={addPetControl} />
-			</View>
-		</ScrollView>
+					<Button buttonStyle={styleCreateForm.btnCreate} title="Añadir Control" onPress={addPetControl} />
+				</View>
+			</ScrollView>
+		</KeyboardAwareScrollView>
 	);
 }
 

@@ -18,7 +18,7 @@ const widhtScreen = Dimensions.get('window').width;
 import { getRecord } from '../../utils/SaveRecord';
 import { useFocusEffect } from '@react-navigation/native';
 import RNPickerSelect from 'react-native-picker-select';
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 /**
  * Crea un nuevo registro de mascotas extraviadas
  * @param {*} props 
@@ -114,64 +114,66 @@ function AddMissinPetForm(props) {
 	};
 
 	return (
-		<ScrollView style={styleForm.scrollView}>
-			<ImageMain
-				styleImageMain={styleImageMain}
-				toastRef={toastRef}
-				widhtScreen={widhtScreen}
-				imageMain={imageSelected[0]}
-				image_default={require('../../../assets/img/lost_pet.png')}
-			/>
-
-			<View style={styleForm.viewForm}>
-				<RNPickerSelect
-					onValueChange={(value) => setPet(value)}
-					placeholder={{
-						label: 'Mascota',
-						value: null,
-						color: '#1A89E7'
-					}}
-					style={stylePicker}
-					items={list_pets}
-					Icon={() => {
-						return <View style={stylePicker.iconStyle} />;
-					}}
+		<KeyboardAwareScrollView>
+			<ScrollView style={styleForm.scrollView}>
+				<ImageMain
+					styleImageMain={styleImageMain}
+					toastRef={toastRef}
+					widhtScreen={widhtScreen}
+					imageMain={imageSelected[0]}
+					image_default={require('../../../assets/img/lost_pet.png')}
 				/>
-			</View>
 
-			<AddForm
-				title="Titulo Reporte"
-				address="Dirección"
-				addressVisible={true}
-				description="Describa en breves palabras donde se encuentra la mascota"
-				styleForm={styleForm}
-				setTitle={setTitle}
-				setAddress={setAddress}
-				setDescription={setDescription}
-				setIsVisibleMap={setIsVisibleMap}
-				locationForm={locationMissingPet}
-				setPhone={setPhone}
-				dataPet={data}
-				pet={pet}
-			/>
-			<UploadImage
-				styleUploadImage={styleUploadImage}
-				toastRef={toastRef}
-				imageSelected={imageSelected}
-				setImageSelected={setImageSelected}
-				dataPet={data}
-				pet={pet}
-			/>
+				<View style={styleForm.viewForm}>
+					<RNPickerSelect
+						onValueChange={(value) => setPet(value)}
+						placeholder={{
+							label: 'Mascota',
+							value: null,
+							color: '#1A89E7'
+						}}
+						style={stylePicker}
+						items={list_pets}
+						Icon={() => {
+							return <View style={stylePicker.iconStyle} />;
+						}}
+					/>
+				</View>
 
-			<Button buttonStyle={styleForm.btnCreate} title="Crear Reporte" onPress={addMissingPets} />
+				<AddForm
+					title="Titulo Reporte"
+					address="Dirección"
+					addressVisible={true}
+					description="Describa en breves palabras donde se encuentra la mascota"
+					styleForm={styleForm}
+					setTitle={setTitle}
+					setAddress={setAddress}
+					setDescription={setDescription}
+					setIsVisibleMap={setIsVisibleMap}
+					locationForm={locationMissingPet}
+					setPhone={setPhone}
+					dataPet={data}
+					pet={pet}
+				/>
+				<UploadImage
+					styleUploadImage={styleUploadImage}
+					toastRef={toastRef}
+					imageSelected={imageSelected}
+					setImageSelected={setImageSelected}
+					dataPet={data}
+					pet={pet}
+				/>
 
-			<Map
-				isVisibleMap={isVisibleMap}
-				setIsVisibleMap={setIsVisibleMap}
-				toastRef={toastRef}
-				setLocationForms={setLocationMissingPet}
-			/>
-		</ScrollView>
+				<Button buttonStyle={styleForm.btnCreate} title="Crear Reporte" onPress={addMissingPets} />
+
+				<Map
+					isVisibleMap={isVisibleMap}
+					setIsVisibleMap={setIsVisibleMap}
+					toastRef={toastRef}
+					setLocationForms={setLocationMissingPet}
+				/>
+			</ScrollView>
+		</KeyboardAwareScrollView>
 	);
 }
 

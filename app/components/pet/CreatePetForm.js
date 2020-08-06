@@ -13,6 +13,7 @@ import PetForm from '../pet/PetForm';
 import { uploadImageStorage } from '../../utils/UploadImageStorage';
 import { saveCollection } from '../../utils/SaveRecord';
 const widhtScreen = Dimensions.get('window').width;
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 /**
  * Funcion que permite crear una mascota nueva
@@ -59,8 +60,7 @@ function CreatePetForm(props) {
 						create_uid: firebase.auth().currentUser.uid,
 						create_date: new Date(),
 						description,
-						active:true
-
+						active: true
 					};
 
 					saveCollection(
@@ -82,40 +82,42 @@ function CreatePetForm(props) {
 	};
 
 	return (
-		<ScrollView style={stylePetForm.scrollView}>
-			<View style={stylePetForm.viewForm}>
-				<ImageMain
-					styleImageMain={styleImageMain}
-					toastRef={toastRef}
-					widhtScreen={widhtScreen}
-					imageMain={imageSelected[0]}
-					image_default={require('../../../assets/img/avatar_dog.png')}
-				/>
-				<UploadImage
-					styleUploadImage={styleUploadImage}
-					toastRef={toastRef}
-					imageSelected={imageSelected}
-					setImageSelected={setImageSelected}
-				/>
+		<KeyboardAwareScrollView>
+			<ScrollView style={stylePetForm.scrollView}>
+				<View style={stylePetForm.viewForm}>
+					<ImageMain
+						styleImageMain={styleImageMain}
+						toastRef={toastRef}
+						widhtScreen={widhtScreen}
+						imageMain={imageSelected[0]}
+						image_default={require('../../../assets/img/avatar_dog.png')}
+					/>
+					<UploadImage
+						styleUploadImage={styleUploadImage}
+						toastRef={toastRef}
+						imageSelected={imageSelected}
+						setImageSelected={setImageSelected}
+					/>
 
-				<PetForm
-					valueTypePet={valueTypePet}
-					setValueTypePet={setValueTypePet}
-					valueSex={valueSex}
-					setValueSex={setValueSex}
-					namePet={namePet}
-					setNamePet={setNamePet}
-					setDescription={setDescription}
-					valueRaza={valueRaza}
-					setValueRaza={setValueRaza}
-					valueDate={valueDate}
-					setValueDate={setValueDate}
-					error={error}
-				/>
+					<PetForm
+						valueTypePet={valueTypePet}
+						setValueTypePet={setValueTypePet}
+						valueSex={valueSex}
+						setValueSex={setValueSex}
+						namePet={namePet}
+						setNamePet={setNamePet}
+						setDescription={setDescription}
+						valueRaza={valueRaza}
+						setValueRaza={setValueRaza}
+						valueDate={valueDate}
+						setValueDate={setValueDate}
+						error={error}
+					/>
 
-				<Button buttonStyle={stylePetForm.btnCreate} title="Crear Mascota" onPress={addPet} />
-			</View>
-		</ScrollView>
+					<Button buttonStyle={stylePetForm.btnCreate} title="Crear Mascota" onPress={addPet} />
+				</View>
+			</ScrollView>
+		</KeyboardAwareScrollView>
 	);
 }
 

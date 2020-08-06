@@ -16,6 +16,7 @@ import Map from '../../formMain/Map';
 import Toast from 'react-native-easy-toast';
 import { isEmpty } from 'lodash';
 import { returnSchedule } from '../../../utils/Configurations';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 const widhtScreen = Dimensions.get('window').width;
 
 function ViewEditPetCenter(props) {
@@ -97,6 +98,7 @@ function ViewEditPetCenter(props) {
 	};
 
 	return (
+		<KeyboardAwareScrollView>
 		<ScrollView style={styleForm.scrollView}>
 			<ImageMain
 				styleImageMain={styleImageMain}
@@ -146,6 +148,7 @@ function ViewEditPetCenter(props) {
 			<Loading isVisible={loading} text="Actualizando..." />
 			<Toast ref={toastRef} position="center" opacity={0.9} />
 		</ScrollView>
+		</KeyboardAwareScrollView>
 	);
 }
 

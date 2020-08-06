@@ -12,6 +12,7 @@ import PetDoctorForm from './PetDoctorForm';
 import { uploadImageStorage } from '../../utils/UploadImageStorage';
 import { saveCollection } from '../../utils/SaveRecord';
 import { showAlert } from '../../utils/validations';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 /**
  * Permite crear un nuevo veterinario
@@ -45,7 +46,7 @@ function CreatePetDoctorForm(props) {
 						image_id: response,
 						create_uid: firebase.auth().currentUser.uid,
 						create_date: new Date(),
-						active:true
+						active: true
 					};
 
 					saveCollection(
@@ -68,26 +69,28 @@ function CreatePetDoctorForm(props) {
 	};
 
 	return (
-		<ScrollView style={stylePetForm.scrollView}>
-			<View style={stylePetForm.viewForm}>
-				<AvatarMain
-					imageDefault={require('../../../assets/img/default_veterinary.jpg')}
-					imageSelected={imageSelected}
-					setImageSelected={setImageSelected}
-					toastRef={toastRef}
-				/>
+		<KeyboardAwareScrollView>
+			<ScrollView style={stylePetForm.scrollView}>
+				<View style={stylePetForm.viewForm}>
+					<AvatarMain
+						imageDefault={require('../../../assets/img/default_veterinary.jpg')}
+						imageSelected={imageSelected}
+						setImageSelected={setImageSelected}
+						toastRef={toastRef}
+					/>
 
-				<PetDoctorForm
-					setSpecialty={setSpecialty}
-					setName={setName}
-					setDescription={setDescription}
-					errorName={errorName}
-					errorDescription={errorDescription}
-				/>
+					<PetDoctorForm
+						setSpecialty={setSpecialty}
+						setName={setName}
+						setDescription={setDescription}
+						errorName={errorName}
+						errorDescription={errorDescription}
+					/>
 
-				<Button buttonStyle={stylePetForm.btnCreate} title="Crear Veterinario" onPress={addPetDoctor} />
-			</View>
-		</ScrollView>
+					<Button buttonStyle={stylePetForm.btnCreate} title="Crear Veterinario" onPress={addPetDoctor} />
+				</View>
+			</ScrollView>
+		</KeyboardAwareScrollView>
 	);
 }
 

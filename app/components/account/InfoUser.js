@@ -40,6 +40,8 @@ function InfoUser(props) {
 						updatePhotoUrl();
 					})
 					.catch((response) => {
+						setLoading(false);
+						console.log(response)
 						toastRef.current.show('Error! No se ha podido subir la imagen');
 					});
 			}
@@ -79,12 +81,11 @@ function InfoUser(props) {
 					photoURL: response
 				};
 				await firebase.auth().currentUser.updateProfile(update);
-
-				//console.log('Imagen Actualizada');
 				props.dispatch(actions.actualizarCliente({ ...cliente, photoURL: response }));
 				setLoading(false);
 			})
 			.catch((response) => {
+				setLoading(false);
 				toastRef.current.show('Ha surgido un error, no se ha podido actualizar el perfil');
 			});
 	};

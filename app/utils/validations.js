@@ -87,16 +87,16 @@ export var return_kms = function(lat1, lon1, lat2, lon2) {
 export var return_data_distance = (location, data) => {
 	for (let index = 0; index < data.length; index++) {
 		var distance = 0
-		if (data[index].location){
-			if (location){
+		if (location){
+			if (data[index].location){
 				distance = return_kms(
 					location.latitude,
 					location.longitude,
 					data[index].location.latitude,
 					data[index].location.longitude 
 				);
+				data[index]['distance'] = distance;
 			}
-			data[index]['distance'] = distance;
 		}
 	}
 

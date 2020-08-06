@@ -15,7 +15,7 @@ export const search = {
     },
     textCenter:{
         color: "gray",
-        margin: 25,
+        margin: 5,
         fontSize:18,
        
         fontWeight: 'bold',
@@ -26,4 +26,4 @@ export const search = {
 
 };
 
-export const styleSearch = StyleSheet.create(search);
+export const notItem = StyleSheet.create(search);

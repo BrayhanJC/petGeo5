@@ -64,7 +64,8 @@ const UserData = (props) => {
 					email: userInfo.email,
 					phone,
 					street,
-					userType: returnUserType(userType)
+					userType: returnUserType(userType),
+					photoURL: userInfo.photoURL
 				};
 
 				const update = {
@@ -83,10 +84,11 @@ const UserData = (props) => {
 						});
 						//navigation.navigate('Profile');
 					})
-					.catch(() => {
+					.catch((response) => {
+						console.log(response)
 						setIsLoading(false);
-						setError('Error al actualizar el nombre');
-						setIsLoading(false);
+						//setError('Error al actualizar el nombre');
+						
 					});
 			} else {
 				setIsLoading(false);
@@ -145,7 +147,8 @@ const UserData = (props) => {
 					quantityVoting: 0,
 					rating: 0,
 					ratingTotal: 0,
-					active: true
+					active: true,
+					photoURL: userInfo.photoURL
 				};
 
 				saveCenter(data, 'petCenters');

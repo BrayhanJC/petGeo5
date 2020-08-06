@@ -35,7 +35,7 @@ function MissingPets(props) {
 	//variables para el buscador
 	const [ item, setItem ] = useState([]);
 	const [ search, setSearch ] = useState('');
-	
+
 	const [ location, setLocation ] = useState(null);
 	useEffect(() => {
 		(async () => {
@@ -54,10 +54,7 @@ function MissingPets(props) {
 			const statusPermissions = resultPermissions.permissions.location.status;
 			//console.log(statusPermissions);
 			if (statusPermissions !== 'granted') {
-				toastRef.current.show(
-					'Tienes que Aceptar los permisos de localización para crear un Comedog',
-					3000
-				);
+				toastRef.current.show('Tienes que Aceptar los permisos de localización para crear un Comedog', 3000);
 			} else {
 				const loc = await Location.getCurrentPositionAsync({});
 				//console.log(loc);
@@ -68,7 +65,6 @@ function MissingPets(props) {
 					longitudeDelta: 0.001
 				});
 			}
-
 		})();
 	}, []);
 
@@ -83,8 +79,9 @@ function MissingPets(props) {
 			}
 		}, [])
 	);
-		//retornar los datos en order de distancia
-		return_data_distance(location, missingPets)
+	//retornar los datos en order de distancia
+	return_data_distance(location, missingPets);
+
 
 	return (
 		<View style={viewBody.viewBody}>
