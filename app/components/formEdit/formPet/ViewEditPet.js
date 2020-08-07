@@ -38,7 +38,7 @@ function ViewEditPet(props) {
 	const [ namePet, setNamePet ] = useState(data_collection.name ? data_collection.name : '');
 	const [ description, setDescription ] = useState(data_collection.description ? data_collection.description : '');
 	const [ valueRaza, setValueRaza ] = useState(data_collection.raza ? data_collection.raza : '');
-	const [ valueDate, setValueDate ] = useState({ date: new Date() });
+	const [ valueDate, setValueDate ] = useState({ date: data_collection.date_birth.date ? data_collection.date_birth.date :new Date() });
 	const [ imageSelected, setImageSelected ] = useState(data_collection.image ? data_collection.image : []);
 	const [ error, setError ] = useState('');
 
@@ -70,6 +70,9 @@ function ViewEditPet(props) {
 		}
 	};
 
+	console.log('la fecha es:')
+	console.log(data_collection)
+
 	return (
 		<KeyboardAwareScrollView>
 			<ScrollView style={styleForm.scrollView}>
@@ -89,7 +92,7 @@ function ViewEditPet(props) {
 					default_sex={data_collection.sex}
 					default_type={data_collection.type}
 					default_description={data_collection.description}
-					default_date={data_collection.date_birth}
+					default_date={data_collection.date_birth.date}
 					styleForm={styleForm}
 					valueTypePet={valueTypePet}
 					setValueTypePet={setValueTypePet}

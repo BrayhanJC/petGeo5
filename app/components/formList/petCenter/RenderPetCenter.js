@@ -104,7 +104,7 @@ function RenderCenter(props) {
 							}}
 						/>
 
-						<Text style={styles.title}>{name.substr(0, 18)}</Text>
+						<Text style={[styles.title, {marginTop:-3}]}>{name.substr(0, 18)}</Text>
 					</View>
 				</View>
 
@@ -112,7 +112,7 @@ function RenderCenter(props) {
 					<Rating imageSize={14} startingValue={rating} readonly />
 				</View>
 
-				<View style={{ flexDirection: 'column', marginTop: 2 }}>
+				<View style={{ flexDirection: 'column', marginTop: -1 }}>
 					<View style={{ flexDirection: 'row' }}>
 						<View
 							style={{
@@ -199,7 +199,8 @@ const styles = StyleSheet.create({
 		alignItems: 'flex-start'
 	},
 	description: {
-		fontSize: 9,
+		marginTop:-3,
+		fontSize: 9.5,
 		fontWeight: 'normal'
 	},
 	bold: {

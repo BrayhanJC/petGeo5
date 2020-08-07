@@ -16,7 +16,7 @@ export const stylePicker = {
 	},
 	pickerPet: {
 		width: '49%',
-		height: 50,
+		height: 45,
 		backgroundColor: 'white',
 		marginTop: 8,
 		borderWidth: 2,

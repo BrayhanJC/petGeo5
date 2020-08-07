@@ -72,7 +72,7 @@ const PetView = (props) => {
 			action: null
 		},
 		{
-			text: 'Nacimiento:' + pet.date_birth,
+			text: 'Nacimiento: ' + pet.date_birth.date,
 			iconName: 'balloon',
 			iconType: 'material-community',
 			action: null

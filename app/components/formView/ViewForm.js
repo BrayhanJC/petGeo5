@@ -112,18 +112,19 @@ const ViewForm = (props) => {
 	}
 	var listInfo = [
 		{
-			text: 'Creado por: ' + item.create_name,
+			text: 'Creado por: ' + (item.create_name || ''),
 			iconName: 'account',
 			iconType: 'material-community',
 			action: null
 		},
 		{
-			text: 'Teléfono: ' + item.phone,
+			text: 'Teléfono: ' + (item.phone || ''),
 			iconName: 'phone',
+			rightNameIcon: 'chevron-right',
 			iconType: 'material-community',
 			onPress: () => {
 				Linking.canOpenURL(number_phone).then((supported) => {
-					if (!supported) {
+					if (!supported || !item.phone) {
 						Alert.alert('El número no esta disponible');
 					} else {
 						return Linking.openURL(number_phone);
@@ -132,13 +133,13 @@ const ViewForm = (props) => {
 			}
 		},
 		{
-			text: 'Dirección: ' + item.address,
+			text: 'Dirección: ' + (item.address || ''),
 			iconName: 'map-marker',
 			iconType: 'material-community',
 			action: null
 		},
 		{
-			text: 'Fecha Creación: ' + date_control,
+			text: 'Fecha Creación: ' + (date_control || ''),
 			iconName: 'calendar-range',
 			iconType: 'material-community',
 			action: null
@@ -147,8 +148,9 @@ const ViewForm = (props) => {
 	if (collection == 'petCenters') {
 		listInfo = [
 			{
-				text: 'Veterinarios:',
-				iconName: 'account-supervisor-circle',
+				text: 'Veterinarios...',
+				iconName: 'stethoscope',
+				rightNameIcon: 'chevron-right',
 				iconType: 'material-community',
 				//CenterDoctorStack
 				//PetDoctors
@@ -160,18 +162,19 @@ const ViewForm = (props) => {
 				}
 			},
 			{
-				text: 'Dirección: ' + item.address,
+				text: 'Dirección: ' + (item.address || ''),
 				iconName: 'map-marker',
 				iconType: 'material-community',
 				action: null
 			},
 			{
-				text: 'Teléfono: ' + item.phone,
+				text: 'Teléfono: ' + (item.phone || ''),
 				iconName: 'phone',
+				rightNameIcon: 'chevron-right',
 				iconType: 'material-community',
 				onPress: () => {
 					Linking.canOpenURL(number_phone).then((supported) => {
-						if (!supported) {
+						if (!supported || !item.phone) {
 							Alert.alert('El número no esta disponible');
 						} else {
 							return Linking.openURL(number_phone);
@@ -186,19 +189,21 @@ const ViewForm = (props) => {
 				action: null
 			},
 			{
-				text: 'Correo: ' + item.email,
+				text: 'Correo: ' + (item.email || ''),
 				iconName: 'email',
 				iconType: 'material-community',
 				action: null
 			},
 			{
-				text: 'Página Web: ' + item.website,
+				text: 'Página Web: ' + (item.website || ''),
 				iconName: 'web',
+				rightNameIcon: 'chevron-right',
 				iconType: 'material-community',
 				onPress: () => {
 					const supportedURL = 'https://' + item.website;
 					Linking.canOpenURL(supportedURL).then((supported) => {
-						if (!supported) {
+
+						if (!supported || !item.website) {
 							Alert.alert('No se ha podido abrir la página web');
 						} else {
 							return Linking.openURL(supportedURL);
@@ -207,7 +212,7 @@ const ViewForm = (props) => {
 				}
 			},
 			{
-				text: 'Fecha Creación: ' + date_control,
+				text: 'Fecha Creación: ' + (date_control || ''),
 				iconName: 'calendar-range',
 				iconType: 'material-community',
 				action: null

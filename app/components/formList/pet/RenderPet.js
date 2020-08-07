@@ -71,7 +71,7 @@ function RenderPet(props) {
 		<TouchableOpacity onPress={goElement} style={{ flex: 1 }}>
 			<View style={[ styles.item, { height: width / 2 } ]}>
 				<View>
-					<View style={styles.avatar}>
+					<View style={[styles.avatar, {marginTop:5, marginLeft:20, marginRight:20}]}>
 						<Avatar
 							size="large"
 							rounded
@@ -84,11 +84,11 @@ function RenderPet(props) {
 							}}
 						/>
 
-						<Text style={styles.title}>{name.substr(0, 18)}</Text>
+						<Text style={[styles.title, {marginTop:-3, fontSize:15}]}>{name.substr(0, 18)}</Text>
 					</View>
 				</View>
 
-				<View style={{ flexDirection: 'column', marginTop: -1 }}>
+				<View style={{ flexDirection: 'column', marginTop: -5 }}>
 					<View style={{ flexDirection: 'row' }}>
 						<View
 							style={{
@@ -176,11 +176,12 @@ const styles = StyleSheet.create({
 		alignItems: 'flex-start'
 	},
 	description: {
-		fontSize: 12,
-		fontWeight: 'normal'
+		fontSize: 10.5,
+		fontWeight: 'normal',
+		marginTop:-3
 	},
 	bold: {
-		fontSize: 13,
+		fontSize: 12,
 		fontWeight: 'bold'
 	}
 });

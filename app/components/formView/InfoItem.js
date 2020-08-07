@@ -25,7 +25,7 @@ const InfoItem = (props) => {
 						color: '#1A89E7'
 					}}
 					rightIcon={{
-						name: 'chevron-right',
+						name: item.rightNameIcon,
 						type: item.iconType,
 						color: '#1A89E7'
                     }}

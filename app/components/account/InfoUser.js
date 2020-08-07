@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
 		paddingBottom: 30
 	},
 	userInfoAvatar: {
-		marginRight: 20
+		marginRight: 10
 	},
 
 	displayName: {
