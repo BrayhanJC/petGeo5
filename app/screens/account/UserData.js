@@ -85,10 +85,9 @@ const UserData = (props) => {
 						//navigation.navigate('Profile');
 					})
 					.catch((response) => {
-						console.log(response)
+						console.log(response);
 						setIsLoading(false);
 						//setError('Error al actualizar el nombre');
-						
 					});
 			} else {
 				setIsLoading(false);
@@ -106,16 +105,18 @@ const UserData = (props) => {
 			} else {
 				setErrorPhone('El celular es requerido');
 			}
-			if (street) {
-				setErrorStreet('');
-			} else {
-				setErrorStreet('La dirección es requerida');
-			}
-			if (location) {
-				//console.log('stret ok');
-				setErrorMap('');
-			} else {
-				setErrorMap('Debe guardar la ubicación, pulse el icono del mapa');
+			if (userType == 1) {
+				if (street) {
+					setErrorStreet('');
+				} else {
+					setErrorStreet('La dirección es requerida');
+				}
+				if (location) {
+					//console.log('stret ok');
+					setErrorMap('');
+				} else {
+					setErrorMap('Debe guardar la ubicación, pulse el icono del mapa');
+				}
 			}
 
 			if (description) {
@@ -124,40 +125,80 @@ const UserData = (props) => {
 				setErrorDescription('Debes agregar una descripcón');
 			}
 
-			if (phone && street && location && description && nameUser) {
-				setErrorPhone('');
-				setErrorStreet('');
-				setErrorDescription('');
-				setIsLoading(true);
+			if (userType == 1) {
+				if (phone && street && location && description && nameUser) {
+					setErrorPhone('');
+					setErrorStreet('');
+					setErrorDescription('');
+					setIsLoading(true);
 
-				const data = {
-					create_uid: userInfo.uid,
-					create_name: nameUser,
-					email: userInfo.email,
-					phone,
-					address: street,
-					location,
-					description,
-					veterinaries: [],
-					userType: returnUserType(userType),
-					schedule: returnSchedule(time),
-					name: nameUser,
-					create_date: new Date(),
-					image: [],
-					quantityVoting: 0,
-					rating: 0,
-					ratingTotal: 0,
-					active: true,
-					photoURL: userInfo.photoURL
-				};
+					const data = {
+						create_uid: userInfo.uid,
+						create_name: nameUser,
+						email: userInfo.email,
+						phone,
+						address: street,
+						location,
+						description,
+						veterinaries: [],
+						userType: returnUserType(userType),
+						schedule: returnSchedule(time),
+						name: nameUser,
+						create_date: new Date(),
+						image: [],
+						quantityVoting: 0,
+						rating: 0,
+						ratingTotal: 0,
+						active: true,
+						photoURL: userInfo.photoURL
+					};
 
-				saveCenter(data, 'petCenters');
-				saveUserInfo(data, 'userInfo', () => {
-					props.dispatch(actions.actualizarCliente(data));
-					setModalVisible();
-				});
-			} else {
-				setIsLoading(false);
+					saveCenter(data, 'petCenters');
+					saveUserInfo(data, 'userInfo', () => {
+						props.dispatch(actions.actualizarCliente(data));
+						setModalVisible();
+					});
+				} else {
+					setIsLoading(false);
+				}
+			}
+
+			if (userType == 2) {
+				if (phone && description && nameUser) {
+					setErrorPhone('');
+					setErrorStreet('');
+					setErrorDescription('');
+					setIsLoading(true);
+
+					const data = {
+						create_uid: userInfo.uid,
+						create_name: nameUser,
+						email: userInfo.email,
+						phone,
+						address: street,
+						location,
+						description,
+						veterinaries: [],
+						userType: returnUserType(userType),
+						schedule: returnSchedule(time),
+						name: nameUser,
+						create_date: new Date(),
+						image: [],
+						quantityVoting: 0,
+						rating: 0,
+						ratingTotal: 0,
+						active: true,
+						photoURL: userInfo.photoURL
+					};
+
+					saveCenter(data, 'petCenters');
+					saveUserInfo(data, 'userInfo', () => {
+						props.dispatch(actions.actualizarCliente(data));
+						setModalVisible();
+					});
+				} else {
+					setIsLoading(false);
+				}
 			}
 		}
 	};
@@ -175,7 +216,7 @@ const UserData = (props) => {
 				>
 					<View style={userInfoStyle.centeredView}>
 						<View style={userInfoStyle.modalView}>
-							<Text style={userInfoStyle.modalText}>Completa Tu Registro!</Text>
+							<Text style={userInfoStyle.modalText}>¡Completa tu registro!</Text>
 
 							<ButtonGroup
 								onPress={(even) => setUserType(even)}
@@ -211,7 +252,7 @@ const UserData = (props) => {
 								onChange={(even) => setphone(even.nativeEvent.text)}
 							/>
 
-							{userType != 0 && (
+							{userType == 1 && (
 								<Input
 									placeholder="Dirección"
 									containerStyle={userInfoStyle.input}
@@ -234,7 +275,7 @@ const UserData = (props) => {
 									onPress={(even) => setTime(even)}
 									selectedIndex={time}
 									buttons={buttonTime}
-									containerStyle={userInfoStyle.buttonGroup}
+									containerStyle={[ userInfoStyle.buttonGroup, { marginTop: -1 } ]}
 								/>
 							)}
 

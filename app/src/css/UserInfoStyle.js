@@ -43,7 +43,8 @@ export const style = {
 		fontWeight: 'bold'
 	},
 	modalText: {
-		marginBottom: 5,
+		marginTop: -12,
+		marginBottom: -2,
 		textAlign: 'center',
 		fontSize: 24,
 		color: '#1A89E7',
