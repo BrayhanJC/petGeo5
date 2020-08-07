@@ -10,7 +10,7 @@ import TitleItem from '../../components/formView/TitleItem';
 import InfoItem from '../../components/formView/InfoItem';
 import EditRecord from '../../components/UpdateRecords/EditRecords';
 import { useFocusEffect } from '@react-navigation/native';
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 const db = firebase.firestore(firebaseApp);
@@ -81,7 +81,12 @@ const PetView = (props) => {
 
 	return (
 		<ScrollView vertical>
-			<CarouselImages image_ids={pet.image_id} height={200} width={screenWidth} image_default={require('../../../assets/img/avatar_dog.png')}/>
+			<CarouselImages
+				image_ids={pet.image}
+				height={200}
+				width={screenWidth}
+				image_default={require('../../../assets/img/avatar_dog.png')}
+			/>
 			<TitleItem name={pet.name} description={pet.description} showRating={false} showDescription={true} />
 			<InfoItem name={pet.name} listInfo={listInfo} showMap={false} nameInfo="la Mascota" />
 			<View style={{ flex: 1, marginTop: 30 }}>

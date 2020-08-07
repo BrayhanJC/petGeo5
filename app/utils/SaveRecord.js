@@ -77,17 +77,15 @@ export const saveCollection = (
 export const listRecords = (collectionName, setTotalElements, setElements, setStartElement) => {
 	db.collection(collectionName).get().then((response) => {
 		//console.log(snap.proto)
-		var sizeElement = 0
+		var sizeElement = 0;
 		response.forEach((doc) => {
 			const element = doc.data();
-			
-			if (element.active){
+
+			if (element.active) {
 				sizeElement++;
 			}
 			setTotalElements(sizeElement);
-			
 		});
-		
 	});
 
 	const resultElements = [];
@@ -97,10 +95,9 @@ export const listRecords = (collectionName, setTotalElements, setElements, setSt
 		response.forEach((doc) => {
 			const element = doc.data();
 			element.id = doc.id;
-			if (element.active){
+			if (element.active) {
 				resultElements.push(element);
 			}
-			
 		});
 		setElements(resultElements);
 	});
@@ -416,7 +413,8 @@ export const createPetFound = (collectionData, toastRef, navigation, record_id, 
 				.doc(record_id)
 				.set({ active: false }, { merge: true })
 				.then((response) => {
-					navigation.navigate('HomeStack');
+					//navigation.navigate('HomeStack');
+					goBack();
 					setloading(false);
 				})
 				.catch((response) => {

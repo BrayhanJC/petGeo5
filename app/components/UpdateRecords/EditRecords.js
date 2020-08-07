@@ -22,6 +22,9 @@ function EditRecord(props) {
 	const [ user, setUser ] = useState(false);
 	const [ currentUser, setCurrentUser ] = useState('');
 
+	console.log('esto es lo del pet por editrecord')
+	console.log(pet)
+
 	const returnData = () => {
 		const data = route.params;
 

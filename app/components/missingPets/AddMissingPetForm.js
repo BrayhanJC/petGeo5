@@ -19,6 +19,7 @@ import { getRecord } from '../../utils/SaveRecord';
 import { useFocusEffect } from '@react-navigation/native';
 import RNPickerSelect from 'react-native-picker-select';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { pickerStyleView } from '../../src/css/PickerStyle';
 /**
  * Crea un nuevo registro de mascotas extraviadas
  * @param {*} props 
@@ -66,7 +67,7 @@ function AddMissinPetForm(props) {
 					phone: userData[0].phone ? userData[0].phone : '',
 					address: userData[0].address ? userData[0].address : '',
 					location: userData[0].location ? userData[0].location : '',
-					image_id: elements[index].image_id ? elements[index].image_id : ''
+					image_id: elements[index].image ? elements[index].image : ''
 				});
 			}
 		}
@@ -113,6 +114,7 @@ function AddMissinPetForm(props) {
 		}
 	};
 
+	
 	return (
 		<KeyboardAwareScrollView>
 			<ScrollView style={styleForm.scrollView}>
@@ -121,10 +123,10 @@ function AddMissinPetForm(props) {
 					toastRef={toastRef}
 					widhtScreen={widhtScreen}
 					imageMain={imageSelected[0]}
-					image_default={require('../../../assets/img/lost_pet.png')}
+					image_default={require('../../../assets/img/lost_pet_default.png')}
 				/>
 
-				<View style={styleForm.viewForm}>
+				<View style={[ pickerStyleView.picker, { marginLeft: 30, marginRight: 30, marginBottom: -4 } ]}>
 					<RNPickerSelect
 						onValueChange={(value) => setPet(value)}
 						placeholder={{

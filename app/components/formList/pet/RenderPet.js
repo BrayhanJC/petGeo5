@@ -16,7 +16,7 @@ function RenderPet(props) {
 	const { elements, navigation, collectionName, width } = props;
 	const {
 		id,
-		image_id,
+		image,
 		name,
 		type,
 		sex,
@@ -27,6 +27,8 @@ function RenderPet(props) {
 		empty,
 		create_date
 	} = elements.item;
+	console.log('holi')
+	console.log(elements.item)
 
 	var mainImage = '';
 
@@ -38,7 +40,7 @@ function RenderPet(props) {
 			create_uid,
 			data_collection: {
 				id,
-				image: image_id,
+				image,
 				name,
 				type,
 				sex,
@@ -50,10 +52,11 @@ function RenderPet(props) {
 			}
 		});
 	};
+
 	if (empty) {
 		return <View style={[ styles.item_blank, { backgroundColor: 'white' } ]} />;
 	} else {
-		mainImage = image_id[0];
+		mainImage = image[0];
 	}
 
 	var total_distance = 0;

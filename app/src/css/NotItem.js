@@ -5,9 +5,9 @@ export const search = {
         marginBottom:0,
     },
     notFound:{
-       
-        alignItems: 'center',
-        
+       alignItems: 'center',
+
+     
     },
     image:{
         height:520,

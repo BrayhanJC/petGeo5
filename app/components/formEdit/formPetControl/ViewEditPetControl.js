@@ -16,6 +16,7 @@ import Toast from 'react-native-easy-toast';
 import FormEditPetControl from './FormEditPetControl';
 import { isEmpty } from 'lodash';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 const widhtScreen = Dimensions.get('window').width;
 
 function ViewEditPetControl(props) {
@@ -75,7 +76,7 @@ function ViewEditPetControl(props) {
 					toastRef={toastRef}
 					widhtScreen={widhtScreen}
 					imageMain={imageSelected[0]}
-					image_default={require('../../../../assets/img/default_comedog.jpg')}
+					image_default={require('../../../../assets/img/control_pet.png')}
 				/>
 
 				<FormEditPetControl

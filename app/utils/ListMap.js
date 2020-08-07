@@ -19,7 +19,10 @@ export const ListMap = (collectionName, setElements, resultElements) => {
 				const element = doc.data();
 				element.id = doc.id;
 				element.collection = collectionName;
-				resultElements.push(element);
+				
+				if (element.active) {
+					resultElements.push(element);
+				}
 			});
 			setElements([ ...resultElements ]);
 		})

@@ -8,6 +8,7 @@ import { stylePicker } from '../../src/css/PickerSelect';
 import { TYPE_CONTROL } from '../../utils/Configurations';
 import { getRecord } from '../../utils/SaveRecord';
 import { useFocusEffect } from '@react-navigation/native';
+import { pickerStyleView } from '../../src/css/PickerStyle';
 
 /**
  * Formulario para la creacion de un nuevo control
@@ -47,34 +48,36 @@ function PetControlForm(props) {
 
 	return (
 		<View>
-			<RNPickerSelect
-				onValueChange={(value) => setPet(value)}
-				placeholder={{
-					label: 'Mascota',
-					value: null,
-					color: '#1A89E7'
-				}}
-				style={stylePicker}
-				items={list_pets}
-				Icon={() => {
-					return <View style={stylePicker.iconStyle} />;
-				}}
-			/>
-
-			<RNPickerSelect
-				onValueChange={(value) => setTypeControl(value)}
-				placeholder={{
-					label: 'Tipo de Control',
-					value: null,
-					color: '#1A89E7'
-				}}
-				style={stylePicker}
-				items={TYPE_CONTROL}
-				Icon={() => {
-					return <View style={stylePicker.iconStyle} />;
-				}}
-			/>
-
+			<View style={pickerStyleView.picker}>
+				<RNPickerSelect
+					onValueChange={(value) => setPet(value)}
+					placeholder={{
+						label: 'Mascota',
+						value: null,
+						color: '#1A89E7'
+					}}
+					style={stylePicker}
+					items={list_pets}
+					Icon={() => {
+						return <View style={stylePicker.iconStyle} />;
+					}}
+				/>
+			</View>
+			<View style={pickerStyleView.picker}>
+				<RNPickerSelect
+					onValueChange={(value) => setTypeControl(value)}
+					placeholder={{
+						label: 'Tipo de Control',
+						value: null,
+						color: '#1A89E7'
+					}}
+					style={stylePicker}
+					items={TYPE_CONTROL}
+					Icon={() => {
+						return <View style={stylePicker.iconStyle} />;
+					}}
+				/>
+			</View>
 			<Input
 				placeholder="Nombre Control"
 				containerStyle={styleCreateForm.input}

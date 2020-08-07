@@ -62,19 +62,20 @@ function FormEdit(props) {
 						justifyContent: 'space-between',
 
 						marginLeft: 15,
-						marginBottom: 10
+						marginBottom: 3
 					}}
 				>
 					<Text style={{ fontWeight: 'bold' }}>Mascota Encontrada</Text>
 					<Switch
 						style={{
-							top: -5,
+							top: -3,
 							position: 'absolute',
 							alignContent: 'flex-end',
-							left: 200,
-							marginBottom: 10
+							left: 150,
+							marginBottom: 3
 						}}
-						trackColor={{ true: '#1A89E7', false: 'grey' }}
+						trackColor={{ true: '#5fadee', false: '#C2C2C2' }}
+						thumbColor={petFound ? "#5fadee" : "#C2C2C2"}
 						onValueChange={(response) => setpetFound(response)}
 						value={petFound}
 					/>

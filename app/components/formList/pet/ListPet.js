@@ -60,7 +60,7 @@ function ListPet(props) {
 									elements={elementData}
 									navigation={navigation}
 									width={WIDTH}
-									collectionName="petCenters"
+									collectionName="pet"
 								/>
 							);
 						}}

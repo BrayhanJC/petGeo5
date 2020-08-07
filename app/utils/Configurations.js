@@ -496,6 +496,8 @@ export const returnNameFormView = (collection) => {
  * @param { nombre de la coleccion} collection
  */
 export const returnNameFormViewEdit = (collection) => {
+	console.log('nombre de la coleccion')
+	console.log(collection)
 	if (collection === 'comedogs') {
 		return 'ViewEditComedog';
 	}
@@ -508,7 +510,7 @@ export const returnNameFormViewEdit = (collection) => {
 	if (collection === 'news') {
 		return 'ViewEditNews';
 	}
-	if (collection === 'pets') {
+	if (collection === 'pets' || collection == 'pet') {
 		return 'ViewEditPet';
 	}
 	if (collection === 'petControl') {

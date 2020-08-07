@@ -54,13 +54,11 @@ function ViewEdit(props) {
 			create_name: data_collection.create_name,
 			create_uid: data_collection.create_uid,
 			create_date: data_collection.create_date,
-			active:true 
+			active: true
 		};
 
 		if (title && address && description && imageSelected && phone && location) {
-			// console.log('la coleccion es asi : ' + route.params.collectionName.toString());
-			// console.log(petFound);
-			// console.log(petFound && route.params.collectionName == 'missingPets');
+
 			if (petFound && route.params.collectionName == 'missingPets') {
 				setloading(true);
 				uploadImageStorage(imageSelected, 'petsFound')
@@ -69,8 +67,6 @@ function ViewEdit(props) {
 						createPetFound(data, toastRef, navigation, route.params.id, setloading);
 					})
 					.catch((response) => {
-						//console.log(response)
-						//console.log('error');
 						setloading(false);
 					});
 			} else {
@@ -83,52 +79,52 @@ function ViewEdit(props) {
 
 	return (
 		<KeyboardAwareScrollView>
-		<ScrollView style={styleForm.scrollView}>
-			<ImageMain
-				styleImageMain={styleImageMain}
-				toastRef={toastRef}
-				widhtScreen={widhtScreen}
-				imageMain={imageSelected[0]}
-				image_default={require('../../../../assets/img/default_comedog.jpg')}
-			/>
+			<ScrollView style={styleForm.scrollView}>
+				<ImageMain
+					styleImageMain={styleImageMain}
+					toastRef={toastRef}
+					widhtScreen={widhtScreen}
+					imageMain={imageSelected[0]}
+					image_default={require('../../../../assets/img/default_comedog.jpg')}
+				/>
 
-			<FormEdit
-				placeholder_title={placeholder_title}
-				placeholder_description={placeholder_description}
-				default_name={data_collection.name}
-				default_address={data_collection.address}
-				default_description={data_collection.description}
-				default_phone={data_collection.phone}
-				addressVisible={true}
-				styleForm={styleForm}
-				setTitle={setTitle}
-				setAddress={setAddress}
-				setPhone={setPhone}
-				setDescription={setDescription}
-				setIsVisibleMap={setIsVisibleMap}
-				locationForm={location}
-				isMissingPet={isMissingPet}
-				petFound={petFound}
-				setpetFound={setpetFound}
-			/>
-			<UploadImage
-				styleUploadImage={styleUploadImage}
-				toastRef={toastRef}
-				imageSelected={imageSelected}
-				setImageSelected={setImageSelected}
-			/>
+				<FormEdit
+					placeholder_title={placeholder_title}
+					placeholder_description={placeholder_description}
+					default_name={data_collection.name}
+					default_address={data_collection.address}
+					default_description={data_collection.description}
+					default_phone={data_collection.phone}
+					addressVisible={true}
+					styleForm={styleForm}
+					setTitle={setTitle}
+					setAddress={setAddress}
+					setPhone={setPhone}
+					setDescription={setDescription}
+					setIsVisibleMap={setIsVisibleMap}
+					locationForm={location}
+					isMissingPet={isMissingPet}
+					petFound={petFound}
+					setpetFound={setpetFound}
+				/>
+				<UploadImage
+					styleUploadImage={styleUploadImage}
+					toastRef={toastRef}
+					imageSelected={imageSelected}
+					setImageSelected={setImageSelected}
+				/>
 
-			<Button buttonStyle={styleForm.btnCreate} title={text_button} onPress={onSubmit} />
+				<Button buttonStyle={styleForm.btnCreate} title={text_button} onPress={onSubmit} />
 
-			<Map
-				isVisibleMap={isVisibleMap}
-				setIsVisibleMap={setIsVisibleMap}
-				toastRef={toastRef}
-				setLocationForms={setLocation}
-			/>
-			<Loading isVisible={loading} text="Actualizando..." />
-			<Toast ref={toastRef} position="center" opacity={0.9} />
-		</ScrollView>
+				<Map
+					isVisibleMap={isVisibleMap}
+					setIsVisibleMap={setIsVisibleMap}
+					toastRef={toastRef}
+					setLocationForms={setLocation}
+				/>
+				<Loading isVisible={loading} text="Actualizando..." />
+				<Toast ref={toastRef} position="center" opacity={0.9} />
+			</ScrollView>
 		</KeyboardAwareScrollView>
 	);
 }

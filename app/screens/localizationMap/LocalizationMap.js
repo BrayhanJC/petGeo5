@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Text, View, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, Dimensions, ScrollView, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 import MapView, { Marker, Callout } from 'react-native-maps';
 import * as Location from 'expo-location';
@@ -121,28 +121,6 @@ function LocalizationMap(props) {
 		});
 	};
 
-
-
-
-
-	
-
-
-
-	// var points = [
-	// 	{ name: 'brayhan', distance: 40 },
-	// 	{ name: 'katherine', distance: 100 },
-	// 	{ name: 'martha', distance: 1 },
-	// 	{ name: 'gildardo', distance: 5 },
-	// 	{ name: 'sasha', distance: 25 },
-	// 	{ name: 'maria', distance: 10 }
-	// ];
-	// points.sort(function(a, b) {
-	// 	return a['distance'] - b['distance'];
-	// });
-
-
-
 	//filtro que permite ocultar o mostrar información de los comedogs, centros o mascotas extraviadas
 	//sin tener que refrescar el componente, de esta manera se logra una respuesta mas rapida
 	var aux = result.filter((valueItem) => {
@@ -190,13 +168,18 @@ function LocalizationMap(props) {
 										goElement(returnNameFormView(record.collection), record.id, record.name)}
 								>
 									<ScrollView vertical>
-										<View style={{ borderRadius: 35, marginRight: 4 }}>
-											<CarouselImages
-												image_ids={record.image}
-												height={85}
-												width={180}
-												style={{ margin: 2, borderRadius: 30 }}
-											/>
+										<View style={{ marginTop: -35 }}>
+											<Text>
+												{' '}
+												<Image
+													style={{
+														height: 95,
+														width: 180
+													}}
+													source={{ uri: record.image[0] }}
+													resizeMode="cover"
+												/>{' '}
+											</Text>
 										</View>
 										<View style={mapInfoStyle.viewComponent}>
 											<Text style={mapInfoStyle.nameItem}>{record.name}</Text>

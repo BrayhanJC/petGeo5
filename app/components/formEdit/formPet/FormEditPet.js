@@ -7,6 +7,7 @@ import RNPickerSelect, { defaultStyles } from 'react-native-picker-select';
 import DatePicker from 'react-native-datepicker';
 import { styleCreateForm } from '../../../src/css/CreateForm';
 import { RAZA, TYPE_SEX, TYPE_PETS, RAZA_CAT } from '../../../utils/Configurations';
+import { pickerStyleView } from '../../../src/css/PickerStyle';
 
 /**
  * Componente que sirve para Editar:
@@ -37,9 +38,7 @@ function FormEditPet(props) {
 		default_sex,
 		default_raza,
 		valueRaza,
-		valueSex,
-		
-		
+		valueSex
 	} = props;
 	const onChange = (event, selectedDate) => {
 		const currentDate = selectedDate;
@@ -53,7 +52,7 @@ function FormEditPet(props) {
 	} else if (valueTypePet === 'Gato') {
 		raza = RAZA_CAT;
 	} else {
-		raza = [{ label: 'Otro', value: 'Otro' }]
+		raza = [ { label: 'Otro', value: 'Otro' } ];
 	}
 	return (
 		<View style={styleForm.viewForm}>
@@ -70,68 +69,82 @@ function FormEditPet(props) {
 				}}
 				defaultValue={default_name}
 			/>
-			<RNPickerSelect
-				onValueChange={(value) => setValueTypePet(value)}
-				placeholder={{
-					label: 'Tipo Mascota',
-					value: '',
-					color: '#1A89E7'
+			<View
+				style={{
+					position: 'relative',
+					flexDirection: 'row',
+					justifyContent: 'space-between',
+					marginLeft: 10,
+					marginRight: 10
 				}}
-				style={pickerSelectStyles}
-				items={TYPE_PETS}
-				value={valueTypePet}
-				Icon={() => {
-					return (
-						<View
-							style={{
-								marginTop: 22,
-								marginRight: 25,
-								backgroundColor: 'transparent',
-								borderTopWidth: 10,
-								borderTopColor: '#C2C2C2',
-								borderRightWidth: 10,
-								borderRightColor: 'transparent',
-								borderLeftWidth: 10,
-								borderLeftColor: 'transparent',
-								width: 0,
-								height: 0
-							}}
-						/>
-					);
-				}}
-			/>
+			>
+				<View style={pickerStyleView.pickerPet}>
+					<RNPickerSelect
+						onValueChange={(value) => setValueTypePet(value)}
+						placeholder={{
+							label: 'Tipo Mascota',
+							value: '',
+							color: '#1A89E7'
+						}}
+						style={pickerSelectStyles}
+						items={TYPE_PETS}
+						value={valueTypePet}
+						Icon={() => {
+							return (
+								<View
+									style={{
+										marginTop: 22,
+										marginRight: 25,
+										backgroundColor: 'transparent',
+										borderTopWidth: 10,
+										borderTopColor: '#C2C2C2',
+										borderRightWidth: 10,
+										borderRightColor: 'transparent',
+										borderLeftWidth: 10,
+										borderLeftColor: 'transparent',
+										width: 0,
+										height: 0
+									}}
+								/>
+							);
+						}}
+					/>
+				</View>
+				<View style={pickerStyleView.pickerPet}>
+					<RNPickerSelect
+						onValueChange={(value) => setValueSex(value)}
+						placeholder={{
+							label: 'Género',
+							value: '',
+							color: '#1A89E7'
+						}}
+						value={valueSex}
+						style={pickerSelectStyles}
+						items={TYPE_SEX}
+						Icon={() => {
+							return (
+								<View
+									style={{
+										marginTop: 22,
+										marginRight: 25,
+										backgroundColor: 'transparent',
+										borderTopWidth: 10,
+										borderTopColor: '#C2C2C2',
+										borderRightWidth: 10,
+										borderRightColor: 'transparent',
+										borderLeftWidth: 10,
+										borderLeftColor: 'transparent',
+										width: 0,
+										height: 0
+									}}
+								/>
+							);
+						}}
+					/>
+				</View>
+			</View>
 
-			<RNPickerSelect
-				onValueChange={(value) => setValueSex(value)}
-				placeholder={{
-					label: 'Género',
-					value: '',
-					color: '#1A89E7'
-				}}
-				value={valueSex}
-				style={pickerSelectStyles}
-				items={TYPE_SEX}
-				Icon={() => {
-					return (
-						<View
-							style={{
-								marginTop: 22,
-								marginRight: 25,
-								backgroundColor: 'transparent',
-								borderTopWidth: 10,
-								borderTopColor: '#C2C2C2',
-								borderRightWidth: 10,
-								borderRightColor: 'transparent',
-								borderLeftWidth: 10,
-								borderLeftColor: 'transparent',
-								width: 0,
-								height: 0
-							}}
-						/>
-					);
-				}}
-			/>
-
+			<View style={pickerStyleView.picker}>
 			<RNPickerSelect
 				onValueChange={(value) => setValueRaza(value)}
 				placeholder={{
@@ -162,6 +175,7 @@ function FormEditPet(props) {
 					);
 				}}
 			/>
+			</View>
 
 			<View style={styleCreateForm.textAreaContainer}>
 				<TextInput
@@ -180,7 +194,6 @@ function FormEditPet(props) {
 				style={{ width: '90%', marginLeft: 15, marginRight: 30 }}
 				date={valueDate.date}
 				mode="date"
-				
 				placeholder="select date"
 				format="MMMM DD YYYY"
 				confirmBtnText="Confirmar"
