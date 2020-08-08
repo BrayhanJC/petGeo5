@@ -21,6 +21,42 @@ function Menu(props) {
 
 	return (
 		<View style={style.container}>
+			{!firebase.auth().currentUser && (
+				<View style={style.bgContainer}>
+					<TouchableOpacity
+						onPress={() => {
+							props.navigation.navigate('ProfileDrawer');
+						}}
+					>
+						<View style={[ style.userContainer, { marginTop: -20 } ]}>
+							<Image
+								style={[ style.userImagen, { height: 200, width: 200 } ]}
+								resizeMode="cover"
+								source={require('../../../assets/img/icon_main.png')}
+							/>
+						</View>
+
+						<View
+							style={{
+								backgroundColor: '#D5D8DC',
+								borderTopLeftRadius: 0,
+								borderTopRightRadius: 50,
+								marginTop: -20,
+								//borderBottomRightRadius: 100,
+								//borderBottomLeftRadius:100,
+								marginRight: 1
+							}}
+						>
+							<View style={style.userNombre}>
+								<Text style={style.userTitulo}> Entérate de los eventos o sucesos más importantes de tu ciudad... </Text>
+								<Text style={style.userSubTitulo}>
+									
+								</Text>
+							</View>
+						</View>
+					</TouchableOpacity>
+				</View>
+			)}
 			{firebase.auth().currentUser && (
 				<View style={style.bgContainer}>
 					<TouchableOpacity

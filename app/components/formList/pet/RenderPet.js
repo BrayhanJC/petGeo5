@@ -17,6 +17,7 @@ function RenderPet(props) {
 	const {
 		id,
 		image,
+		image_id,
 		name,
 		type,
 		sex,
@@ -27,8 +28,7 @@ function RenderPet(props) {
 		empty,
 		create_date
 	} = elements.item;
-	console.log('holi')
-	console.log(elements.item)
+
 
 	var mainImage = '';
 
@@ -41,6 +41,7 @@ function RenderPet(props) {
 			data_collection: {
 				id,
 				image,
+				image_id,
 				name,
 				type,
 				sex,
@@ -56,7 +57,7 @@ function RenderPet(props) {
 	if (empty) {
 		return <View style={[ styles.item_blank, { backgroundColor: 'white' } ]} />;
 	} else {
-		mainImage = image[0];
+		mainImage = image_id[0];
 	}
 
 	var total_distance = 0;

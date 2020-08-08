@@ -13,9 +13,10 @@ function UploadImage(props) {
 		<View style={styleImageMain.viewPhoto}>
 			<Image
 				source={imageMain ? { uri: imageMain } : image_default}
+				//resizeMode="stretch"
 				style={{
 					width: widhtScreen,
-					height: 200
+					height: 230
 				}}
 			/>
 		</View>

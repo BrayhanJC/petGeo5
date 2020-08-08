@@ -29,8 +29,6 @@ function ViewEditPet(props) {
 	//console.log('capturando los datos de la mascota');
 	const data_collection = route.params.pet;
 
-	console.log(data_collection);
-
 	const [ loading, setloading ] = useState(false);
 
 	const [ valueTypePet, setValueTypePet ] = useState(data_collection.type ? data_collection.type : '');
@@ -38,14 +36,16 @@ function ViewEditPet(props) {
 	const [ namePet, setNamePet ] = useState(data_collection.name ? data_collection.name : '');
 	const [ description, setDescription ] = useState(data_collection.description ? data_collection.description : '');
 	const [ valueRaza, setValueRaza ] = useState(data_collection.raza ? data_collection.raza : '');
-	const [ valueDate, setValueDate ] = useState({ date: data_collection.date_birth.date ? data_collection.date_birth.date :new Date() });
+	const [ valueDate, setValueDate ] = useState({
+		date: data_collection.date_birth.date ? data_collection.date_birth.date : new Date()
+	});
 	const [ imageSelected, setImageSelected ] = useState(data_collection.image ? data_collection.image : []);
 	const [ error, setError ] = useState('');
 
 	const onSubmit = () => {
 		const data = {
 			name: namePet,
-			image: imageSelected,
+			image_id: imageSelected,
 			raza: valueRaza,
 			sex: valueSex,
 			type: valueTypePet,
@@ -69,9 +69,6 @@ function ViewEditPet(props) {
 			}
 		}
 	};
-
-	console.log('la fecha es:')
-	console.log(data_collection)
 
 	return (
 		<KeyboardAwareScrollView>

@@ -4,44 +4,41 @@ import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
 import RNPickerSelect from 'react-native-picker-select';
 import { stylePicker } from '../../../src/css/PickerSelect';
 import { styleCreateForm } from '../../../src/css/CreateForm';
-import {SPECIALITY} from '../../../utils/Configurations'
+import { SPECIALITY } from '../../../utils/Configurations';
 import { stylePetForm } from '../../../src/css/PetForm';
+import { pickerStyleView } from '../../../src/css/PickerStyle';
 function FormEditVeterinary(props) {
 	const {
-
 		setDescription,
 		setSpecialty,
 		specialty,
 		setName,
-
 		description,
-
 		styleForm,
-
-
 		placeholder_title,
 		placeholder_description,
 		default_name,
-		default_description,
-	
+		default_description
 	} = props;
 
 	return (
 		<View style={stylePetForm.viewForm}>
-			<RNPickerSelect
-				onValueChange={(value) => setSpecialty(value)}
-				placeholder={{
-					label: 'Especialidad',
-					value: null,
-					color: '#1A89E7'
-				}}
-				value={specialty}
-				style={stylePicker}
-				items={SPECIALITY}
-				Icon={() => {
-					return <View style={stylePicker.iconStyle} />;
-				}}
-			/>
+			<View style={pickerStyleView.picker}>
+				<RNPickerSelect
+					onValueChange={(value) => setSpecialty(value)}
+					placeholder={{
+						label: 'Especialidad',
+						value: null,
+						color: '#1A89E7'
+					}}
+					value={specialty}
+					style={stylePicker}
+					items={SPECIALITY}
+					Icon={() => {
+						return <View style={stylePicker.iconStyle} />;
+					}}
+				/>
+			</View>
 
 			<Input
 				placeholder="Nombre Completo"
@@ -50,7 +47,7 @@ function FormEditVeterinary(props) {
 				errorStyle={{ color: 'red' }}
 				onChange={(even) => setName(even.nativeEvent.text)}
 				defaultValue={default_name}
-			/>	
+			/>
 
 			<View style={styleCreateForm.textAreaContainer}>
 				<TextInput

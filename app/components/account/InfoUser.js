@@ -29,7 +29,9 @@ function InfoUser(props) {
 		} else {
 			const result = await ImagePicker.launchImageLibraryAsync({
 				allowsEditing: true,
-				aspect: [ 4, 3 ]
+				mediaTypes: ImagePicker.MediaTypeOptions.Images,
+				aspect: [ 2, 1 ],
+				quality: 0.1,
 			});
 
 			if (result.cancelled) {
@@ -41,7 +43,7 @@ function InfoUser(props) {
 					})
 					.catch((response) => {
 						setLoading(false);
-						console.log(response)
+						//console.log(response)
 						toastRef.current.show('Error! No se ha podido subir la imagen');
 					});
 			}

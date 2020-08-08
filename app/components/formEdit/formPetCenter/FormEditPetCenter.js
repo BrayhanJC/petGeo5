@@ -22,7 +22,6 @@ function FormEditPetCenter(props) {
 		setIsVisibleMap,
 		locationForm,
 		setPhone,
-
 		placeholder_title,
 		placeholder_description,
 		default_name,
@@ -34,7 +33,8 @@ function FormEditPetCenter(props) {
 		buttonTime,
 		time,
 		setTime,
-		setWebsite
+		setWebsite,
+		userTypeCenter
 	} = props;
 
 	return (
@@ -52,7 +52,7 @@ function FormEditPetCenter(props) {
 				}}
 				defaultValue={default_name}
 			/>
-			{addressVisible && (
+			{userTypeCenter == 'veterinary' && (
 				<Input
 					placeholder="Dirección"
 					containerStyle={styleForm.input}
@@ -83,28 +83,31 @@ function FormEditPetCenter(props) {
 				}}
 				defaultValue={default_phone}
 			/>
-
-			<Text
-				style={{
-					color: 'gray',
-					alignItems: 'center',
-					textAlign: 'center',
-					fontSize: 19
-				}}
-			>
-				Horario de Atención
-			</Text>
-			<ButtonGroup
-				onPress={(even) => setTime(even)}
-				selectedIndex={time}
-				buttons={buttonTime}
-				containerStyle={{
-					height: 35,
-					borderRadius: 50,
-					borderColor: '#C2C2C2',
-					borderWidth: 2
-				}}
-			/>
+			{userTypeCenter == 'veterinary' && (
+				<Text
+					style={{
+						color: 'gray',
+						alignItems: 'center',
+						textAlign: 'center',
+						fontSize: 19
+					}}
+				>
+					Horario de Atención
+				</Text>
+			)}
+			{userTypeCenter == 'veterinary' && (
+				<ButtonGroup
+					onPress={(even) => setTime(even)}
+					selectedIndex={time}
+					buttons={buttonTime}
+					containerStyle={{
+						height: 35,
+						borderRadius: 50,
+						borderColor: '#C2C2C2',
+						borderWidth: 2
+					}}
+				/>
+			)}
 
 			<Input
 				placeholder="Sitio Web"

@@ -63,7 +63,9 @@ function UploadImage(props) {
 		} else {
 			const result = await ImagePicker.launchImageLibraryAsync({
 				allowsEditing: true,
-				aspect: [ 4, 3 ]
+				mediaTypes: ImagePicker.MediaTypeOptions.Images,
+				aspect: [ 2, 1 ],
+				quality: 0.1,
 			});
 
 			if (result.cancelled) {

@@ -57,6 +57,7 @@ function CreatePetForm(props) {
 						raza: valueRaza,
 						date_birth: valueDate.date,
 						image_id: response,
+						image: response,
 						create_uid: firebase.auth().currentUser.uid,
 						create_date: new Date(),
 						description,
@@ -72,7 +73,6 @@ function CreatePetForm(props) {
 						setIsLoading,
 						'Error al guardar la Mascota ' + namePet
 					);
-					//setNamePet('');
 				})
 				.catch(() => {
 					setIsLoading(false);

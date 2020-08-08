@@ -7,7 +7,7 @@ export const imageMain = {
 		marginLeft: 20,
         marginRight: 20,
         alignItems: 'center',
-        height: 200,
+        height: 230,
        
    
     },

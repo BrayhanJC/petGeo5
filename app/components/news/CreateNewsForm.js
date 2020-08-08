@@ -50,6 +50,8 @@ function CreateNewsForm(props) {
 			);
 		} else {
 			setIsLoading(true);
+
+			var user_complete =  firebase.auth().currentUser
 			uploadImageStorage(imageSelected, 'news').then((response) => {
 				saveCollection(
 					{
@@ -59,8 +61,8 @@ function CreateNewsForm(props) {
 						location: locationNew,
 						image: response,
 						create_date: new Date(),
-						create_uid: firebase.auth().currentUser.uid,
-						create_name: firebase.auth().currentUser.displayName,
+						create_uid: user_complete.uid,
+						create_name: user_complete.displayName,
 						phone,
 						isAdoption,
 						quantityVoting: 0,
@@ -78,8 +80,6 @@ function CreateNewsForm(props) {
 			});
 		}
 	};
-
-	//const {title, setTitle, address, setAddress, description, setDescription, btnName, addressVisible} = props
 
 	return (
 		<KeyboardAwareScrollView>

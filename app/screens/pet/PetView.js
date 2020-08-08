@@ -72,7 +72,7 @@ const PetView = (props) => {
 			action: null
 		},
 		{
-			text: 'Nacimiento: ' + pet.date_birth.date,
+			text: 'Nacimiento: ' + pet.date_birth,
 			iconName: 'balloon',
 			iconType: 'material-community',
 			action: null
@@ -82,7 +82,7 @@ const PetView = (props) => {
 	return (
 		<ScrollView vertical>
 			<CarouselImages
-				image_ids={pet.image}
+				image_ids={pet.image_id}
 				height={200}
 				width={screenWidth}
 				image_default={require('../../../assets/img/avatar_dog.png')}

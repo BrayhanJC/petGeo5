@@ -38,17 +38,17 @@ function MissingPets(props) {
 
 	const [ location, setLocation ] = useState(null);
 	useEffect(() => {
-		(async () => {
-			const user = await firebase.auth().currentUser;
-			//cargando datos al userInfo, contiene toda la informacion del usuario
-			setUser(user);
+		// (async () => {
+		// 	const user = await firebase.auth().currentUser;
+		// 	//cargando datos al userInfo, contiene toda la informacion del usuario
+		// 	setUser(user);
 
-			// if (user) {
-			// 	if (user.uid) {
-			// 		getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
-			// 	}
-			// }
-		})();
+		// 	// if (user) {
+		// 	// 	if (user.uid) {
+		// 	// 		getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
+		// 	// 	}
+		// 	// }
+		// })();
 		(async () => {
 			const resultPermissions = await Permissions.askAsync(Permissions.LOCATION);
 			const statusPermissions = resultPermissions.permissions.location.status;
@@ -72,11 +72,11 @@ function MissingPets(props) {
 		useCallback(() => {
 			listRecords('missingPets', setTotalMissingPets, setMissingPets, setStartMissingPets);
 
-			if (user) {
-				if (user.uid) {
-					getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
-				}
-			}
+			// if (user) {
+			// 	if (user.uid) {
+			// 		getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
+			// 	}
+			// }
 		}, [])
 	);
 	//retornar los datos en order de distancia
@@ -140,14 +140,7 @@ function MissingPets(props) {
 				/>
 			)}
 
-			{/***
-			 * Modal que sirve para registrar el tipo de usuario
-			 */
-			modalVisible ? (
-				<UserData modalVisible={modalVisible} setModalVisible={setModalVisible} userInfo={user} />
-			) : (
-				<Text />
-			)}
+
 			{firebase.auth().currentUser && (
 				<Icon
 					containerStyle={buttonFormFloating.btnContainer}

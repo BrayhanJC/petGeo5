@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { View, Text, ScrollView, Alert, TextInput, StyleSheet, Picker } from 'react-native';
 import { Icon, Avatar, Image, Input, Button, Divider } from 'react-native-elements';
 import { styleCreateForm } from '../../src/css/CreateForm';
-import {SPECIALITY} from '../../utils/Configurations'
+import { SPECIALITY } from '../../utils/Configurations';
 import RNPickerSelect from 'react-native-picker-select';
 import { stylePicker } from '../../src/css/PickerSelect';
-
+import { pickerStyleView } from '../../src/css/PickerStyle';
 /**
  * Formulario para poder crear un veterinario
  * @param {*} props 
@@ -15,20 +15,21 @@ function PetDoctorForm(props) {
 
 	return (
 		<View>
-
-			<RNPickerSelect
-				onValueChange={(value) => setSpecialty(value)}
-				placeholder={{
-					label: 'Especialidad',
-					value: null,
-					color: '#1A89E7'
-				}}
-				style={stylePicker}
-				items={SPECIALITY}
-				Icon={() => {
-					return <View style={stylePicker.iconStyle} />;
-				}}
-			/>
+			<View style={pickerStyleView.picker}>
+				<RNPickerSelect
+					onValueChange={(value) => setSpecialty(value)}
+					placeholder={{
+						label: 'Especialidad',
+						value: null,
+						color: '#1A89E7'
+					}}
+					style={stylePicker}
+					items={SPECIALITY}
+					Icon={() => {
+						return <View style={stylePicker.iconStyle} />;
+					}}
+				/>
+			</View>
 
 			<Input
 				placeholder="Nombre Completo"
@@ -41,7 +42,7 @@ function PetDoctorForm(props) {
 
 			<View style={styleCreateForm.textAreaContainer}>
 				<TextInput
-          style={styleCreateForm.textArea}
+					style={styleCreateForm.textArea}
 					underlineColorAndroid="transparent"
 					placeholder="Biografía"
 					placeholderTextColor="grey"

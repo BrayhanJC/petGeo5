@@ -53,9 +53,9 @@ function CenterVeterinaryDoctor(props) {
 			const user = await firebase.auth().currentUser;
 			//cargando datos al userInfo, contiene toda la informacion del usuario
 			setUser(user);
-			if (firebase.auth().currentUser.uid) {
-				getInfoByUser('userInfo', firebase.auth().currentUser.uid, setElements, setModalVisible);
-			}
+			// if (firebase.auth().currentUser.uid) {
+			// 	getInfoByUser('userInfo', firebase.auth().currentUser.uid, setElements, setModalVisible);
+			// }
 		})();
 	}, []);
 

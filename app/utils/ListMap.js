@@ -3,6 +3,7 @@ import firebase from 'firebase/app';
 import 'firebase/storage';
 import 'firebase/firestore';
 const db = firebase.firestore(firebaseApp);
+import {size} from 'lodash'
 
 /**
  * Funcion que retorna los elementos para mostrarlos en el mapa
@@ -20,7 +21,7 @@ export const ListMap = (collectionName, setElements, resultElements) => {
 				element.id = doc.id;
 				element.collection = collectionName;
 				
-				if (element.active) {
+				if (element.active && size(element.location)>0) {
 					resultElements.push(element);
 				}
 			});

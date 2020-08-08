@@ -42,6 +42,7 @@ function CreateComedogForm(props) {
 			toastRef.current.show("Debes localizar tu noticia o evento en el mapa. Pulse el icono del mapa para hacerlo.", 3000);
 		} else {
 			setIsLoading(true);
+			var user_complete =  firebase.auth().currentUser
 			uploadImageStorage(imageSelected, 'Comedogs').then((response) => {
 				saveCollection(
 					{

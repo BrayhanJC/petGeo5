@@ -57,10 +57,10 @@ function AvatarMain(props) {
 		} else {
 			const result = await ImagePicker.launchImageLibraryAsync({
 				allowsEditing: true,
-				aspect: [ 4, 3 ]
+				mediaTypes: ImagePicker.MediaTypeOptions.Images,
+				aspect: [ 2, 1 ],
+				quality: 0.1,
 			});
-
-			//console.log(result);
 
 			if (result.cancelled) {
 				toastRef.current.show('Haz cerrado la galeria sin seleccionar ninguna imagen', 2000);

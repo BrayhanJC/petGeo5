@@ -77,16 +77,16 @@ function LocalizationMap(props) {
 						longitudeDelta: 0.001
 					});
 				}
-				const user = await firebase.auth().currentUser;
+				//const user = await firebase.auth().currentUser;
 
 				//cargando datos al userInfo, contiene toda la informacion del usuario
-				setUser(user);
+				//setUser(user);
 
-				if (user) {
-					if (user.uid) {
-						getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
-					}
-				}
+				// if (user) {
+				// 	if (user.uid) {
+				// 		getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
+				// 	}
+				// }
 			})();
 
 			ListMap('comedogs', setResult, resultElements);
@@ -98,15 +98,15 @@ function LocalizationMap(props) {
 		[ reload ]
 	);
 
-	useFocusEffect(
-		useCallback(() => {
-			if (user) {
-				if (user.uid) {
-					getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
-				}
-			}
-		}, [])
-	);
+	// useFocusEffect(
+	// 	useCallback(() => {
+	// 		if (user) {
+	// 			if (user.uid) {
+	// 				getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
+	// 			}
+	// 		}
+	// 	}, [])
+	// );
 
 	/**
 	 * Permite validar hacia que coleccion vamos a dirigirnos
@@ -194,14 +194,6 @@ function LocalizationMap(props) {
 					</MapView>
 				)}
 
-				{/***
-			 * Modal que sirve para registrar el tipo de usuario
-			 */
-				modalVisible ? (
-					<UserData modalVisible={modalVisible} setModalVisible={setModalVisible} userInfo={user} />
-				) : (
-					<Text />
-				)}
 				<FilterMap
 					filterGreen={filterGreen}
 					setFilterGreen={setFilterGreen}

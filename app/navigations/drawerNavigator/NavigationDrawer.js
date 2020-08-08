@@ -96,7 +96,7 @@ function NavigatorDrawer(props) {
 			}}
 
 			
-			drawerContent={(props) => <Menu {...props} />}
+			//drawerContent={(props) => <Menu {...props} />}
 		>
 			<Drawer.Screen
 				name="Home"
@@ -156,7 +156,7 @@ function NavigatorDrawer(props) {
 					options={{
 						title: 'Veterinarios',
 						drawerIcon: ({ color, size }) => (
-							<MaterialCommunityIcons name="account-multiple" color="#1A89E7" size={27} />
+							<MaterialCommunityIcons name="account-group" color="#1A89E7" size={27} />
 						)
 					}}
 				/>

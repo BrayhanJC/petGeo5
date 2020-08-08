@@ -52,7 +52,8 @@ function RenderCenter(props) {
 				create_uid,
 				create_date,
 				website: elements.item.website,
-				schedule: elements.item.schedule
+				schedule: elements.item.schedule,
+				userType: elements.item.userType
 			}
 		});
 	};
@@ -87,9 +88,13 @@ function RenderCenter(props) {
 							shadowOpacity: 0.5
 						}}
 					>
-						<View style={{ alignItems: 'center', backgroundColor: '#C2C2C2', borderRadius: 30 }}>
-							<Text style={{ fontWeight: 'bold', fontSize: 9, color: 'gray' }}>{total_distance} </Text>
-						</View>
+						{elements.item.userType == 'veterinary' && (
+							<View style={{ alignItems: 'center', backgroundColor: '#C2C2C2', borderRadius: 30 }}>
+								<Text style={{ fontWeight: 'bold', fontSize: 9, color: 'gray' }}>
+									{total_distance}{' '}
+								</Text>
+							</View>
+						)}
 					</View>
 					<View style={styles.avatar}>
 						<Avatar
@@ -104,7 +109,7 @@ function RenderCenter(props) {
 							}}
 						/>
 
-						<Text style={[styles.title, {marginTop:-3}]}>{name.substr(0, 18)}</Text>
+						<Text style={[ styles.title, { marginTop: 1 } ]}>{name.substr(0, 18)}</Text>
 					</View>
 				</View>
 
@@ -199,7 +204,7 @@ const styles = StyleSheet.create({
 		alignItems: 'flex-start'
 	},
 	description: {
-		marginTop:-3,
+		marginTop: -3,
 		fontSize: 9.5,
 		fontWeight: 'normal'
 	},

@@ -43,10 +43,10 @@ function UserGuest() {
 						<View style={{ ...StyleSheet.absoluteFillObject }} />
 						<View style={styles.footerContent}>
 							<View style={styles.container}>
-								<Text style={styles.title_footer}>Registrate...</Text>
-								<Text style={styles.description_footer}>
-									¿Como encontrarías tu mascotas si es extraviada? Buscala y administra los datos de
-									tu mascota?
+								<Text style={[styles.title_footer, {marginTop:-5}]}>Registrate...</Text>
+								<Text style={[styles.description_footer, {marginTop:-10}]}>
+									¿Como encontrarías tu mascotas si es extraviada? Búscala y administra los datos de
+									tu mascota...
 								</Text>
 								<Button
 									buttonStyle={styles.btnStyle}

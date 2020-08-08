@@ -34,29 +34,17 @@ function PetsFound(props) {
 	const [ item, setItem ] = useState([]);
 	const [ search, setSearch ] = useState('');
 
-	useEffect(() => {
-		(async () => {
-			const user = await firebase.auth().currentUser;
-			//cargando datos al userInfo, contiene toda la informacion del usuario
-			setUser(user);
-
-			if (user) {
-				if (user.uid) {
-					getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
-				}
-			}
-		})();
-	}, []);
+	// useEffect(() => {
+	// 	(async () => {
+	// 		const user = await firebase.auth().currentUser;
+	// 		//cargando datos al userInfo, contiene toda la informacion del usuario
+	// 		setUser(user);
+	// 	})();
+	// }, []);
 
 	useFocusEffect(
 		useCallback(() => {
 			listRecords('petsFound', setTotalPetFound, setPetFound, setStartPetFound);
-
-			if (user) {
-				if (user.uid) {
-					getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
-				}
-			}
 		}, [])
 	);
 
@@ -117,14 +105,6 @@ function PetsFound(props) {
 				/>
 			)}
 
-			{/***
-				 * Modal que sirve para registrar el tipo de usuario
-				 */
-			modalVisible ? (
-				<UserData modalVisible={modalVisible} setModalVisible={setModalVisible} userInfo={user} />
-			) : (
-				<Text />
-			)}
 		</View>
 	);
 }

@@ -77,11 +77,11 @@ function Comedogs(props) {
 	useFocusEffect(
 		useCallback(() => {
 			listRecords('comedogs', setTotalComedog, setComedog, setStartComedog);
-			if (user) {
-				if (user.uid) {
-					getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
-				}
-			}
+			// if (user) {
+			// 	if (user.uid) {
+			// 		getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
+			// 	}
+			// }
 		}, [])
 	);
 
@@ -147,14 +147,7 @@ function Comedogs(props) {
 				/>
 			)}
 
-			{/***
-			 * Modal que sirve para registrar el tipo de usuario
-			 */
-			modalVisible ? (
-				<UserData modalVisible={modalVisible} setModalVisible={setModalVisible} userInfo={user} />
-			) : (
-				<Text />
-			)}
+
 
 			{firebase.auth().currentUser && (
 				<Icon

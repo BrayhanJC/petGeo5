@@ -29,7 +29,6 @@ const CarouselImages = (props) => {
 				itemWidth={width}
 				renderItem={renderItem}
 				sliderHeight={height}
-				containerCustomStyle={{ borderRadius: 20 }}
 			/>
 		);
 	} else {

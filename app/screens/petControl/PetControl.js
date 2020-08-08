@@ -36,12 +36,12 @@ function PetControl(props) {
 	//cargamos los datos del usuario
 	useEffect(() => {
 		setUser(firebase.auth().currentUser);
-		getInfoByUser('userInfo', firebase.auth().currentUser.uid, setElements, setModalVisible);
+		//getInfoByUser('userInfo', firebase.auth().currentUser.uid, setElements, setModalVisible);
 	}, []);
 
 	useFocusEffect(
 		useCallback(() => {
-			getInfoByUser('userInfo', firebase.auth().currentUser.uid, setElements, setModalVisible);
+			//getInfoByUser('userInfo', firebase.auth().currentUser.uid, setElements, setModalVisible);
 			listRecords('petControl', setTotalPetControl, setPetControl, setStartPetControl);
 		}, [])
 	);
@@ -104,8 +104,6 @@ function PetControl(props) {
 						)}
 				/>
 			)}
-
-			{modalVisible && <UserData modalVisible={modalVisible} setModalVisible={setModalVisible} userInfo={user} />}
 
 			{user && (
 				<Icon

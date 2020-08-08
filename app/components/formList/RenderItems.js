@@ -58,7 +58,8 @@ function RendenderItems(props) {
 					create_uid,
 					create_date,
 					website: elements.item.website,
-					schedule: elements.item.schedule
+					schedule: elements.item.schedule,
+					userType: elements.item.userType
 				}
 			});
 		} else {

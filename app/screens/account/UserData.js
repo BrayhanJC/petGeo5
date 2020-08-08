@@ -152,6 +152,27 @@ const UserData = (props) => {
 						active: true,
 						photoURL: userInfo.photoURL
 					};
+					const update = {
+						displayName: nameUser
+					};
+
+					firebase
+						.auth()
+						.currentUser.updateProfile(update)
+						.then(() => {
+							setIsLoading(false);
+							//console.log(data);
+							saveUserInfo(data, 'userInfo', () => {
+								setModalVisible();
+								props.dispatch(actions.actualizarCliente(data));
+							});
+							//navigation.navigate('Profile');
+						})
+						.catch((response) => {
+							console.log(response);
+							setIsLoading(false);
+							//setError('Error al actualizar el nombre');
+						});
 
 					saveCenter(data, 'petCenters');
 					saveUserInfo(data, 'userInfo', () => {
@@ -190,7 +211,27 @@ const UserData = (props) => {
 						active: true,
 						photoURL: userInfo.photoURL
 					};
+					const update = {
+						displayName: nameUser
+					};
 
+					firebase
+						.auth()
+						.currentUser.updateProfile(update)
+						.then(() => {
+							setIsLoading(false);
+							//console.log(data);
+							saveUserInfo(data, 'userInfo', () => {
+								setModalVisible();
+								props.dispatch(actions.actualizarCliente(data));
+							});
+							//navigation.navigate('Profile');
+						})
+						.catch((response) => {
+							//console.log(response);
+							setIsLoading(false);
+							//setError('Error al actualizar el nombre');
+						});
 					saveCenter(data, 'petCenters');
 					saveUserInfo(data, 'userInfo', () => {
 						props.dispatch(actions.actualizarCliente(data));
@@ -222,7 +263,7 @@ const UserData = (props) => {
 								onPress={(even) => setUserType(even)}
 								selectedIndex={userType}
 								buttons={buttons}
-								containerStyle={userInfoStyle.buttonGroup}
+								containerStyle={[ userInfoStyle.buttonGroup, { marginBottom: 2 } ]}
 							/>
 
 							<Input
@@ -295,7 +336,12 @@ const UserData = (props) => {
 							<Text style={userInfoStyle.textError}>{message ? message + '!' : ''} </Text>
 
 							<TouchableHighlight
-								style={{ ...userInfoStyle.openButton, backgroundColor: '#1A89E7', width: '90%' }}
+								style={{
+									...userInfoStyle.openButton,
+									backgroundColor: '#1A89E7',
+									width: '90%',
+									marginTop: 2
+								}}
 								onPress={onSubmit}
 							>
 								<Text style={userInfoStyle.textStyle}>Guardar</Text>
