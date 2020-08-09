@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, AsyncStorage } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { Icon, Button, Input } from 'react-native-elements';
 import { isEmpty } from 'lodash';
 import { useNavigation } from '@react-navigation/native';
@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { validateEmail } from '../../utils/validations';
 
 import Loading from '../Loading';
-
+import RecoveryPassword from '../../screens/account/RecoveryPassword'
 import { firebaseApp } from '../../utils/FireBase';
 import firebase from 'firebase/app';
 import 'firebase/storage';
@@ -34,6 +34,8 @@ function LoginForm(props) {
 	const [ showPassword, setshowPassword ] = useState(true);
 	const [ formData, setformData ] = useState(defaultFormValue);
 	const [ loading, setloading ] = useState(false);
+
+	const [visibleModalRecovery, setVisibleModalRecovery] = useState(false);
 
 	var { email, password } = formData;
 
@@ -93,6 +95,17 @@ function LoginForm(props) {
 					/>
 				}
 			/>
+			<Text style={styles.textRegister}>
+				
+				<Text
+					style={styles.btnRegister}
+					onPress={() => {
+						setVisibleModalRecovery(!visibleModalRecovery)
+					}}
+				>
+					Recuperar Contraseña
+				</Text>
+			</Text>
 
 			<Button
 				title="Iniciar Sesión"
@@ -101,6 +114,7 @@ function LoginForm(props) {
 				titleStyle={styles.btnTitleStyle}
 				onPress={onSubmit}
 			/>
+			<RecoveryPassword visibleModalRecovery={visibleModalRecovery} setVisibleModalRecovery={setVisibleModalRecovery}/>
 			<Loading isVisible={loading} text="Iniciando sesion" />
 		</View>
 	);
@@ -133,6 +147,17 @@ const styles = StyleSheet.create({
 	},
 	btnTitleStyle: {
 		fontWeight: 'bold'
+	},
+	btnRegister: {
+		color: 'gray',
+		fontWeight: 'bold',
+		margin: 5
+	},
+	textRegister: {
+		marginTop: 5,
+		marginLeft: 5,
+		marginRight: 5,
+		marginBottom: -10
 	}
 });
 export default LoginForm;

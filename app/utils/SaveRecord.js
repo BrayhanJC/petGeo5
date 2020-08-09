@@ -1,9 +1,11 @@
+import {  Alert } from 'react-native';
 import { firebaseApp } from '../utils/FireBase';
 import firebase from 'firebase/app';
 import 'firebase/storage';
 import 'firebase/firestore';
 import { size } from 'lodash';
 import { sendNotification } from './Notifications';
+import { validateEmail, showAlert } from './validations';
 const db = firebase.firestore(firebaseApp);
 
 const limitRecords = 10;
@@ -497,4 +499,45 @@ export const getMissingPet = async (collection, record_id, data) => {
 		.catch((response) => {
 			console.log('algo salio mal');
 		});
+};
+
+export const recoveryPassword = async (email, setVisibleModalRecovery, setIsLoading) => {
+	if (email) {
+		if (validateEmail(email)) {
+			setIsLoading(true);
+			firebase
+				.auth()
+				.sendPasswordResetEmail(email)
+				.then(() => {
+					setIsLoading(false);
+
+					Alert.alert(
+						'Alerta',
+						'Se ha enviado un correo. Por favor sigue los pasos indicados.',
+						[
+							{
+								text: 'Aceptar',
+								onPress: () => {
+									setVisibleModalRecovery(false);
+								}
+							}
+						],
+						{
+							cancelable: false
+						}
+					);
+				
+				})
+				.catch((response) => {
+					setIsLoading(false);
+					console.log(response)
+				});
+		} else {
+			setIsLoading(false);
+			showAlert('Debe ingresar un correo válido.');
+		}
+	} else {
+		setIsLoading(false);
+		showAlert('Debe ingresar un correo.');
+	}
 };

@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, Alert, Dimensions } from 'react-native';
+import {  Alert } from 'react-native';
 import { deleteRecordBD } from '../utils/SaveRecord';
 /**
  * 
