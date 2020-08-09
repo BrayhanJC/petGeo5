@@ -16,12 +16,21 @@ import { MaterialCommunityIcons } from 'react-native-vector-icons';
  */
 function Menu(props) {
 	const [ user, setUser ] = useState(null);
+
+
+	if (firebase.auth().currentUser){
+		setUser(true)
+	}else{
+		setUser(false)
+	}
+
+	
 	const { cliente } = props;
 	const { login } = props;
 
 	return (
 		<View style={style.container}>
-			{!firebase.auth().currentUser && (
+			{!user && (
 				<View style={style.bgContainer}>
 					<TouchableOpacity
 						onPress={() => {
@@ -42,8 +51,6 @@ function Menu(props) {
 								borderTopLeftRadius: 0,
 								borderTopRightRadius: 50,
 								marginTop: -20,
-								//borderBottomRightRadius: 100,
-								//borderBottomLeftRadius:100,
 								marginRight: 1
 							}}
 						>
@@ -57,7 +64,7 @@ function Menu(props) {
 					</TouchableOpacity>
 				</View>
 			)}
-			{firebase.auth().currentUser && (
+			{user && (
 				<View style={style.bgContainer}>
 					<TouchableOpacity
 						onPress={() => {
@@ -88,10 +95,10 @@ function Menu(props) {
 							}}
 						>
 							<View style={style.userNombre}>
-								<Text style={style.userTitulo}> {firebase.auth().currentUser ? cliente.name : ''}</Text>
+								<Text style={style.userTitulo}> {user ? cliente.name : ''}</Text>
 								<Text style={style.userSubTitulo}>
 									{' '}
-									{firebase.auth().currentUser ? cliente.email : ''}
+									{user ? cliente.email : ''}
 								</Text>
 							</View>
 						</View>
@@ -100,7 +107,7 @@ function Menu(props) {
 			)}
 
 			<DrawerItemList {...props} />
-			{firebase.auth().currentUser && (
+			{user && (
 				<Button
 					title="Cerrar Sesión"
 					buttonStyle={style.btnCloseSession}

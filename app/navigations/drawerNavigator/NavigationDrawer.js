@@ -96,7 +96,7 @@ function NavigatorDrawer(props) {
 			}}
 
 			
-			//drawerContent={(props) => <Menu {...props} />}
+			drawerContent={(props) => <Menu {...props} />}
 		>
 			<Drawer.Screen
 				name="Home"

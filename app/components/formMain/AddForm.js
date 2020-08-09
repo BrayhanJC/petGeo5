@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { View, Text, ScrollView, Alert, TextInput } from 'react-native';
 import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
 
-
 /**
  * Componente que sirve para:
  * -> Crear Noticias
@@ -24,18 +23,17 @@ function AddForm(props) {
 		locationForm,
 		setPhone,
 		dataPet,
-		pet
+		pet,
+		default_value_address
 	} = props;
 
-		if (pet){
-			setPhone(pet ? (dataPet[0].phone ? dataPet[0].phone : '') : '')
-			setDescription(pet ? (dataPet[0].description ? dataPet[0].description: '') : '')
-		}
+	if (pet) {
+		setPhone(pet ? (dataPet[0].phone ? dataPet[0].phone : '') : '');
+		setDescription(pet ? (dataPet[0].description ? dataPet[0].description : '') : '');
+	}
 
 	return (
-	
 		<View style={styleForm.viewForm}>
-			
 			<Input
 				placeholder={title}
 				containerStyle={styleForm.input}
@@ -48,10 +46,8 @@ function AddForm(props) {
 					name: 'format-letter-case',
 					color: '#C2C2C2'
 				}}
-				
-				
 			/>
-			
+
 			{addressVisible && (
 				<Input
 					placeholder={address}
@@ -65,7 +61,7 @@ function AddForm(props) {
 						color: locationForm ? '#1A89E7' : '#C2C2C2',
 						onPress: () => setIsVisibleMap(true)
 					}}
-					//defaultValue={pet ? (dataPet[0].address ? dataPet[0].address : '') : ''}
+					defaultValue={default_value_address}
 				/>
 			)}
 
@@ -81,7 +77,7 @@ function AddForm(props) {
 					name: 'phone',
 					color: '#C2C2C2'
 				}}
-				defaultValue={pet ? (dataPet[0].phone ? dataPet[0].phone : '') : ''}
+				defaultValue={pet ? dataPet[0].phone ? dataPet[0].phone : '' : ''}
 			/>
 
 			<View style={styleForm.textAreaContainer}>
@@ -92,12 +88,10 @@ function AddForm(props) {
 					placeholderTextColor="grey"
 					multiline={true}
 					onChange={(even) => setDescription(even.nativeEvent.text)}
-					defaultValue={pet ? (dataPet[0].description ? dataPet[0].description: '') : ''}
+					defaultValue={pet ? dataPet[0].description ? dataPet[0].description : '' : ''}
 				/>
 			</View>
-			
 		</View>
-	
 	);
 }
 
