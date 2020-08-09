@@ -18,13 +18,15 @@ function Menu(props) {
 	const [ user, setUser ] = useState(null);
 
 
-	if (firebase.auth().currentUser){
-		setUser(true)
-	}else{
-		setUser(false)
-	}
 
-	
+
+	useEffect(() => {
+		if (firebase.auth().currentUser){
+			setUser(true)
+		}else{
+			setUser(false)
+		}
+	}, []);
 	const { cliente } = props;
 	const { login } = props;
 

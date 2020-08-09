@@ -176,7 +176,7 @@ function LocalizationMap(props) {
 														height: 95,
 														width: 180
 													}}
-													source={{ uri: record.image[0] }}
+													source={record.image[0] ? { uri: record.image[0] } : require('../../../assets/img/default_center.jpeg')}
 													resizeMode="cover"
 												/>{' '}
 											</Text>

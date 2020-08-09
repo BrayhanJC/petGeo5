@@ -45,7 +45,7 @@ function UserGuest() {
 							<View style={styles.container}>
 								<Text style={[styles.title_footer, {marginTop:-5}]}>Registrate...</Text>
 								<Text style={[styles.description_footer, {marginTop:-10}]}>
-									¿Como encontrarías tu mascotas si es extraviada? Búscala y administra los datos de
+									¿Cómo encontrarías a tu mascota si es extraviada? Búscala y administra los datos de
 									tu mascota...
 								</Text>
 								<Button

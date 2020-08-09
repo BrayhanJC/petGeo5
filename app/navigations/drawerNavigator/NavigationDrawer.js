@@ -93,7 +93,7 @@ function NavigatorDrawer(props) {
 				activeTintColor: '#1A89E7',
 				inactiveTintColor: '#C2C2C2'
 			}}
-			//drawerContent={(props) => <Menu {...props} />}
+			drawerContent={(props) => <Menu {...props} />}
 		>
 			<Drawer.Screen
 				name="Home"
