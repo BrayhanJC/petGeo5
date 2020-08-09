@@ -7,12 +7,9 @@ export const imageMain = {
 		marginLeft: 20,
         marginRight: 20,
         alignItems: 'center',
-        height: 230,
-       
-   
+        height: 210,
     },
  
-
 };
 
 export const styleImageMain = StyleSheet.create(imageMain);

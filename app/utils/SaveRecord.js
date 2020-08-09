@@ -414,7 +414,7 @@ export const createPetFound = (collectionData, toastRef, navigation, record_id, 
 				.set({ active: false }, { merge: true })
 				.then((response) => {
 					//navigation.navigate('HomeStack');
-					goBack();
+					navigation.goBack();
 					setloading(false);
 				})
 				.catch((response) => {
@@ -433,6 +433,7 @@ export const createPetFound = (collectionData, toastRef, navigation, record_id, 
  * @param { variabel para guardar la informacion} data 
  */
 export const getInfoCollection = async (collection, record_id, data) => {
+	console.log('hola');
 	const resultElements = [];
 	if (record_id && collection) {
 		await db
@@ -442,6 +443,8 @@ export const getInfoCollection = async (collection, record_id, data) => {
 			.then((response) => {
 				response.forEach((doc) => {
 					const element = doc.data();
+					console.log();
+					console.log(element);
 					element.id = doc.id;
 					resultElements.push(element);
 				});
@@ -473,4 +476,25 @@ export const updateCollectionRecord = async (collection, record_id, data, setIsL
 				setIsLoading(false);
 			});
 	}
+};
+
+/**
+ * Permite verificar si la mascota extraviada esta activa o no
+ * @param {nombre de la coleccion} collection 
+ * @param {record de la mascota extraviada} record_id 
+ * @param { guarda el resultado} data 
+ */
+export const getMissingPet = async (collection, record_id, data) => {
+	const resultElements = [];
+
+	await db
+		.collection(collection)
+		.doc(record_id)
+		.get()
+		.then((response) => {
+			data(response.data().active);
+		})
+		.catch((response) => {
+			console.log('algo salio mal');
+		});
 };

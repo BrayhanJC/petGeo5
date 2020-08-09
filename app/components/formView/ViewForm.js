@@ -285,7 +285,7 @@ const ViewForm = (props) => {
 
 	return (
 		<ScrollView vertical style={viewFormStyle.viewBody}>
-			<CarouselImages image_ids={item.image} height={220} width={screenWidth} image_default={image_default} />
+			<CarouselImages image_ids={item.image} height={210} width={screenWidth} image_default={image_default} />
 
 			<TitleItem
 				name={item.name}

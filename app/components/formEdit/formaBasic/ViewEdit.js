@@ -2,19 +2,27 @@ import React, { useState, useRef } from 'react';
 import { View, Text, ScrollView, Alert, TextInput, Dimensions } from 'react-native';
 import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
 import { size } from 'lodash';
-import firebase from 'firebase/app';
+
 import { uploadImageStorage } from '../../../utils/UploadImageStorage';
-import { updateCollectionRecord, createPetFound } from '../../../utils/SaveRecord';
+import { updateCollectionRecord, createPetFound, getInfoCollection, getMissingPet } from '../../../utils/SaveRecord';
 import { styleForm } from '../../../src/css/AddForm';
 import { styleUploadImage } from '../../../src/css/UploadImage';
 import { styleImageMain } from '../../../src/css/ImageMain';
 import FormEdit from './FormEdit';
 import UploadImage from '../../formMain/UploadImage';
 import ImageMain from '../../formMain/ImageMain';
+import { showAlert } from '../../../utils/validations';
 import Loading from '../../Loading';
 import Map from '../../formMain/Map';
 import Toast from 'react-native-easy-toast';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+import { firebaseApp } from '../../../utils/FireBase';
+import firebase from 'firebase/app';
+import 'firebase/storage';
+import 'firebase/firestore';
+
+const db = firebase.firestore(firebaseApp);
 
 const widhtScreen = Dimensions.get('window').width;
 
@@ -43,6 +51,8 @@ function ViewEdit(props) {
 
 	const [ petFound, setpetFound ] = useState('');
 
+	const [ dataMissing, setdataMissing ] = useState(true);
+
 	const onSubmit = () => {
 		const data = {
 			name: title,
@@ -58,16 +68,28 @@ function ViewEdit(props) {
 		};
 
 		if (title && address && description && imageSelected && phone && location) {
-
 			if (petFound && route.params.collectionName == 'missingPets') {
-				setloading(true);
-				uploadImageStorage(imageSelected, 'petsFound')
+				db
+					.collection('missingPets')
+					.doc(route.params.id)
+					.get()
 					.then((response) => {
-						//console.log('entrando en la imgen para guardar');
-						createPetFound(data, toastRef, navigation, route.params.id, setloading);
+						if (response.data().active) {
+							setloading(true);
+							uploadImageStorage(imageSelected, 'petsFound')
+								.then((response) => {
+									//console.log('entrando en la imgen para guardar');
+									createPetFound(data, toastRef, navigation, route.params.id, setloading);
+								})
+								.catch((response) => {
+									setloading(false);
+								});
+						} else {
+							showAlert('Esta mascota ya ha sido encontrada...');
+						}
 					})
 					.catch((response) => {
-						setloading(false);
+						console.log('algo salio mal');
 					});
 			} else {
 				updateCollectionRecord(route.params.collectionName, route.params.id, data, setloading, navigation);

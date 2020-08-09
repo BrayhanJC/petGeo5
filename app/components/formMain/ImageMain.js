@@ -16,7 +16,7 @@ function UploadImage(props) {
 				//resizeMode="stretch"
 				style={{
 					width: widhtScreen,
-					height: 230
+					height: 210
 				}}
 			/>
 		</View>
