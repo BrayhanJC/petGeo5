@@ -13,6 +13,7 @@ import NotFoundItem from '../../components/formSearch/NotFoundItem';
 import { size, isEmpty } from 'lodash';
 import UserData from '../account/UserData';
 import { return_data_distance } from '../../utils/validations';
+import { notItem } from '../../src/css/NotItem';
 /**
  * Componente que permite listar los centros veterinarios o fundaciones
  * @param {navigation} props 
@@ -39,19 +40,6 @@ function CenterVeterinary(props) {
 	const [ location, setLocation ] = useState(null);
 
 	useEffect(() => {
-		// (async () => {
-		// 	const user = await firebase.auth().currentUser;
-
-		// 	//cargando datos al userInfo, contiene toda la informacion del usuario
-		// 	setUser(user);
-
-		// 	// if (user) {
-		// 	// 	if (user.uid) {
-		// 	// 		getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
-		// 	// 	}
-		// 	// }
-		// })();
-
 		(async () => {
 			const resultPermissions = await Permissions.askAsync(Permissions.LOCATION);
 			const statusPermissions = resultPermissions.permissions.location.status;
@@ -77,6 +65,7 @@ function CenterVeterinary(props) {
 		}, [])
 	);
 
+	var showInfo = !filterCenter && !filterFundation;
 	//retornar los datos en order de distancia
 	return_data_distance(location, centerVeterinary);
 
@@ -192,6 +181,17 @@ function CenterVeterinary(props) {
 							setcenterVeterinary
 						)}
 				/>
+			)}
+			{showInfo && (
+				<View style={{ marginTop: -105, marginLeft: 30, marginRight: 30, flex: 1 }}>
+					<View style={notItem.notFound}>
+						<Text style={notItem.textCenter}>No se encuentra ningún filtro aplicado.</Text>
+						<Text style={[ notItem.textCenter, { marginTop: 35 } ]}>
+							Para poder visualizar los centros o fundaciones animalistas, asegurese de tener activo por
+							lo menos un filtro.
+						</Text>
+					</View>
+				</View>
 			)}
 		</View>
 	);

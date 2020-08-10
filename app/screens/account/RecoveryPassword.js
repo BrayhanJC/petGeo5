@@ -25,9 +25,16 @@ const RecoveryPasswaord = (props) => {
 
 	const [ email, setEmail ] = useState('');
 
+	/**
+     * Permite realizar el envio de reestablecer contraseña
+     */
 	const onSubmit = () => {
-		recoveryPassword(email, setVisibleModalRecovery, setIsLoading)
+		recoveryPassword(email, setVisibleModalRecovery, setIsLoading);
 	};
+
+	/**
+     * Permite cerrar el modal
+     */
 	const closeModal = () => {
 		setVisibleModalRecovery(false);
 	};
@@ -73,13 +80,11 @@ const RecoveryPasswaord = (props) => {
 									containerStyle={styles.btnContainerLogin}
 									buttonStyle={styles.btnLogin}
 									titleStyle={styles.btnTitleStyle}
-                                    onPress={onSubmit}
-                                    loading={isLoading}
+									onPress={onSubmit}
+									loading={isLoading}
 								/>
 							</View>
 						</View>
-
-						
 					</View>
 				</View>
 			</Modal>

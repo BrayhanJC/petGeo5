@@ -1,14 +1,25 @@
-import {  Alert } from 'react-native';
+import { Alert } from 'react-native';
 import { firebaseApp } from '../utils/FireBase';
 import firebase from 'firebase/app';
 import 'firebase/storage';
 import 'firebase/firestore';
 import { size } from 'lodash';
 import { sendNotification } from './Notifications';
-import { validateEmail, showAlert } from './validations';
+
 const db = firebase.firestore(firebaseApp);
 
 const limitRecords = 10;
+
+
+/**
+ * 
+ * @param { email que se va a validar} email 
+ * Funcion que permite validar el correo electronico
+ */
+export function validateEmail(email) {
+	const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	return re.test(email);
+}
 
 /**
  * Función que permite validar el mensaje apropiado para el envio de la notificación con expo
@@ -501,6 +512,33 @@ export const getMissingPet = async (collection, record_id, data) => {
 		});
 };
 
+/**
+ * 
+ * @param {variable que muestra el mensaje al usuario} message 
+ * funcion que permite mostrar al usuario un mensaje de alerta
+ */
+export function showAlert(message) {
+	return Alert.alert(
+		'Alerta',
+		message,
+		[
+			{
+				text: 'Aceptar',
+				style: 'cancel'
+			}
+		],
+		{
+			cancelable: false
+		}
+	);
+}
+
+/**
+ * Funcion que permite enviar un correo electronico al usuario para poder reestablacer la contraseña
+ * @param { email destinatario} email 
+ * @param { permite validar el estado de la variable para poder cerrar el modal} setVisibleModalRecovery 
+ * @param { permite mostrar al usuario un indicador de carga en el boton enviar} setIsLoading 
+ */
 export const recoveryPassword = async (email, setVisibleModalRecovery, setIsLoading) => {
 	if (email) {
 		if (validateEmail(email)) {
@@ -526,11 +564,12 @@ export const recoveryPassword = async (email, setVisibleModalRecovery, setIsLoad
 							cancelable: false
 						}
 					);
-				
 				})
 				.catch((response) => {
 					setIsLoading(false);
-					console.log(response)
+					showAlert('Ha ocurrido un error. Por favor inténtelo mas tarde.');
+				
+				
 				});
 		} else {
 			setIsLoading(false);
