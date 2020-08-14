@@ -628,3 +628,26 @@ export const slides = [
 		description: 'Visualiza los veterinarios que estan disponibles en los centros veterinarios.'
 	}
 ];
+
+
+/**
+ * Funcion que permite retornar una descripcion por defecto para que se muestre al momento de creacion de un comentario
+ * @param { nombre de la coleccion} collection_name 
+ */
+export var return_description_default = (collection_name) => {
+	var description = '';
+	if (collection_name == 'petCenters') {
+		description = 'Centros'
+	}
+	if (collection_name == 'news') {
+		description = 'Noticias'
+	}
+	if (collection_name == 'comedogs') {
+		description = 'Comedgos'
+	}
+	if (collection_name == 'missingPets') {
+		description = 'Mascotas Extraviadas'
+	}
+
+	return description;
+};

@@ -35,11 +35,14 @@
           "apiKey": "AIzaSyBcaEjskn_rHK1l2jak10_BPp9Pa3qT2rg"
         }
       },
+      "googleServicesFile": "./google-services.json",
       "permissions": [
         "CAMERA_ROLL",
         "READ_EXTERNAL_STORAGE",
         "WRITE_EXTERNAL_STORAGE",
         "LOCATION",
+        "NOTIFICATIONS",
+        "USER_FACING_NOTIFICATIONS",
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION"
       ]

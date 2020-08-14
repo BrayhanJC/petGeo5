@@ -9,7 +9,8 @@ import Loading from '../../components/Loading';
 import { firebaseApp } from '../../utils/FireBase';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-
+import { sendNotification } from '../../utils/Notifications';
+import {return_description_default} from '../../utils/Configurations'
 const db = firebase.firestore(firebaseApp);
 
 /**
@@ -48,13 +49,13 @@ const CreateReview = (props) => {
 			.get()
 			.then((response) => {
 				const itemData = response.data();
+
 				const ratingTotal = itemData.ratingTotal + rating;
 				const quantityVoting = itemData.quantityVoting + 1;
 				const ratingResult = ratingTotal / quantityVoting;
 				var active = true;
 				if (quantityVoting >= 12) {
 					if (ratingResult < 3) {
-						//console.log('esta publicacion se tiene que eliminar');
 						active = false;
 					}
 				}
@@ -66,9 +67,13 @@ const CreateReview = (props) => {
 					active
 				};
 
+				const messageTittle = itemData.name 
+				const messageDescription = "Han realizado un nuevo comentario en " + return_description_default(type)
+
 				itemRef
 					.update(val)
 					.then(() => {
+						sendNotification(messageTittle, messageDescription)
 						setIsLoading(false);
 						navigation.goBack();
 					})

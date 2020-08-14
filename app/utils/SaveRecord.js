@@ -36,13 +36,13 @@ export const notify_user = (collection_name, title, description) => {
 			sendNotification('Nuevo Comedog registrado: ', description);
 		}
 		if (collection_name == 'missingPets') {
-			sendNotification('Se ha reportado una Mascota Extraviada: :O', description);
+			sendNotification('Se ha reportado una Mascota Extraviada: 😱', description);
 		}
 		if (collection_name == 'petCenters') {
 			sendNotification('Nuevo Centro disponible para ti: ', description);
 		}
 		if (collection_name == 'petsFound') {
-			sendNotification('Mascota Encontrada: :)' + title, description);
+			sendNotification('Mascota Encontrada: 🐶' + title, description);
 		}
 	}
 };

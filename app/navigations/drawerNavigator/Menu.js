@@ -15,18 +15,11 @@ import { MaterialCommunityIcons } from 'react-native-vector-icons';
  * @param {*} props 
  */
 function Menu(props) {
-	const [ user, setUser ] = useState(null);
+	var user = false;
+	if (firebase.auth().currentUser) {
+		user = true;
+	}
 
-
-
-
-	useEffect(() => {
-		if (firebase.auth().currentUser){
-			setUser(true)
-		}else{
-			setUser(false)
-		}
-	}, []);
 	const { cliente } = props;
 	const { login } = props;
 
@@ -57,10 +50,11 @@ function Menu(props) {
 							}}
 						>
 							<View style={style.userNombre}>
-								<Text style={style.userTitulo}> Entérate de los eventos o sucesos más importantes de tu ciudad... </Text>
-								<Text style={style.userSubTitulo}>
-									
+								<Text style={style.userTitulo}>
+									{' '}
+									Entérate de los eventos o sucesos más importantes de tu ciudad...{' '}
 								</Text>
+								<Text style={style.userSubTitulo} />
 							</View>
 						</View>
 					</TouchableOpacity>
@@ -98,10 +92,7 @@ function Menu(props) {
 						>
 							<View style={style.userNombre}>
 								<Text style={style.userTitulo}> {user ? cliente.name : ''}</Text>
-								<Text style={style.userSubTitulo}>
-									{' '}
-									{user ? cliente.email : ''}
-								</Text>
+								<Text style={style.userSubTitulo}> {user ? cliente.email : ''}</Text>
 							</View>
 						</View>
 					</TouchableOpacity>
