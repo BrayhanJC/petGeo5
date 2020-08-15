@@ -95,7 +95,7 @@ function ListDoctor(props) {
 			<NotItem
 				image_default={require('../../../../assets/img/doctor.png')}
 				title="Aún no ha creado los veterinarios"
-				subtitle="Por Favor, pulsa el icono azul para crear un veterinario"
+				subtitle=""
 			/>
 		);
 	}

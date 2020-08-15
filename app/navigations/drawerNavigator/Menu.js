@@ -100,7 +100,7 @@ function Menu(props) {
 			)}
 
 			<DrawerItemList {...props} />
-			{user && (
+			{firebase.auth().currentUser && (
 				<Button
 					title="Cerrar Sesión"
 					buttonStyle={style.btnCloseSession}

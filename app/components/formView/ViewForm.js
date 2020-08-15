@@ -182,7 +182,7 @@ const ViewForm = (props) => {
 					}
 				},
 				{
-					text: 'Horario de Atención: ' + (item.schedule + ' Horas' ? item.schedule : ''),
+					text: 'Horario de Atención: ' + (item.schedule + ' Horas') ,
 					iconName: 'timer',
 					iconType: 'material-community',
 					action: null
