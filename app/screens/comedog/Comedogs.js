@@ -87,6 +87,7 @@ function Comedogs(props) {
 
 	//retornar los datos en order de distancia
 	return_data_distance(location, Comedog);
+	return_data_distance(location, item);
 	
 	return (
 		<View style={styles.viewBody}>

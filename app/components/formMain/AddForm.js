@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView, Alert, TextInput } from 'react-native';
 import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
-
+import {size} from 'lodash'
 /**
  * Componente que sirve para:
  * -> Crear Noticias
@@ -32,6 +32,10 @@ function AddForm(props) {
 		setDescription(pet ? (dataPet[0].description ? dataPet[0].description : '') : '');
 	}
 
+
+	console.log('esta es')
+	console.log(locationForm)
+
 	return (
 		<View style={styleForm.viewForm}>
 			<Input
@@ -58,7 +62,7 @@ function AddForm(props) {
 					rightIcon={{
 						type: 'material-community',
 						name: 'google-maps',
-						color: locationForm ? '#1A89E7' : '#C2C2C2',
+						color: size(locationForm) >0 ? '#1A89E7' : '#C2C2C2',
 						onPress: () => setIsVisibleMap(true)
 					}}
 					defaultValue={default_value_address}

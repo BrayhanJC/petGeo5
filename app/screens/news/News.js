@@ -43,36 +43,28 @@ function News(props) {
 				getInfoByUser('userInfo', userInfo.uid, setElements, setModalVisible);
 			}
 		});
-		
-			(async () => {
-				const resultPermissions = await Permissions.askAsync(Permissions.LOCATION);
-				const statusPermissions = resultPermissions.permissions.location.status;
-				//console.log(statusPermissions);
-				if (statusPermissions !== 'granted') {
-					toastRef.current.show(
-						'Tienes que Aceptar los permisos de localización para crear un Comedog',
-						3000
-					);
-				} else {
-					const loc = await Location.getCurrentPositionAsync({});
-					//console.log(loc);
-					if (loc){
-						if (loc.coords.latitude && loc.coords.longitude){
-							setLocation({
-								latitude: loc.coords.latitude,
-								longitude: loc.coords.longitude,
-								latitudeDelta: 0.001,
-								longitudeDelta: 0.001
-							});
-						}
-						
+
+		(async () => {
+			const resultPermissions = await Permissions.askAsync(Permissions.LOCATION);
+			const statusPermissions = resultPermissions.permissions.location.status;
+			//console.log(statusPermissions);
+			if (statusPermissions !== 'granted') {
+				toastRef.current.show('Tienes que Aceptar los permisos de localización para crear un Comedog', 3000);
+			} else {
+				const loc = await Location.getCurrentPositionAsync({});
+				//console.log(loc);
+				if (loc) {
+					if (loc.coords.latitude && loc.coords.longitude) {
+						setLocation({
+							latitude: loc.coords.latitude,
+							longitude: loc.coords.longitude,
+							latitudeDelta: 0.001,
+							longitudeDelta: 0.001
+						});
 					}
 				}
-
-			})();
-
-
-		
+			}
+		})();
 	}, []);
 
 	useFocusEffect(
@@ -82,8 +74,8 @@ function News(props) {
 	);
 
 	//retornar los datos en order de distancia
-	return_data_distance(location, News)
-
+	return_data_distance(location, News);
+	return_data_distance(location, item);
 
 	return (
 		<View style={styles.viewBody}>
