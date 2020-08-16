@@ -73,7 +73,7 @@ function RenderCenter(props) {
 	}
 
 	return (
-		<TouchableOpacity onPress={goElement} style={{ flex: 1 }}>
+		<TouchableOpacity onPress={goElement} style={{ flex: 1 }} activeOpacity={0.5}>
 			<View style={[ styles.item, { height: width / 2 } ]}>
 				<View>
 					<View

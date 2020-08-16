@@ -24,7 +24,7 @@ import {
  */
 function RenderItemsPetControl(props) {
 	const { elements, navigation, collectionName } = props;
-	const { id, image_id, name, description, create_date, create_uid, pet_id, type_control  } = elements.item;
+	const { id, image_id, name, description, create_date, create_uid, pet_id, type_control } = elements.item;
 	const mainImage = image_id[0];
 	const createControl = new Date(create_date.seconds * 1000);
 	var date_control =
@@ -46,17 +46,21 @@ function RenderItemsPetControl(props) {
 			name,
 			collectionName,
 			create_uid,
-			data_collection:{
-				id, image:image_id, name, description, pet_id, type_control
+			data_collection: {
+				id,
+				image: image_id,
+				name,
+				description,
+				pet_id,
+				type_control
 			}
-		})
+		});
 	};
 
 	return (
-		<TouchableOpacity onPress={goElement}>
+		<TouchableOpacity onPress={goElement} activeOpacity={0.5}>
 			<View style={styleTouchableViewRecords.touchableViewRecordsStyle}>
 				<View style={styleTouchableViewImageRecords.touchableViewImageRecordsStyle}>
-
 					<Avatar
 						xlarge
 						style={touchableImageRecords.touchableImageRecordsStyle}
@@ -65,11 +69,15 @@ function RenderItemsPetControl(props) {
 					/>
 				</View>
 				<View style={styleViewFormat.textFormat}>
-				
 					<Text style={styleTouchableNameRecords.touchableNameRecordsStyle}>{name}</Text>
-					<Text>Fecha: <Text style={styleTouchableDescriptionRecordsRecords.touchableDescriptionRecordsStyle}>{date_control.toString()}</Text></Text>
-                    <Text style={styleTouchableDescriptionRecordsRecords.touchableDescriptionRecordsStyle}>
-                    {description}
+					<Text>
+						Fecha:{' '}
+						<Text style={styleTouchableDescriptionRecordsRecords.touchableDescriptionRecordsStyle}>
+							{date_control.toString()}
+						</Text>
+					</Text>
+					<Text style={styleTouchableDescriptionRecordsRecords.touchableDescriptionRecordsStyle}>
+						{description}
 					</Text>
 				</View>
 			</View>

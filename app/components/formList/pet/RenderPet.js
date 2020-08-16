@@ -29,7 +29,6 @@ function RenderPet(props) {
 		create_date
 	} = elements.item;
 
-
 	var mainImage = '';
 
 	const goElement = () => {
@@ -69,10 +68,10 @@ function RenderPet(props) {
 	}
 
 	return (
-		<TouchableOpacity onPress={goElement} style={{ flex: 1 }}>
+		<TouchableOpacity onPress={goElement} style={{ flex: 1 }} activeOpacity={0.5}>
 			<View style={[ styles.item, { height: width / 2 } ]}>
 				<View>
-					<View style={[styles.avatar, {marginTop:5, marginLeft:20, marginRight:20}]}>
+					<View style={[ styles.avatar, { marginTop: 5, marginLeft: 20, marginRight: 20 } ]}>
 						<Avatar
 							size="large"
 							rounded
@@ -85,7 +84,7 @@ function RenderPet(props) {
 							}}
 						/>
 
-						<Text style={[styles.title, {marginTop:-3, fontSize:15}]}>{name.substr(0, 18)}</Text>
+						<Text style={[ styles.title, { marginTop: -3, fontSize: 15 } ]}>{name.substr(0, 18)}</Text>
 					</View>
 				</View>
 
@@ -179,7 +178,7 @@ const styles = StyleSheet.create({
 	description: {
 		fontSize: 10.5,
 		fontWeight: 'normal',
-		marginTop:-3
+		marginTop: -3
 	},
 	bold: {
 		fontSize: 12,

@@ -35,14 +35,21 @@ function RendenderItemsPet(props) {
 			name,
 			collectionName,
 			create_uid,
-			data_collection:{
-				id, image:image_id, name, type, sex, raza, date_birth, description
+			data_collection: {
+				id,
+				image: image_id,
+				name,
+				type,
+				sex,
+				raza,
+				date_birth,
+				description
 			}
 		});
 	};
 
 	return (
-		<TouchableOpacity onPress={goElement}>
+		<TouchableOpacity onPress={goElement} activeOpacity={0.5}>
 			<View style={styleTouchableViewRecords.itemColum}>
 				<View style={styleTouchableViewImageRecords.touchableViewImageRecordsStyleColumn}>
 					<Avatar
@@ -53,12 +60,11 @@ function RendenderItemsPet(props) {
 					/>
 				</View>
 				<View style={styleViewFormat.textFormat}>
-					<View style={{alignItems: 'center'}}>
-						<Text >{name}</Text>
+					<View style={{ alignItems: 'center' }}>
+						<Text>{name}</Text>
 					</View>
 					<View style={{ flexDirection: 'column', margin: 5 }}>
-
-						<View style={{flexDirection: 'row'}}>
+						<View style={{ flexDirection: 'row' }}>
 							<View style={{ width: '50%' }}>
 								<Text>Tipo: </Text>
 								<Text style={styleTouchableDescriptionRecordsRecords.touchableDescriptionRecordsStyle}>
