@@ -71,7 +71,7 @@ export const saveCollection = (
 		.add(collectionData)
 		.then(() => {
 			setIsLoading(false);
-			//notify_user(collectionName, collectionData.name, collectionData.description)
+			notify_user(collectionName, collectionData.name, collectionData.description)
 			navigation.navigate(navigateTo);
 		})
 		.catch((e) => {

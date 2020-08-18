@@ -8,7 +8,9 @@ import { Provider } from 'react-redux';
 import { store, persistor } from './app/store/store';
 
 import { persistStore } from 'redux-persist'; //NO BORRAR
-import { getPushNotificationPermissions } from './app/utils/Notifications';
+//import { getPushNotificationPermissions } from './app/utils/Notifications';
+import { registerForPushNotificationsAsync } from './app/utils/Notifications';
+
 
 YellowBox.ignoreWarnings(['Setting a timer', 'Non-serializable', 'Warning']);
 
@@ -18,7 +20,7 @@ if (!global.atob) global.atob = decode;
 function App() {
 	useEffect(() => {
 		persistStore(store).purge();
-		getPushNotificationPermissions();
+		registerForPushNotificationsAsync();
 	}, []);
 
 	return (
