@@ -28,7 +28,8 @@ function RenderCenter(props) {
 		location,
 		create_date,
 		rating,
-		schedule
+		schedule,
+		userType
 	} = elements.item;
 
 	var mainImage = '';
@@ -141,10 +142,12 @@ function RenderCenter(props) {
 						</View>
 					</View>
 
-					<View style={styles.containerData}>
-						<Text style={styles.bold}>Dirección: </Text>
-						<Text style={styles.description}>{address.substr(0, 95)}...</Text>
-					</View>
+					{userType == 'veterinary' && (
+						<View style={styles.containerData}>
+							<Text style={styles.bold}>Dirección: </Text>
+							<Text style={styles.description}>{address.substr(0, 95)}...</Text>
+						</View>
+					)}
 				</View>
 			</View>
 		</TouchableOpacity>

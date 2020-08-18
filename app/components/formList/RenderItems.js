@@ -129,7 +129,7 @@ function RendenderItems(props) {
 					)}
 				</View>
 				<View style={styleViewFormat.textFormat}>
-					<Text style={styleTouchableNameRecords.touchableNameRecordsStyle}>{name}</Text>
+					<Text style={styleTouchableNameRecords.touchableNameRecordsStyle}>{name.substr(0, 25)}</Text>
 					{/* <Text style={styletouchableAddressRecords.touchableAddressRecordsStyle}>Dirección: {address}</Text> */}
 					<Text style={styletouchableAddressRecords.touchableAddressRecordsStyle}>
 						<Text style={{ fontWeight: 'bold' }}>Autor:</Text> {create_name}
