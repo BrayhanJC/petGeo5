@@ -11,8 +11,7 @@ import { persistStore } from 'redux-persist'; //NO BORRAR
 //import { getPushNotificationPermissions } from './app/utils/Notifications';
 import { registerForPushNotificationsAsync } from './app/utils/Notifications';
 
-
-YellowBox.ignoreWarnings(['Setting a timer', 'Non-serializable', 'Warning']);
+YellowBox.ignoreWarnings([ 'Setting a timer', 'Non-serializable', 'Warning' ]);
 
 if (!global.btoa) global.btoa = encode;
 if (!global.atob) global.atob = decode;

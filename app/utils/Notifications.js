@@ -3,7 +3,7 @@ import { firebaseApp } from '../utils/FireBase';
 import firebase from 'firebase/app';
 import 'firebase/storage';
 import 'firebase/firestore';
-import { Notifications } from 'expo';
+//import { Notifications } from 'expo';
 import * as Permissions from 'expo-permissions';
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
