@@ -23,4 +23,5 @@ jobs:
       node_js: lts/*
       script:
         - npm ci
-        - expo build:android -t apk
+        - npx expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
+        - npx expo publish --non-interactive
