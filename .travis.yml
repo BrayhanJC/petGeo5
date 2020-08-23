@@ -1,3 +1,4 @@
+---
 language: node_js
 node_js:
   - node
@@ -22,4 +23,5 @@ jobs:
       node_js: lts/*
       script:
         - npm ci
-        - yarn start
+        - npx expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
+        - npx expo publish --non-interactive
