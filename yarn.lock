@@ -12468,6 +12468,11 @@ nanomatch@^1.2.9:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
+native-testing-library@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/native-testing-library/-/native-testing-library-4.0.0.tgz#b31c39f87418d19e84bf4654f6823e0698855757"
+  integrity sha512-pJ3luDQPh8uSkSiddRrZdO4AwyocFub6btPAuYFzgSPA3JTGxab4uxAzqubMrWmsTPeMNwcFQnqqZQx+uo56VA==
+
 native-url@^0.2.6:
   version "0.2.6"
   resolved "https://registry.yarnpkg.com/native-url/-/native-url-0.2.6.tgz#ca1258f5ace169c716ff44eccbddb674e10399ae"
