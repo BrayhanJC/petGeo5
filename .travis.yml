@@ -8,7 +8,7 @@ cache:
     - ~/.npm
     - .jest
 before_script:
-  - npm install
+  - yarn install
   - npm install -g npm@latest
 script:
   - npm ci
@@ -19,5 +19,5 @@ jobs:
       node_js: lts/*
       script:
         - npm ci
-        - npx expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
+        - npx expo login -u 'brayhanjaramillo' -p 'andresjc.;'
         - npx expo publish --non-interactive
