@@ -20,5 +20,5 @@ jobs:
       node_js: lts/*
       script:
         - npm ci
-        - expo login -u brayhanjaramillo -p andresjc.;
-        - expo publish --non-interactive
+        - npx expo login -u brayhanjaramillo@hotmail.com -p andresjc.;
+        - npx expo publish --non-interactive
