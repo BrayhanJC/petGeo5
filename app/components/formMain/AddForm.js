@@ -24,7 +24,8 @@ function AddForm(props) {
 		setPhone,
 		dataPet,
 		pet,
-		default_value_address
+		default_value_address,
+		default_phone
 	} = props;
 
 	if (pet) {
