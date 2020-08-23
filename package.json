@@ -6,11 +6,10 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "node ./node_modules/jest/bin/jest.js --watchAll"
+    "test": "jest"
   },
   "jest": {
-    "preset": "jest-expo",
-    "cacheDirectory": ".jest"
+    "preset": "jest-expo"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.11.0",
@@ -24,6 +23,7 @@
     "base-64": "^0.1.0",
     "ci": "^1.0.0",
     "expo": "~38.0.8",
+    "expo-cli": "^3.22.1",
     "expo-constants": "^9.1.1",
     "expo-facebook": "^8.1.0",
     "expo-image-picker": "^8.1.0",
@@ -64,7 +64,6 @@
   "devDependencies": {
     "@babel/core": "^7.8.6",
     "babel-preset-expo": "~8.1.0",
-    "expo-cli": "^3.24.2",
     "jest-expo": "^38.0.2",
     "react-test-renderer": "^16.13.1"
   },
