@@ -19,5 +19,3 @@ jobs:
       node_js: lts/*
       script:
         - npm ci
-        - npx expo login -u brayhanjaramillo -p andresjc.;
-        - npx expo publish --non-interactive
