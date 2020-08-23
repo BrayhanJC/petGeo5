@@ -25,4 +25,35 @@ jobs:
 
 
 
+language: node_js
+node_js:
+  - node
+  - lts/*
+cache:
+  directories:
+    - ~/.npm
+    - .jest
 
+before_script:
+  - npm install
+  - npm install -g npm@latest
+script:
+  - npm ci
+  - npx jest --ci
+jobs:
+  include:
+    - stage: deploy
+      node_js: lts/*
+      before_install:
+        - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.13.0
+      install:
+      - yarn global add expo-cli
+      script:
+
+        - npm install
+        - yarn install
+        - npx expo login -u brayhanjaramillo -p andresjc.; --non-interactive
+        - yarn
+        - expo publish
+        - npm ci
+        - npx expo publish --non-interactive
