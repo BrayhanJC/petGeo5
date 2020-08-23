@@ -22,6 +22,9 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "notification": {
+      "icon": "./assets/icon.png"
+    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.brayhanjjuanz.petgeocinco",

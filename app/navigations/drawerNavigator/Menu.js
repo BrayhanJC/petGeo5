@@ -72,7 +72,7 @@ function Menu(props) {
 								style={style.userImagen}
 								source={
 									login.photoURL ? (
-										{ uri: cliente.photoURL }
+										{ uri: login.photoURL }
 									) : (
 										require('../../../assets/img/avatar_cat.png')
 									)

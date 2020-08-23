@@ -84,6 +84,7 @@ function InfoUser(props) {
 				};
 				await firebase.auth().currentUser.updateProfile(update);
 				props.dispatch(actions.actualizarCliente({ ...cliente, photoURL: response }));
+				//props.dispatch(actions.actualizarCliente(data));
 				setLoading(false);
 			})
 			.catch((response) => {
@@ -99,7 +100,7 @@ function InfoUser(props) {
 				size="large"
 				showEditButton
 				containerStyle={styles.userInfoAvatar}
-				source={login.photoURL ? { uri: cliente.photoURL } : require('../../../assets/img/avatar_cat.png')}
+				source={login.photoURL ? { uri: login.photoURL } : require('../../../assets/img/avatar_cat.png')}
 				onEditPress={changeAvatar}
 			/>
 			<View>

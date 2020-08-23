@@ -21,7 +21,6 @@ Notifications.setNotificationHandler({
 	})
 });
 
-
 // export const getPushNotificationPermissions = async () => {
 // 	const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
 // 	let finalStatus = existingStatus;
@@ -114,6 +113,7 @@ export const sendNotification = async (title, message) => {
 const buildElementRequest = (to, title, message) => {
 	return {
 		to: to,
+		sound: 'default',
 		title: title,
 		body: message
 	};

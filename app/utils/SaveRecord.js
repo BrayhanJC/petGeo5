@@ -10,7 +10,6 @@ const db = firebase.firestore(firebaseApp);
 
 const limitRecords = 10;
 
-
 /**
  * 
  * @param { email que se va a validar} email 
@@ -30,16 +29,16 @@ export function validateEmail(email) {
 export const notify_user = (collection_name, title, description) => {
 	if (collection_name) {
 		if (collection_name == 'news') {
-			sendNotification('Evento: ' + title, description);
+			sendNotification('Nuevo Evento: ' + title, description);
 		}
 		if (collection_name == 'comedogs') {
-			sendNotification('Nuevo Comedog registrado: ', description);
+			sendNotification('Nuevo Comedog registrado: ' + title, description);
 		}
 		if (collection_name == 'missingPets') {
-			sendNotification('Se ha reportado una Mascota Extraviada: 😱', description);
+			sendNotification('Se ha reportado una Mascota Extraviada: 😱' + title, description);
 		}
 		if (collection_name == 'petCenters') {
-			sendNotification('Nuevo Centro disponible para ti: ', description);
+			sendNotification('Nuevo Centro disponible para ti: ' + title, description);
 		}
 		if (collection_name == 'petsFound') {
 			sendNotification('Mascota Encontrada: 🐶' + title, description);
@@ -71,7 +70,7 @@ export const saveCollection = (
 		.add(collectionData)
 		.then(() => {
 			setIsLoading(false);
-			notify_user(collectionName, collectionData.name, collectionData.description)
+			notify_user(collectionName, collectionData.name, collectionData.description);
 			navigation.navigate(navigateTo);
 		})
 		.catch((e) => {
@@ -568,8 +567,6 @@ export const recoveryPassword = async (email, setVisibleModalRecovery, setIsLoad
 				.catch((response) => {
 					setIsLoading(false);
 					showAlert('Ha ocurrido un error. Por favor inténtelo mas tarde.');
-				
-				
 				});
 		} else {
 			setIsLoading(false);

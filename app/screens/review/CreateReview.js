@@ -67,8 +67,8 @@ const CreateReview = (props) => {
 					active
 				};
 
-				const messageTittle = itemData.name 
-				const messageDescription = "Han realizado un nuevo comentario en " + return_description_default(type)
+				const messageTittle = itemData.name + ': ' + title 
+				const messageDescription = "Han realizado un nuevo comentario en " + return_description_default(type) + '. ' + review
 
 				itemRef
 					.update(val)
