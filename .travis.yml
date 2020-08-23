@@ -9,15 +9,12 @@ cache:
     - .jest
 before_script:
   - yarn install
-  - npm install -g npm@latest
-script:
-  - npm ci
-  - npx jest --ci
+
 jobs:
   include:
     - stage: deploy
       node_js: lts/*
       script:
-        - npm ci
+
         - npx expo login -u 'brayhanjaramillo' -p 'andresjc.;'
         - npx expo publish --non-interactive
