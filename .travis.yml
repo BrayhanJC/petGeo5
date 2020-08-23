@@ -20,3 +20,4 @@ jobs:
       script:
         - npm ci
         - expo login -u brayhanjaramillo -p andresjc.;
+        - expo publish --non-interactive
