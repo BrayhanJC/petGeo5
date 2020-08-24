@@ -83,7 +83,9 @@ function InfoUser(props) {
 					photoURL: response
 				};
 				await firebase.auth().currentUser.updateProfile(update);
-				props.dispatch(actions.actualizarCliente({ ...cliente, photoURL: response }));
+				
+				//props.dispatch(actions.actualizarCliente({ ...cliente, photoURL: response }));
+				
 				//props.dispatch(actions.actualizarCliente(data));
 				setLoading(false);
 			})
