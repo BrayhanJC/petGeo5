@@ -5,6 +5,8 @@ import 'firebase/storage';
 import 'firebase/firestore';
 import { size } from 'lodash';
 import { sendNotification } from './Notifications';
+import * as Permissions from 'expo-permissions';
+import * as ImagePicker from 'expo-image-picker';
 
 const db = firebase.firestore(firebaseApp);
 
@@ -577,3 +579,32 @@ export const recoveryPassword = async (email, setVisibleModalRecovery, setIsLoad
 		showAlert('Debe ingresar un correo.');
 	}
 };
+
+/**
+ * funcion que permite retornar un arreglo con los valores necesarios para llenar el listitem
+ * el cual va a permitir seleccionar una imagen o tomar una foto
+ */
+export var listOpenImage = (setvalOptionImage, setModalVisible, setReload) => [
+	{
+		text: 'Tomar Foto',
+		iconName: 'account-edit',
+		iconType: 'material-community',
+		rightNameIcon: 'chevron-right',
+		onPress: () => {
+			setvalOptionImage('take_photo');
+			setModalVisible(false);
+			setReload(true);
+		}
+	},
+	{
+		text: 'Seleccionar de Galería',
+		iconName: 'image',
+		rightNameIcon: 'chevron-right',
+		iconType: 'material-community',
+		onPress: async () => {
+			setvalOptionImage('select_photo');
+			setModalVisible(false);
+			setReload(true);
+		}
+	}
+];

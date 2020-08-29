@@ -12,7 +12,6 @@ export const style = {
 		backgroundColor: 'white',
 		borderRadius: 20,
 		padding: 15,
-
 		alignItems: 'center',
 		shadowColor: '#000',
 		shadowOffset: {

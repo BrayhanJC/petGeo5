@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, Alert, TextInput } from 'react-native';
 import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
-
+//import ImagePicker from 'react-native-image-picker';
+import OpenImage from '../openImage/OpenImage';
 import { map, size, filter } from 'lodash';
 
 /**
@@ -20,6 +21,29 @@ function UploadImage(props) {
 			}
 		}
 	}
+	//variables para elegir la foto o tomar foto
+	const [ showOpenImage, setshowOpenImage ] = useState(false);
+	const [ valOptionImage, setvalOptionImage ] = useState('');
+	const [ reload, setReload ] = useState(false);
+
+	useEffect(
+		() => {
+			(async () => {
+				if (reload) {
+					if (valOptionImage == 'take_photo') {
+						console.log('tomar foto');
+						takePhoto();
+					}
+					if (valOptionImage == 'select_photo') {
+						console.log('seleccionar fotossss');
+						imageSelect();
+					}
+				}
+				setReload(false);
+			})();
+		},
+		[ reload ]
+	);
 
 	/**
 	 * Remueve la imagen que ha seleccionado
@@ -48,7 +72,6 @@ function UploadImage(props) {
 		);
 	};
 
-
 	/**
 	 * Permite seleccionar una imagen de la galeria del celular
 	 */
@@ -65,7 +88,7 @@ function UploadImage(props) {
 				allowsEditing: true,
 				mediaTypes: ImagePicker.MediaTypeOptions.Images,
 				aspect: [ 2, 1 ],
-				quality: 0.1,
+				quality: 0.1
 			});
 
 			if (result.cancelled) {
@@ -75,6 +98,34 @@ function UploadImage(props) {
 			}
 		}
 	};
+
+	/**
+	 * Permite tomar una foto
+	 */
+	const takePhoto = async () => {
+		const resultPermissions = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+
+		if (resultPermissions === 'denied') {
+			toastRef.current.show(
+				'Es necesario aceptar los permisos de la galeria, si lo haz rechazado tienes que ir a Configuración y activarlos manualmente',
+				3000
+			);
+		} else {
+			const result = await ImagePicker.launchCameraAsync({
+				allowsEditing: true,
+				mediaTypes: ImagePicker.MediaTypeOptions.Images,
+				aspect: [ 2, 1 ],
+				quality: 0.1
+			});
+
+			if (result.cancelled) {
+				toastRef.current.show('Haz cerrado la galeria sin seleccionar ninguna imagen', 2000);
+			} else {
+				setImageSelected([ ...imageSelected, result.uri ]);
+			}
+		}
+	};
+
 	return (
 		<ScrollView style={styleUploadImage.viewImage} horizontal={true}>
 			{size(imageSelected) < 4 && (
@@ -84,7 +135,9 @@ function UploadImage(props) {
 					color="#7A7A7A"
 					size={48}
 					containerStyle={styleUploadImage.containerIcon}
-					onPress={imageSelect}
+					onPress={() => {
+						setshowOpenImage(true);
+					}}
 				/>
 			)}
 
@@ -98,6 +151,15 @@ function UploadImage(props) {
 					onPress={() => removeImage(imageComedog)}
 				/>
 			))}
+			<OpenImage
+				modalVisible={showOpenImage}
+				setModalVisible={setshowOpenImage}
+				setvalOptionImage={setvalOptionImage}
+				imageSelected={setImageSelected}
+				setImageSelected={setImageSelected}
+				toastRef={toastRef}
+				setReload={setReload}
+			/>
 		</ScrollView>
 	);
 }

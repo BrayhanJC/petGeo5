@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Text, View, StyleSheet, Dimensions, ScrollView, Image } from 'react-native';
-import { Button } from 'react-native-elements';
+
 import MapView, { Marker, Callout } from 'react-native-maps';
 import * as Location from 'expo-location';
-import { useFocusEffect } from '@react-navigation/native';
-import { styleMap } from '../../src/css/MapView';
+
 import * as Permissions from 'expo-permissions';
 import { firebaseApp } from '../../utils/FireBase';
 import { ListMap } from '../../utils/ListMap';
@@ -13,14 +12,12 @@ import 'firebase/storage';
 import 'firebase/firestore';
 const db = firebase.firestore(firebaseApp);
 import { map, size, filter } from 'lodash';
-import CarouselImages from '../../components/CarouselImages';
-import { mapInfoStyle } from '../../src/css/InfoMap';
-import { getInfoByUser } from '../../utils/SaveRecord';
 
-import UserData from '../account/UserData';
+import { mapInfoStyle } from '../../src/css/InfoMap';
+
 import FilterMap from './FilterMap';
 import { returnColor, returnNameFormView } from '../../utils/Configurations';
-import { return_kms } from '../../utils/validations';
+
 /**
  * Permite localizar todos los registros:
  * -> Comedogs (naranja)
@@ -176,7 +173,13 @@ function LocalizationMap(props) {
 														height: 95,
 														width: 180
 													}}
-													source={record.image[0] ? { uri: record.image[0] } : require('../../../assets/img/default_center.jpeg')}
+													source={
+														record.image[0] ? (
+															{ uri: record.image[0] }
+														) : (
+															require('../../../assets/img/default_center.jpeg')
+														)
+													}
 													resizeMode="cover"
 												/>{' '}
 											</Text>

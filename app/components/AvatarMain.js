@@ -59,7 +59,7 @@ function AvatarMain(props) {
 				allowsEditing: true,
 				mediaTypes: ImagePicker.MediaTypeOptions.Images,
 				aspect: [ 2, 1 ],
-				quality: 0.1,
+				quality: 0.1
 			});
 
 			if (result.cancelled) {

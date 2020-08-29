@@ -651,3 +651,33 @@ export var return_description_default = (collection_name) => {
 
 	return description;
 };
+
+/**
+ * funcion que permite retornar un arreglo con los valores necesarios para llenar el listitem
+ * el cual va a permitir seleccionar una imagen o tomar una foto
+ */
+export var listOpenImage = (setvalOptionImage, setModalVisible) => [
+	{
+		text: 'Tomar Foto',
+		iconName: 'account-edit',
+		iconType: 'material-community',
+		rightNameIcon: 'chevron-right',
+		onPress: () => {
+			console.log('tomar foto')
+		
+			setvalOptionImage('take_photo')
+			setModalVisible(false)
+		}
+	},
+	{
+		text: 'Seleccionar de Galería',
+		iconName: 'image',
+		rightNameIcon: 'chevron-right',
+		iconType: 'material-community',
+		onPress: () => {
+		
+			setvalOptionImage('select_photo')
+			setModalVisible(false)
+		}
+	}
+];
