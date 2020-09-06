@@ -1,5 +1,4 @@
 import React from 'react';
-import { View, Text, Slider } from 'react-native';
 import { Image } from 'react-native-elements';
 import Carousel from 'react-native-snap-carousel';
 import { size } from 'lodash';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import ViewEditPetCenter from '../../components/formEdit/formPetCenter/ViewEditPetCenter';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 

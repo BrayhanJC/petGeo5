@@ -1,16 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, TextInput } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { View, TextInput } from 'react-native';
 import { AirbnbRating, Button, Input } from 'react-native-elements';
-
 import { styleCreateReview } from '../../src/css/CreateReview';
 import Toast from 'react-native-easy-toast';
 import Loading from '../../components/Loading';
-
 import { firebaseApp } from '../../utils/FireBase';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { sendNotification } from '../../utils/Notifications';
-import {return_description_default} from '../../utils/Configurations'
+import { return_description_default } from '../../utils/Configurations';
 const db = firebase.firestore(firebaseApp);
 
 /**
@@ -67,13 +65,14 @@ const CreateReview = (props) => {
 					active
 				};
 
-				const messageTittle = itemData.name + ': ' + title 
-				const messageDescription = "Han realizado un nuevo comentario en " + return_description_default(type) + '. ' + review
+				const messageTittle = itemData.name + ': ' + title;
+				const messageDescription =
+					'Han realizado un nuevo comentario en ' + return_description_default(type) + '. ' + review;
 
 				itemRef
 					.update(val)
 					.then(() => {
-						sendNotification(messageTittle, messageDescription)
+						sendNotification(messageTittle, messageDescription);
 						setIsLoading(false);
 						navigation.goBack();
 					})

@@ -21,8 +21,8 @@ const NotItem = (props) => {
 					<Image source={image_default} resizeMode="contain" style={{ height }} />
 				</View>
 				<View style={notItem.notFound}>
-				<Text style={notItem.textCenter}>{title}</Text>
-				<Text style={[ notItem.textCenter, { marginTop: 35 } ]}>{subtitle}</Text>
+					<Text style={notItem.textCenter}>{title}</Text>
+					<Text style={[ notItem.textCenter, { marginTop: 35 } ]}>{subtitle}</Text>
 				</View>
 			</View>
 		</ScrollView>

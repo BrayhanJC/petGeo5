@@ -1,15 +1,8 @@
-import React, { useRef, Component, useState } from 'react';
-import { Alert, Modal, StyleSheet, Text, TextInput, TouchableHighlight, View, ScrollView, Picker } from 'react-native';
-import { ButtonGroup, Button, Icon, Input } from 'react-native-elements';
+import React, { useState } from 'react';
+import { Modal, StyleSheet, Text, View } from 'react-native';
+import { Button, Input } from 'react-native-elements';
 import { userInfoStyle } from '../../src/css/UserInfoStyle';
-import { styleForm } from '../../src/css/AddForm';
 import { recoveryPassword } from '../../utils/SaveRecord';
-import Map from '../../components/formMain/Map';
-import { returnUserType, returnSchedule } from '../../utils/Configurations';
-import * as firebase from 'firebase';
-import { connect } from 'react-redux';
-import { actions } from '../../store';
-import Loading from '../../components/Loading';
 
 /**
  * Modal que permite verificar que tipo de usuario es el que se va a registrar
@@ -20,7 +13,7 @@ import Loading from '../../components/Loading';
  */
 const RecoveryPasswaord = (props) => {
 	const { visibleModalRecovery, setVisibleModalRecovery } = props;
-	const toastRef = useRef();
+
 	const [ isLoading, setIsLoading ] = useState(false);
 
 	const [ email, setEmail ] = useState('');

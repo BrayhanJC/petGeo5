@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Text, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
 import * as firebase from 'firebase';
-
 import Loading from '../../components/Loading';
 import UserGuest from './UserGuest';
 import UserLogged from './UserLogged';

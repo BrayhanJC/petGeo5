@@ -38,7 +38,6 @@ function RenderDoctor(props) {
 						size="large"
 						rounded
 						source={mainImage ? { uri: mainImage } : require('../../../../assets/img/doctor.png')}
-						//source={require('../../../../assets/img/doctor.png')}
 						activeOpacity={0.7}
 					/>
 				</View>
@@ -56,10 +55,8 @@ export default RenderDoctor;
 
 const styles = StyleSheet.create({
 	item: {
-		//backgroundColor: '#F2F2F2',
 		backgroundColor: 'white',
 		alignItems: 'center',
-		//justifyContent: 'center',
 		flex: 1,
 		margin: 2,
 		marginTop: 4,

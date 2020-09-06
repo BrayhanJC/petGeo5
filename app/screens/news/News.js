@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { StyleSheet, View, Text, AsyncStorage } from 'react-native';
+import {  View} from 'react-native';
 import { Icon } from 'react-native-elements';
 import { styles } from '../../src/css/News';
 import { listRecords, handleLoadMore, getInfoByUser } from '../../utils/SaveRecord';
@@ -26,6 +26,7 @@ function News(props) {
 	const [ totalNews, setTotalNews ] = useState(0);
 	const [ startNews, setStartNews ] = useState(null);
 	const [ isLoading, setIsLoading ] = useState(false);
+
 	//variables para el popup
 	const [ elements, setElements ] = useState('');
 	const [ modalVisible, setModalVisible ] = useState(false);
@@ -47,12 +48,12 @@ function News(props) {
 		(async () => {
 			const resultPermissions = await Permissions.askAsync(Permissions.LOCATION);
 			const statusPermissions = resultPermissions.permissions.location.status;
-			//console.log(statusPermissions);
+			
 			if (statusPermissions !== 'granted') {
 				toastRef.current.show('Tienes que Aceptar los permisos de localización para crear un Comedog', 3000);
 			} else {
 				const loc = await Location.getCurrentPositionAsync({});
-				//console.log(loc);
+				
 				if (loc) {
 					if (loc.coords.latitude && loc.coords.longitude) {
 						setLocation({

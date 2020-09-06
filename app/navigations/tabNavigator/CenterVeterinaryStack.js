@@ -1,6 +1,5 @@
-import * as React from 'react';
+import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-
 import PetCenterScreen from '../../screens/veterinaryCenter/CenterVeterinary';
 import AvatarIcon from '../../components/AvatarIcon';
 import CreateReview from '../../screens/review/CreateReview';
@@ -8,8 +7,6 @@ import PetCenterView from '../../screens/veterinaryCenter/PetCenterView';
 import EditCenter from '../../screens/veterinaryCenter/EditCenter';
 import PetDoctorView from '../../screens/petDoctor/PetDoctorView';
 import DeleteRecord from '../../components/UpdateRecords/DeleteRecord';
-import { MaterialCommunityIcons } from 'react-native-vector-icons';
-import CenterDoctorScreen from '../../screens/petDoctor/CenterDoctors';
 import CenterVeterinaryDoctorScreen from '../../screens/petDoctor/CenterVeterinaryDoctor';
 const Stack = createStackNavigator();
 

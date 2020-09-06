@@ -1,9 +1,7 @@
 import React, { useRef } from 'react';
-import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
-import { Button, Divider } from 'react-native-elements';
-import { useNavigation } from '@react-navigation/native';
+import { View, StyleSheet, ScrollView, Image } from 'react-native';
+import { Divider } from 'react-native-elements';
 import Toast from 'react-native-easy-toast';
-
 import LinkCreateAccount from './LinkCreateAccount';
 import LoginForm from '../../components/account/LoginForm';
 import LoginFacebook from '../../components/account/LoginFacebook';

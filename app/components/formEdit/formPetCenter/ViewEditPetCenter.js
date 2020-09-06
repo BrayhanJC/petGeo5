@@ -1,8 +1,6 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, ScrollView, Alert, TextInput, Dimensions } from 'react-native';
-import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
-import { size } from 'lodash';
-import firebase from 'firebase/app';
+import { ScrollView, Dimensions } from 'react-native';
+import { Button } from 'react-native-elements';
 import { uploadImageStorage } from '../../../utils/UploadImageStorage';
 import { updateCollectionRecord } from '../../../utils/SaveRecord';
 import { styleForm } from '../../../src/css/AddForm';
@@ -21,25 +19,13 @@ const widhtScreen = Dimensions.get('window').width;
 
 function ViewEditPetCenter(props) {
 	const toastRef = useRef();
-	const {
-		navigation,
-		route,
-		placeholder_title,
-		placeholder_description,
-		text_button,
-		validation_basic,
-		validation_pet,
-		validation_petControl
-	} = props;
+	const { navigation, route, placeholder_title, placeholder_description, text_button } = props;
 
 	navigation.setOptions({
 		title: route.params.name
 	});
 
-	//console.log('capturando lso elementos');
 	const data_collection = route.params.data_collection;
-	//console.log(data_collection);
-
 	const [ loading, setloading ] = useState(false);
 
 	//campos basicos para las colecciones
@@ -74,7 +60,7 @@ function ViewEditPetCenter(props) {
 			website
 		};
 
-		if (data_collection.userType == 'veterinary'){
+		if (data_collection.userType == 'veterinary') {
 			if (title && address && description && imageSelected && phone && location && website) {
 				setloading(true);
 				uploadImageStorage(imageSelected, 'petCenters')
@@ -99,9 +85,9 @@ function ViewEditPetCenter(props) {
 			}
 		}
 
-		if (data_collection.userType == 'fundation'){
-			console.log('por aca')
-			if (title  && description && imageSelected && phone) {
+		if (data_collection.userType == 'fundation') {
+			console.log('por aca');
+			if (title && description && imageSelected && phone) {
 				setloading(true);
 				uploadImageStorage(imageSelected, 'petCenters')
 					.then((response) => {
@@ -113,17 +99,15 @@ function ViewEditPetCenter(props) {
 			} else {
 				if (isEmpty(title)) {
 					toastRef.current.show('Debe incluir el nombre del Centro', 3000);
-				}  else if (isEmpty(description)) {
+				} else if (isEmpty(description)) {
 					toastRef.current.show('Debe incluir una Descripción', 3000);
-				}  else if (!imageSelected) {
+				} else if (!imageSelected) {
 					toastRef.current.show('Debe incluir una Descripción', 3000);
-				}
-				else {
+				} else {
 					toastRef.current.show('Asegurese de llenar los datos principales', 3000);
 				}
 			}
 		}
-
 	};
 
 	return (

@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, ScrollView, Alert, TextInput } from 'react-native';
-import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
+import React, { useState, useCallback } from 'react';
+import { View, TextInput } from 'react-native';
+import { Input } from 'react-native-elements';
 import { styleCreateForm } from '../../../src/css/CreateForm';
 import RNPickerSelect from 'react-native-picker-select';
 import firebase from 'firebase/app';
@@ -11,27 +11,21 @@ import { useFocusEffect } from '@react-navigation/native';
 import { pickerStyleView } from '../../../src/css/PickerStyle';
 
 /**
- * Componente que sirve para Editar:
- * ->  Noticias
- * ->  Mascotas Extraviadas
- * ->  Comedogs
+ * Componente que sirve para  editar los controles 
  * @param {*} props
  */
 function FormEditPetControl(props) {
 	const {
-		description,
 		setDescription,
 		styleForm,
 		placeholder_title,
-		placeholder_description,
 		default_name,
 		default_description,
 		setNameControl,
 		setTypeControl,
 		setPet,
 		pet,
-		typeControl,
-		nameControl
+		typeControl
 	} = props;
 
 	const [ elements, setElements ] = useState(null);
@@ -54,40 +48,39 @@ function FormEditPetControl(props) {
 
 	return (
 		<View style={styleForm.viewForm}>
+			<View style={pickerStyleView.picker}>
+				<RNPickerSelect
+					onValueChange={(value) => setPet(value)}
+					placeholder={{
+						label: 'Mascota',
+						value: null,
+						color: '#1A89E7'
+					}}
+					value={pet}
+					style={stylePicker}
+					items={list_pets}
+					Icon={() => {
+						return <View style={stylePicker.iconStyle} />;
+					}}
+				/>
+			</View>
+			<View style={pickerStyleView.picker}>
+				<RNPickerSelect
+					onValueChange={(value) => setTypeControl(value)}
+					placeholder={{
+						label: 'Tipo de Control',
+						value: null,
+						color: '#1A89E7'
+					}}
+					value={typeControl}
+					style={stylePicker}
+					items={TYPE_CONTROL}
+					Icon={() => {
+						return <View style={stylePicker.iconStyle} />;
+					}}
+				/>
+			</View>
 
-				<View style={pickerStyleView.picker}>
-					<RNPickerSelect
-						onValueChange={(value) => setPet(value)}
-						placeholder={{
-							label: 'Mascota',
-							value: null,
-							color: '#1A89E7'
-						}}
-						value={pet}
-						style={stylePicker}
-						items={list_pets}
-						Icon={() => {
-							return <View style={stylePicker.iconStyle} />;
-						}}
-					/>
-				</View>
-				<View style={pickerStyleView.picker}>
-					<RNPickerSelect
-						onValueChange={(value) => setTypeControl(value)}
-						placeholder={{
-							label: 'Tipo de Control',
-							value: null,
-							color: '#1A89E7'
-						}}
-						value={typeControl}
-						style={stylePicker}
-						items={TYPE_CONTROL}
-						Icon={() => {
-							return <View style={stylePicker.iconStyle} />;
-						}}
-					/>
-				</View>
-		
 			<Input
 				placeholder={placeholder_title}
 				containerStyle={styleCreateForm.input}

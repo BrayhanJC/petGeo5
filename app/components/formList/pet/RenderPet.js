@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Avatar, Rating } from 'react-native-elements';
+import { Avatar } from 'react-native-elements';
 
 /**
  * Permite crear una cuadricula en la cual se mostraran los datos de la mascota
@@ -160,7 +160,6 @@ const styles = StyleSheet.create({
 	avatar: {
 		alignItems: 'center',
 		paddingBottom: 5,
-		//marginTop:-10,
 		backgroundColor: 'white'
 	},
 	title: {

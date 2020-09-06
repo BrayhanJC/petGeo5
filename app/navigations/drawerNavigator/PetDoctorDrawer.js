@@ -1,8 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import PetDoctorScreen from '../../screens/petDoctor/PetDoctor';
 import CreatePetDoctor from '../../screens/petDoctor/CreatePetDoctor';
 import PetDoctorView from '../../screens/petDoctor/PetDoctorView';
 import DeleteRecord from '../../components/UpdateRecords/DeleteRecord';

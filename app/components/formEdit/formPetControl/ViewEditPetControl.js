@@ -1,9 +1,6 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, ScrollView, Alert, TextInput, Dimensions } from 'react-native';
-import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
-import { size } from 'lodash';
-import firebase from 'firebase/app';
-import { uploadImageStorage } from '../../../utils/UploadImageStorage';
+import { ScrollView, Dimensions } from 'react-native';
+import { Button } from 'react-native-elements';
 import { updateCollectionRecord } from '../../../utils/SaveRecord';
 import { styleForm } from '../../../src/css/AddForm';
 import { styleUploadImage } from '../../../src/css/UploadImage';
@@ -11,7 +8,6 @@ import { styleImageMain } from '../../../src/css/ImageMain';
 import UploadImage from '../../formMain/UploadImage';
 import ImageMain from '../../formMain/ImageMain';
 import Loading from '../../Loading';
-import Map from '../../formMain/Map';
 import Toast from 'react-native-easy-toast';
 import FormEditPetControl from './FormEditPetControl';
 import { isEmpty } from 'lodash';
@@ -27,14 +23,8 @@ function ViewEditPetControl(props) {
 		title: route.params.name
 	});
 
-	//console.log('capturando lso elementos');
 	const data_collection = route.params.petControl;
-	//console.log(data_collection);
-
 	const [ loading, setloading ] = useState(false);
-
-	//campos basicos para las colecciones
-
 	const [ pet, setPet ] = useState(data_collection.pet ? data_collection.pet : '');
 	const [ typeControl, setTypeControl ] = useState(data_collection.type_control ? data_collection.type_control : '');
 	const [ nameControl, setNameControl ] = useState(data_collection.name ? data_collection.name : '');
@@ -42,7 +32,6 @@ function ViewEditPetControl(props) {
 	const [ imageSelected, setImageSelected ] = useState(data_collection.image_id ? data_collection.image_id : []);
 
 	const onSubmit = () => {
-		//console.log('Cpturarndo valores en control');
 		const data = {
 			name: nameControl,
 			type_control: typeControl,

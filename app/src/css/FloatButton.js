@@ -1,12 +1,10 @@
-import { StyleSheet, Icon } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export const button = {
 	viewBody: {
 		flex: 1,
 		backgroundColor: 'white'
 	},
-
-	//estilo boton flotante
 	btnContainer: {
 		position: 'absolute',
 		bottom: 10,

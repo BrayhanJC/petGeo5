@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import {  View } from 'react-native';
 import { Input, Button, Card } from 'react-native-elements';
 import { isEmpty } from 'lodash';
-import * as firebase from 'firebase';
 import { styles } from '../../src/css/ModalProfile';
 import Map from '../../components/formMain/Map';
 import { updateInfoUserCenter } from '../../utils/SaveRecord';
-
 import { connect } from 'react-redux';
 import { actions } from '../../store';
 

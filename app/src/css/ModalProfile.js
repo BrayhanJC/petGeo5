@@ -1,15 +1,12 @@
-
-import {StyleSheet, View} from 'react-native'
+import { StyleSheet, View } from 'react-native';
 
 export const styleForm = {
-    view: {
-        alignItems: 'center',
-        paddingTop: 10,
-        paddingBottom: 10,
-       
-    },
-
-    input: {
+	view: {
+		alignItems: 'center',
+		paddingTop: 10,
+		paddingBottom: 10
+	},
+	input: {
 		marginBottom: 3
 	},
 	inputForm: {
@@ -21,18 +18,14 @@ export const styleForm = {
 		borderRadius: 50,
 		backgroundColor: '#ffffff'
 	},
-    btnContainer: {
-        marginTop: 20,
-        width: '90%',
-        
-    },
-    btnUpdate: {
-        backgroundColor: '#1A89E7',
-        borderRadius: 20,
-        
-    }
-}
+	btnContainer: {
+		marginTop: 20,
+		width: '90%'
+	},
+	btnUpdate: {
+		backgroundColor: '#1A89E7',
+		borderRadius: 20
+	}
+};
 
-export const styles = StyleSheet.create(styleForm)
-
-
+export const styles = StyleSheet.create(styleForm);

@@ -1,8 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { Icon } from 'react-native-elements';
 import Slidemain from '../../screens/slides/SlideMain';
 
 const Stack = createStackNavigator();

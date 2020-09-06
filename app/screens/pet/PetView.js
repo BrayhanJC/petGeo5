@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, ScrollView, Dimensions } from 'react-native';
+import React, { useState, useCallback } from 'react';
+import { View, ScrollView, Dimensions } from 'react-native';
 import { firebaseApp } from '../../utils/FireBase';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
@@ -10,9 +10,7 @@ import TitleItem from '../../components/formView/TitleItem';
 import InfoItem from '../../components/formView/InfoItem';
 import EditRecord from '../../components/UpdateRecords/EditRecords';
 import { useFocusEffect } from '@react-navigation/native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 const screenWidth = Dimensions.get('window').width;
-const screenHeight = Dimensions.get('window').height;
 const db = firebase.firestore(firebaseApp);
 
 /**

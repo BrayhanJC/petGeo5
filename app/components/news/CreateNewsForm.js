@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, Alert, Dimensions, StyleSheet } from 'react-native';
-import { Icon, Avatar, Image, Input, Button, CheckBox } from 'react-native-elements';
+import { View, ScrollView, Dimensions, StyleSheet } from 'react-native';
+import { Button, CheckBox } from 'react-native-elements';
 import { size } from 'lodash';
 import firebase from 'firebase/app';
 import { uploadImageStorage } from '../../utils/UploadImageStorage';
@@ -14,7 +14,6 @@ import ImageMain from '../formMain/ImageMain';
 import Map from '../formMain/Map';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { connect } from 'react-redux';
-import { actions } from '../../store';
 
 //devuelve el ancho de la screen
 const widhtScreen = Dimensions.get('window').width;

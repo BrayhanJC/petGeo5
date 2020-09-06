@@ -1,7 +1,6 @@
 import { StyleSheet, Icon } from 'react-native';
 
 export const addForm = {
-
 	scrollView: {
 		height: '100%'
 	},
@@ -11,11 +10,9 @@ export const addForm = {
 		marginRight: 20
 	},
 	input: {
-		marginBottom: 3,
-
+		marginBottom: 3
 	},
 	inputForm: {
-		
 		height: 35,
 		marginTop: 5,
 		padding: 5,
@@ -31,7 +28,6 @@ export const addForm = {
 		marginRight: 15,
 		borderRadius: 30
 	},
-
 	textAreaContainer: {
 		padding: 5,
 		marginLeft: 10,
@@ -43,12 +39,11 @@ export const addForm = {
 		borderColor: '#C2C2C2',
 		borderWidth: 2,
 		borderRadius: 15,
-		backgroundColor: '#ffffff',
+		backgroundColor: '#ffffff'
 	},
 	textArea: {
-		fontSize:14
-	},
-	
+		fontSize: 14
+	}
 };
 
 export const stylePetForm = StyleSheet.create(addForm);

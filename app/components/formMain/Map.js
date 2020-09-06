@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, Alert, TextInput, Dimensions } from 'react-native';
-import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
+import { View,  Dimensions } from 'react-native';
+import {  Button } from 'react-native-elements';
 import * as Permissions from 'expo-permissions';
-import * as ImagePicker from 'expo-image-picker';
 import Modal from '../Modal';
-import { map, size, filter } from 'lodash';
 import * as Location from 'expo-location';
 import MapView from 'react-native-maps';
 import { styleMap } from '../../src/css/MapView';
@@ -23,7 +21,7 @@ function Map(props) {
 		(async () => {
 			const resultPermissions = await Permissions.askAsync(Permissions.LOCATION);
 			const statusPermissions = resultPermissions.permissions.location.status;
-			//console.log(statusPermissions);
+			
 			if (statusPermissions !== 'granted') {
 				if (toastRef) {
 					toastRef.current.show('Tienes que Aceptar los permisos de localización', 3000);

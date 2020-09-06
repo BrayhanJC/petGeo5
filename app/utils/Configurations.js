@@ -629,7 +629,6 @@ export const slides = [
 	}
 ];
 
-
 /**
  * Funcion que permite retornar una descripcion por defecto para que se muestre al momento de creacion de un comentario
  * @param { nombre de la coleccion} collection_name 
@@ -637,16 +636,16 @@ export const slides = [
 export var return_description_default = (collection_name) => {
 	var description = '';
 	if (collection_name == 'petCenters') {
-		description = 'Centros'
+		description = 'Centros';
 	}
 	if (collection_name == 'news') {
-		description = 'Noticias'
+		description = 'Noticias';
 	}
 	if (collection_name == 'comedogs') {
-		description = 'Comedgos'
+		description = 'Comedgos';
 	}
 	if (collection_name == 'missingPets') {
-		description = 'Mascotas Extraviadas'
+		description = 'Mascotas Extraviadas';
 	}
 
 	return description;
@@ -663,10 +662,10 @@ export var listOpenImage = (setvalOptionImage, setModalVisible) => [
 		iconType: 'material-community',
 		rightNameIcon: 'chevron-right',
 		onPress: () => {
-			console.log('tomar foto')
-		
-			setvalOptionImage('take_photo')
-			setModalVisible(false)
+			console.log('tomar foto');
+
+			setvalOptionImage('take_photo');
+			setModalVisible(false);
 		}
 	},
 	{
@@ -675,9 +674,8 @@ export var listOpenImage = (setvalOptionImage, setModalVisible) => [
 		rightNameIcon: 'chevron-right',
 		iconType: 'material-community',
 		onPress: () => {
-		
-			setvalOptionImage('select_photo')
-			setModalVisible(false)
+			setvalOptionImage('select_photo');
+			setModalVisible(false);
 		}
 	}
 ];

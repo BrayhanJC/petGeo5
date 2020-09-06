@@ -1,7 +1,6 @@
-import { StyleSheet, Icon } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export const avatar = {
-
 	viewUserInfo: {
 		alignItems: 'center',
 		justifyContent: 'center',
@@ -12,9 +11,7 @@ export const avatar = {
 	},
 	userInfoAvatar: {
 		marginRight: 20
-	},
- 
-
+	}
 };
 
 export const styleAvatarMain = StyleSheet.create(avatar);

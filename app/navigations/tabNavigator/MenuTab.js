@@ -1,18 +1,11 @@
-import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
-import { MaterialCommunityIcons } from 'react-native-vector-icons';
-
-//importando stacks
 import NewsStack from './NewsStack';
 import PetCenterStack from './CenterVeterinaryStack';
 import ComedgosStack from './ComedogsStack';
 import MissingPetsStack from './MissingPetsStack';
 import LocalizationMapStack from './LocalizationMapStack';
-
 const Tab = createBottomTabNavigator();
-
 import { useNavigation } from '@react-navigation/native';
 import { Icon } from 'react-native-elements';
 

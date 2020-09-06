@@ -5,8 +5,6 @@ import 'firebase/storage';
 import 'firebase/firestore';
 import { size } from 'lodash';
 import { sendNotification } from './Notifications';
-import * as Permissions from 'expo-permissions';
-import * as ImagePicker from 'expo-image-picker';
 
 const db = firebase.firestore(firebaseApp);
 

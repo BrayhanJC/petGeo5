@@ -1,4 +1,4 @@
-import { StyleSheet, Icon } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export const addForm = {
 	textAreaContainer: {

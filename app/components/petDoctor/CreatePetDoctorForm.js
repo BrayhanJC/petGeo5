@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, Alert, Dimensions } from 'react-native';
-import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
+import { View, ScrollView } from 'react-native';
+import { Button } from 'react-native-elements';
 import firebase from 'firebase/app';
-
 import AvatarMain from '../AvatarMain';
-
 import { stylePetForm } from '../../src/css/PetForm';
-import { isEmpty } from 'lodash';
-
 import PetDoctorForm from './PetDoctorForm';
 import { uploadImageStorage } from '../../utils/UploadImageStorage';
 import { saveCollection } from '../../utils/SaveRecord';
@@ -48,7 +44,6 @@ function CreatePetDoctorForm(props) {
 						create_date: new Date(),
 						active: true
 					};
-
 					saveCollection(
 						data,
 						'petDoctor',
@@ -61,7 +56,6 @@ function CreatePetDoctorForm(props) {
 				})
 				.catch(() => {
 					setIsLoading(false);
-					//toastRef.current.show('jummm');
 				});
 		} else {
 			showAlert('Todos los campos son requeridos');

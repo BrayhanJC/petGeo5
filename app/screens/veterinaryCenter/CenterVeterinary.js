@@ -1,26 +1,24 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
-import firebase from 'firebase/app';
 import * as Permissions from 'expo-permissions';
 import * as Location from 'expo-location';
-import { viewBody, buttonFormFloating } from '../../src/css/GeneralStyles';
-import { listRecords, handleLoadMore, getInfoByUser } from '../../utils/SaveRecord';
+import { viewBody } from '../../src/css/GeneralStyles';
+import { listRecords, handleLoadMore } from '../../utils/SaveRecord';
 import ListPetCenter from '../../components/formList/petCenter/ListPetCenter';
 import { useFocusEffect } from '@react-navigation/native';
 import Search from '../../components/formSearch/Search';
 import NotFoundItem from '../../components/formSearch/NotFoundItem';
 import { size, isEmpty } from 'lodash';
-import UserData from '../account/UserData';
 import { return_data_distance } from '../../utils/validations';
 import { notItem } from '../../src/css/NotItem';
+
 /**
  * Componente que permite listar los centros veterinarios o fundaciones
  * @param {navigation} props 
  */
 function CenterVeterinary(props) {
 	const { navigation } = props;
-	const [ user, setUser ] = useState(null);
 
 	const [ centerVeterinary, setcenterVeterinary ] = useState([]);
 	const [ totalcenterVeterinary, setTotalcenterVeterinary ] = useState(0);
@@ -28,10 +26,6 @@ function CenterVeterinary(props) {
 	const [ isLoading, setIsLoading ] = useState(false);
 	const [ filterCenter, setFilterCenter ] = useState(true);
 	const [ filterFundation, setFilterFundation ] = useState(true);
-
-	//variables para el popup
-	const [ elements, setElements ] = useState('');
-	const [ modalVisible, setModalVisible ] = useState(false);
 
 	//variables para el buscador
 	const [ item, setItem ] = useState([]);
@@ -43,12 +37,10 @@ function CenterVeterinary(props) {
 		(async () => {
 			const resultPermissions = await Permissions.askAsync(Permissions.LOCATION);
 			const statusPermissions = resultPermissions.permissions.location.status;
-			//console.log(statusPermissions);
 			if (statusPermissions !== 'granted') {
 				toastRef.current.show('Tienes que Aceptar los permisos de localización para crear un Comedog', 3000);
 			} else {
 				const loc = await Location.getCurrentPositionAsync({});
-				//console.log(loc);
 				setLocation({
 					latitude: loc.coords.latitude,
 					longitude: loc.coords.longitude,

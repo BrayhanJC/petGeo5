@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 /**
@@ -14,7 +14,6 @@ function LinkCreateAccount() {
 			<Text
 				style={styles.btnRegister}
 				onPress={() => {
-					//console.log('navegando al formulario de registro')
 					navigation.navigate('Register');
 				}}
 			>

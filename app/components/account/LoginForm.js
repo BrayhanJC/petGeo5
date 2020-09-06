@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Icon, Button, Input } from 'react-native-elements';
 import { isEmpty } from 'lodash';

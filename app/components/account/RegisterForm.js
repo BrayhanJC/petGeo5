@@ -44,10 +44,9 @@ function RegisterForm(props) {
 			if (!validateEmail(email)) {
 				toastRef.current.show('Debe ser un correo valido');
 			} else if (size(password) < 6 || size(repeatPassword) < 6) {
-				//console.log('la contraseña deberia tener por lo menos tantos caracteres');
 				toastRef.current.show('la contraseña deberia tener por lo menos 6 caracteres');
 			} else if (password !== repeatPassword) {
-				//console.log('las contraseñas deberian ser iguales');
+		
 				toastRef.current.show('las contraseñas deberian ser iguales');
 			} else {
 				setloading(true);
@@ -56,7 +55,6 @@ function RegisterForm(props) {
 					.createUserWithEmailAndPassword(email, password)
 					.then((response) => {
 						props.dispatch(actions.actualizarCliente(response.user));
-						//console.log('RegisterForm', response);
 						setloading(false);
 						navigation.navigate('Profile');
 					})

@@ -1,6 +1,6 @@
-import React, { useRef, Component, useState } from 'react';
-import { Alert, Modal, StyleSheet, Text, TextInput, TouchableHighlight, View, ScrollView, Picker } from 'react-native';
-import { ButtonGroup, Button, Icon, Input } from 'react-native-elements';
+import React, { useRef, useState } from 'react';
+import { Alert, Modal, StyleSheet, Text, TouchableHighlight, View, ScrollView, Picker } from 'react-native';
+import { ButtonGroup, Input } from 'react-native-elements';
 import { userInfoStyle } from '../../src/css/UserInfoStyle';
 import { styleForm } from '../../src/css/AddForm';
 import { saveUserInfo, saveCenter } from '../../utils/SaveRecord';
@@ -112,7 +112,6 @@ const UserData = (props) => {
 					setErrorStreet('La dirección es requerida');
 				}
 				if (location) {
-					//console.log('stret ok');
 					setErrorMap('');
 				} else {
 					setErrorMap('Debe guardar la ubicación, pulse el icono del mapa');
@@ -220,7 +219,7 @@ const UserData = (props) => {
 						.currentUser.updateProfile(update)
 						.then(() => {
 							setIsLoading(false);
-							//console.log(data);
+
 							saveUserInfo(data, 'userInfo', () => {
 								setModalVisible();
 								props.dispatch(actions.actualizarCliente(data));
@@ -228,9 +227,7 @@ const UserData = (props) => {
 							//navigation.navigate('Profile');
 						})
 						.catch((response) => {
-							//console.log(response);
 							setIsLoading(false);
-							//setError('Error al actualizar el nombre');
 						});
 					saveCenter(data, 'petCenters');
 					saveUserInfo(data, 'userInfo', () => {

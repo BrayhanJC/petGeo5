@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { ScrollView, Dimensions, View } from 'react-native';
 import { styleForm } from '../../src/css/AddForm';
 import { styleUploadImage } from '../../src/css/UploadImage';
@@ -77,7 +77,6 @@ function AddMissinPetForm(props) {
 	 * Funcion que valida la información suministrada por el usuario para poder crear una mascota extraviada o desaparecida
 	 */
 	const addMissingPets = () => {
-		//setIsLoading(true);
 		if (!title || !address || !description) {
 			toastRef.current.show('Todos los campos del formulario son obligatorios', 1500);
 		} else if (size(imageSelected) === 0) {
@@ -114,7 +113,6 @@ function AddMissinPetForm(props) {
 		}
 	};
 
-	
 	return (
 		<KeyboardAwareScrollView>
 			<ScrollView style={styleForm.scrollView}>

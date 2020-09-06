@@ -1,10 +1,9 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, ScrollView, Alert, TextInput, Dimensions } from 'react-native';
-import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
-import { size } from 'lodash';
+import { ScrollView,  Dimensions } from 'react-native';
+import {  Button } from 'react-native-elements';
 
 import { uploadImageStorage } from '../../../utils/UploadImageStorage';
-import { updateCollectionRecord, createPetFound, getInfoCollection, getMissingPet } from '../../../utils/SaveRecord';
+import { updateCollectionRecord, createPetFound } from '../../../utils/SaveRecord';
 import { styleForm } from '../../../src/css/AddForm';
 import { styleUploadImage } from '../../../src/css/UploadImage';
 import { styleImageMain } from '../../../src/css/ImageMain';
@@ -34,9 +33,7 @@ function ViewEdit(props) {
 		title: route.params.name
 	});
 
-	//console.log('capturando lso elementos');
 	const data_collection = route.params.data_collection;
-	//console.log(data_collection);
 
 	const [ loading, setloading ] = useState(false);
 
@@ -50,8 +47,6 @@ function ViewEdit(props) {
 	const [ phone, setPhone ] = useState(data_collection.phone ? data_collection.phone : '');
 
 	const [ petFound, setpetFound ] = useState('');
-
-	const [ dataMissing, setdataMissing ] = useState(true);
 
 	const onSubmit = () => {
 		const data = {
@@ -78,7 +73,6 @@ function ViewEdit(props) {
 							setloading(true);
 							uploadImageStorage(imageSelected, 'petsFound')
 								.then((response) => {
-									//console.log('entrando en la imgen para guardar');
 									createPetFound(data, toastRef, navigation, route.params.id, setloading);
 								})
 								.catch((response) => {

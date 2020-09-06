@@ -61,7 +61,6 @@ export const style = {
 	btnRegister: {
 		backgroundColor: '#1A89E7'
 	},
-
 	textError: {
 		color: '#C2C2C2',
 		fontWeight: 'bold',
@@ -70,7 +69,6 @@ export const style = {
 		fontSize: 14,
 		fontWeight: 'bold'
 	},
-
 	input: {
 		marginBottom: 3
 	},

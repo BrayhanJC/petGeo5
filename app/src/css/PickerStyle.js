@@ -11,7 +11,6 @@ export const stylePicker = {
 		borderRadius: 30,
 		color: 'gray',
 		height: 43,
-		
 		marginBottom: 5
 	},
 	pickerPet: {

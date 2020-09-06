@@ -1,7 +1,5 @@
-import * as React from 'react';
+import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useNavigation } from '@react-navigation/native';
-
 import ComedogsScreen from '../../screens/comedog/Comedogs';
 import AvatarIcon from '../../components/AvatarIcon';
 import CreateComedog from '../../screens/comedog/CreateComedog';

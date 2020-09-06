@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import { Input, Button, Card } from 'react-native-elements';
 import { styles } from '../../src/css/ModalProfile';
 import { validateEmail } from '../../utils/validations';
 import * as firebase from 'firebase';
-
 import { reauthenticate } from '../../utils/Api';
-
 import { connect } from 'react-redux';
 import { actions } from '../../store';
 import { updateInfoUserCenter } from '../../utils/SaveRecord';

@@ -3,7 +3,6 @@ import { firebaseApp } from '../utils/FireBase';
 import firebase from 'firebase/app';
 import 'firebase/storage';
 import 'firebase/firestore';
-//import { Notifications } from 'expo';
 import * as Permissions from 'expo-permissions';
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
@@ -20,21 +19,6 @@ Notifications.setNotificationHandler({
 		shouldSetBadge: false
 	})
 });
-
-// export const getPushNotificationPermissions = async () => {
-// 	const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
-// 	let finalStatus = existingStatus;
-// 	if (existingStatus !== 'granted') {
-// 		const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-// 		finalStatus = status;
-// 	}
-// 	if (finalStatus !== 'granted') {
-// 		return;
-// 	}
-// 	const token = await Notifications.getExpoPushTokenAsync();
-// 	global.token = token;
-// 	addTokenExpo(token);
-// };
 
 /**
  * Obtiene las notificaciones
@@ -66,7 +50,6 @@ export async function registerForPushNotificationsAsync() {
 			lightColor: '#FF231F7C'
 		});
 	}
-	//console.log(token)
 	addTokenExpo(token);
 }
 

@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, ScrollView, Dimensions } from 'react-native';
+import React, { useState, useCallback } from 'react';
+import { View, ScrollView, Dimensions } from 'react-native';
 import { firebaseApp } from '../../utils/FireBase';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-
 import Loading from '../../components/Loading';
-import ViewAvatar from '../../components/formView/ViewAvatar';
 import CarouselImages from '../../components/CarouselImages';
 import TitleItem from '../../components/formView/TitleItem';
 import InfoItem from '../../components/formView/InfoItem';

@@ -1,18 +1,14 @@
 import React from 'react';
-import { Text, View, FlatList, ActivityIndicator, TouchableOpacity, Dimensions } from 'react-native';
-import { Image } from 'react-native-elements';
-import { useNavigation } from '@react-navigation/native';
-import { size, map } from 'lodash';
+import { Text, View, FlatList, ActivityIndicator,  Dimensions } from 'react-native';
+import { size } from 'lodash';
 import { styleLoadingRecords } from '../../../src/css/ListRecord';
-
 import FooterList from '../FooterList';
 import RenderPetCenter from './RenderPetCenter';
-
 const WIDTH = Dimensions.get('window').width;
 const COLUMNS = 2;
 
 /**
- * Lista los centros veterinarios que han sido creados
+ * Lista los centros veterinarios y/o fundaciones animalistas que han sido creados
  * @param {*} props 
  */
 function ListPetCenter(props) {
@@ -20,10 +16,7 @@ function ListPetCenter(props) {
 		elements,
 		isLoading,
 		handleLoadMore,
-		showPetDoctor,
-		navigator,
 		user,
-		collectionName,
 		navigation,
 		showDoctor,
 		create_uid = { create_uid }
@@ -48,9 +41,9 @@ function ListPetCenter(props) {
 		}
 	};
 
-	// var dataRender = dataRender.filter( valueItem => {
-	// 	return valueItem.active == true
-	// })
+	var dataRender = dataRender.filter( valueItem => {
+		return valueItem.active == true
+	})
 
 	formatData(dataRender, COLUMNS);
 

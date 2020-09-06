@@ -1,30 +1,28 @@
-import { StyleSheet, Icon } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export const info = {
 	viewTitle: {
-		marginTop: -1,
+		marginTop: -1
 	},
 	viewComponent: {
 		flexDirection: 'row',
 		justifyContent: 'center',
-		alignItems: 'center',
-
+		alignItems: 'center'
 	},
 	nameItem: {
 		fontSize: 14,
 		fontWeight: 'bold'
 	},
 	description: {
-        fontSize: 10,
+		fontSize: 10,
 		marginTop: 0,
 		color: 'gray',
-		marginRight:-4
-    },
-    rating:{
-        position:'absolute',
-        right:0,
-        
-    }
+		marginRight: -4
+	},
+	rating: {
+		position: 'absolute',
+		right: 0
+	}
 };
 
 export const mapInfoStyle = StyleSheet.create(info);

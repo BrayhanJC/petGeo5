@@ -1,18 +1,8 @@
 import React from 'react';
-import { Text, View, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native';
-import { Image } from 'react-native-elements';
+import { Text, View, FlatList, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { size, map } from 'lodash';
-import {
-	styleLoadingRecords,
-	styleTouchableViewRecords,
-	styleTouchableViewImageRecords,
-	touchableImageRecords,
-	styleTouchableNameRecords,
-	styletouchableAddressRecords,
-	styleTouchableDescriptionRecordsRecords,
-	styleNoFoundRecords
-} from '../../src/css/ListRecord';
+import { size } from 'lodash';
+import { styleLoadingRecords } from '../../src/css/ListRecord';
 
 import RenderItems from './RenderItems';
 import FooterList from './FooterList';
@@ -20,7 +10,6 @@ import RendenderItemsPet from './RenderItemsPet';
 import RenderItemsPetControl from './RenderItemsPetControl';
 import RenderItemsPetDoctor from './RenderItemsPetDoctor';
 import NotItem from './NotItem';
-//import { USER_FACING_NOTIFICATIONS } from 'expo-permissions';
 
 /**
  * Funcion que permite listar:
@@ -53,9 +42,9 @@ function ListRecords(props) {
 		}
 	}
 
-	var dataRender = dataRender.filter( valueItem => {
-		return valueItem.active == true
-	})
+	var dataRender = dataRender.filter((valueItem) => {
+		return valueItem.active == true;
+	});
 
 	if (size(dataRender) > 0) {
 		return (
@@ -113,8 +102,6 @@ function ListRecords(props) {
 			</View>
 		);
 	} else {
-		//console.log('la colleciones:')
-		//console.log(collectionName)
 		if (showPetControl) {
 			return (
 				<NotItem
@@ -123,8 +110,7 @@ function ListRecords(props) {
 					subtitle="Por Favor, pulsa el icono azul para crear un Nuevo Control."
 				/>
 			);
-		} 
-		else if (collectionName == 'petsFound') {
+		} else if (collectionName == 'petsFound') {
 			return (
 				<NotItem
 					image_default={require('../../../assets/img/search_pet_found.png')}
@@ -132,8 +118,7 @@ function ListRecords(props) {
 					subtitle="Ayúdanos a encontrar una..."
 				/>
 			);
-		}
-		else if (collectionName == 'news') {
+		} else if (collectionName == 'news') {
 			return (
 				<NotItem
 					image_default={require('../../../assets/img/news_main.png')}
@@ -142,8 +127,7 @@ function ListRecords(props) {
 					height={250}
 				/>
 			);
-		}
-		else if (collectionName == 'comedogs') {
+		} else if (collectionName == 'comedogs') {
 			return (
 				<NotItem
 					image_default={require('../../../assets/img/default_comedog.jpg')}
@@ -152,18 +136,15 @@ function ListRecords(props) {
 					height={250}
 				/>
 			);
-		}
-		else if (collectionName == 'missingPets') {
+		} else if (collectionName == 'missingPets') {
 			return (
 				<NotItem
 					image_default={require('../../../assets/img/avatar_dog.png')}
 					title="Aún no hay registros de mascotas extraviadas"
 					subtitle="Ayudanos a saber si hay alguna mascota perdida en la Ciudad..."
-					
 				/>
 			);
-		}
-		else {
+		} else {
 			return (
 				<NotItem
 					image_default={require('../../../assets/img/search_control.png')}

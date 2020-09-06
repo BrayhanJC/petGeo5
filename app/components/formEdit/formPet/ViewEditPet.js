@@ -1,9 +1,6 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, ScrollView, Alert, TextInput, Dimensions } from 'react-native';
-import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
-import { size } from 'lodash';
-import firebase from 'firebase/app';
-import { uploadImageStorage } from '../../../utils/UploadImageStorage';
+import { ScrollView, Dimensions } from 'react-native';
+import { Button } from 'react-native-elements';
 import { updateCollectionRecord } from '../../../utils/SaveRecord';
 import { styleForm } from '../../../src/css/AddForm';
 import { styleUploadImage } from '../../../src/css/UploadImage';
@@ -12,7 +9,6 @@ import FormEditPet from './FormEditPet';
 import UploadImage from '../../formMain/UploadImage';
 import ImageMain from '../../formMain/ImageMain';
 import Loading from '../../Loading';
-import Map from '../../formMain/Map';
 import Toast from 'react-native-easy-toast';
 import { isEmpty } from 'lodash';
 const widhtScreen = Dimensions.get('window').width;
@@ -26,7 +22,6 @@ function ViewEditPet(props) {
 		title: route.params.name
 	});
 
-	//console.log('capturando los datos de la mascota');
 	const data_collection = route.params.pet;
 
 	const [ loading, setloading ] = useState(false);

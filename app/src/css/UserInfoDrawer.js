@@ -1,4 +1,4 @@
-import { StyleSheet, Icon } from "react-native";
+import { StyleSheet, Icon } from 'react-native';
 
 export const style = {
 	viewUserInfo: {
@@ -12,7 +12,6 @@ export const style = {
 	userInfoAvatar: {
 		marginRight: 20
 	},
-
 	displayName: {
 		fontWeight: 'bold',
 		paddingBottom: 10,

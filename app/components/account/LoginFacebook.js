@@ -6,7 +6,10 @@ import { useNavigation} from '@react-navigation/native'
 import { FacebookApi } from '../../utils/Social';
 import Loading from '../Loading'
 
-
+/**
+ * Funcion que permite el ingreso a la palicación por medio de facebook
+ * @param {*} props 
+ */
 function LoginFacebook(props){
 
     const { toastRef } = props;
@@ -27,20 +30,16 @@ function LoginFacebook(props){
             if (type === 'success') {
                 setLoading(true)
                 const credentials = firebase.auth.FacebookAuthProvider.credential(token);
-                //console.log(credentials)
+                
                 firebase
                 .auth()
                 .signInWithCredential(credentials)
                 .then( (response) => {
-                    //console.log('ingreso con exito en el facebook')
                     setLoading(false)
                     navigation.navigate('Profile')
                 })
                 .catch( (error) => {
-                    //console.log('error al inciar sesion con facebook')
-                    //console.log(error)
                     toastRef.current.show('Error desconocido, intentelo nuevamente.');
-                    //console.log('algo salio mal')
                     setLoading(false)
                   
                 })

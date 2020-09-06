@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
-
 import SlideComplete from './SlideComplete';
 import { ScrollView } from 'react-native-gesture-handler';
 import { slides } from '../../utils/Configurations';

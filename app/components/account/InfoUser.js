@@ -5,7 +5,6 @@ import * as firebase from 'firebase';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 import { connect } from 'react-redux';
-import { actions } from '../../store';
 
 /**
  * Permite mostrar el avatar, nombre y correo del usuario
@@ -17,8 +16,6 @@ function InfoUser(props) {
 
 	const { cliente } = props;
 	const { login } = props;
-
-	//console.log('InfoUser', cliente);
 
 	const changeAvatar = async () => {
 		const resultPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);

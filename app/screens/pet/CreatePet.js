@@ -1,11 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text } from 'react-native';
-
+import { View } from 'react-native';
 import Toast from 'react-native-easy-toast';
 import Loading from '../../components/Loading';
-import { firebaseApp } from '../../utils/FireBase';
 import firebase from 'firebase/app';
-
 import CreatePetForm from '../../components/pet/CreatePetForm';
 
 /**

@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { View, Text, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 import style from '../../src/css/MenuStyle';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { DrawerItemList } from '@react-navigation/drawer';
 import firebase from 'firebase/app';
-
 import { connect } from 'react-redux';
-import { actions } from '../../store';
-
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
+
 /**
  * Brinda un estilo al menu lateral
  * @param {*} props 
@@ -85,8 +83,6 @@ function Menu(props) {
 								backgroundColor: '#D5D8DC',
 								borderTopLeftRadius: 0,
 								borderTopRightRadius: 50,
-								//borderBottomRightRadius: 100,
-								//borderBottomLeftRadius:100,
 								marginRight: 1
 							}}
 						>

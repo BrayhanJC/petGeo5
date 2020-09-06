@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, Alert, TextInput } from 'react-native';
-import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
+import {  ScrollView, Alert } from 'react-native';
+import { Icon, Avatar } from 'react-native-elements';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
-//import ImagePicker from 'react-native-image-picker';
 import OpenImage from '../openImage/OpenImage';
 import { map, size, filter } from 'lodash';
 

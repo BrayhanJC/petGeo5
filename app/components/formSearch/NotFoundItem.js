@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Image } from 'react-native';
 import { styleSearch } from '../../src/css/Search';
 
 /**
- * Permite mostrar una imagen indicandole al usuario que no ha encontrado 
+ * Permite mostrar una imagen indicandole al usuario que no ha encontrado ningun registro coincidente
  */
 const NotFoundItem = () => {
 	return (

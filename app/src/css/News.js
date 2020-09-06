@@ -5,8 +5,6 @@ export const styleForm = {
 		flex: 1,
 		backgroundColor: 'white'
 	},
-
-	//estilo boton flotante
 	btnContainer: {
 		position: 'absolute',
 		bottom: 10,
@@ -21,7 +19,7 @@ export const createNews = {
 	textAreaContainer: {
 		borderColor: 'gray',
 		borderWidth: 1,
-        padding: 5,
+		padding: 5,
 		marginLeft: 10,
 		marginRight: 10
 	},

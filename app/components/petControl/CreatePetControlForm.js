@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, Alert, Dimensions } from 'react-native';
-import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
+import { View, ScrollView, Dimensions } from 'react-native';
+import { Button } from 'react-native-elements';
 import firebase from 'firebase/app';
-import AvatarMain from '../AvatarMain';
 import { styleUploadImage } from '../../src/css/UploadImage';
 import { styleImageMain } from '../../src/css/ImageMain';
 import ImageMain from '../formMain/ImageMain';
 import { styleCreateForm } from '../../src/css/CreateForm';
-import { isEmpty } from 'lodash';
 import PetControlForm from '../petControl/PetControlForm';
 import { uploadImageStorage } from '../../utils/UploadImageStorage';
 import { saveCollection } from '../../utils/SaveRecord';
@@ -24,7 +22,6 @@ const widhtScreen = Dimensions.get('window').width;
  */
 function CreatePetControlForm(props) {
 	const { toastRef, setIsLoading, navigation, userInfo } = props;
-	const [ loading, setloading ] = useState(false);
 
 	const [ pet, setPet ] = useState('');
 	const [ typeControl, setTypeControl ] = useState('');

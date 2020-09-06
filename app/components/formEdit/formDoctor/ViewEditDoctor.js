@@ -1,44 +1,30 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, ScrollView, Alert, TextInput, Dimensions } from 'react-native';
-import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
-import { size } from 'lodash';
-import firebase from 'firebase/app';
+import { ScrollView } from 'react-native';
+import {  Button } from 'react-native-elements';
 import { updateCollectionRecord } from '../../../utils/SaveRecord';
 import { styleForm } from '../../../src/css/AddForm';
-import { styleUploadImage } from '../../../src/css/UploadImage';
-import { styleImageMain } from '../../../src/css/ImageMain';
 import FormEditDoctor from './FormEditDoctor';
-import UploadImage from '../../formMain/UploadImage';
-import ImageMain from '../../formMain/ImageMain';
 import Loading from '../../Loading';
-import Map from '../../formMain/Map';
 import Toast from 'react-native-easy-toast';
 import AvatarMain from '../../AvatarMain';
 import { isEmpty } from 'lodash';
-const widhtScreen = Dimensions.get('window').width;
+
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-function ViewEditVeterinary(props) {
+function ViewEditDoctor(props) {
 	const toastRef = useRef();
 	const {
 		navigation,
 		route,
 		placeholder_title,
 		placeholder_description,
-		text_button,
-		validation_basic,
-		validation_pet,
-		validation_petControl
+		text_button
 	} = props;
 
 	navigation.setOptions({
 		title: route.params.name
 	});
-
-	//console.log('capturando lso elementos');
 	const data_collection = route.params.petDoctor;
-	//console.log(data_collection);
-
 	const [ loading, setloading ] = useState(false);
 
 	//campos basicos para las colecciones
@@ -101,4 +87,4 @@ function ViewEditVeterinary(props) {
 	);
 }
 
-export default ViewEditVeterinary;
+export default ViewEditDoctor;

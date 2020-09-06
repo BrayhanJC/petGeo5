@@ -5,10 +5,10 @@ import cliente, { actualizarCliente } from './cliente';
 
 export default combineReducers({
 	login,
-	cliente,
+	cliente
 });
 
 export const actions = {
 	actualizarLogin: actualizarLogin,
-	actualizarCliente: actualizarCliente,
+	actualizarCliente: actualizarCliente
 };

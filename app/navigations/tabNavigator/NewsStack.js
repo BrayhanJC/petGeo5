@@ -1,14 +1,11 @@
-import * as React from 'react';
+import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useNavigation } from '@react-navigation/native';
-
 import NewsScreen from '../../screens/news/News';
 import AvatarIcon from '../../components/AvatarIcon';
 import CreateNews from '../../screens/news/CreateNews';
 import NewsView from '../../screens/news/NewsView';
 import CreateReview from '../../screens/review/CreateReview';
 import DeleteRecord from '../../components/UpdateRecords/DeleteRecord';
-
 import EditNews from '../../screens/news/EditNews';
 const Stack = createStackNavigator();
 
@@ -22,14 +19,12 @@ const Stack = createStackNavigator();
  * @param {*} props 
  */
 function NewsStack(props) {
-	//const navigation = useNavigation();
-
 	return (
 		<Stack.Navigator
 			screenOptions={{
 				headerTitleAlign: 'center',
 				headerTitleStyle: {
-					fontWeight: 'bold',
+					fontWeight: 'bold'
 				}
 			}}
 		>
@@ -38,8 +33,7 @@ function NewsStack(props) {
 				component={NewsScreen}
 				options={{
 					title: 'Noticias',
-					headerLeft: () => <AvatarIcon />,
-					
+					headerLeft: () => <AvatarIcon />
 				}}
 			/>
 			<Stack.Screen

@@ -1,11 +1,8 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { View, Text } from 'react-native';
-
+import { View } from 'react-native';
 import Toast from 'react-native-easy-toast';
 import Loading from '../../components/Loading';
-import { firebaseApp } from '../../utils/FireBase';
 import firebase from 'firebase/app';
-
 import CreatePetControlForm from '../../components/petControl/CreatePetControlForm';
 import { useFocusEffect } from '@react-navigation/native';
 

@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { useFocusEffect } from '@react-navigation/native';
 import firebase from 'firebase/app';
 import { styleFloatButton } from '../../src/css/FloatButton';
-import { listRecords, handleLoadMore, getInfoByUser } from '../../utils/SaveRecord';
+import { listRecords, handleLoadMore } from '../../utils/SaveRecord';
 import ListRecords from '../../components/formList/ListRecords';
 import Search from '../../components/formSearch/Search';
 import NotFoundItem from '../../components/formSearch/NotFoundItem';
 import { size, isEmpty } from 'lodash';
-import UserData from '../account/UserData';
 
 /**
  * Componente que permite listar todos los controles registrados por usuario
@@ -25,10 +24,6 @@ function PetControl(props) {
 	const [ startPetControl, setStartPetControl ] = useState(null);
 	const [ isLoading, setIsLoading ] = useState(false);
 
-	//variables para el popup
-	const [ elements, setElements ] = useState('');
-	const [ modalVisible, setModalVisible ] = useState(false);
-
 	//variables para el buscador
 	const [ item, setItem ] = useState([]);
 	const [ search, setSearch ] = useState('');
@@ -36,12 +31,10 @@ function PetControl(props) {
 	//cargamos los datos del usuario
 	useEffect(() => {
 		setUser(firebase.auth().currentUser);
-		//getInfoByUser('userInfo', firebase.auth().currentUser.uid, setElements, setModalVisible);
 	}, []);
 
 	useFocusEffect(
 		useCallback(() => {
-			//getInfoByUser('userInfo', firebase.auth().currentUser.uid, setElements, setModalVisible);
 			listRecords('petControl', setTotalPetControl, setPetControl, setStartPetControl);
 		}, [])
 	);

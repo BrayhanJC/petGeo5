@@ -1,13 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { createStackNavigator } from '@react-navigation/stack';
-import { DrawerActions, useNavigation } from '@react-navigation/native';
-import { Avatar } from 'react-native-elements';
 import firebase from 'firebase/app';
-import { showAlertConfirm, showAlert } from '../../utils/validations';
-import { useFocusEffect } from '@react-navigation/native';
-import { size } from 'lodash';
+import { showAlert } from '../../utils/validations';
 import { styleFloatButton } from '../../src/css/FloatButton';
 import { returnNameFormViewEdit } from '../../utils/Configurations';
 import { connect } from 'react-redux';
@@ -17,10 +12,18 @@ import { connect } from 'react-redux';
  * @param {*} props
  */
 function EditRecord(props) {
-	const { navigation, route, pet, petControl, petDoctor, setValSwitch, valSwitch, setIsVisible, activeButton } = props;
+	const {
+		navigation,
+		route,
+		pet,
+		petControl,
+		petDoctor,
+		setValSwitch,
+		valSwitch,
+		setIsVisible,
+		activeButton
+	} = props;
 	const { cliente } = props;
-	const [ user, setUser ] = useState(false);
-	const [ currentUser, setCurrentUser ] = useState('');
 
 	const returnData = () => {
 		const data = route.params;
@@ -33,12 +36,11 @@ function EditRecord(props) {
 		};
 	};
 
-	
 	let isOwner = returnData().current_user_id == cliente.create_uid;
-	if (activeButton){
-		setIsVisible(isOwner)
+	if (activeButton) {
+		setIsVisible(isOwner);
 	}
-	
+
 	/**
 	 * Funcion que permite editar el registro
 	 */

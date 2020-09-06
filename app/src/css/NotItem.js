@@ -14,9 +14,7 @@ export const search = {
 		color: 'gray',
 		margin: 5,
 		fontSize: 18,
-
 		fontWeight: 'bold',
-
 		alignItems: 'center'
 	}
 };

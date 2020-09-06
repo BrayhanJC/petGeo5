@@ -1,16 +1,13 @@
 import React from 'react';
-import { Text, View, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native';
-import { Image, Avatar, Icon } from 'react-native-elements';
+import { Text, View, TouchableOpacity } from 'react-native';
+import { Avatar } from 'react-native-elements';
 
 import {
-	styleLoadingRecords,
 	styleTouchableViewRecords,
 	styleTouchableViewImageRecords,
 	touchableImageRecords,
 	styleTouchableNameRecords,
-	styletouchableAddressRecords,
 	styleTouchableDescriptionRecordsRecords,
-	styleNoFoundRecords,
 	styleViewFormat
 } from '../../src/css/ListRecord';
 
@@ -19,7 +16,6 @@ import {
  * @param {*} props 
  */
 function RenderItemsPetDoctor(props) {
-	//const navigation = useNavigation();
 	const { elements, navigation, collectionName } = props;
 	const { id, image_id, name, description, specialty, create_uid } = elements.item;
 

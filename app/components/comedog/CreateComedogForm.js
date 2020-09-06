@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, Alert, TextInput, Dimensions } from 'react-native';
-import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
+import { ScrollView, Dimensions } from 'react-native';
+import { Button } from 'react-native-elements';
 import { size } from 'lodash';
 import firebase from 'firebase/app';
 import { uploadImageStorage } from '../../utils/UploadImageStorage';
@@ -23,26 +23,28 @@ const widhtScreen = Dimensions.get('window').width;
  */
 function CreateComedogForm(props) {
 	const { toastRef, setIsLoading, navigation } = props;
-	const [ loading, setloading ] = useState(false);
 	const [ title, setTitle ] = useState('');
 	const [ address, setAddress ] = useState('');
 	const [ description, setDescription ] = useState('');
 	const [ imageSelected, setImageSelected ] = useState([]);
 	const [ isVisibleMap, setIsVisibleMap ] = useState(false);
 	const [ locationComeDog, setLocationComeDog ] = useState(null);
-	const [phone, setPhone] = useState('')
+	const [ phone, setPhone ] = useState('');
 
 	const addComedog = () => {
 		setIsLoading(false);
 		if (!title || !address || !description) {
-			toastRef.current.show('Todos los campos del formulario son obligatorios',3000);
+			toastRef.current.show('Todos los campos del formulario son obligatorios', 3000);
 		} else if (size(imageSelected) === 0) {
-			toastRef.current.show('El comedog debe de tener por lo menos una imagen',3000);
+			toastRef.current.show('El comedog debe de tener por lo menos una imagen', 3000);
 		} else if (!locationComeDog) {
-			toastRef.current.show("Debes localizar tu noticia o evento en el mapa. Pulse el icono del mapa para hacerlo.", 3000);
+			toastRef.current.show(
+				'Debes localizar tu noticia o evento en el mapa. Pulse el icono del mapa para hacerlo.',
+				3000
+			);
 		} else {
 			setIsLoading(true);
-			var user_complete =  firebase.auth().currentUser
+			var user_complete = firebase.auth().currentUser;
 			uploadImageStorage(imageSelected, 'Comedogs').then((response) => {
 				saveCollection(
 					{
@@ -58,7 +60,7 @@ function CreateComedogForm(props) {
 						quantityVoting: 0,
 						rating: 0,
 						ratingTotal: 0,
-						active:true
+						active: true
 					},
 					'comedogs',
 					navigation,

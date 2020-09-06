@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { View, Text, ScrollView, Alert, TextInput, Switch } from 'react-native';
-import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
+import React from 'react';
+import { View, Text, TextInput, Switch } from 'react-native';
+import { Input } from 'react-native-elements';
 
 /**
  * Componente que sirve para Editar:
@@ -33,26 +33,6 @@ function FormEdit(props) {
 		isMissingPet
 	} = props;
 
-	const [ valor, setvalor ] = useState('');
-	
-	const onChangePetMissing = (response, setVal, value) => {
-		const collectionName = 'missingPets';
-		// if (response) {
-		// 	console.log('el id es: ' + item.id);
-		// 	console.log('************');
-		// 	console.log('activando');
-		// 	uploadImageStorage(item.image, 'petsFound')
-		// 		.then((response) => {
-		// 			createPetFound(item, navigation);
-		// 		})
-		// 		.catch((response) => {
-		// 			console.log('error');
-		// 		});
-		// } else {
-		// 	console.log('no esta activo');
-		// }
-	};
-
 	return (
 		<View style={styleForm.viewForm}>
 			{isMissingPet && (
@@ -75,7 +55,7 @@ function FormEdit(props) {
 							marginBottom: 3
 						}}
 						trackColor={{ true: '#5fadee', false: '#C2C2C2' }}
-						thumbColor={petFound ? "#5fadee" : "#C2C2C2"}
+						thumbColor={petFound ? '#5fadee' : '#C2C2C2'}
 						onValueChange={(response) => setpetFound(response)}
 						value={petFound}
 					/>

@@ -1,10 +1,7 @@
 import React from 'react';
-import { Text, View, FlatList, ActivityIndicator, TouchableOpacity, Dimensions } from 'react-native';
-import { Image } from 'react-native-elements';
-import { useNavigation } from '@react-navigation/native';
-import { size, map } from 'lodash';
+import { Text, View, FlatList, ActivityIndicator, Dimensions } from 'react-native';
+import { size } from 'lodash';
 import { styleLoadingRecords } from '../../../src/css/ListRecord';
-
 import FooterList from '../FooterList';
 import RenderPet from './RenderPet';
 import NotItem from '../NotItem';
@@ -20,12 +17,8 @@ function ListPet(props) {
 		elements,
 		isLoading,
 		handleLoadMore,
-		showPetDoctor,
-		navigator,
 		user,
-		collectionName,
 		navigation,
-		showDoctor,
 		create_uid = { create_uid }
 	} = props;
 
@@ -43,9 +36,9 @@ function ListPet(props) {
 		}
 	};
 
-	// var dataRender = dataRender.filter( valueItem => {
-	// 	return valueItem.active == true
-	// })
+	var dataRender = dataRender.filter((valueItem) => {
+		return valueItem.active == true;
+	});
 
 	formatData(dataRender, COLUMNS);
 	if (size(dataRender) > 0) {

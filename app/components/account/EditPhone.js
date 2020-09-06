@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import { Input, Button, Card } from 'react-native-elements';
-import { isEmpty } from 'lodash';
-import * as firebase from 'firebase';
 import { reauthenticate } from '../../utils/Api';
 import { styles } from '../../src/css/ModalProfile';
-//import {db} from '../../utils/FireBase'
 import { updateInfoUserCenter } from '../../utils/SaveRecord';
 
 import { connect } from 'react-redux';
@@ -17,7 +14,7 @@ import { actions } from '../../store';
 function defaultFormValue() {
 	return {
 		phone: '',
-		password: '',
+		password: ''
 	};
 }
 
@@ -26,8 +23,6 @@ function defaultFormValue() {
  * @param {*} props 
  */
 function EditPhone(props) {
-	//console.log("cambiando nombre");
-
 	const {
 		displayName,
 		setShowModal,
@@ -37,35 +32,35 @@ function EditPhone(props) {
 		data_user,
 		toastRef,
 		petCenter,
-		phoneDefault,
+		phoneDefault
 	} = props;
 
 	const { cliente } = props;
 
-	const [phone, setPhone] = useState('');
+	const [ phone, setPhone ] = useState('');
 
 	//variable que se utiliza para mostrar el error en el campo displayName
-	const [error, setError] = useState(null);
+	const [ error, setError ] = useState(null);
 
 	//variable que se utiliza para actualizar automaticamente despues de que se guarde el nuevo nombre
-	const [isLoading, setIsLoading] = useState(false);
+	const [ isLoading, setIsLoading ] = useState(false);
 
 	//variable donde se almacenaran los datos de email y contraseña
-	const [formData, setFormData] = useState(defaultFormValue);
+	const [ formData, setFormData ] = useState(defaultFormValue);
 
 	//variable para ocultar o mostrar la contraseña, como tambien el icono
-	const [showPassword, setShowPassword] = useState(false);
+	const [ showPassword, setShowPassword ] = useState(false);
 
 	//variable que permite mostrar una informacion de error al usuario
-	const [showError, setShowError] = useState({});
+	const [ showError, setShowError ] = useState({});
 
 	//variable que permite verificar al usuario que se esta enviando una peticion, se mostrara en el boton
-	const [isLoadig, setIsLoadig] = useState(false);
+	const [ isLoadig, setIsLoadig ] = useState(false);
 	//funcion que nos permite actualizar el formData cada vez que el usuario ingrese algo en el email o password
 	const onChange = (even, type) => {
 		setFormData({
 			...formData,
-			[type]: even.nativeEvent.text,
+			[type]: even.nativeEvent.text
 		});
 	};
 
@@ -77,12 +72,12 @@ function EditPhone(props) {
 		if (!formData.phone) {
 			setShowError({
 				phone: 'El campo Celular debe estar diligenciado',
-				password: '',
+				password: ''
 			});
 		} else if (!formData.password) {
 			setShowError({
 				email: '',
-				password: 'El campo contraseña debe estar diligenciado',
+				password: 'El campo contraseña debe estar diligenciado'
 			});
 		} else {
 			//console.log('EditPhone', { phone: formData.phone });
@@ -108,7 +103,7 @@ function EditPhone(props) {
 					// 			email: 'Error al actualizar el Celular.'
 					// 		});
 					// 		setIsLoadig(false);
-					//     });32012
+					//     });
 
 					if (user_id) {
 						updateInfoUserCenter('userInfo', user_id, { phone: formData.phone });
@@ -119,16 +114,13 @@ function EditPhone(props) {
 						props.dispatch(actions.actualizarCliente({ ...cliente, phone: formData.phone }));
 						if (petCenter) {
 							updateInfoUserCenter('petCenters', user_id, { phone: formData.phone });
-						} else {
-							//props.dispatch(actions.actualizarCliente({ ...cliente, phone: formData.phone }));
-							//validar que guarde en la autenticacion
 						}
 					}
 				})
 				.catch(() => {
 					toastRef.current.show('La contraseña no es correcta');
 					setShowError({
-						password: 'La contraseña no es correcta.',
+						password: 'La contraseña no es correcta.'
 					});
 					setIsLoadig(false);
 				});
@@ -147,7 +139,7 @@ function EditPhone(props) {
 					rightIcon={{
 						type: 'material-community',
 						name: 'phone',
-						color: '#C2C2C2',
+						color: '#C2C2C2'
 					}}
 					disabled={false}
 					// onChange={(even) => setPhone(even.nativeEvent.text)}
@@ -164,7 +156,7 @@ function EditPhone(props) {
 						type: 'material-community',
 						name: showPassword ? 'eye-outline' : 'eye-off-outline',
 						color: '#C2C2C2',
-						onPress: () => setShowPassword(!showPassword),
+						onPress: () => setShowPassword(!showPassword)
 					}}
 					onChange={(even) => onChange(even, 'password')}
 					errorMessage={showError.password}
@@ -183,7 +175,7 @@ function EditPhone(props) {
 
 const mapStateToProps = (state) => ({
 	cliente: state.cliente.cliente,
-	login: state.login.login,
+	login: state.login.login
 });
 
 export default connect(mapStateToProps)(EditPhone);

@@ -158,10 +158,7 @@ export default RenderCenter;
 
 const styles = StyleSheet.create({
 	item: {
-		//backgroundColor: '#F2F2F2',
 		backgroundColor: 'white',
-		//alignItems: 'center',
-		//justifyContent: 'center',
 		flex: 1,
 		margin: 2,
 		marginTop: 4,
@@ -192,7 +189,6 @@ const styles = StyleSheet.create({
 	avatar: {
 		alignItems: 'center',
 		paddingBottom: 5,
-		//marginTop:-10,
 		backgroundColor: 'white'
 	},
 	title: {

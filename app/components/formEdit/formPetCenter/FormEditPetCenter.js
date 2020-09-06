@@ -1,23 +1,16 @@
-import React, { useState } from 'react';
-import { View, Text, ScrollView, Alert, TextInput } from 'react-native';
-import { Icon, Avatar, Image, Input, Button, ButtonGroup } from 'react-native-elements';
+import React from 'react';
+import { View, Text, TextInput } from 'react-native';
+import { Input, ButtonGroup } from 'react-native-elements';
 
 /**
- * Componente que sirve para Editar:
- * ->  Noticias
- * ->  Mascotas Extraviadas
- * ->  Comedogs
+ * Componente que sirve para editar los centros veterinarios o fundaciones animalistas
  * @param {*} props
  */
 function FormEditPetCenter(props) {
 	const {
-		title,
 		setTitle,
-		address,
 		setAddress,
-		description,
 		setDescription,
-		addressVisible,
 		styleForm,
 		setIsVisibleMap,
 		locationForm,
@@ -28,7 +21,6 @@ function FormEditPetCenter(props) {
 		default_address,
 		default_description,
 		default_phone,
-		default_time,
 		default_website,
 		buttonTime,
 		time,

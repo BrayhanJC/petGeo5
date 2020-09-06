@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import {  View } from 'react-native';
 import { Input, Button, Card } from 'react-native-elements';
 import { isEmpty } from 'lodash';
-import * as firebase from 'firebase';
 import { styles } from '../../src/css/ModalProfile';
-
 import { updateInfoUserCenter } from '../../utils/SaveRecord';
-
 import { connect } from 'react-redux';
 import { actions } from '../../store';
 
@@ -25,10 +22,6 @@ function EditWebsite(props) {
 
 	//variable que se utiliza para actualizar automaticamente despues de que se guarde el nuevo nombre
 	const [isLoading, setIsLoading] = useState(false);
-
-	//funcion que nos permite actualizar el displayName del usuario
-
-	//console.log('EditWebsite', cliente);
 
 	const onSubmit = () => {
 		setError('');

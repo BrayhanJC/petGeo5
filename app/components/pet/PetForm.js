@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
-import { View, Text, ScrollView, Alert, TextInput, StyleSheet, Picker } from 'react-native';
-import { Icon, Avatar, Image, Input, Button, Divider } from 'react-native-elements';
-
-import RNPickerSelect, { defaultStyles } from 'react-native-picker-select';
-
+import React from 'react';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { Input } from 'react-native-elements';
+import RNPickerSelect from 'react-native-picker-select';
 import DatePicker from 'react-native-datepicker';
 import { styleCreateForm } from '../../src/css/CreateForm';
 import { RAZA, TYPE_SEX, TYPE_PETS, RAZA_CAT } from '../../utils/Configurations';
 import { pickerStyleView } from '../../src/css/PickerStyle';
+
 /**
  * Formulario que es utilizado para poder crear la mascota
  * @param {*} props 
@@ -24,11 +23,6 @@ function PetForm(props) {
 		setValueDate,
 		error
 	} = props;
-
-	const onChange = (event, selectedDate) => {
-		const currentDate = selectedDate;
-		setValueDate(currentDate);
-	};
 
 	var raza = '';
 

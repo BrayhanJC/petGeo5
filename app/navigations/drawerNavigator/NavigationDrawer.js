@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Alert, View, Text, Image, Button, AsyncStorage } from 'react-native';
+import React, { useState, useEffect } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
-
 import PetDoctorDrawer from './PetDoctorDrawer';
 import PetControlDrawer from './PetControlDrawer';
 import PetDrawer from './PetDrawer';
@@ -12,7 +10,6 @@ import PetFoundDrawer from './PetFoundDrawer';
 import SlidesDrawer from './SlidesDrawer.js';
 import firebase from 'firebase/app';
 import Menu from './Menu';
-
 import { connect } from 'react-redux';
 import { actions } from '../../store';
 import { obtenerUsuarios } from '../../utils/SaveRecord';

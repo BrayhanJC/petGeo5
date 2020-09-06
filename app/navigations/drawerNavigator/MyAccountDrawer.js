@@ -1,14 +1,10 @@
-import * as React from 'react';
-import { View, Text, Image, Button } from 'react-native';
+import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import MyAccountScreen from '../../screens/account/Account';
 import LoginScreen from '../../screens/account/Login';
 import RegisterScreen from '../../screens/account/Register';
-
 import { useNavigation } from '@react-navigation/native';
-
-import { DrawerActions } from '@react-navigation/native';
 
 const Stack = createStackNavigator();
 

@@ -1,4 +1,3 @@
-import { firebaseApp } from '../utils/FireBase';
 import firebase from 'firebase/app';
 import 'firebase/storage';
 import uuid from 'random-uuid-v4';

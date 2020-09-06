@@ -4,8 +4,6 @@ import { ListItem } from 'react-native-elements';
 import { map } from 'lodash';
 import { userInfoStyle } from '../../src/css/UserInfoStyle';
 import { listOpenImage } from '../../utils/SaveRecord';
-import * as Permissions from 'expo-permissions';
-import * as ImagePicker from 'expo-image-picker';
 
 const OpenImage = (props) => {
 	const { modalVisible, setModalVisible, setvalOptionImage, setReload } = props;

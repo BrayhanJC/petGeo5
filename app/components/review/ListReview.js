@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { View, Text } from 'react-native';
-import { Button, Avatar, Rating } from 'react-native-elements';
+import { Button } from 'react-native-elements';
 import { firebaseApp } from '../../utils/FireBase';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-import { styleReview, review } from '../../src/css/ListReview';
+import { styleReview } from '../../src/css/ListReview';
 import Review from './Review';
 import { map } from 'lodash';
 import { useFocusEffect } from '@react-navigation/native';

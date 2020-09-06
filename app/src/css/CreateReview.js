@@ -1,4 +1,4 @@
-import { StyleSheet, Icon } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export const review = {
 	viewBody: {
@@ -13,7 +13,7 @@ export const review = {
 		alignItems: 'center',
 		margin: 10,
 		marginTop: 25
-    },
+	},
 	input: {
 		marginBottom: 3
 	},
@@ -26,12 +26,11 @@ export const review = {
 		borderRadius: 50,
 		backgroundColor: '#ffffff'
 	},
- 
-    inputArea: {
+	inputArea: {
 		marginBottom: 0
 	},
 	inputFormArea: {
-        width: '100%',
+		width: '100%',
 		marginTop: 4,
 		paddingLeft: 7,
 		paddingRight: 8,
@@ -41,14 +40,13 @@ export const review = {
 		borderRadius: 15,
 		backgroundColor: '#ffffff'
 	},
-
 	textAreaContainer: {
-        width: '95%',
+		width: '95%',
 		marginTop: 5,
-        padding: 5,
-        paddingTop: 1,
-        paddingLeft: 5,
-        fontSize: 40,
+		padding: 5,
+		paddingTop: 1,
+		paddingLeft: 5,
+		fontSize: 40,
 		borderColor: '#C2C2C2',
 		borderWidth: 2,
 		borderRadius: 50,
@@ -56,21 +54,17 @@ export const review = {
 		borderRadius: 15,
 		backgroundColor: '#ffffff'
 	},
-    btnContainer:{
-        flex:1,
-        justifyContent: 'flex-end',
-        marginTop: 20,
-        marginBottom: 10,
-        width: '90%',
-        
-        
-
-    },
-    btnStyle:{
-        backgroundColor: '#1A89E7',
-        borderRadius: 30,
-        
-    }
+	btnContainer: {
+		flex: 1,
+		justifyContent: 'flex-end',
+		marginTop: 20,
+		marginBottom: 10,
+		width: '90%'
+	},
+	btnStyle: {
+		backgroundColor: '#1A89E7',
+		borderRadius: 30
+	}
 };
 
 export const styleCreateReview = StyleSheet.create(review);

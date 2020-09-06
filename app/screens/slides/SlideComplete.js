@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-
 import Slide from './Slide';
 import SubSlide from './SubSlide';
 

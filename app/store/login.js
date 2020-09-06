@@ -2,11 +2,11 @@ export const ACTUALIZAR_LOGIN = 'ACTUALIZAR_LOGIN';
 
 export const actualizarLogin = (login) => ({
 	type: ACTUALIZAR_LOGIN,
-	login,
+	login
 });
 
 const initialState = {
-	login: {},
+	login: {}
 };
 
 export default (state = initialState, action) => {
@@ -14,7 +14,7 @@ export default (state = initialState, action) => {
 		case ACTUALIZAR_LOGIN:
 			return {
 				...state,
-				login: action.login,
+				login: action.login
 			};
 		default:
 			return state;

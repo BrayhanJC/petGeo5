@@ -1,21 +1,18 @@
-import React, { useState } from 'react';
-import { View, Text, ScrollView, Alert, TextInput } from 'react-native';
-import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
+import React from 'react';
+import { View, TextInput } from 'react-native';
+import { Input } from 'react-native-elements';
 import RNPickerSelect from 'react-native-picker-select';
 import { stylePicker } from '../../../src/css/PickerSelect';
 import { styleCreateForm } from '../../../src/css/CreateForm';
 import { SPECIALITY } from '../../../utils/Configurations';
 import { stylePetForm } from '../../../src/css/PetForm';
 import { pickerStyleView } from '../../../src/css/PickerStyle';
-function FormEditVeterinary(props) {
+function FormEditDoctor(props) {
 	const {
 		setDescription,
 		setSpecialty,
 		specialty,
 		setName,
-		description,
-		styleForm,
-		placeholder_title,
 		placeholder_description,
 		default_name,
 		default_description
@@ -65,4 +62,4 @@ function FormEditVeterinary(props) {
 	);
 }
 
-export default FormEditVeterinary;
+export default FormEditDoctor;

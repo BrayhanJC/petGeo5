@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, Image } from 'react-native';
-import { SearchBar, ListItem, Icon } from 'react-native-elements';
+import { View } from 'react-native';
+import { SearchBar } from 'react-native-elements';
 import { styleSearch } from '../../src/css/Search';
 import firebase from 'firebase/app';
 import { FireSQL } from 'firesql';
-import { size } from 'lodash';
 const fireSQL = new FireSQL(firebase.firestore(), { includeId: 'id' });
 
 /**
@@ -28,7 +27,6 @@ const Search = (props) => {
 						var data = response.filter((valueItem) => {
 							return valueItem.name.toLowerCase().includes(search.toLowerCase());
 						});
-
 						//filtra por item de creacion
 						if (collection == 'petDoctor' || collection == 'pet') {
 							data = data.filter((valueItem) => {
@@ -39,7 +37,6 @@ const Search = (props) => {
 						setLoading(false);
 					})
 					.catch((response) => {
-						//console.log(response);
 						setLoading(false);
 					});
 			}

@@ -8,8 +8,8 @@ import { viewFormStyle } from '../../src/css/ViewForm';
  * @param {navigation, route} props 
  */
 const PetFoundView = (props) => {
-    const { navigation, route } = props;
-    
+	const { navigation, route } = props;
+
 	return (
 		<View style={viewFormStyle.viewBody}>
 			<ViewForm

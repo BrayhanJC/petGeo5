@@ -45,7 +45,6 @@ const styles = StyleSheet.create({
 		fontSize: 24,
 		color: '#0C0D34',
 		fontWeight: 'bold',
-		//lineHeight: 24,
 		marginBottom: 12
 	},
 	description: {

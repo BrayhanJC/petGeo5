@@ -1,8 +1,7 @@
 import React, { useRef } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Toast from 'react-native-easy-toast';
-
 import RegisterForm from '../../components/account/RegisterForm';
 
 /**

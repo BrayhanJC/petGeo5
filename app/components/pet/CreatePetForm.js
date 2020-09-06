@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, Alert, Dimensions } from 'react-native';
-import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
+import { View, ScrollView, Dimensions } from 'react-native';
+import { Button } from 'react-native-elements';
 import firebase from 'firebase/app';
 import { styleUploadImage } from '../../src/css/UploadImage';
 import { styleImageMain } from '../../src/css/ImageMain';
 import UploadImage from '../formMain/UploadImage';
 import ImageMain from '../formMain/ImageMain';
-
 import { stylePetForm } from '../../src/css/PetForm';
 import { isEmpty } from 'lodash';
 import PetForm from '../pet/PetForm';
@@ -21,7 +20,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
  */
 function CreatePetForm(props) {
 	const { toastRef, setIsLoading, navigation, userInfo } = props;
-	const [ loading, setloading ] = useState(false);
 
 	const [ valueTypePet, setValueTypePet ] = useState('');
 	const [ valueSex, setValueSex ] = useState('');
@@ -39,7 +37,6 @@ function CreatePetForm(props) {
 	const addPet = () => {
 		if (isEmpty(namePet)) {
 			toastRef.current.show('Debe diligenciar el campo Nombre Mascota', 2000);
-			//setError('Este campo es requerido');
 		} else if (valueTypePet === '') {
 			toastRef.current.show('El Tipo de la Mascota es requerido', 2000);
 		} else if (valueSex === '') {

@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { View, Text, ScrollView, Alert, TextInput } from 'react-native';
-import { Icon, Avatar, Image, Input, Button } from 'react-native-elements';
+import React from 'react';
+import { View, TextInput } from 'react-native';
+import { Input } from 'react-native-elements';
 import {size} from 'lodash'
+
 /**
  * Componente que sirve para:
  * -> Crear Noticias
  * -> Crear Mascotas Extraviadas
- * -> Crear Noticias
+ * -> Crear comedogs
  * @param {*} props
  */
 function AddForm(props) {

@@ -1,19 +1,14 @@
-import React, { useState } from 'react';
-import { View, Text, ScrollView, Alert, TextInput, StyleSheet, Picker } from 'react-native';
-import { Icon, Avatar, Image, Input, Button, Divider } from 'react-native-elements';
-
-import RNPickerSelect, { defaultStyles } from 'react-native-picker-select';
-
+import React from 'react';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { Input } from 'react-native-elements';
+import RNPickerSelect from 'react-native-picker-select';
 import DatePicker from 'react-native-datepicker';
 import { styleCreateForm } from '../../../src/css/CreateForm';
 import { RAZA, TYPE_SEX, TYPE_PETS, RAZA_CAT } from '../../../utils/Configurations';
 import { pickerStyleView } from '../../../src/css/PickerStyle';
 
 /**
- * Componente que sirve para Editar:
- * ->  Noticias
- * ->  Mascotas Extraviadas
- * ->  Comedogs
+ * Componente que sirve para editar la mascota
  * @param {*} props
  */
 function FormEditPet(props) {
@@ -27,23 +22,12 @@ function FormEditPet(props) {
 		setValueRaza,
 		valueDate,
 		setValueDate,
-		error,
-
 		placeholder_title,
-		placeholder_description,
 		default_name,
 		default_description,
-		default_date,
-		default_type,
-		default_sex,
-		default_raza,
 		valueRaza,
 		valueSex
 	} = props;
-	const onChange = (event, selectedDate) => {
-		const currentDate = selectedDate;
-		setValueDate(currentDate);
-	};
 
 	var raza = '';
 
@@ -145,36 +129,36 @@ function FormEditPet(props) {
 			</View>
 
 			<View style={pickerStyleView.picker}>
-			<RNPickerSelect
-				onValueChange={(value) => setValueRaza(value)}
-				placeholder={{
-					label: 'Raza Mascota',
-					value: '',
-					color: '#1A89E7'
-				}}
-				style={pickerSelectStyles}
-				items={raza}
-				value={valueRaza}
-				Icon={() => {
-					return (
-						<View
-							style={{
-								marginTop: 22,
-								marginRight: 25,
-								backgroundColor: 'transparent',
-								borderTopWidth: 10,
-								borderTopColor: '#C2C2C2',
-								borderRightWidth: 10,
-								borderRightColor: 'transparent',
-								borderLeftWidth: 10,
-								borderLeftColor: 'transparent',
-								width: 0,
-								height: 0
-							}}
-						/>
-					);
-				}}
-			/>
+				<RNPickerSelect
+					onValueChange={(value) => setValueRaza(value)}
+					placeholder={{
+						label: 'Raza Mascota',
+						value: '',
+						color: '#1A89E7'
+					}}
+					style={pickerSelectStyles}
+					items={raza}
+					value={valueRaza}
+					Icon={() => {
+						return (
+							<View
+								style={{
+									marginTop: 22,
+									marginRight: 25,
+									backgroundColor: 'transparent',
+									borderTopWidth: 10,
+									borderTopColor: '#C2C2C2',
+									borderRightWidth: 10,
+									borderRightColor: 'transparent',
+									borderLeftWidth: 10,
+									borderLeftColor: 'transparent',
+									width: 0,
+									height: 0
+								}}
+							/>
+						);
+					}}
+				/>
 			</View>
 
 			<View style={styleCreateForm.textAreaContainer}>

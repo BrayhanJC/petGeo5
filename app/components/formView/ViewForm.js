@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, ScrollView, Dimensions, StyleSheet, Alert } from 'react-native';
+import React, { useState, useCallback } from 'react';
+import { View, ScrollView, Dimensions, StyleSheet, Alert } from 'react-native';
 import { Button } from 'react-native-elements';
 import { firebaseApp } from '../../utils/FireBase';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import Loading from '../../components/Loading';
 import { useFocusEffect } from '@react-navigation/native';
-
 import CarouselImages from '../../components/CarouselImages';
 import TitleItem from './TitleItem';
 import InfoItem from './InfoItem';
@@ -144,7 +143,7 @@ const ViewForm = (props) => {
 		}
 	];
 	if (collection == 'petCenters') {
-		if (item.userType == 'veterinary'){
+		if (item.userType == 'veterinary') {
 			listInfo = [
 				{
 					text: 'Veterinarios...',
@@ -182,7 +181,7 @@ const ViewForm = (props) => {
 					}
 				},
 				{
-					text: 'Horario de Atención: ' + (item.schedule + ' Horas') ,
+					text: 'Horario de Atención: ' + (item.schedule + ' Horas'),
 					iconName: 'timer',
 					iconType: 'material-community',
 					action: null
@@ -218,15 +217,13 @@ const ViewForm = (props) => {
 			];
 		}
 
-		if (item.userType == 'fundation'){
+		if (item.userType == 'fundation') {
 			listInfo = [
 				{
 					text: 'Veterinarios...',
 					iconName: 'stethoscope',
 					rightNameIcon: 'chevron-right',
 					iconType: 'material-community',
-					//CenterDoctorStack
-					//PetDoctors
 					onPress: () => {
 						navigation.navigate('CenterVeterinayDoctorStack', {
 							navigation,
@@ -283,7 +280,7 @@ const ViewForm = (props) => {
 
 	var image_default = return_image_default(collection);
 
-	console.log(item.image)
+	console.log(item.image);
 	return (
 		<ScrollView vertical style={viewFormStyle.viewBody}>
 			<CarouselImages image_ids={item.image} height={210} width={screenWidth} image_default={image_default} />

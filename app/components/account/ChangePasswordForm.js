@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import { Input, Button, Card } from 'react-native-elements';
 import { styles } from '../../src/css/ModalProfile';
-import { validateEmail } from '../../utils/validations';
 import * as firebase from 'firebase';
 import { size } from 'lodash';
-
 import { reauthenticate } from '../../utils/Api';
 
 /***
@@ -65,7 +63,7 @@ function ChangePasswordForm(props) {
 				newPassword: 'Las Contraseñas no Coinciden',
 				repeatNewPassword: 'Las Contraseñas no Coinciden'
 			};
-		} else if (size(newPassword) < 6) {
+		} else if (esize(newPassword) < 6) {
 			errorsTemp = {
 				password: '',
 				newPassword: 'La Contraseña debe ser Mayor a 5 Caracteres',
@@ -75,8 +73,6 @@ function ChangePasswordForm(props) {
 			setIsLoadig(true);
 			await reauthenticate(password)
 				.then(async () => {
-					//console.log('ok');
-
 					setIsLoadig(false);
 					await firebase
 						.auth()
@@ -104,7 +100,6 @@ function ChangePasswordForm(props) {
 					setIsLoadig(false);
 				});
 		}
-
 		isSetErrors && setShowError(errorsTemp);
 	};
 	return (

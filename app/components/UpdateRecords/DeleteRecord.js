@@ -1,13 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { DrawerActions, useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { View } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import firebase from 'firebase/app';
 import { showAlertConfirm, showAlert } from '../../utils/validations';
-import { useFocusEffect } from '@react-navigation/native';
-import { size } from 'lodash';
-
 import { connect } from 'react-redux';
 
 /**
@@ -17,9 +12,6 @@ import { connect } from 'react-redux';
 function DeleteRecord(props) {
 	const { navigation, route } = props.props;
 	const { cliente } = props;
-
-	const [ user, setUser ] = useState(false);
-	const [ currentUser, setCurrentUser ] = useState('');
 
 	const returnData = () => {
 		const data = route.state.routes;

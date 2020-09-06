@@ -1,14 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import { View, Text, Image, Button } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import MyAccountScreen from '../../screens/account/MyAccount';
 import LoginScreen from '../../screens/account/Login';
 import RegisterScreen from '../../screens/account/Register';
-
 import { useNavigation } from '@react-navigation/native';
-import NavigationDrawer from '../drawerNavigator/NavigationDrawer';
-
 import { DrawerActions } from '@react-navigation/native';
 
 /***
@@ -35,7 +31,7 @@ function LogoTitle(props) {
 	);
 }
 
-function MyAccountStack() {
+function MyAccountTab() {
 	return (
 		<Stack.Navigator
 			screenOptions={{
@@ -58,10 +54,8 @@ function MyAccountStack() {
 				component={LoginScreen}
 				options={{
 					title: 'Cuenta',
-					//headerTitle: (props) => <LogoTitle title="Cuenta" />,
 					headerStyle: {
 						backgroundColor: '#E0E0E0'
-						//tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="paw" color={color} size={size} />
 					},
 					headerTintColor: '#1A89E7',
 					headerTitleStyle: {
@@ -74,4 +68,4 @@ function MyAccountStack() {
 	);
 }
 
-export default MyAccountStack;
+export default MyAccountTab;

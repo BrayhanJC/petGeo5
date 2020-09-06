@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Text, View, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
 import { Button } from 'react-native-elements';
 
 /**

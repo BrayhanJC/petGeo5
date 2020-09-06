@@ -1,10 +1,7 @@
 import React from 'react';
-import { Text, View, FlatList, ActivityIndicator, TouchableOpacity, Dimensions } from 'react-native';
-import { Image } from 'react-native-elements';
-import { useNavigation } from '@react-navigation/native';
-import { size, map } from 'lodash';
+import { Text, View, FlatList, ActivityIndicator, Dimensions } from 'react-native';
+import { size } from 'lodash';
 import { styleLoadingRecords } from '../../../src/css/ListRecord';
-
 import FooterList from '../FooterList';
 import RenderDoctor from './RenderDoctor';
 import NotItem from '../NotItem';
@@ -17,20 +14,7 @@ const COLUMNS = 2;
  * @param {*} props 
  */
 function ListDoctor(props) {
-	//const dataList = [ { key: '1' }, { key: '2' }, { key: '3' }, { key: '4' }, { key: '5' } ];
-
-	const {
-		elements,
-		isLoading,
-		handleLoadMore,
-		showPetDoctor,
-		navigator,
-		user,
-		collectionName,
-		navigation,
-		showDoctor,
-		create_uid = { create_uid }
-	} = props;
+	const { elements, isLoading, handleLoadMore, user, navigation, showDoctor, create_uid = { create_uid } } = props;
 
 	var dataRender = elements;
 	if (showDoctor) {
@@ -45,17 +29,15 @@ function ListDoctor(props) {
 		}
 	}
 
-	//dataRender = [ { key: '1' }, { key: '2' }, { key: '3' }, { key: '4' }, { key: '5' } ];
-
 	const formatData = (data, numColumns) => {
 		if (!((data.length / numColumns) % 2 == 0)) {
 			data.push({ key: 'blank', empty: true });
 		}
 	};
 
-	// var dataRender = dataRender.filter( valueItem => {
-	// 	return valueItem.active == true
-	// })
+	var dataRender = dataRender.filter((valueItem) => {
+		return valueItem.active == true;
+	});
 
 	formatData(dataRender, COLUMNS);
 

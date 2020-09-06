@@ -1,14 +1,11 @@
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
+import React from 'react';
+import { View } from 'react-native';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { Avatar } from 'react-native-elements';
 
 /***
  * Create un avatar in stack nav
- * Show Drawer Navigation
  */
-
 function AvatarIcon() {
 	const navigation = useNavigation();
 

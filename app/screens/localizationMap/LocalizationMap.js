@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Dimensions, ScrollView, Image } from 'react-native';
-
 import MapView, { Marker, Callout } from 'react-native-maps';
 import * as Location from 'expo-location';
-
 import * as Permissions from 'expo-permissions';
 import { firebaseApp } from '../../utils/FireBase';
 import { ListMap } from '../../utils/ListMap';
@@ -11,10 +9,8 @@ import firebase from 'firebase/app';
 import 'firebase/storage';
 import 'firebase/firestore';
 const db = firebase.firestore(firebaseApp);
-import { map, size, filter } from 'lodash';
-
+import { map } from 'lodash';
 import { mapInfoStyle } from '../../src/css/InfoMap';
-
 import FilterMap from './FilterMap';
 import { returnColor, returnNameFormView } from '../../utils/Configurations';
 
@@ -66,7 +62,7 @@ function LocalizationMap(props) {
 					);
 				} else {
 					const loc = await Location.getCurrentPositionAsync({});
-					//console.log(loc);
+
 					setLocation({
 						latitude: loc.coords.latitude,
 						longitude: loc.coords.longitude,
@@ -74,16 +70,6 @@ function LocalizationMap(props) {
 						longitudeDelta: 0.001
 					});
 				}
-				//const user = await firebase.auth().currentUser;
-
-				//cargando datos al userInfo, contiene toda la informacion del usuario
-				//setUser(user);
-
-				// if (user) {
-				// 	if (user.uid) {
-				// 		getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
-				// 	}
-				// }
 			})();
 
 			ListMap('comedogs', setResult, resultElements);
@@ -94,16 +80,6 @@ function LocalizationMap(props) {
 		},
 		[ reload ]
 	);
-
-	// useFocusEffect(
-	// 	useCallback(() => {
-	// 		if (user) {
-	// 			if (user.uid) {
-	// 				getInfoByUser('userInfo', user.uid, setElements, setModalVisible);
-	// 			}
-	// 		}
-	// 	}, [])
-	// );
 
 	/**
 	 * Permite validar hacia que coleccion vamos a dirigirnos

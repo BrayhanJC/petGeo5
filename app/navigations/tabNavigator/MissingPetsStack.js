@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import MissingPetsScreen from '../../screens/missingPets/MissingPets';
 import AddMissingPet from '../../screens/missingPets/AddMessingPet';

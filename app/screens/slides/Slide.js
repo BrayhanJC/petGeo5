@@ -1,8 +1,6 @@
 import React from 'react';
 import { View, Text, Dimensions, StyleSheet, Image } from 'react-native';
-
 const { width, height } = Dimensions.get('window');
-
 export const SLIDE_HEIGHT = 0.61 * height;
 
 /**
@@ -11,8 +9,6 @@ export const SLIDE_HEIGHT = 0.61 * height;
  */
 export default function Slide(props) {
 	const { label, color, isAnimation, url, size } = props;
-
-	const url_image = '../../../assets/animations/control.json';
 
 	return (
 		<View style={[ styles.slider, { backgroundColor: color } ]}>
@@ -109,7 +105,7 @@ export default function Slide(props) {
 				)}
 				{isAnimation &&
 				label == 'Veterinarios' && (
-					<View style={{ alignItems: 'center'}}>
+					<View style={{ alignItems: 'center' }}>
 						<Image
 							style={{
 								height: 320,
@@ -119,10 +115,6 @@ export default function Slide(props) {
 						/>
 					</View>
 				)}
-
-
-
-
 			</View>
 		</View>
 	);
@@ -130,7 +122,6 @@ export default function Slide(props) {
 
 const styles = StyleSheet.create({
 	container: {
-		//flex:1,
 		width
 	},
 	title: {
@@ -138,7 +129,6 @@ const styles = StyleSheet.create({
 		color: 'white',
 		textAlign: 'center',
 		fontWeight: 'bold'
-		//lineHeight: 80
 	},
 	titleContainer: {
 		height: 100,

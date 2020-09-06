@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, ScrollView, Alert, TextInput, StyleSheet, Picker } from 'react-native';
-import { Icon, Avatar, Image, Input, Button, Divider } from 'react-native-elements';
+import React, { useState, useCallback } from 'react';
+import { View, TextInput } from 'react-native';
+import { Input } from 'react-native-elements';
 import { styleCreateForm } from '../../src/css/CreateForm';
 import RNPickerSelect from 'react-native-picker-select';
 import firebase from 'firebase/app';
@@ -15,18 +15,7 @@ import { pickerStyleView } from '../../src/css/PickerStyle';
  * @param {*} props 
  */
 function PetControlForm(props) {
-	const {
-		setPet,
-		setTypeControl,
-		setNameControl,
-		setDescription,
-		setErrorPet,
-		setErrorType,
-		setErrorName,
-		errorName,
-		errorDescription,
-		userInfo
-	} = props;
+	const { setPet, setTypeControl, setNameControl, setDescription, errorName, errorDescription } = props;
 
 	const [ elements, setElements ] = useState(null);
 

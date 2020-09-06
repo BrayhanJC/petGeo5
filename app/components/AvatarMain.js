@@ -1,10 +1,9 @@
 import React from 'react';
-import { StyleSheet, View, Text, Alert } from 'react-native';
+import {  View, Alert } from 'react-native';
 import { Avatar } from 'react-native-elements';
-import * as firebase from 'firebase';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
-import { map, size, filter } from 'lodash';
+import { filter } from 'lodash';
 
 import { styleAvatarMain } from '../src/css/AvatarMain';
 

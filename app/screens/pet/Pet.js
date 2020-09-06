@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import firebase from 'firebase/app';
 import { styleFloatButton } from '../../src/css/FloatButton';
-import { listRecords, handleLoadMore, getInfoByUser } from '../../utils/SaveRecord';
+import { listRecords, handleLoadMore } from '../../utils/SaveRecord';
 import ListPet from '../../components/formList/pet/ListPet'
 import { useFocusEffect } from '@react-navigation/native';
 import Search from '../../components/formSearch/Search';
 import NotFoundItem from '../../components/formSearch/NotFoundItem';
-import UserData from '../account/UserData';
 import { size, isEmpty } from 'lodash';
 
 /**
@@ -25,10 +24,6 @@ function Pet(props) {
 	const [ startPets, setStartPets ] = useState(null);
 	const [ isLoading, setIsLoading ] = useState(false);
 
-	//variables para el popup
-	const [ elements, setElements ] = useState('');
-	const [ modalVisible, setModalVisible ] = useState(false);
-
 	//variables para el buscador
 	const [ item, setItem ] = useState([]);
 	const [ search, setSearch ] = useState('');
@@ -39,9 +34,6 @@ function Pet(props) {
 			const user = await firebase.auth().currentUser;
 			//cargando datos al userInfo, contiene toda la informacion del usuario
 			setUser(user);
-			// if (firebase.auth().currentUser.uid) {
-			// 	getInfoByUser('userInfo', firebase.auth().currentUser.uid, setElements, setModalVisible);
-			// }
 		})();
 	}, []);
 
