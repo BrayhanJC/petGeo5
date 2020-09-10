@@ -39,17 +39,18 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		padding: 25
+		padding: 24
 	},
 	title: {
-		fontSize: 24,
+		fontSize: 23,
 		color: '#0C0D34',
 		fontWeight: 'bold',
-		marginBottom: 12
+		marginBottom: 5,
+		marginTop:10
 	},
 	description: {
-		fontSize: 15,
-		lineHeight: 24,
+		fontSize: 14,
+		lineHeight: 15,
 		color: '#0C0D34',
 		justifyContent: 'center'
 	},

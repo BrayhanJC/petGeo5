@@ -280,7 +280,7 @@ const ViewForm = (props) => {
 
 	var image_default = return_image_default(collection);
 
-	console.log(item.image);
+	
 	return (
 		<ScrollView vertical style={viewFormStyle.viewBody}>
 			<CarouselImages image_ids={item.image} height={210} width={screenWidth} image_default={image_default} />

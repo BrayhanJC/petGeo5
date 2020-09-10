@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as firebase from 'firebase';
+import { ScrollView } from 'react-native';
 import Loading from '../../components/Loading';
 import UserGuest from './UserGuest';
 import UserLogged from './UserLogged';
@@ -22,7 +23,18 @@ const MyAccount = () => {
 		return <Loading text="Cargando..." isVisible={true} />;
 	}
 
-	return login ? <UserLogged /> : <UserGuest />;
+	return login ? (
+		<ScrollView
+			vertical
+			style={{
+				flex: 1
+			}}
+		>
+			<UserLogged />
+		</ScrollView>
+	) : (
+		<UserGuest />
+	);
 };
 
 export default MyAccount;

@@ -28,7 +28,7 @@ function UserGuest() {
 				<View style={{ width: width }}>
 					<View style={[ styles.slider, { backgroundColor: '#1A89E7' } ]}>
 						<View style={{ width: width }}>
-							<View style={[ styles.titleContainer ]}>
+							<View style={[ styles.titleContainer, {marginTop:-20} ]}>
 								<Text style={styles.title}>PetGe🌎</Text>
 							</View>
 							<Image
@@ -43,7 +43,7 @@ function UserGuest() {
 						<View style={{ ...StyleSheet.absoluteFillObject }} />
 						<View style={styles.footerContent}>
 							<View style={styles.container}>
-								<Text style={[styles.title_footer, {marginTop:-5}]}>Registrate...</Text>
+								<Text style={[styles.title_footer, {marginTop:5}]}>Registrate...</Text>
 								<Text style={[styles.description_footer, {marginTop:-10}]}>
 									¿Cómo encontrarías a tu mascota si es extraviada? Búscala y administra los datos de
 									tu mascota...
@@ -55,7 +55,6 @@ function UserGuest() {
 									titleStyle={{ fontWeight: 'bold' }}
 									accessibilityLabel="Learn more about this purple button"
 									onPress={() => {
-										//console.log('estamos en el perfil');
 										navigation.navigate('Login');
 									}}
 								/>
@@ -110,8 +109,8 @@ const styles = StyleSheet.create({
 		marginBottom: 12
 	},
 	description_footer: {
-		fontSize: 15,
-		lineHeight: 24,
+		fontSize: 14,
+		lineHeight: 15,
 		color: '#0C0D34',
 		justifyContent: 'center'
 	},
@@ -136,6 +135,7 @@ const styles = StyleSheet.create({
 		marginTop: 15
 	},
 	btnContainer: {
+		marginTop:-10,
 		width: '70%'
 	}
 });

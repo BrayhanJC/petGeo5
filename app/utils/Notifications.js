@@ -39,7 +39,7 @@ export async function registerForPushNotificationsAsync() {
 		token = (await Notifications.getExpoPushTokenAsync()).data;
 		console.log(token);
 	} else {
-		alert('Must use physical device for Push Notifications');
+		//alert('Must use physical device for Push Notifications');
 	}
 
 	if (Platform.OS === 'android') {
@@ -106,8 +106,9 @@ const buildElementRequest = (to, title, message) => {
  * Función principal para el envio de la notificación
  * @param { data que contiene los datos basicos para el envio de la notificacion } data 
  */
-const sendNotificationToExpo = (data) => {
-	fetch('https://exp.host/--/api/v2/push/send', {
+const sendNotificationToExpo = async (data) => {
+	
+	await fetch('https://exp.host/--/api/v2/push/send', {
 		method: 'POST',
 		headers: {
 			Accept: 'application/json',
@@ -116,6 +117,6 @@ const sendNotificationToExpo = (data) => {
 		},
 		body: JSON.stringify(data)
 	})
-		.then((response) => console.log('response' + JSON.stringify(response)))
+		.then((response) => console.log('response' + JSON.stringify(response) + 'otra vaina   ' + JSON.stringify(data)))
 		.catch((err) => console.log('err' + JSON.stringify(err)));
 };

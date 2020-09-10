@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, TouchableHighlight, Text } from 'react-native';
 import { Input, Button, Icon } from 'react-native-elements';
 import { validateEmail } from '../../utils/validations';
 import Loading from '../Loading';
 import { size, isEmpty } from 'lodash';
 import * as firebase from 'firebase';
 import { useNavigation } from '@react-navigation/native';
-
+import { userInfoStyle } from '../../src/css/UserInfoStyle';
 import { connect } from 'react-redux';
 import { actions } from '../../store';
 
@@ -17,7 +17,7 @@ function defaultFormValue() {
 	return {
 		email: '',
 		password: '',
-		repeatPassword: '',
+		repeatPassword: ''
 	};
 }
 
@@ -30,10 +30,10 @@ function RegisterForm(props) {
 
 	const { cliente, login } = props;
 
-	const [showPassword, setShowPassword] = useState(false);
-	const [showRepitPassword, setshowRepitPassword] = useState(false);
-	const [formData, setformData] = useState(defaultFormValue());
-	const [loading, setloading] = useState(false);
+	const [ showPassword, setShowPassword ] = useState(false);
+	const [ showRepitPassword, setshowRepitPassword ] = useState(false);
+	const [ formData, setformData ] = useState(defaultFormValue());
+	const [ loading, setloading ] = useState(false);
 	const navigation = useNavigation();
 	const onSubmit = () => {
 		//console.log(formData);
@@ -46,7 +46,6 @@ function RegisterForm(props) {
 			} else if (size(password) < 6 || size(repeatPassword) < 6) {
 				toastRef.current.show('la contraseña deberia tener por lo menos 6 caracteres');
 			} else if (password !== repeatPassword) {
-		
 				toastRef.current.show('las contraseñas deberian ser iguales');
 			} else {
 				setloading(true);
@@ -69,11 +68,11 @@ function RegisterForm(props) {
 	const onChange = (even, type) => {
 		setformData({
 			...formData,
-			[type]: even.nativeEvent.text,
+			[type]: even.nativeEvent.text
 		});
 	};
 	return (
-		<View >
+		<View style={{ marginTop: -20 }}>
 			<Input
 				label="Correo electrónico"
 				placeholder="Correo Electrónico"
@@ -123,13 +122,23 @@ function RegisterForm(props) {
 					/>
 				}
 			/>
-			<Button
-				title="Registrarse"
-				containerStyle={styles.btnContainerRegister}
-				buttonStyle={styles.btnRegister}
-				style={{ width:'100%'}}
+
+			<TouchableHighlight
+				style={{
+					...userInfoStyle.openButton,
+					backgroundColor: '#1A89E7',
+					width: '90%',
+					marginTop: 2,
+					marginTop: 20,
+					alignItems: 'center',
+					marginBottom: 30,
+					justifyContent: 'center',
+					width: '100%'
+				}}
 				onPress={onSubmit}
-			/>
+			>
+				<Text style={userInfoStyle.textStyle}>Registrar</Text>
+			</TouchableHighlight>
 
 			<Loading isVisible={loading} text="Creando Cuenta" />
 		</View>
@@ -141,32 +150,29 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
-		marginTop: 30,
+		marginTop: 30
 	},
 	iconRight: {},
 	inputForm: {
 		width: '100%',
-		marginTop: 20,
+		marginTop: 10
 	},
 	btnContainerRegister: {
 		marginTop: 20,
 		alignItems: 'center',
 		justifyContent: 'center',
-		width: '100%',
-		
+		width: '100%'
 	},
 	btnRegister: {
-
 		justifyContent: 'center',
 		backgroundColor: '#1A89E7',
 		borderRadius: 50
-		
-	},
+	}
 });
 
 const mapStateToProps = (state) => ({
 	cliente: state.cliente.cliente,
-	login: state.login.login,
+	login: state.login.login
 });
 
 export default connect(mapStateToProps)(RegisterForm);

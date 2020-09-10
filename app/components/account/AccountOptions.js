@@ -41,14 +41,14 @@ function AccountOptions(props) {
 
 	const [ updateData, setupdateData ] = useState(false);
 
-	//cargamos los datos del usuario
+
 
 	/***
 	 * Funcion que permite seleccionar el componente para cambiar
 	 * la el nombre, el email o la contraseña
 	 */
 	const selectedComponent = (key) => {
-		//console.log(key);
+		
 		setShowModal(true);
 		//isCenter(uid, setpetCenter);
 
@@ -155,11 +155,6 @@ function AccountOptions(props) {
 			}
 		}
 	}
-
-	//console.log('AccountOptions 22', datUserInfo);
-	//console.log('AccountOptions', cliente);
-
-	//console.log('AccountOptions menuOptions', menuOptions);
 
 	return (
 		<View>

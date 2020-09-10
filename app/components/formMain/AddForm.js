@@ -2,6 +2,7 @@ import React from 'react';
 import { View, TextInput } from 'react-native';
 import { Input } from 'react-native-elements';
 import {size} from 'lodash'
+import { connect } from 'react-redux';
 
 /**
  * Componente que sirve para:
@@ -26,17 +27,24 @@ function AddForm(props) {
 		dataPet,
 		pet,
 		default_value_address,
-		default_phone
+		
 	} = props;
 
 	if (pet) {
-		setPhone(pet ? (dataPet[0].phone ? dataPet[0].phone : '') : '');
+		//setPhone(pet ? (dataPet[0].phone ? dataPet[0].phone : '') : '');
 		setDescription(pet ? (dataPet[0].description ? dataPet[0].description : '') : '');
 	}
 
+	const { cliente } = props;
+	const { login } = props;
+	console.log(cliente)
+	if (cliente){
+		setPhone(cliente.phone ? cliente.phone : '')
+		setAddress(cliente.address ? cliente.address : '')
+	}
 
-	console.log('esta es')
-	console.log(locationForm)
+	var default_address =  cliente.address ? cliente.address : ''
+	var default_phone =  cliente.phone ? cliente.phone : ''
 
 	return (
 		<View style={styleForm.viewForm}>
@@ -67,7 +75,7 @@ function AddForm(props) {
 						color: size(locationForm) >0 ? '#1A89E7' : '#C2C2C2',
 						onPress: () => setIsVisibleMap(true)
 					}}
-					defaultValue={default_value_address}
+					defaultValue={default_address}
 				/>
 			)}
 
@@ -83,7 +91,7 @@ function AddForm(props) {
 					name: 'phone',
 					color: '#C2C2C2'
 				}}
-				defaultValue={pet ? dataPet[0].phone ? dataPet[0].phone : '' : ''}
+				defaultValue={default_phone}
 			/>
 
 			<View style={styleForm.textAreaContainer}>
@@ -101,4 +109,9 @@ function AddForm(props) {
 	);
 }
 
-export default AddForm;
+const mapStateToProps = (state) => ({
+	cliente: state.cliente.cliente,
+	login: state.login.login
+});
+
+export default connect(mapStateToProps)(AddForm);

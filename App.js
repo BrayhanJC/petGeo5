@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { YellowBox, AsyncStorage } from 'react-native';
 import Navigation from './app/navigations/Navigation';
 import { decode, encode } from 'base-64';
-
+import * as Permissions from 'expo-permissions';
+import * as Location from 'expo-location';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import { store, persistor } from './app/store/store';
@@ -20,6 +21,19 @@ function App() {
 	useEffect(() => {
 		persistStore(store).purge();
 		registerForPushNotificationsAsync();
+
+		(async () => {
+			const resultPermissions = await Permissions.askAsync(Permissions.LOCATION);
+			const statusPermissions = resultPermissions.permissions.location.status;
+
+			if (statusPermissions !== 'granted') {
+				toastRef.current.show('Tienes que Aceptar los permisos de localización para crear un Comedog', 3000);
+			} else {
+				const loc = await Location.getCurrentPositionAsync({});
+			}
+		})();
+
+
 	}, []);
 
 	return (

@@ -17,12 +17,12 @@ function Login() {
 	return (
 		<ScrollView>
 			<Image source={require('../../../assets/img/logo.png')} style={styles.logo} resizeMode="contain" />
-			<View style={styles.viewContainer}>
+			<View style={[styles.viewContainer, {marginTop:-1}]}>
 				<LoginForm toastRef={toastRef} />
 				<LinkCreateAccount />
 			</View>
 			<Divider style={styles.divider} />
-			<View style={styles.viewContainer}>
+			<View style={[styles.viewContainer, {marginTop:-1}]}>
 				<LoginFacebook toastRef={toastRef} />
 			</View>
 			<Toast ref={toastRef} position="center" opacity={0.9} />

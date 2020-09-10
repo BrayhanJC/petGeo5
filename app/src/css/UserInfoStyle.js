@@ -37,7 +37,7 @@ export const style = {
 		alignItems: 'center',
 		textAlign: 'center',
 		width: '90%',
-		fontSize: 18,
+		fontSize: 20,
 		paddingLeft: 30,
 		fontWeight: 'bold'
 	},

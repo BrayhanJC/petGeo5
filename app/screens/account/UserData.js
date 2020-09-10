@@ -63,9 +63,11 @@ const UserData = (props) => {
 					name: nameUser,
 					email: userInfo.email,
 					phone,
-					street,
+					address,
 					userType: returnUserType(userType),
-					photoURL: userInfo.photoURL
+					photoURL: userInfo.photoURL,
+					location: [],
+					active: true,
 				};
 
 				const update = {
@@ -160,7 +162,7 @@ const UserData = (props) => {
 						.currentUser.updateProfile(update)
 						.then(() => {
 							setIsLoading(false);
-							//console.log(data);
+							
 							saveUserInfo(data, 'userInfo', () => {
 								setModalVisible();
 								props.dispatch(actions.actualizarCliente(data));

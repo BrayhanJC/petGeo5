@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
 import Toast from 'react-native-easy-toast';
 import Loading from '../../components/Loading';
@@ -52,6 +52,7 @@ function UserLogged() {
 	);
 
 	return (
+		
 		<View style={styles.viewUserInfo}>
 			{//se valida que la varable userInfo sea diferente de {} o de null
 			//se pasan el setLoading para poder actualizar el avatar el tiempo real
@@ -75,6 +76,7 @@ function UserLogged() {
 				datUserInfo={datUserInfo}
 				setDatUserInfo={setDatUserInfo}
 			/>
+			
 			<Button
 				title="Cerrar Sesión"
 				buttonStyle={styles.btnCloseSession}
@@ -84,6 +86,7 @@ function UserLogged() {
 			<Toast ref={toastRef} position="center" opacity={0.9} />
 			<Loading text={loadingText} isVisible={loading} />
 		</View>
+		
 	);
 }
 

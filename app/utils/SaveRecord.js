@@ -5,6 +5,7 @@ import 'firebase/storage';
 import 'firebase/firestore';
 import { size } from 'lodash';
 import { sendNotification } from './Notifications';
+import { CommonActions } from '@react-navigation/native';
 
 const db = firebase.firestore(firebaseApp);
 
@@ -316,17 +317,58 @@ export const getRecord = async (collectionName, user_id, setElements) => {
  */
 export const deleteRecordBD = async (collectionName, record_id, navigation) => {
 	if (record_id && collectionName) {
-		await db
-			.collection(collectionName)
-			.doc(record_id)
-			.delete()
-			.then((response) => {
-				//console.log('Se ha eliminado el registro con exito');
-				navigation.goBack();
+
+		// navigation.dispatch(
+		// 	CommonActions.navigate({
+		// 	  name: 'HomeTab',
+			  
+		// 	})
+		//   );
+
+		  navigation.dispatch(
+			CommonActions.reset({
+			  index: 0,
+			  routes: [
+				{ name: 'centerVeterinaryTab' },
+				{
+				  name: 'centerVeterinaryTab',
+				},
+			  ],
 			})
-			.catch(function(error) {
-				console.log('Ha Ocurrido un error al eliminar');
-			});
+		  );	  
+		  
+		// await db
+		// 	.collection(collectionName)
+		// 	.doc(record_id)
+		// 	.delete()
+		// 	.then((response) => {
+		// 		//console.log('Se ha eliminado el registro con exito');
+		// 		//navigation.goBack();
+		// 		console.log(navigation)
+		
+		// 		navigation.dispatch({
+		// 			...CommonActions.goBack(),
+		// 			source: route.key,
+		// 			target: route?.params?.key,
+		// 		  })
+
+		// 		// navigation.dispatch(
+		// 		// 	CommonActions.reset({
+		// 		// 	  index: 1,
+		// 		// 	  routes: [
+		// 		// 		{ name: 'HomeTab' },
+						
+		// 		// 	  ],
+		// 		// 	})
+		// 		//   );
+
+
+
+		// 	})
+		// 	.catch(function(error) {
+		// 		console.log('Ha Ocurrido un error al eliminar');
+		// 	});
+
 	}
 };
 

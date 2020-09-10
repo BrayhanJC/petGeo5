@@ -20,6 +20,8 @@ import { useFocusEffect } from '@react-navigation/native';
 import RNPickerSelect from 'react-native-picker-select';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { pickerStyleView } from '../../src/css/PickerStyle';
+import { connect } from 'react-redux';
+
 /**
  * Crea un nuevo registro de mascotas extraviadas
  * @param {*} props 
@@ -38,6 +40,9 @@ function AddMissinPetForm(props) {
 	const [ pet, setPet ] = useState('');
 
 	const [ userData, setUserData ] = useState('');
+
+	const { cliente } = props;
+
 	useFocusEffect(
 		useCallback(() => {
 			getRecord('pet', firebase.auth().currentUser.uid, setElements);
@@ -52,6 +57,16 @@ function AddMissinPetForm(props) {
 				label: elements[index]['name'],
 				value: elements[index]['id']
 			});
+		}
+	}
+
+	var hide_pet_selector = true;
+
+	console.log('*******')
+	console.log(cliente)
+	if (cliente) {
+		if (cliente.userType == 'veterinary' || cliente.userType == 'fundation') {
+			hide_pet_selector = false;
 		}
 	}
 
@@ -124,21 +139,23 @@ function AddMissinPetForm(props) {
 					image_default={require('../../../assets/img/lost_pet_default.png')}
 				/>
 
-				<View style={[ pickerStyleView.picker, { marginLeft: 30, marginRight: 30, marginBottom: -4 } ]}>
-					<RNPickerSelect
-						onValueChange={(value) => setPet(value)}
-						placeholder={{
-							label: 'Mascota',
-							value: null,
-							color: '#1A89E7'
-						}}
-						style={stylePicker}
-						items={list_pets}
-						Icon={() => {
-							return <View style={stylePicker.iconStyle} />;
-						}}
-					/>
-				</View>
+				{hide_pet_selector && (
+					<View style={[ pickerStyleView.picker, { marginLeft: 30, marginRight: 30, marginBottom: -4 } ]}>
+						<RNPickerSelect
+							onValueChange={(value) => setPet(value)}
+							placeholder={{
+								label: 'Mascota',
+								value: null,
+								color: '#1A89E7'
+							}}
+							style={stylePicker}
+							items={list_pets}
+							Icon={() => {
+								return <View style={stylePicker.iconStyle} />;
+							}}
+						/>
+					</View>
+				)}
 
 				<AddForm
 					title="Titulo Reporte"
@@ -177,4 +194,9 @@ function AddMissinPetForm(props) {
 	);
 }
 
-export default AddMissinPetForm;
+const mapStateToProps = (state) => ({
+	cliente: state.cliente.cliente,
+	login: state.login.login
+});
+
+export default connect(mapStateToProps)(AddMissinPetForm);

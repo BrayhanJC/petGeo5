@@ -18,6 +18,7 @@ function Menu(props) {
 		user = true;
 	}
 
+	//<DrawerContentScrollView {...props}>
 	const { cliente } = props;
 	const { login } = props;
 
@@ -80,6 +81,9 @@ function Menu(props) {
 
 						<View
 							style={{
+								//alignItems: 'flex-start',
+								alignItems: 'center',
+								justifyContent: 'center',
 								backgroundColor: '#D5D8DC',
 								borderTopLeftRadius: 0,
 								borderTopRightRadius: 50,

@@ -17,6 +17,10 @@ function InfoUser(props) {
 	const { cliente } = props;
 	const { login } = props;
 
+	var name_user = 'Anónimo';
+	if (cliente) {
+		name_user = cliente.name;
+	}
 	const changeAvatar = async () => {
 		const resultPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
 		const resultPermissionCamera = resultPermission.permissions.cameraRoll.status;
@@ -28,7 +32,7 @@ function InfoUser(props) {
 				allowsEditing: true,
 				mediaTypes: ImagePicker.MediaTypeOptions.Images,
 				aspect: [ 2, 1 ],
-				quality: 0.1,
+				quality: 0.1
 			});
 
 			if (result.cancelled) {
@@ -80,10 +84,9 @@ function InfoUser(props) {
 					photoURL: response
 				};
 				await firebase.auth().currentUser.updateProfile(update);
-				
-				//props.dispatch(actions.actualizarCliente({ ...cliente, photoURL: response }));
-				
-				//props.dispatch(actions.actualizarCliente(data));
+
+				props.dispatch(actions.actualizarCliente({ ...cliente, photoURL: response }));
+				props.dispatch(actions.actualizarCliente(data));
 				setLoading(false);
 			})
 			.catch((response) => {
@@ -93,17 +96,36 @@ function InfoUser(props) {
 	};
 
 	return (
-		<View style={styles.viewUserInfo}>
-			<Avatar
-				rounded
-				size="large"
-				showEditButton
-				containerStyle={styles.userInfoAvatar}
-				source={login.photoURL ? { uri: login.photoURL } : require('../../../assets/img/avatar_cat.png')}
-				onEditPress={changeAvatar}
-			/>
+		<View
+			style={{
+				flexDirection: 'row',
+				alignItems: 'center',
+				justifyContent: 'center',
+				padding: 10,
+				marginLeft: 20,
+				paddingBottom: 20,
+				paddingTop: 20
+			}}
+		>
 			<View>
-				<Text style={styles.displayName}>{cliente.name ? cliente.name : 'Anónimo'}</Text>
+				<Avatar
+					rounded
+					size="large"
+					showEditButton
+					containerStyle={styles.userInfoAvatar}
+					source={login.photoURL ? { uri: login.photoURL } : require('../../../assets/img/avatar_cat.png')}
+					onEditPress={changeAvatar}
+				/>
+			</View>
+			<View
+				style={{
+					flex: 1,
+					alignItems: 'flex-start',
+					//alignItems: 'center',
+					justifyContent: 'center'
+				}}
+			>
+				<Text style={styles.displayName}>{name_user}</Text>
 				<Text>{cliente.email ? cliente.email : 'Social login'}</Text>
 			</View>
 		</View>
@@ -114,7 +136,6 @@ const styles = StyleSheet.create({
 	viewUserInfo: {
 		alignItems: 'center',
 		justifyContent: 'center',
-		flexDirection: 'row',
 		backgroundColor: '#F2F2F2',
 		paddingTop: 30,
 		paddingBottom: 30
@@ -122,10 +143,9 @@ const styles = StyleSheet.create({
 	userInfoAvatar: {
 		marginRight: 10
 	},
-
 	displayName: {
 		fontWeight: 'bold',
-		paddingBottom: 10,
+		paddingBottom: 5,
 		fontSize: 18
 	}
 });

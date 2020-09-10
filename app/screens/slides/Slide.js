@@ -21,7 +21,7 @@ export default function Slide(props) {
 					<View style={{ alignItems: 'center', marginTop: -30 }}>
 						<Image
 							style={{
-								height: 310,
+								height: 270,
 								width: 350
 							}}
 							source={require('../../../assets/animations/centers.gif')}
@@ -30,7 +30,7 @@ export default function Slide(props) {
 				)}
 				{isAnimation &&
 				label == 'Mascotas' && (
-					<View style={{ alignItems: 'center', marginTop: -5 }}>
+					<View style={{ alignItems: 'center', marginTop: -30 }}>
 						<Image
 							style={{
 								height: size,
@@ -55,7 +55,7 @@ export default function Slide(props) {
 				)}
 				{isAnimation &&
 				label == 'Noticias' && (
-					<View style={{ alignItems: 'center' }}>
+					<View style={{ alignItems: 'center', marginTop: -30 }}>
 						<Image
 							style={{
 								height: size,
@@ -105,11 +105,11 @@ export default function Slide(props) {
 				)}
 				{isAnimation &&
 				label == 'Veterinarios' && (
-					<View style={{ alignItems: 'center' }}>
+					<View style={{ alignItems: 'center', marginTop: -32 }}>
 						<Image
 							style={{
-								height: 320,
-								width: 320
+								height: 300,
+								width: 310
 							}}
 							source={require('../../../assets/img/centers.png')}
 						/>
@@ -132,7 +132,8 @@ const styles = StyleSheet.create({
 	},
 	titleContainer: {
 		height: 100,
-		justifyContent: 'center'
+		justifyContent: 'center',
+		marginTop:-25
 	},
 	slider: {
 		height: SLIDE_HEIGHT,
