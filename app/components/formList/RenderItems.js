@@ -100,7 +100,7 @@ function RendenderItems(props) {
 		return (
 			<TouchableOpacity onPress={goElement} activeOpacity={0.5}>
 				<Card containerStyle={styles.containerCard}>
-					<View style={{ marginTop: 8, marginLeft: 5, marginRight: 5 }}>
+					<View style={{ marginTop: 2, marginLeft: 7, marginRight: 7 }}>
 						<Image
 							style={styles.containerImage}
 							resizeMode="cover"
@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
 	},
 	containerImage: {
 		width: '100%',
-		height: 120
+		height: 150
 	},
 	containerTitle: {
 		flexDirection: 'row',
