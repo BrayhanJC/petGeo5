@@ -1,10 +1,10 @@
-import React from 'react';
-import {  View, Alert } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Alert } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 import { filter } from 'lodash';
-
+import OpenImage from '../components/openImage/OpenImage';
 import { styleAvatarMain } from '../src/css/AvatarMain';
 
 /***
@@ -13,6 +13,28 @@ import { styleAvatarMain } from '../src/css/AvatarMain';
  */
 function AvatarMain(props) {
 	const { imageDefault, imageSelected, setImageSelected, toastRef } = props;
+
+	//variables para elegir la foto o tomar foto
+	const [ showOpenImage, setshowOpenImage ] = useState(false);
+	const [ valOptionImage, setvalOptionImage ] = useState('');
+	const [ reload, setReload ] = useState(false);
+
+	useEffect(
+		() => {
+			(async () => {
+				if (reload) {
+					if (valOptionImage == 'take_photo') {
+						takePhoto();
+					}
+					if (valOptionImage == 'select_photo') {
+						imageSelect();
+					}
+				}
+				setReload(false);
+			})();
+		},
+		[ reload ]
+	);
 
 	/**
 	 * Permite remover una imagen anteriormente carga de la lista de imagenes
@@ -30,7 +52,6 @@ function AvatarMain(props) {
 				},
 				{
 					text: 'Eliminar',
-
 					onPress: () => {
 						setImageSelected(filter(imageSelected, (imageUri) => imageUri !== image));
 					}
@@ -43,7 +64,7 @@ function AvatarMain(props) {
 	};
 
 	/**
-	 * Permite seleccionar una imagen de la galeria de imagenes del celular
+	 * Permite seleccionar una imagen de la galeria del celular
 	 */
 	const imageSelect = async () => {
 		const resultPermissions = await Permissions.askAsync(Permissions.CAMERA_ROLL);
@@ -56,21 +77,54 @@ function AvatarMain(props) {
 		} else {
 			const result = await ImagePicker.launchImageLibraryAsync({
 				allowsEditing: true,
+				mediaType: 'photo',
 				mediaTypes: ImagePicker.MediaTypeOptions.Images,
-				aspect: [ 2, 1 ],
-				quality: 0.1
+				aspect: [ 2, 1.5 ],
+				maxWidth: 50,
+				maxHeight: 25,
+				quality: 0.4
 			});
 
 			if (result.cancelled) {
 				toastRef.current.show('Haz cerrado la galeria sin seleccionar ninguna imagen', 2000);
 			} else {
-				setImageSelected([ result.uri ]);
+				setImageSelected([ ...imageSelected, result.uri ]);
+			}
+		}
+	};
+
+	/**
+	 * Permite tomar una foto
+	 */
+	const takePhoto = async () => {
+		const resultPermissions = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+
+		if (resultPermissions === 'denied') {
+			toastRef.current.show(
+				'Es necesario aceptar los permisos de la galeria, si lo haz rechazado tienes que ir a Configuración y activarlos manualmente',
+				3000
+			);
+		} else {
+			const result = await ImagePicker.launchCameraAsync({
+				allowsEditing: true,
+				mediaTypes: ImagePicker.MediaTypeOptions.Images,
+				aspect: [ 2, 1.5 ],
+				maxWidth: 100,
+				maxHeight: 10,
+				quality: 0.5
+			});
+
+			if (result.cancelled) {
+				toastRef.current.show('Haz cerrado la galeria sin seleccionar ninguna imagen', 2000);
+			} else {
+				setImageSelected([ ...imageSelected, result.uri ]);
 			}
 		}
 	};
 
 	return (
-		<View style={styleAvatarMain.viewUserInfo}>
+<>
+<View style={styleAvatarMain.viewUserInfo}>
 			<Avatar
 				rounded
 				size="xlarge"
@@ -78,9 +132,22 @@ function AvatarMain(props) {
 				containerStyle={styleAvatarMain.userInfoAvatar}
 				source={imageSelected[0] ? { uri: imageSelected[0] } : imageDefault}
 				onPress={() => removeImage(imageSelected[0])}
-				onEditPress={imageSelect}
+				//onEditPress={imageSelect}
+				onEditPress={() => {
+					setshowOpenImage(true);
+				}}
 			/>
 		</View>
+					<OpenImage
+					modalVisible={showOpenImage}
+					setModalVisible={setshowOpenImage}
+					setvalOptionImage={setvalOptionImage}
+					imageSelected={imageSelected}
+					setImageSelected={setImageSelected}
+					toastRef={toastRef}
+					setReload={setReload}
+				/>
+</>
 	);
 }
 

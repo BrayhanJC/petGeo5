@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, TextInput } from 'react-native';
 import { Input } from 'react-native-elements';
-import {size} from 'lodash'
+import { size } from 'lodash';
 import { connect } from 'react-redux';
 
 /**
@@ -26,25 +26,26 @@ function AddForm(props) {
 		setPhone,
 		dataPet,
 		pet,
-		default_value_address,
-		
+		default_value_address
 	} = props;
 
 	if (pet) {
-		//setPhone(pet ? (dataPet[0].phone ? dataPet[0].phone : '') : '');
 		setDescription(pet ? (dataPet[0].description ? dataPet[0].description : '') : '');
 	}
 
 	const { cliente } = props;
 	const { login } = props;
-	console.log(cliente)
-	if (cliente){
-		setPhone(cliente.phone ? cliente.phone : '')
-		setAddress(cliente.address ? cliente.address : '')
+
+	if (cliente.phone) {
+		setPhone(cliente.phone ? cliente.phone : '');
 	}
 
-	var default_address =  cliente.address ? cliente.address : ''
-	var default_phone =  cliente.phone ? cliente.phone : ''
+	if (cliente.address) {
+		setAddress(cliente.address ? cliente.address : '');
+	}
+
+	var default_address = cliente.address ? cliente.address : '';
+	var default_phone = cliente.phone ? cliente.phone : '';
 
 	return (
 		<View style={styleForm.viewForm}>
@@ -72,7 +73,7 @@ function AddForm(props) {
 					rightIcon={{
 						type: 'material-community',
 						name: 'google-maps',
-						color: size(locationForm) >0 ? '#1A89E7' : '#C2C2C2',
+						color: size(locationForm) > 0 ? '#1A89E7' : '#C2C2C2',
 						onPress: () => setIsVisibleMap(true)
 					}}
 					defaultValue={default_address}

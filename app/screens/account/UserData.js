@@ -67,7 +67,7 @@ const UserData = (props) => {
 					userType: returnUserType(userType),
 					photoURL: userInfo.photoURL,
 					location: [],
-					active: true,
+					active: true
 				};
 
 				const update = {
@@ -79,7 +79,6 @@ const UserData = (props) => {
 					.currentUser.updateProfile(update)
 					.then(() => {
 						setIsLoading(false);
-						//console.log(data);
 						saveUserInfo(data, 'userInfo', () => {
 							setModalVisible();
 							props.dispatch(actions.actualizarCliente(data));
@@ -87,7 +86,6 @@ const UserData = (props) => {
 						//navigation.navigate('Profile');
 					})
 					.catch((response) => {
-						console.log(response);
 						setIsLoading(false);
 						//setError('Error al actualizar el nombre');
 					});
@@ -162,7 +160,7 @@ const UserData = (props) => {
 						.currentUser.updateProfile(update)
 						.then(() => {
 							setIsLoading(false);
-							
+
 							saveUserInfo(data, 'userInfo', () => {
 								setModalVisible();
 								props.dispatch(actions.actualizarCliente(data));
@@ -170,7 +168,6 @@ const UserData = (props) => {
 							//navigation.navigate('Profile');
 						})
 						.catch((response) => {
-							console.log(response);
 							setIsLoading(false);
 							//setError('Error al actualizar el nombre');
 						});

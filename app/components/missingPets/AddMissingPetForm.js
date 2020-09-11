@@ -62,8 +62,6 @@ function AddMissinPetForm(props) {
 
 	var hide_pet_selector = true;
 
-	console.log('*******')
-	console.log(cliente)
 	if (cliente) {
 		if (cliente.userType == 'veterinary' || cliente.userType == 'fundation') {
 			hide_pet_selector = false;

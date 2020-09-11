@@ -47,6 +47,7 @@
     "react-native-easy-toast": "^1.2.0",
     "react-native-elements": "1.2.7",
     "react-native-gesture-handler": "^1.6.1",
+    "react-native-image-resizer": "^1.2.6",
     "react-native-keyboard-aware-scroll-view": "~0.9.1",
     "react-native-maps": "^0.27.1",
     "react-native-open-maps": "^0.3.5",

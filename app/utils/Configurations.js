@@ -662,8 +662,6 @@ export var listOpenImage = (setvalOptionImage, setModalVisible) => [
 		iconType: 'material-community',
 		rightNameIcon: 'chevron-right',
 		onPress: () => {
-			console.log('tomar foto');
-
 			setvalOptionImage('take_photo');
 			setModalVisible(false);
 		}
@@ -679,3 +677,5 @@ export var listOpenImage = (setvalOptionImage, setModalVisible) => [
 		}
 	}
 ];
+
+

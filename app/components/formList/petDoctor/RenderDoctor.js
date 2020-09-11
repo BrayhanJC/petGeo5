@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Avatar } from 'react-native-elements';
+import {size} from 'lodash'
 
 /**
  * Permite crear una cuadricula en la cual se mostraran los datos del veterinario
@@ -10,15 +11,20 @@ import { Avatar } from 'react-native-elements';
  * @param {*} props 
  */
 function RenderDoctor(props) {
-	const { elements, navigation, collectionName, width } = props;
+	const { elements, navigation, collectionName, width, doctorDrawer } = props;
 	const { id, image_id, name, description, specialty, create_uid, empty } = elements.item;
 
 	var mainImage = '';
 
 	const goElement = () => {
-		navigation.navigate('ViewPetDoctorStack', {
+		var name_view = 'ViewPetDoctorStack';
+		if (doctorDrawer) {
+			name_view = 'ViewPetDoctor';
+		}
+
+		navigation.navigate(name_view, {
 			id,
-			name,
+			name:name.substr(0, 22) + '...',
 			collectionName,
 			create_uid
 		});

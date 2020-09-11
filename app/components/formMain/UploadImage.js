@@ -5,6 +5,7 @@ import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 import OpenImage from '../openImage/OpenImage';
 import { map, size, filter } from 'lodash';
+//import ImageResizer from 'react-native-image-resizer';
 
 /**
  * Permite cargar una serie de imagenes para ser alamacenadas en el firebase
@@ -71,6 +72,21 @@ function UploadImage(props) {
 		);
 	};
 
+	// var resizeImage = (uri) => {
+	// 	console.log(uri)
+	// 	ImageResizer.createResizedImage(uri, 80, 60, 'JPEG', 100)
+	// 	  .then(({uri}) => {
+	// 		console.log(uri)
+	// 	  })
+	// 	  .catch(err => {
+	// 		console.log(err);
+	// 		return Alert.alert(
+	// 		  'Unable to resize the photo',
+	// 		  'Check the console for full the error message',
+	// 		);
+	// 	  });
+	//   }
+
 	/**
 	 * Permite seleccionar una imagen de la galeria del celular
 	 */
@@ -85,9 +101,12 @@ function UploadImage(props) {
 		} else {
 			const result = await ImagePicker.launchImageLibraryAsync({
 				allowsEditing: true,
+				mediaType: 'photo',
 				mediaTypes: ImagePicker.MediaTypeOptions.Images,
-				aspect: [ 2, 1 ],
-				quality: 0.1
+				aspect: [ 2, 1.5 ],
+				maxWidth: 50,
+				maxHeight: 25,
+				quality: 0.4
 			});
 
 			if (result.cancelled) {
@@ -113,8 +132,10 @@ function UploadImage(props) {
 			const result = await ImagePicker.launchCameraAsync({
 				allowsEditing: true,
 				mediaTypes: ImagePicker.MediaTypeOptions.Images,
-				aspect: [ 2, 1 ],
-				quality: 0.1
+				aspect: [ 2, 1.5 ],
+				maxWidth: 100,
+				maxHeight: 10,
+				quality: 0.5
 			});
 
 			if (result.cancelled) {
@@ -154,7 +175,7 @@ function UploadImage(props) {
 				modalVisible={showOpenImage}
 				setModalVisible={setshowOpenImage}
 				setvalOptionImage={setvalOptionImage}
-				imageSelected={setImageSelected}
+				imageSelected={imageSelected}
 				setImageSelected={setImageSelected}
 				toastRef={toastRef}
 				setReload={setReload}

@@ -58,7 +58,7 @@ function PetControlDrawer(props) {
 				name="ViewPetControl"
 				component={PetControlView}
 				options={{
-					headerRight: () => <DeleteRecord props={props} />
+					headerRight: () => <DeleteRecord props={props} menuDrawer={true} />
 				}}
 			/>
 

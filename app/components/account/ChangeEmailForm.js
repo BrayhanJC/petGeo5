@@ -89,7 +89,7 @@ function ChangeEmailForm(props) {
 								});
 							}
 
-							props.dispatch(actions.actualizarCliente({ ...cliente, email: formData.email }));
+							props.dispatch(actualizarCliente({ ...cliente, email: formData.email }));
 							updateInfoUserCenter('userInfo', user_id, {
 								email: formData.email,
 							});

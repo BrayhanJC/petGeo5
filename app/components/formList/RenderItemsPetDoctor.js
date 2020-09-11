@@ -24,7 +24,7 @@ function RenderItemsPetDoctor(props) {
 	const goElement = () => {
 		navigation.navigate('ViewPetDoctor', {
 			id,
-			name,
+			name:name.substr(0, 22) + '...',
 			collectionName,
 			create_uid
 		});

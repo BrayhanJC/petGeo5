@@ -27,7 +27,7 @@ function RendenderItemsPet(props) {
 	const goElement = () => {
 		navigation.navigate('ViewPet', {
 			id,
-			name,
+			name:name.substr(0, 22) + '...',
 			collectionName,
 			create_uid,
 			data_collection: {

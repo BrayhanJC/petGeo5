@@ -39,7 +39,7 @@ function RenderItemsPetControl(props) {
 	const goElement = () => {
 		navigation.navigate('ViewPetControl', {
 			id,
-			name,
+			name:name.substr(0, 22) + '...',
 			collectionName,
 			create_uid,
 			data_collection: {

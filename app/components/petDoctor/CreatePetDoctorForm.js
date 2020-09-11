@@ -16,7 +16,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
  */
 function CreatePetDoctorForm(props) {
 	const { toastRef, setIsLoading, navigation, userInfo } = props;
-	const [ loading, setloading ] = useState(false);
 
 	const [ imageSelected, setImageSelected ] = useState([]);
 	const [ name, setName ] = useState('');

@@ -36,7 +36,7 @@ export function showAlert(message) {
  * @param {mensaje a mostrar} message 
  * @param {funcionalidad a realizar} action_to_do 
  */
-export function showAlertConfirm(message, collectionName, record_id, navigation) {
+export function showAlertConfirm(message, collectionName, record_id, navigation, menuDrawer) {
 	return Alert.alert(
 		'Alerta',
 		message,
@@ -48,7 +48,7 @@ export function showAlertConfirm(message, collectionName, record_id, navigation)
 			{
 				text: 'Eliminar',
 				onPress: () => {
-					deleteRecordBD(collectionName, record_id, navigation);
+					deleteRecordBD(collectionName, record_id, navigation, menuDrawer);
 				}
 			}
 		],

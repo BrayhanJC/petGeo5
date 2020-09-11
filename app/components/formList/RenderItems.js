@@ -39,7 +39,7 @@ function RendenderItems(props) {
 		if (collectionName == 'petCenters') {
 			navigation.navigate(navigator, {
 				id,
-				name,
+				name:name.substr(0, 22) + '...',
 				collectionName,
 				create_uid,
 				data_collection: {
@@ -62,7 +62,7 @@ function RendenderItems(props) {
 		} else {
 			navigation.navigate(navigator, {
 				id,
-				name,
+				name:name.substr(0, 22) + '...',
 				collectionName,
 				create_uid,
 				data_collection: {

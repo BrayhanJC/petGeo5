@@ -14,7 +14,7 @@ const COLUMNS = 2;
  * @param {*} props 
  */
 function ListDoctor(props) {
-	const { elements, isLoading, handleLoadMore, user, navigation, showDoctor, create_uid = { create_uid } } = props;
+	const { elements, isLoading, handleLoadMore, user, navigation, showDoctor, create_uid = { create_uid }, doctorDrawer  } = props;
 
 	var dataRender = elements;
 	if (showDoctor) {
@@ -55,6 +55,7 @@ function ListDoctor(props) {
 									navigation={navigation}
 									width={WIDTH}
 									collectionName="petDoctor"
+									doctorDrawer={doctorDrawer}
 								/>
 							);
 						}}

@@ -10,7 +10,6 @@ import { updateInfoUserCenter } from '../../utils/SaveRecord';
 import { connect } from 'react-redux';
 import { actions } from '../../store';
 
-
 /**
  * Inicializa la data
  * @param { nombre } displayName 
@@ -19,7 +18,7 @@ function defaultFormValue(displayName) {
 	return {
 		names: '',
 		lastnames: '',
-		displayName: displayName,
+		displayName: displayName
 	};
 }
 
@@ -33,7 +32,7 @@ function ChangeDisplayNameForm(props) {
 	const { displayName, setShowModal, setReloadUserInfo, title, user_id, setupdateData, petCenter } = props;
 
 	//variables donde se guardara lo que el usuario ingrese en los campos nombres y apellidos
-	const [formData, setformData] = useState(defaultFormValue(displayName));
+	const [ formData, setformData ] = useState(defaultFormValue(displayName));
 
 	//variables que poseen la info anteriormente ingresada por el usuario
 	var { names, lastnames } = formData;
@@ -43,30 +42,28 @@ function ChangeDisplayNameForm(props) {
 	// const [newDisplayName, setNewDisplayName] = useState(null)
 
 	//variable que se utiliza para mostrar el error en el campo nombres
-	const [errorNames, setErrorNames] = useState(null);
+	const [ errorNames, setErrorNames ] = useState(null);
 
 	//variable que se utiliza para mostrar el error en el campo apellidos
-	const [errorLastNames, setErrorLastNames] = useState(null);
+	const [ errorLastNames, setErrorLastNames ] = useState(null);
 
 	//variable que se utiliza para mostrar el error en el campo displayName
-	const [error, setError] = useState(null);
+	const [ error, setError ] = useState(null);
 
 	//variable que se utiliza para actualizar automaticamente despues de que se guarde el nuevo nombre
-	const [isLoading, setIsLoading] = useState(false);
+	const [ isLoading, setIsLoading ] = useState(false);
 
 	//funcion que nos permite capturar lo que escribieron en los campos nombres y apellidos
 	const onChange = (even, type) => {
 		setformData({
 			...formData,
 			[type]: even.nativeEvent.text,
-			displayName: `${formData.names} ${formData.lastnames}`,
+			displayName: `${formData.names} ${formData.lastnames}`
 		});
-
-		//console.log(formData);
 	};
 
-	const [nameComplete, setNameComplete] = useState('');
-	const [errorNameComplete, setErrorNameComplete] = useState('');
+	const [ nameComplete, setNameComplete ] = useState('');
+	const [ errorNameComplete, setErrorNameComplete ] = useState('');
 	//funcion que nos permite actualizar el displayName del usuario
 	const onSubmit = () => {
 		setError(null);
@@ -79,12 +76,8 @@ function ChangeDisplayNameForm(props) {
 				setupdateData(true);
 
 				const update = {
-					displayName: nameComplete,
+					displayName: nameComplete
 				};
-
-				//console.log({ create_name: nameComplete, name: nameComplete });
-
-				//console.log(update);
 
 				setIsLoading(true);
 				firebase
@@ -124,13 +117,12 @@ function ChangeDisplayNameForm(props) {
 				setError('El nombre no puede ser igual al actual.');
 			} else {
 				setError('');
-				//console.log('entrando');
+
 				if (newDisplayName) {
-					//console.log('sdsds');
 					setErrorNames(null);
 					setErrorLastNames(null);
 					const update = {
-						displayName: newDisplayName,
+						displayName: newDisplayName
 					};
 					setIsLoading(true);
 
@@ -144,15 +136,15 @@ function ChangeDisplayNameForm(props) {
 							setupdateData(false);
 
 							updateInfoUserCenter('userInfo', user_id, {
-								create_name: nameComplete,
-								name: nameComplete,
+								create_name: newDisplayName,
+								name: newDisplayName
 							});
 
 							props.dispatch(
 								actions.actualizarCliente({
 									...cliente,
 									create_name: newDisplayName,
-									name: newDisplayName,
+									name: newDisplayName
 								})
 							);
 						})
@@ -185,7 +177,7 @@ function ChangeDisplayNameForm(props) {
 						inputContainerStyle={styles.inputForm}
 						rightIcon={{
 							type: 'material-community',
-							color: '#C2C2C2',
+							color: '#C2C2C2'
 						}}
 						onChange={(even) => onChange(even, 'lastnames')}
 						errorMessage={errorLastNames}
@@ -199,14 +191,16 @@ function ChangeDisplayNameForm(props) {
 					rightIcon={{
 						type: 'material-community',
 						name: 'account-circle-outline',
-						color: '#C2C2C2',
+						color: '#C2C2C2'
 					}}
 					defaultValue={formData.displayName}
 					disabled={petCenter ? false : true}
 					onChange={
-						petCenter
-							? (even) => setNameComplete(even.nativeEvent.text)
-							: (even) => onChange(even, 'displayName')
+						petCenter ? (
+							(even) => setNameComplete(even.nativeEvent.text)
+						) : (
+							(even) => onChange(even, 'displayName')
+						)
 					}
 					errorMessage={petCenter ? errorNameComplete : error}
 				/>
@@ -223,7 +217,7 @@ function ChangeDisplayNameForm(props) {
 }
 const mapStateToProps = (state) => ({
 	cliente: state.cliente.cliente,
-	login: state.login.login,
+	login: state.login.login
 });
 
 export default connect(mapStateToProps)(ChangeDisplayNameForm);

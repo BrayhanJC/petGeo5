@@ -37,7 +37,7 @@ export async function registerForPushNotificationsAsync() {
 			return;
 		}
 		token = (await Notifications.getExpoPushTokenAsync()).data;
-		console.log(token);
+		//console.log(token);
 	} else {
 		//alert('Must use physical device for Push Notifications');
 	}
@@ -117,6 +117,6 @@ const sendNotificationToExpo = async (data) => {
 		},
 		body: JSON.stringify(data)
 	})
-		.then((response) => console.log('response' + JSON.stringify(response) + 'otra vaina   ' + JSON.stringify(data)))
+		.then((response) => console.log('response' + JSON.stringify(response)))
 		.catch((err) => console.log('err' + JSON.stringify(err)));
 };

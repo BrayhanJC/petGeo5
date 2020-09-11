@@ -86,7 +86,6 @@ function ViewEditPetCenter(props) {
 		}
 
 		if (data_collection.userType == 'fundation') {
-			console.log('por aca');
 			if (title && description && imageSelected && phone) {
 				setloading(true);
 				uploadImageStorage(imageSelected, 'petCenters')

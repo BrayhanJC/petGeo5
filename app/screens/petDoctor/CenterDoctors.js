@@ -73,6 +73,7 @@ function CenterDoctors(props) {
 			{!isEmpty(search) && size(item) > 0 ? (
 				<View style={styleFloatButton.viewBody}>
 					<ListDoctor
+						doctorDrawer={true}
 						elements={item}
 						isLoading={isLoading}
 						showDoctor={showDoctor}
@@ -98,6 +99,7 @@ function CenterDoctors(props) {
 
 			{isEmpty(search) && (
 				<ListDoctor
+					doctorDrawer={true}
 					elements={PetDoctor}
 					isLoading={isLoading}
 					showDoctor={showDoctor}

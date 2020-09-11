@@ -219,9 +219,10 @@ export const getInfoByUser = async (collectionName, user_id, setElements, setMod
 			.then((response) => {
 				if (response.doc !== undefined) {
 					setModalVisible(false);
-				} else {
-					setModalVisible(true);
 				}
+				// else {
+				// 	setModalVisible(true);
+				// }
 
 				response.forEach((doc) => {
 					const element = doc.data();
@@ -315,60 +316,44 @@ export const getRecord = async (collectionName, user_id, setElements) => {
  * @param {nombre de la coleccion } collectionName
  * @param { permite dirigir al usuario hacia atras } navegation
  */
-export const deleteRecordBD = async (collectionName, record_id, navigation) => {
+export const deleteRecordBD = async (collectionName, record_id, navigation, menuDrawer) => {
 	if (record_id && collectionName) {
-
-		// navigation.dispatch(
-		// 	CommonActions.navigate({
-		// 	  name: 'HomeTab',
-			  
-		// 	})
-		//   );
-
-		  navigation.dispatch(
-			CommonActions.reset({
-			  index: 0,
-			  routes: [
-				{ name: 'centerVeterinaryTab' },
-				{
-				  name: 'centerVeterinaryTab',
-				},
-			  ],
+		await db
+			.collection(collectionName)
+			.doc(record_id)
+			.delete()
+			.then((response) => {
+				//console.log('Se ha eliminado el registro con exito');
+				//navigation.goBack();
+				if (menuDrawer) {
+					navigation.dispatch(
+						CommonActions.reset({
+							index: 0,
+							routes: [
+								{ name: 'Home' },
+								{
+									name: 'Home'
+								}
+							]
+						})
+					);
+				} else {
+					navigation.dispatch(
+						CommonActions.reset({
+							index: returnPositionMenu(collectionName) || 0,
+							routes: [
+								{ name: 'HomeTab' },
+								{
+									name: 'HomeTab'
+								}
+							]
+						})
+					);
+				}
 			})
-		  );	  
-		  
-		// await db
-		// 	.collection(collectionName)
-		// 	.doc(record_id)
-		// 	.delete()
-		// 	.then((response) => {
-		// 		//console.log('Se ha eliminado el registro con exito');
-		// 		//navigation.goBack();
-		// 		console.log(navigation)
-		
-		// 		navigation.dispatch({
-		// 			...CommonActions.goBack(),
-		// 			source: route.key,
-		// 			target: route?.params?.key,
-		// 		  })
-
-		// 		// navigation.dispatch(
-		// 		// 	CommonActions.reset({
-		// 		// 	  index: 1,
-		// 		// 	  routes: [
-		// 		// 		{ name: 'HomeTab' },
-						
-		// 		// 	  ],
-		// 		// 	})
-		// 		//   );
-
-
-
-		// 	})
-		// 	.catch(function(error) {
-		// 		console.log('Ha Ocurrido un error al eliminar');
-		// 	});
-
+			.catch(function(error) {
+				console.log('Ha Ocurrido un error al eliminar');
+			});
 	}
 };
 
@@ -487,7 +472,7 @@ export const createPetFound = (collectionData, toastRef, navigation, record_id, 
  * @param { variabel para guardar la informacion} data 
  */
 export const getInfoCollection = async (collection, record_id, data) => {
-	console.log('hola');
+
 	const resultElements = [];
 	if (record_id && collection) {
 		await db
@@ -497,8 +482,6 @@ export const getInfoCollection = async (collection, record_id, data) => {
 			.then((response) => {
 				response.forEach((doc) => {
 					const element = doc.data();
-					console.log();
-					console.log(element);
 					element.id = doc.id;
 					resultElements.push(element);
 				});
@@ -648,3 +631,25 @@ export var listOpenImage = (setvalOptionImage, setModalVisible, setReload) => [
 		}
 	}
 ];
+
+/**
+ * Permite retornar la posicion del menu en el cual se va a mostrar una vez se elimine
+ * @param {nombre de la coleccion} collection_name 
+ */
+export var returnPositionMenu = (collection_name) => {
+	if (collection_name) {
+		if (collection_name == 'news') {
+			return 0;
+		} else if (collection_name == 'comedogs') {
+			return 2;
+		} else if (collection_name == 'missingPets') {
+			return 3;
+		} else if (collection_name == 'petCenters') {
+			return 1;
+		} else if (collection_name == 'petDoctor') {
+			return 0;
+		} else {
+			return 0;
+		}
+	}
+};

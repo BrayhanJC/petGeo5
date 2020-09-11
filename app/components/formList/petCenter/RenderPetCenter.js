@@ -37,7 +37,7 @@ function RenderCenter(props) {
 	const goElement = () => {
 		navigation.navigate('ViewPetCenter', {
 			id,
-			name,
+			name:name.substr(0, 22) + '...',
 			collectionName,
 			create_uid,
 			data_collection: {

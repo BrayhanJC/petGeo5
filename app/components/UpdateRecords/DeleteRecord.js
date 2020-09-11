@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
  */
 function DeleteRecord(props) {
 	const { navigation, route } = props.props;
-	const { cliente } = props;
+	const { cliente, menuDrawer} = props;
 
 	const returnData = () => {
 		const data = route.state.routes;
@@ -49,7 +49,8 @@ function DeleteRecord(props) {
 				'¿Esta seguro que desea eliminar este registro?...',
 				`${data.collectionName}`,
 				`${data.record_id}`,
-				navigation
+				navigation,
+				menuDrawer
 			);
 		} else {
 			showAlert('No puede eliminar este registro, ya que no es de su propiedad');
