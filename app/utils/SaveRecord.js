@@ -453,7 +453,18 @@ export const createPetFound = (collectionData, toastRef, navigation, record_id, 
 				.set({ active: false }, { merge: true })
 				.then((response) => {
 					//navigation.navigate('HomeStack');
-					navigation.goBack();
+					//navigation.goBack();
+					navigation.dispatch(
+						CommonActions.reset({
+							index: 3,
+							routes: [
+								{ name: 'HomeTab' },
+								{
+									name: 'HomeTab'
+								}
+							]
+						})
+					);					
 					setloading(false);
 				})
 				.catch((response) => {

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
-import { Avatar } from 'react-native-elements';
+import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { Avatar, Card, Image } from 'react-native-elements';
 import {
 	styleTouchableViewRecords,
 	styleTouchableViewImageRecords,
@@ -39,7 +39,7 @@ function RendenderItems(props) {
 		if (collectionName == 'petCenters') {
 			navigation.navigate(navigator, {
 				id,
-				name:name.substr(0, 22) + '...',
+				name: name.substr(0, 22) + '...',
 				collectionName,
 				create_uid,
 				data_collection: {
@@ -62,7 +62,7 @@ function RendenderItems(props) {
 		} else {
 			navigation.navigate(navigator, {
 				id,
-				name:name.substr(0, 22) + '...',
+				name: name.substr(0, 22) + '...',
 				collectionName,
 				create_uid,
 				data_collection: {
@@ -96,48 +96,152 @@ function RendenderItems(props) {
 		isPetFound = true;
 	}
 
-	return (
-		<TouchableOpacity onPress={goElement} activeOpacity={0.5}>
-			<View style={styleTouchableViewRecords.touchableViewRecordsStyle}>
-				<View style={styleTouchableViewImageRecords.touchableViewImageRecordsStyle}>
-					<Avatar
-						xlarge
-						style={touchableImageRecords.touchableImageRecordsStyle}
-						source={mainImage ? { uri: mainImage } : require('../../../assets/img/not_found.png')}
-						rounded
-					/>
+	if (collectionName == 'news') {
+		return (
+			<TouchableOpacity onPress={goElement} activeOpacity={0.5}>
+				<Card containerStyle={styles.containerCard}>
+					<View style={{ marginTop: 8, marginLeft: 5, marginRight: 5 }}>
+						<Image
+							style={styles.containerImage}
+							resizeMode="cover"
+							borderRadius={20}
+							PlaceholderContent={<ActivityIndicator />}
+							source={mainImage ? { uri: mainImage } : require('../../../assets/img/not_found.png')}
+						/>
+					</View>
+					<View style={styles.containerMeters}>
 					{!isPetFound && (
-						<View
+							<View
+								style={{
+									flex: 1,
+									paddingLeft: 5,
+									paddingRight: 5,
+									shadowColor: 'black',
+									shadowOffset: { width: 2, height: 2 },
+									shadowOpacity: 0.5
+								}}
+							>
+								<View style={{ alignItems: 'center', backgroundColor: '#C2C2C2', borderRadius: 30 }}>
+									<Text style={{ fontWeight: 'bold', fontSize: 11, color: 'gray' }}>
+										{total_distance}{' '}
+									</Text>
+								</View>
+							</View>
+						)}
+					</View>
+
+					<View style={styles.containerTitle}>
+						<Text style={styles.titleStyle}>{name.substr(0, 25)}</Text>
+					</View>
+					<View style={styles.containerTitle}>
+						<Text
 							style={{
-								flex: 1,
-								paddingLeft: 5,
-								paddingRight: 5,
-								shadowColor: 'black',
-								shadowOffset: { width: 2, height: 2 },
-								shadowOpacity: 0.5
+								fontSize: 12,
+								color: 'black',
+								fontStyle: 'italic'
 							}}
 						>
-							<View style={{ alignItems: 'center', backgroundColor: '#C2C2C2', borderRadius: 30 }}>
-								<Text style={{ fontWeight: 'bold', fontSize: 9, color: 'gray' }}>
-									{total_distance}{' '}
-								</Text>
-							</View>
-						</View>
-					)}
-				</View>
-				<View style={styleViewFormat.textFormat}>
-					<Text style={styleTouchableNameRecords.touchableNameRecordsStyle}>{name.substr(0, 25)}</Text>
-					<Text style={styletouchableAddressRecords.touchableAddressRecordsStyle}>
-						<Text style={{ fontWeight: 'bold' }}>Autor:</Text> {create_name ? create_name.substr(0, 25) : ''}
-					</Text>
+							<Text style={{ fontWeight: 'bold' }}>Autor:</Text>{' '}
+							{create_name ? create_name.substr(0, 25) : ''}
+						</Text>
+					</View>
 
-					<Text style={styleTouchableDescriptionRecordsRecords.touchableDescriptionRecordsStyle}>
-						{description.substr(0, 100)}...
-					</Text>
+					<Text style={styles.description}>{description.substr(0, 90)}...</Text>
+
+				</Card>
+			</TouchableOpacity>
+		);
+	} else {
+		return (
+			<TouchableOpacity onPress={goElement} activeOpacity={0.5}>
+				<View style={styleTouchableViewRecords.touchableViewRecordsStyle}>
+					<View style={styleTouchableViewImageRecords.touchableViewImageRecordsStyle}>
+						<Avatar
+							xlarge
+							style={touchableImageRecords.touchableImageRecordsStyle}
+							source={mainImage ? { uri: mainImage } : require('../../../assets/img/not_found.png')}
+							rounded
+						/>
+						{!isPetFound && (
+							<View
+								style={{
+									flex: 1,
+									paddingLeft: 5,
+									paddingRight: 5,
+									shadowColor: 'black',
+									shadowOffset: { width: 2, height: 2 },
+									shadowOpacity: 0.5
+								}}
+							>
+								<View style={{ alignItems: 'center', backgroundColor: '#C2C2C2', borderRadius: 30 }}>
+									<Text style={{ fontWeight: 'bold', fontSize: 9, color: 'gray' }}>
+										{total_distance}{' '}
+									</Text>
+								</View>
+							</View>
+						)}
+					</View>
+					<View style={styleViewFormat.textFormat}>
+						<Text style={styleTouchableNameRecords.touchableNameRecordsStyle}>{name.substr(0, 25)}</Text>
+						<Text style={styletouchableAddressRecords.touchableAddressRecordsStyle}>
+							<Text style={{ fontWeight: 'bold' }}>Autor:</Text>{' '}
+							{create_name ? create_name.substr(0, 25) : ''}
+						</Text>
+
+						<Text style={styleTouchableDescriptionRecordsRecords.touchableDescriptionRecordsStyle}>
+							{description.substr(0, 100)}...
+						</Text>
+					</View>
 				</View>
-			</View>
-		</TouchableOpacity>
-	);
+			</TouchableOpacity>
+		);
+	}
 }
 
 export default RendenderItems;
+
+const styles = StyleSheet.create({
+	containerCard: {
+		marginBottom: 5,
+		borderWidth: 0,
+		//flexDirection: 'row',
+		marginTop: 7,
+		marginLeft: 10,
+		marginRight: 10,
+		backgroundColor: 'white',
+		borderRadius: 18,
+		shadowColor: '#000',
+		shadowOffset: {
+			width: 0,
+			height: 5
+		},
+		shadowOpacity: 0.22,
+		shadowRadius: 2.22,
+		elevation: 4,
+		paddingVertical: '1%'
+	},
+	containerMeters: {
+		position: 'absolute',
+		right:2,
+		top:-5,
+		marginRight:-15,
+		zIndex: 1,
+		//alignContent:'flex-end'
+	},
+	containerImage: {
+		width: '100%',
+		height: 120
+	},
+	containerTitle: {
+		flexDirection: 'row',
+		marginTop: -1
+	},
+	titleStyle: {
+		fontSize: 16,
+		fontWeight: 'bold'
+	},
+	description:{
+		color:'gray',
+		textAlign:'justify'
+	}
+});

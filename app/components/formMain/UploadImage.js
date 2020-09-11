@@ -31,11 +31,9 @@ function UploadImage(props) {
 			(async () => {
 				if (reload) {
 					if (valOptionImage == 'take_photo') {
-						console.log('tomar foto');
 						takePhoto();
 					}
 					if (valOptionImage == 'select_photo') {
-						console.log('seleccionar fotossss');
 						imageSelect();
 					}
 				}
