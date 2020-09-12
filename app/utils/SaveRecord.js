@@ -220,9 +220,9 @@ export const getInfoByUser = async (collectionName, user_id, setElements, setMod
 				if (response.doc !== undefined) {
 					setModalVisible(false);
 				}
-				// else {
-				// 	setModalVisible(true);
-				// }
+				else {
+					setModalVisible(true);
+				}
 
 				response.forEach((doc) => {
 					const element = doc.data();

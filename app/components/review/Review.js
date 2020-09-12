@@ -30,7 +30,7 @@ const Review = (props) => {
 				<Text style={styleReview.reviewText}>{review}</Text>
 				<Rating imageSize={10} startingValue={rating} readonly />
 				<Text style={styleReview.reviewDate}>
-					{createReview.getDate() - 1}/{createReview.getMonth()}/{createReview.getFullYear()} -{' '}
+					{createReview.getDate()}/{(createReview.getMonth()+1)}/{createReview.getFullYear()} -{' '}
 					{createReview.getHours()}:{createReview.getMinutes() < 10 ? '0' : ''}
 					{createReview.getMinutes()}
 				</Text>

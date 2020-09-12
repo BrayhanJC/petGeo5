@@ -46,10 +46,9 @@ const PetControlView = (props) => {
 
 	const createControl = new Date(petControl.create_date.seconds * 1000);
 	var date_control =
-		createControl.getDate() -
-		1 +
+		createControl.getDate() +
 		'/' +
-		createControl.getMonth() +
+		(createControl.getMonth()+1) +
 		'/' +
 		createControl.getFullYear() +
 		' ' +

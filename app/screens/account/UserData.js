@@ -10,6 +10,7 @@ import * as firebase from 'firebase';
 import { connect } from 'react-redux';
 import { actions } from '../../store';
 import Loading from '../../components/Loading';
+import { size } from 'lodash';
 
 /**
  * Modal que permite verificar que tipo de usuario es el que se va a registrar
@@ -55,40 +56,41 @@ const UserData = (props) => {
 			if (phone && nameUser) {
 				setErrorPhone('');
 				setErrorStreet('');
-				setIsLoading(true);
 
-				const data = {
-					create_uid: userInfo.uid,
-					create_name: nameUser,
-					name: nameUser,
-					email: userInfo.email,
-					phone,
-					address,
-					userType: returnUserType(userType),
-					photoURL: userInfo.photoURL,
-					location: [],
-					active: true
-				};
+				if (size(phone) >= 7 && size(phone) <= 10) {
+					setIsLoading(true);
+					const data = {
+						create_uid: userInfo.uid,
+						create_name: nameUser,
+						name: nameUser,
+						email: userInfo.email,
+						phone,
+						userType: returnUserType(userType),
+						photoURL: userInfo.photoURL,
+						location: [],
+						active: true
+					};
 
-				const update = {
-					displayName: nameUser
-				};
+					const update = {
+						displayName: nameUser
+					};
 
-				firebase
-					.auth()
-					.currentUser.updateProfile(update)
-					.then(() => {
-						setIsLoading(false);
-						saveUserInfo(data, 'userInfo', () => {
-							setModalVisible();
-							props.dispatch(actions.actualizarCliente(data));
+					firebase
+						.auth()
+						.currentUser.updateProfile(update)
+						.then(() => {
+							setIsLoading(false);
+							saveUserInfo(data, 'userInfo', () => {
+								setModalVisible();
+								props.dispatch(actions.actualizarCliente(data));
+							});
+						})
+						.catch((response) => {
+							setIsLoading(false);
 						});
-						//navigation.navigate('Profile');
-					})
-					.catch((response) => {
-						setIsLoading(false);
-						//setError('Error al actualizar el nombre');
-					});
+				} else {
+					setErrorPhone('No es un teléfono válido');
+				}
 			} else {
 				setIsLoading(false);
 				if (!phone) {
@@ -129,54 +131,58 @@ const UserData = (props) => {
 					setErrorPhone('');
 					setErrorStreet('');
 					setErrorDescription('');
-					setIsLoading(true);
 
-					const data = {
-						create_uid: userInfo.uid,
-						create_name: nameUser,
-						email: userInfo.email,
-						phone,
-						address: street,
-						location,
-						description,
-						veterinaries: [],
-						userType: returnUserType(userType),
-						schedule: returnSchedule(time),
-						name: nameUser,
-						create_date: new Date(),
-						image: [],
-						quantityVoting: 0,
-						rating: 0,
-						ratingTotal: 0,
-						active: true,
-						photoURL: userInfo.photoURL
-					};
-					const update = {
-						displayName: nameUser
-					};
+					if (size(phone) >= 7 && size(phone) <= 10) {
+						setIsLoading(true);
+						const data = {
+							create_uid: userInfo.uid,
+							create_name: nameUser,
+							email: userInfo.email,
+							phone,
+							address: street,
+							street,
+							location,
+							description,
+							veterinaries: [],
+							userType: returnUserType(userType),
+							schedule: returnSchedule(time),
+							name: nameUser,
+							create_date: new Date(),
+							image: [],
+							quantityVoting: 0,
+							rating: 0,
+							ratingTotal: 0,
+							active: true,
+							photoURL: userInfo.photoURL
+						};
+						const update = {
+							displayName: nameUser
+						};
 
-					firebase
-						.auth()
-						.currentUser.updateProfile(update)
-						.then(() => {
-							setIsLoading(false);
+						firebase
+							.auth()
+							.currentUser.updateProfile(update)
+							.then(() => {
+								setIsLoading(false);
 
-							saveUserInfo(data, 'userInfo', () => {
-								setModalVisible();
-								props.dispatch(actions.actualizarCliente(data));
+								saveUserInfo(data, 'userInfo', () => {
+									setModalVisible();
+									props.dispatch(actions.actualizarCliente(data));
+								});
+								//navigation.navigate('Profile');
+							})
+							.catch((response) => {
+								setIsLoading(false);
 							});
-							//navigation.navigate('Profile');
-						})
-						.catch((response) => {
-							setIsLoading(false);
-							//setError('Error al actualizar el nombre');
-						});
 
-					saveCenter(data, 'petCenters');
-					saveUserInfo(data, 'userInfo', () => {
-						props.dispatch(actions.actualizarCliente(data));
-						setModalVisible();
-					});
+						saveCenter(data, 'petCenters');
+						saveUserInfo(data, 'userInfo', () => {
+							props.dispatch(actions.actualizarCliente(data));
+							setModalVisible();
+						});
+					} else {
+						setErrorPhone('No es un teléfono válido');
+					}
 				} else {
 					setIsLoading(false);
 				}
@@ -187,52 +193,57 @@ const UserData = (props) => {
 					setErrorPhone('');
 					setErrorStreet('');
 					setErrorDescription('');
-					setIsLoading(true);
+					if (size(phone) >= 7 && size(phone) <= 10) {
+						setIsLoading(true);
 
-					const data = {
-						create_uid: userInfo.uid,
-						create_name: nameUser,
-						email: userInfo.email,
-						phone,
-						address: street,
-						location,
-						description,
-						veterinaries: [],
-						userType: returnUserType(userType),
-						schedule: returnSchedule(time),
-						name: nameUser,
-						create_date: new Date(),
-						image: [],
-						quantityVoting: 0,
-						rating: 0,
-						ratingTotal: 0,
-						active: true,
-						photoURL: userInfo.photoURL
-					};
-					const update = {
-						displayName: nameUser
-					};
+						const data = {
+							create_uid: userInfo.uid,
+							create_name: nameUser,
+							email: userInfo.email,
+							phone,
+							address: street,
+							street,
+							location,
+							description,
+							veterinaries: [],
+							userType: returnUserType(userType),
+							schedule: returnSchedule(time),
+							name: nameUser,
+							create_date: new Date(),
+							image: [],
+							quantityVoting: 0,
+							rating: 0,
+							ratingTotal: 0,
+							active: true,
+							photoURL: userInfo.photoURL
+						};
+						const update = {
+							displayName: nameUser
+						};
 
-					firebase
-						.auth()
-						.currentUser.updateProfile(update)
-						.then(() => {
-							setIsLoading(false);
+						firebase
+							.auth()
+							.currentUser.updateProfile(update)
+							.then(() => {
+								setIsLoading(false);
 
-							saveUserInfo(data, 'userInfo', () => {
-								setModalVisible();
-								props.dispatch(actions.actualizarCliente(data));
+								saveUserInfo(data, 'userInfo', () => {
+									setModalVisible();
+									props.dispatch(actions.actualizarCliente(data));
+								});
+								//navigation.navigate('Profile');
+							})
+							.catch((response) => {
+								setIsLoading(false);
 							});
-							//navigation.navigate('Profile');
-						})
-						.catch((response) => {
-							setIsLoading(false);
+						saveCenter(data, 'petCenters');
+						saveUserInfo(data, 'userInfo', () => {
+							props.dispatch(actions.actualizarCliente(data));
+							setModalVisible();
 						});
-					saveCenter(data, 'petCenters');
-					saveUserInfo(data, 'userInfo', () => {
-						props.dispatch(actions.actualizarCliente(data));
-						setModalVisible();
-					});
+					} else {
+						setErrorPhone('No es un teléfono válido');
+					}
 				} else {
 					setIsLoading(false);
 				}

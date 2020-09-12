@@ -55,13 +55,6 @@ function CreateNewsForm(props) {
 	const addNews = async () => {
 		setIsLoading(false);
 
-		var items = {
-			phone,
-			title,
-			address,
-			description
-		}
-
 		if (!title || !address || !description) {
 			toastRef.current.show('Todos los campos del formulario son obligatorios');
 		} else if (size(imageSelected) === 0) {
@@ -72,38 +65,35 @@ function CreateNewsForm(props) {
 				3000
 			);
 		} else {
-
-
-
-			//setIsLoading(true);
+			setIsLoading(true);
 			
-			// var user_complete = firebase.auth().currentUser;
-			// uploadImageStorage(imageSelected, 'news').then((response) => {
-			// 	saveCollection(
-			// 		{
-			// 			name: title,
-			// 			address: address,
-			// 			description: description,
-			// 			location: locationNew,
-			// 			image: response,
-			// 			create_date: new Date(),
-			// 			create_uid: user_complete.uid,
-			// 			create_name: user_complete.displayName,
-			// 			phone,
-			// 			isAdoption,
-			// 			quantityVoting: 0,
-			// 			rating: 0,
-			// 			ratingTotal: 0,
-			// 			active: true
-			// 		},
-			// 		'news',
-			// 		navigation,
-			// 		'HomeStack',
-			// 		toastRef,
-			// 		setIsLoading,
-			// 		'Error al subir la noticia'
-			// 	);
-			// });
+			var user_complete = firebase.auth().currentUser;
+			uploadImageStorage(imageSelected, 'news').then((response) => {
+				saveCollection(
+					{
+						name: title,
+						address: address,
+						description: description,
+						location: locationNew,
+						image: response,
+						create_date: new Date(),
+						create_uid: user_complete.uid,
+						create_name: user_complete.displayName,
+						phone,
+						isAdoption,
+						quantityVoting: 0,
+						rating: 0,
+						ratingTotal: 0,
+						active: true
+					},
+					'news',
+					navigation,
+					'HomeStack',
+					toastRef,
+					setIsLoading,
+					'Error al subir la noticia'
+				);
+			});
 		}
 	};
 

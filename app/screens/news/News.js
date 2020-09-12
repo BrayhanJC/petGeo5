@@ -44,34 +44,33 @@ function News(props) {
 				getInfoByUser('userInfo', userInfo.uid, setElements, setModalVisible);
 			}
 		});
-
-		(async () => {
-			const resultPermissions = await Permissions.askAsync(Permissions.LOCATION);
-			const statusPermissions = resultPermissions.permissions.location.status;
-			
-			if (statusPermissions !== 'granted') {
-				toastRef.current.show('Tienes que Aceptar los permisos de localización para crear un Comedog', 3000);
-			} else {
-				const loc = await Location.getCurrentPositionAsync({});
-				
-				if (loc) {
-					if (loc.coords.latitude && loc.coords.longitude) {
-						setLocation({
-							latitude: loc.coords.latitude,
-							longitude: loc.coords.longitude,
-							latitudeDelta: 0.001,
-							longitudeDelta: 0.001
-						});
-					}
-				}
-			}
-		})();
 	}, []);
 
 	useFocusEffect(
 		useCallback(() => {
+			(async () => {
+				const resultPermissions = await Permissions.askAsync(Permissions.LOCATION);
+				const statusPermissions = resultPermissions.permissions.location.status;
+				
+				if (statusPermissions !== 'granted') {
+					toastRef.current.show('Tienes que Aceptar los permisos de localización para crear un Comedog', 3000);
+				} else {
+					const loc = await Location.getCurrentPositionAsync({});
+					
+					if (loc) {
+						if (loc.coords.latitude && loc.coords.longitude) {
+							setLocation({
+								latitude: loc.coords.latitude,
+								longitude: loc.coords.longitude,
+								latitudeDelta: 0.001,
+								longitudeDelta: 0.001
+							});
+						}
+					}
+				}
+			})();
 			listRecords('news', setTotalNews, setNews, setStartNews);
-		}, [])
+		}, [location])
 	);
 
 	//retornar los datos en order de distancia

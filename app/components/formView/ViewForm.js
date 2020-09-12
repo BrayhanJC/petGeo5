@@ -62,7 +62,7 @@ const ViewForm = (props) => {
 					data.rating && setRating(data.rating);
 				})
 				.catch();
-		}, [])
+		}, [id])
 	);
 
 	if (!item) return <Loading isVisible={true} text="Cargando..." />;
@@ -71,7 +71,7 @@ const ViewForm = (props) => {
 	var date_control =
 		createRecord.getDate() +
 		'/' +
-		createRecord.getMonth() +
+		(createRecord.getMonth() + 1) +
 		'/' +
 		createRecord.getFullYear() +
 		' ' +
