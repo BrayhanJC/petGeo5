@@ -56,7 +56,7 @@ function MissingPets(props) {
 		}, [])
 	);
 	//retornar los datos en order de distancia
-	return_data_distance(location, missingPets);
+	//return_data_distance(location, missingPets);
 	return_data_distance(location, item);
 
 	return (

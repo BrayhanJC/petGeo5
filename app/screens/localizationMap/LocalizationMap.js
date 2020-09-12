@@ -54,7 +54,6 @@ function LocalizationMap(props) {
 			(async () => {
 				const resultPermissions = await Permissions.askAsync(Permissions.LOCATION);
 				const statusPermissions = resultPermissions.permissions.location.status;
-				//console.log(statusPermissions);
 				if (statusPermissions !== 'granted') {
 					toastRef.current.show(
 						'Tienes que Aceptar los permisos de localización para crear un Comedog',

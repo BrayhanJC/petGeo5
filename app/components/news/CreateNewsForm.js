@@ -66,7 +66,7 @@ function CreateNewsForm(props) {
 			);
 		} else {
 			setIsLoading(true);
-			
+
 			var user_complete = firebase.auth().currentUser;
 			uploadImageStorage(imageSelected, 'news').then((response) => {
 				saveCollection(

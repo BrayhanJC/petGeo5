@@ -70,12 +70,12 @@ function News(props) {
 				}
 			})();
 			listRecords('news', setTotalNews, setNews, setStartNews);
-		}, [location])
+		}, [])
 	);
 
 	//retornar los datos en order de distancia
-	return_data_distance(location, News);
-	return_data_distance(location, item);
+	//return_data_distance(location, News);
+	//return_data_distance(location, item);
 
 	return (
 		<View style={styles.viewBody}>

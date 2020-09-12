@@ -6,6 +6,8 @@ import 'firebase/firestore';
 import { size } from 'lodash';
 import { sendNotification } from './Notifications';
 import { CommonActions } from '@react-navigation/native';
+import * as Permissions from 'expo-permissions';
+import * as Location from 'expo-location';
 
 const db = firebase.firestore(firebaseApp);
 
@@ -87,33 +89,80 @@ export const saveCollection = (
  * @param { contiene toda la lista de los elementos} setElements
  * @param { contiene el elemento inicial en el cual se va a empezar a listar} setStartElement
  */
-export const listRecords = (collectionName, setTotalElements, setElements, setStartElement) => {
-	db.collection(collectionName).get().then((response) => {
-		//console.log(snap.proto)
-		var sizeElement = 0;
-		response.forEach((doc) => {
-			const element = doc.data();
+export const listRecords = async (collectionName, setTotalElements, setElements, setStartElement) => {
+	var locationMain = {};
 
-			if (element.active) {
-				sizeElement++;
+	const resultPermissions = await Permissions.askAsync(Permissions.LOCATION);
+	const statusPermissions = resultPermissions.permissions.location.status;
+
+	if (statusPermissions !== 'granted') {
+		toastRef.current.show('Tienes que Aceptar los permisos de localización para crear un Comedog', 3000);
+	} else {
+		const loc = await Location.getCurrentPositionAsync({});
+
+		if (loc) {
+			if (loc.coords.latitude && loc.coords.longitude) {
+				locationMain = {
+					latitude: loc.coords.latitude,
+					longitude: loc.coords.longitude,
+					latitudeDelta: 0.001,
+					longitudeDelta: 0.001
+				};
 			}
-			setTotalElements(sizeElement);
-		});
-	});
+		}
+	}
 
-	const resultElements = [];
+	const resultElementsMain = [];
+	await db.collection(collectionName).get().then((response) => {
 
-	db.collection(collectionName).orderBy('create_date', 'desc').limit(limitRecords).get().then((response) => {
-		setStartElement(response.docs[response.docs.length - 1]);
+		var sizeElement = 0;
 		response.forEach((doc) => {
 			const element = doc.data();
 			element.id = doc.id;
 			if (element.active) {
-				resultElements.push(element);
+				sizeElement++;
+
+				var distance = 0;
+				if (element.location) {
+					if (element.location.latitude && element.location.longitude) {
+						distance = return_kms(
+							locationMain.latitude,
+							locationMain.longitude,
+							element.location.latitude,
+							element.location.longitude
+						);
+					}
+				}
+				element['distance'] = distance;
+				resultElementsMain.push(element);
 			}
+
+			setTotalElements(sizeElement);
 		});
-		setElements(resultElements);
+
+		resultElementsMain.sort(function(a, b) {
+			return a['distance'] - b['distance'];
+		});
+
+		var newResult = resultElementsMain.slice(0, limitRecords);
+
+		setStartElement(newResult[newResult.length - 1].id);
+		setElements(newResult);
 	});
+
+	//const resultElements = [];
+
+	// db.collection(collectionName).orderBy('create_date', 'desc').limit(limitRecords).get().then((response) => {
+	// 	setStartElement(response.docs[response.docs.length - 1]);
+	// 	response.forEach((doc) => {
+	// 		const element = doc.data();
+	// 		element.id = doc.id;
+	// 		if (element.active) {
+	// 			resultElements.push(element);
+	// 		}
+	// 	});
+	// 	setElements(resultElements);
+	// });
 };
 
 /**
@@ -162,7 +211,7 @@ export const listRecordsById = (collectionName, create_uid, setTotalElements, se
  * @param { modifica el item en el cual se va a empezar a cargar los nuevos elementos} setStartElement 
  * @param { modifica los elmentos encontrados } setElements 
  */
-export const handleLoadMore = (
+export const handleLoadMore = async (
 	collectionName,
 	element,
 	totalElement,
@@ -174,33 +223,90 @@ export const handleLoadMore = (
 ) => {
 	const resultElements = [];
 
-	if (isLoading) {
-		return;
-	}
+	// if (isLoading) {
+	// 	return;
+	// }
 
 	if (!(element.length < totalElement - 1)) {
 		setIsLoading(false);
 		return;
 	}
 	setIsLoading(true);
-	db
-		.collection(collectionName)
-		.orderBy('create_date', 'desc')
-		.startAfter(startElement.data().create_date)
-		.limit(limitRecords)
-		.get()
-		.then((response) => {
-			if (response.docs.length > 0) {
-				setStartElement(response.docs[response.docs.length - 1]);
+
+	var locationMain = {};
+
+	const resultPermissions = await Permissions.askAsync(Permissions.LOCATION);
+	const statusPermissions = resultPermissions.permissions.location.status;
+
+	if (statusPermissions !== 'granted') {
+		toastRef.current.show('Tienes que Aceptar los permisos de localización para crear un Comedog', 3000);
+	} else {
+		const loc = await Location.getCurrentPositionAsync({});
+
+		if (loc) {
+			if (loc.coords.latitude && loc.coords.longitude) {
+				locationMain = {
+					latitude: loc.coords.latitude,
+					longitude: loc.coords.longitude,
+					latitudeDelta: 0.001,
+					longitudeDelta: 0.001
+				};
 			}
-			response.forEach((doc) => {
-				const elementDoc = doc.data();
-				elementDoc.id = doc.id;
-				resultElements.push(elementDoc);
-			});
-			setIsLoading(false);
-			setElements([ ...element, ...resultElements ]);
+		}
+	}
+
+	const resultElementsMain = [];
+	await db.collection(collectionName).get().then((response) => {
+		response.forEach((doc) => {
+			const element = doc.data();
+			element.id = doc.id;
+			if (element.active) {
+				var distance = 0;
+				if (element.location) {
+					if (element.location.latitude && element.location.longitude) {
+						distance = return_kms(
+							locationMain.latitude,
+							locationMain.longitude,
+							element.location.latitude,
+							element.location.longitude
+						);
+					}
+				}
+				element['distance'] = distance;
+				resultElementsMain.push(element);
+			}
 		});
+
+		resultElementsMain.sort(function(a, b) {
+			return a['distance'] - b['distance'];
+		});
+
+		var indexData = resultElementsMain.findIndex((x) => x.id === startElement);
+
+		var newResult = resultElementsMain.slice(indexData + 1, limitRecords + indexData);
+		setStartElement(newResult[newResult.length - 1].id);
+
+		setElements([ ...element, ...newResult ]);
+	});
+
+	// db
+	// 	.collection(collectionName)
+	// 	.orderBy('create_date', 'desc')
+	// 	.startAfter(startElement.data().create_date)
+	// 	.limit(limitRecords)
+	// 	.get()
+	// 	.then((response) => {
+	// 		if (response.docs.length > 0) {
+	// 			setStartElement(response.docs[response.docs.length - 1]);
+	// 		}
+	// 		response.forEach((doc) => {
+	// 			const elementDoc = doc.data();
+	// 			elementDoc.id = doc.id;
+	// 			resultElements.push(elementDoc);
+	// 		});
+	// 		setIsLoading(false);
+	// 		setElements([ ...element, ...resultElements ]);
+	// 	});
 };
 
 /**
@@ -219,8 +325,7 @@ export const getInfoByUser = async (collectionName, user_id, setElements, setMod
 			.then((response) => {
 				if (response.doc !== undefined) {
 					setModalVisible(false);
-				}
-				else {
+				} else {
 					setModalVisible(true);
 				}
 
@@ -323,7 +428,6 @@ export const deleteRecordBD = async (collectionName, record_id, navigation, menu
 			.doc(record_id)
 			.delete()
 			.then((response) => {
-				//console.log('Se ha eliminado el registro con exito');
 				//navigation.goBack();
 				if (menuDrawer) {
 					navigation.dispatch(
@@ -464,7 +568,7 @@ export const createPetFound = (collectionData, toastRef, navigation, record_id, 
 								}
 							]
 						})
-					);					
+					);
 					setloading(false);
 				})
 				.catch((response) => {
@@ -483,7 +587,6 @@ export const createPetFound = (collectionData, toastRef, navigation, record_id, 
  * @param { variabel para guardar la informacion} data 
  */
 export const getInfoCollection = async (collection, record_id, data) => {
-
 	const resultElements = [];
 	if (record_id && collection) {
 		await db
@@ -663,4 +766,51 @@ export var returnPositionMenu = (collection_name) => {
 			return 0;
 		}
 	}
+};
+
+/**
+ * Función que permite retornar la distancia aproximada entre la localización actual y la localización del registro
+ * @param { latitud actual} lat1 
+ * @param { longitud actual} lon1 
+ * @param {latitud del registro} lat2 
+ * @param {longitud del registro} lon2 
+ */
+export var return_kms = function(lat1, lon1, lat2, lon2) {
+	var rad = function(x) {
+		return x * Math.PI / 180;
+	};
+	var R = 6378.137; //Radio de la tierra en km
+	var dLat = rad(lat2 - lat1);
+	var dLong = rad(lon2 - lon1);
+	var a =
+		Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+		Math.cos(rad(lat1)) * Math.cos(rad(lat2)) * Math.sin(dLong / 2) * Math.sin(dLong / 2);
+	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+	var d = R * c;
+	d = d * 1000;
+	var result = parseInt(d);
+	//return d.toFixed(3); //Retorna tres decimales
+	//return Intl.NumberFormat().format(result)
+	return result;
+};
+
+export var return_data_distance = (location, data) => {
+	for (let index = 0; index < data.length; index++) {
+		var distance = 0;
+		if (location) {
+			if (data[index].location) {
+				distance = return_kms(
+					location.latitude,
+					location.longitude,
+					data[index].location.latitude,
+					data[index].location.longitude
+				);
+				data[index]['distance'] = distance;
+			}
+		}
+	}
+
+	data.sort(function(a, b) {
+		return a['distance'] - b['distance'];
+	});
 };

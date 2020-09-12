@@ -59,7 +59,7 @@ function CenterVeterinary(props) {
 
 	var showInfo = !filterCenter && !filterFundation;
 	//retornar los datos en order de distancia
-	return_data_distance(location, centerVeterinary);
+	//return_data_distance(location, centerVeterinary);
 	return_data_distance(location, item);
 
 	var aux = centerVeterinary.filter((item) => {

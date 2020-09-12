@@ -36,7 +36,7 @@ function RegisterForm(props) {
 	const [ loading, setloading ] = useState(false);
 	const navigation = useNavigation();
 	const onSubmit = () => {
-		//console.log(formData);
+
 		var { email, password, repeatPassword } = formData;
 		if (isEmpty(email) || isEmpty(password) || isEmpty(repeatPassword)) {
 			toastRef.current.show('Todos los campos son obligatorios');
