@@ -46,13 +46,14 @@ const styles = StyleSheet.create({
 		color: '#0C0D34',
 		fontWeight: 'bold',
 		marginBottom: 5,
-		marginTop:10
+		marginTop: 10
 	},
 	description: {
 		fontSize: 14,
 		lineHeight: 15,
 		color: '#0C0D34',
-		justifyContent: 'center'
+		justifyContent: 'center',
+		textAlign: 'justify'
 	},
 	footer: {
 		flex: 1,

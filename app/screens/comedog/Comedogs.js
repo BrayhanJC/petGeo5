@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View } from 'react-native';
-import { Icon } from 'react-native-elements';
+import { View, Text } from 'react-native';
+import { Icon, Avatar } from 'react-native-elements';
 import { styles } from '../../src/css/Comedogs';
 import firebase from 'firebase/app';
 import { useFocusEffect } from '@react-navigation/native';
@@ -138,6 +138,26 @@ function Comedogs(props) {
 					containerStyle={styles.btnContainer}
 					onPress={() => navigation.navigate('CreateComedog')}
 				/>
+			)}
+
+			{!firebase.auth().currentUser && (
+				<View>
+					<Avatar
+						size="medium"
+						rounded
+						raised
+						icon={{ name: 'account', type: 'material-community', color: 'white', size: 35 }}
+						onPress={() => navigation.navigate('Login')}
+						activeOpacity={0.7}
+						containerStyle={styles.btnContainer}
+						overlayContainerStyle={{ backgroundColor: '#1A89E7' }}
+					/>
+					<View style={styles.btnContainerView}>
+						<Text style={styles.viewInfo} onPress={() => navigation.navigate('Login')}>
+							¡Únete ya!
+						</Text>
+					</View>
+				</View>
 			)}
 		</View>
 	);

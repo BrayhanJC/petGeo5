@@ -33,6 +33,7 @@ function ComedogsStack(props) {
 				name="ComedogStack"
 				component={ComedogsScreen}
 				options={{
+					headerTintColor: '#1A89E7',
 					title: 'Comedogs',
 					headerLeft: () => <AvatarIcon />
 				}}

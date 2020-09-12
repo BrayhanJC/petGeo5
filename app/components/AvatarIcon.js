@@ -26,7 +26,7 @@ function AvatarIcon(props) {
 					size="small"
 					rounded
 					raised
-					source={login.photoURL ? { uri: login.photoURL } : require('../../assets/img/avatar_cat.png')}
+					source={login.photoURL ? { uri: login.photoURL } : require('../../assets/img/avatar_dog.png')}
 					//icon={{ name: 'account', type: 'material-community', color: 'white', size: 25 }}
 					onPress={() => {
 						navigation.dispatch(DrawerActions.openDrawer());
@@ -41,7 +41,7 @@ function AvatarIcon(props) {
 					size="small"
 					rounded
 					raised
-					source={require('../../assets/img/avatar_cat.png')}
+					source={require('../../assets/img/avatar_dog.png')}
 					//icon={{ name: 'account', type: 'material-community', color: 'white', size: 25 }}
 					onPress={() => {
 						navigation.dispatch(DrawerActions.openDrawer());

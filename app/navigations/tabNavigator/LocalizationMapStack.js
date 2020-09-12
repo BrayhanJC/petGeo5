@@ -27,6 +27,7 @@ function LocalizationMapStack() {
 				component={LocalizationMapScreen}
 				options={{
 					title: 'Localizador',
+					headerTintColor: '#1A89E7',
 					headerLeft: () => <AvatarIcon />
 				}}
 			/>

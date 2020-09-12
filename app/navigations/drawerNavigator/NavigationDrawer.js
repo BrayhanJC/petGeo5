@@ -89,7 +89,7 @@ function NavigatorDrawer(props) {
 			drawerContentOptions={{
 				activeTintColor: '#1A89E7',
 				inactiveTintColor: '#C2C2C2',
-				itemStyle: { marginVertical: -4 },
+				itemStyle: { marginVertical: -3 },
 			}}
 		
 			drawerContent={(props) => <Menu {...props} />}

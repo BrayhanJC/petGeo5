@@ -32,6 +32,7 @@ function MissingPetsStack(props) {
 				name="missing-pets"
 				component={MissingPetsScreen}
 				options={{
+					headerTintColor: '#1A89E7',
 					title: 'Mascotas extraviadas',
 					headerLeft: () => <AvatarIcon />
 				}}

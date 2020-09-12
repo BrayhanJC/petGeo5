@@ -11,11 +11,13 @@ export const title = {
 	},
 	nameItem: {
 		fontSize: 20,
-		fontWeight: 'bold'
+		fontWeight: 'bold',
+		textAlign:'justify'
 	},
 	description: {
 		marginTop: 10,
-		color: 'gray'
+		color: 'gray',
+		textAlign:'justify'
 	},
 	rating: {
 		position: 'absolute',

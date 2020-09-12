@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View } from 'react-native';
-import { Icon } from 'react-native-elements';
+import { View, Text } from 'react-native';
+import { Icon,Avatar } from 'react-native-elements';
 import firebase from 'firebase/app';
 import { viewBody, buttonFormFloating } from '../../src/css/GeneralStyles';
 import * as Permissions from 'expo-permissions';
@@ -125,6 +125,24 @@ function MissingPets(props) {
 					reverse
 					onPress={() => navigation.navigate('add-missing-pet')}
 				/>
+			)}
+
+			{!firebase.auth().currentUser && (
+				<View>
+					<Avatar
+						size="medium"
+						rounded
+						raised
+						icon={{ name: 'account', type: 'material-community', color: 'white', size: 35 }}
+						onPress={() => navigation.navigate('Login')}
+						activeOpacity={0.7}
+						containerStyle={buttonFormFloating.btnContainer}
+						overlayContainerStyle={{ backgroundColor: '#1A89E7' }}
+					/>
+					<View style={buttonFormFloating.btnContainerView}>
+						<Text style={buttonFormFloating.viewInfo} onPress={() => navigation.navigate('Login')}>¡Únete ya!</Text>
+					</View>
+				</View>
 			)}
 		</View>
 	);

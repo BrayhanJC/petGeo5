@@ -54,6 +54,7 @@ function LocalizationMap(props) {
 			(async () => {
 				const resultPermissions = await Permissions.askAsync(Permissions.LOCATION);
 				const statusPermissions = resultPermissions.permissions.location.status;
+				//console.log(statusPermissions);
 				if (statusPermissions !== 'granted') {
 					toastRef.current.show(
 						'Tienes que Aceptar los permisos de localización para crear un Comedog',
@@ -142,7 +143,6 @@ function LocalizationMap(props) {
 									<ScrollView vertical>
 										<View style={{ marginTop: -35 }}>
 											<Text>
-												{' '}
 												<Image
 													style={{
 														height: 95,
@@ -156,7 +156,7 @@ function LocalizationMap(props) {
 														)
 													}
 													resizeMode="cover"
-												/>{' '}
+												/>
 											</Text>
 										</View>
 										<View style={mapInfoStyle.viewComponent}>

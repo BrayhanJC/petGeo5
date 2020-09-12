@@ -35,7 +35,8 @@ function CenterVeterinary(props) {
 				name="CenterStack"
 				component={PetCenterScreen}
 				options={{
-					title: 'Centros',
+					headerTintColor: '#1A89E7',
+					title: 'Centros | Fundaciones',
 					headerLeft: () => <AvatarIcon />
 				}}
 			/>

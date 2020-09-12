@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import {  View} from 'react-native';
-import { Icon } from 'react-native-elements';
+import { View, Text } from 'react-native';
+import { Icon, Avatar } from 'react-native-elements';
 import { styles } from '../../src/css/News';
 import { listRecords, handleLoadMore, getInfoByUser } from '../../utils/SaveRecord';
 import ListRecords from '../../components/formList/ListRecords';
@@ -51,12 +51,15 @@ function News(props) {
 			(async () => {
 				const resultPermissions = await Permissions.askAsync(Permissions.LOCATION);
 				const statusPermissions = resultPermissions.permissions.location.status;
-				
+
 				if (statusPermissions !== 'granted') {
-					toastRef.current.show('Tienes que Aceptar los permisos de localización para crear un Comedog', 3000);
+					toastRef.current.show(
+						'Tienes que Aceptar los permisos de localización para crear un Comedog',
+						3000
+					);
 				} else {
 					const loc = await Location.getCurrentPositionAsync({});
-					
+
 					if (loc) {
 						if (loc.coords.latitude && loc.coords.longitude) {
 							setLocation({
@@ -75,7 +78,7 @@ function News(props) {
 
 	//retornar los datos en order de distancia
 	//return_data_distance(location, News);
-	//return_data_distance(location, item);
+	return_data_distance(location, item);
 
 	return (
 		<View style={styles.viewBody}>
@@ -151,6 +154,24 @@ function News(props) {
 					containerStyle={styles.btnContainer}
 					onPress={() => navigation.navigate('CreateNews')}
 				/>
+			)}
+
+			{!user && (
+				<View >
+					<Avatar
+						size="medium"
+						rounded
+						raised
+						icon={{ name: 'account', type: 'material-community', color: 'white', size: 35 }}
+						onPress={() => navigation.navigate('Login')}
+						activeOpacity={0.7}
+						containerStyle={styles.btnContainer}
+						overlayContainerStyle={{ backgroundColor: '#1A89E7' }}
+					/>
+					<View style={styles.btnContainerView}>
+						<Text style={styles.viewInfo} onPress={() => navigation.navigate('Login')}>¡Únete ya!</Text>
+					</View>
+				</View>
 			)}
 		</View>
 	);

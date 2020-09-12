@@ -142,7 +142,7 @@ function RendenderItems(props) {
 							}}
 						>
 							<Text style={{ fontWeight: 'bold' }}>Autor:</Text>{' '}
-							{create_name ? create_name.substr(0, 25) : ''}
+							{create_name ? create_name.substr(0, 35) : ''}
 						</Text>
 					</View>
 

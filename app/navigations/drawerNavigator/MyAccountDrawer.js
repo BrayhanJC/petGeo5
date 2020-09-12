@@ -30,6 +30,7 @@ function MyAccountStack() {
 				name="Profile"
 				component={MyAccountScreen}
 				options={{
+					headerTintColor: '#1A89E7',
 					title: 'Perfil',
 					headerLeft: ({ color, size }) => (
 						<MaterialCommunityIcons

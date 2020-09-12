@@ -32,6 +32,7 @@ function NewsStack(props) {
 				name="HomeStack"
 				component={NewsScreen}
 				options={{
+					headerTintColor: '#1A89E7',
 					title: 'Noticias',
 					headerLeft: () => <AvatarIcon />
 				}}
