@@ -49,7 +49,7 @@ function LoginForm(props) {
 				setloading(true);
 				firebase
 					.auth()
-					.signInWithEmailAndPassword(email, password)
+					.signInWithEmailAndPassword(email.trim(), password)
 					.then((response) => {
 						setloading(false);
 						navigation.navigate('Profile');

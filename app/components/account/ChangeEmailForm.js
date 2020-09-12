@@ -49,7 +49,6 @@ function ChangeEmailForm(props) {
 	//funcion que nos permite actualizar el displayName del usuario
 	const onSubmit = () => {
 		setShowError({});
-		//console.log(formData);
 
 		if (!formData.email) {
 			setShowError({
@@ -79,19 +78,19 @@ function ChangeEmailForm(props) {
 				.then(() => {
 					firebase
 						.auth()
-						.currentUser.updateEmail(formData.email)
+						.currentUser.updateEmail(formData.email.trim())
 						.then(() => {
 							setIsLoadig(false);
 							setReloadUserInfo(true);
 							if (petCenter) {
 								updateInfoUserCenter('petCenters', user_id, {
-									email: formData.email,
+									email: formData.email.trim(),
 								});
 							}
 
 							props.dispatch(actions.actualizarCliente({ ...cliente, email: formData.email }));
 							updateInfoUserCenter('userInfo', user_id, {
-								email: formData.email,
+								email: formData.email.trim(),
 							});
 							toastRef.current.show('Email Actualizado con Exito', 1500);
 							setShowModal(false);
