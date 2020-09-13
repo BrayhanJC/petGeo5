@@ -24,7 +24,6 @@ const widhtScreen = Dimensions.get('window').width;
  */
 function CreateNewsForm(props) {
 	const { cliente } = props;
-	const { login } = props;
 
 	var isCenter = false;
 	var default_value_address = '';
@@ -34,7 +33,6 @@ function CreateNewsForm(props) {
 		default_value_address = cliente.address;
 	}
 	const { toastRef, setIsLoading, navigation } = props;
-	const [ loading, setloading ] = useState(false);
 	const [ title, setTitle ] = useState('');
 	const [ address, setAddress ] = useState(isCenter ? cliente.address : '');
 	const [ description, setDescription ] = useState('');
@@ -59,41 +57,79 @@ function CreateNewsForm(props) {
 			toastRef.current.show('Todos los campos del formulario son obligatorios');
 		} else if (size(imageSelected) === 0) {
 			toastRef.current.show('La noticia o evento debe de tener por lo menos una imagen', 3000);
-		} else if (!locationNew) {
+		} else if (size(locationNew) == 0) {
 			toastRef.current.show(
 				'Debes localizar tu noticia o evento en el mapa. Pulse el icono del mapa para hacerlo.',
 				3000
 			);
-		} else {
-			setIsLoading(true);
+		} else if (phone) {
+			if (!(size(phone) >= 7 && size(phone) <= 10)) {
+				toastRef.current.show('No es un teléfono válido', 2000);
+			} else {
+				if (title && address && description && locationNew) {
+					setIsLoading(true);
 
-			var user_complete = firebase.auth().currentUser;
-			uploadImageStorage(imageSelected, 'news').then((response) => {
-				saveCollection(
-					{
-						name: title,
-						address: address,
-						description: description,
-						location: locationNew,
-						image: response,
-						create_date: new Date(),
-						create_uid: user_complete.uid,
-						create_name: user_complete.displayName,
-						phone,
-						isAdoption,
-						quantityVoting: 0,
-						rating: 0,
-						ratingTotal: 0,
-						active: true
-					},
-					'news',
-					navigation,
-					'HomeStack',
-					toastRef,
-					setIsLoading,
-					'Error al subir la noticia'
-				);
-			});
+					var user_complete = firebase.auth().currentUser;
+					uploadImageStorage(imageSelected, 'news').then((response) => {
+						saveCollection(
+							{
+								name: title,
+								address: address,
+								description: description,
+								location: locationNew,
+								image: response,
+								create_date: new Date(),
+								create_uid: user_complete.uid,
+								create_name: user_complete.displayName,
+								phone,
+								isAdoption,
+								quantityVoting: 0,
+								rating: 0,
+								ratingTotal: 0,
+								active: true
+							},
+							'news',
+							navigation,
+							'HomeStack',
+							toastRef,
+							setIsLoading,
+							'Error al subir la noticia'
+						);
+					});
+				}
+			}
+		} else {
+			if (title && address && description && locationNew) {
+				setIsLoading(true);
+
+				var user_complete = firebase.auth().currentUser;
+				uploadImageStorage(imageSelected, 'news').then((response) => {
+					saveCollection(
+						{
+							name: title,
+							address: address,
+							description: description,
+							location: locationNew,
+							image: response,
+							create_date: new Date(),
+							create_uid: user_complete.uid,
+							create_name: user_complete.displayName,
+							phone,
+							isAdoption,
+							quantityVoting: 0,
+							rating: 0,
+							ratingTotal: 0,
+							active: true
+						},
+						'news',
+						navigation,
+						'HomeStack',
+						toastRef,
+						setIsLoading,
+						'Error al subir la noticia'
+					);
+				});
+			}
 		}
 	};
 

@@ -37,39 +37,75 @@ function CreateComedogForm(props) {
 			toastRef.current.show('Todos los campos del formulario son obligatorios', 3000);
 		} else if (size(imageSelected) === 0) {
 			toastRef.current.show('El comedog debe de tener por lo menos una imagen', 3000);
-		} else if (!locationComeDog) {
+		} else if (size(locationComeDog) == 0) {
 			toastRef.current.show(
 				'Debes localizar tu noticia o evento en el mapa. Pulse el icono del mapa para hacerlo.',
 				3000
 			);
+		} else if (phone) {
+			if (!(size(phone) >= 7 && size(phone) <= 10)) {
+				toastRef.current.show('No es un teléfono válido');
+			} else {
+				if (title && address && description && locationComeDog) {
+					setIsLoading(true);
+					var user_complete = firebase.auth().currentUser;
+					uploadImageStorage(imageSelected, 'Comedogs').then((response) => {
+						saveCollection(
+							{
+								name: title,
+								address: address,
+								description: description,
+								location: locationComeDog,
+								image: response,
+								create_date: new Date(),
+								create_uid: user_complete.uid,
+								create_name: user_complete.displayName,
+								phone,
+								quantityVoting: 0,
+								rating: 0,
+								ratingTotal: 0,
+								active: true
+							},
+							'comedogs',
+							navigation,
+							'ComedogStack',
+							toastRef,
+							setIsLoading,
+							'Error al subir el comedog'
+						);
+					});
+				}
+			}
 		} else {
-			setIsLoading(true);
-			var user_complete = firebase.auth().currentUser;
-			uploadImageStorage(imageSelected, 'Comedogs').then((response) => {
-				saveCollection(
-					{
-						name: title,
-						address: address,
-						description: description,
-						location: locationComeDog,
-						image: response,
-						create_date: new Date(),
-						create_uid: firebase.auth().currentUser.uid,
-						create_name: firebase.auth().currentUser.displayName,
-						phone,
-						quantityVoting: 0,
-						rating: 0,
-						ratingTotal: 0,
-						active: true
-					},
-					'comedogs',
-					navigation,
-					'ComedogStack',
-					toastRef,
-					setIsLoading,
-					'Error al subir el comedog'
-				);
-			});
+			if (title && address && description && locationComeDog) {
+				setIsLoading(true);
+				var user_complete = firebase.auth().currentUser;
+				uploadImageStorage(imageSelected, 'Comedogs').then((response) => {
+					saveCollection(
+						{
+							name: title,
+							address: address,
+							description: description,
+							location: locationComeDog,
+							image: response,
+							create_date: new Date(),
+							create_uid: user_complete.uid,
+							create_name: user_complete.displayName,
+							phone,
+							quantityVoting: 0,
+							rating: 0,
+							ratingTotal: 0,
+							active: true
+						},
+						'comedogs',
+						navigation,
+						'ComedogStack',
+						toastRef,
+						setIsLoading,
+						'Error al subir el comedog'
+					);
+				});
+			}
 		}
 	};
 
