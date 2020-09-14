@@ -131,7 +131,7 @@ function RendenderItems(props) {
 					</View>
 
 					<View style={styles.containerTitle}>
-						<Text style={styles.titleStyle}>{name.substr(0, 25)}</Text>
+						<Text style={styles.titleStyle}>{name.substr(0, 40)}</Text>
 					</View>
 					<View style={styles.containerTitle}>
 						<Text
@@ -142,7 +142,7 @@ function RendenderItems(props) {
 							}}
 						>
 							<Text style={{ fontWeight: 'bold' }}>Autor:</Text>{' '}
-							{create_name ? create_name.substr(0, 35) : ''}
+							{create_name ? create_name.substr(0, 40) : ''}
 						</Text>
 					</View>
 

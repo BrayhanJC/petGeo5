@@ -3,18 +3,19 @@ import firebase from 'firebase/app';
 /**
  * variable que contiene la información principal del firebase
  */
-// const firebaseConfig = {
-// 	apiKey: 'AIzaSyBl0foFZIoEj0lW-uszRVMvtBvU9zvfPWE',
-// 	authDomain: 'petgeo-cacec.firebaseapp.com',
-// 	databaseURL: 'https://petgeo-cacec.firebaseio.com',
-// 	projectId: 'petgeo-cacec',
-// 	storageBucket: 'petgeo-cacec.appspot.com',
-// 	messagingSenderId: '17591487987',
-// 	appId: '1:17591487987:web:7136184a56bf6d7f3e9686',
-// 	measurementId: 'G-1RE99FMEX1'
-// };
-
 // Configuracion produccion
+// var firebaseConfig = {
+//     apiKey: "AIzaSyDLiqmScc70aoT_kfFgJEWBm89KVBoy4vY",
+//     authDomain: "petgeofinal.firebaseapp.com",
+//     databaseURL: "https://petgeofinal.firebaseio.com",
+//     projectId: "petgeofinal",
+//     storageBucket: "petgeofinal.appspot.com",
+//     messagingSenderId: "1018003932203",
+//     appId: "1:1018003932203:web:4309b54aa4568e4fa7966e",
+//     measurementId: "G-ZNJYPDNFTY"
+//   };
+
+
 var firebaseConfig = {
 	apiKey: 'AIzaSyB_HWG6PjnkwEgqlPwMtEregp4iTvdcNOk',
 	authDomain: 'petgeoproduction.firebaseapp.com',
@@ -25,5 +26,7 @@ var firebaseConfig = {
 	appId: '1:534726125204:web:fdd39bb364a04a9b54f681',
 	measurementId: 'G-K5M6FNY12Y'
 };
+
+//apiKey :  AIzaSyAR8EY0YpwWYdhSSvNJpiBwbzkfOFQmwZY
 
 export const firebaseApp = firebase.initializeApp(firebaseConfig);

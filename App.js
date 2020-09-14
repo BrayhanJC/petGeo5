@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { YellowBox, AsyncStorage } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { YellowBox } from 'react-native';
 import Navigation from './app/navigations/Navigation';
 import { decode, encode } from 'base-64';
 import * as Permissions from 'expo-permissions';
@@ -18,10 +18,15 @@ if (!global.btoa) global.btoa = encode;
 if (!global.atob) global.atob = decode;
 
 function App() {
+
+
+	const [location, setLocation] = useState()
+
 	useEffect(() => {
 		persistStore(store).purge();
 		registerForPushNotificationsAsync();
 
+		
 		(async () => {
 			const resultPermissions = await Permissions.askAsync(Permissions.LOCATION);
 			const statusPermissions = resultPermissions.permissions.location.status;
@@ -30,11 +35,21 @@ function App() {
 				toastRef.current.show('Tienes que Aceptar los permisos de localización para crear un Comedog', 3000);
 			} else {
 				const loc = await Location.getCurrentPositionAsync({});
+
+				if (loc) {
+					if (loc.coords.latitude && loc.coords.longitude) {
+						setLocation({
+							latitude: loc.coords.latitude,
+							longitude: loc.coords.longitude,
+							latitudeDelta: 0.001,
+							longitudeDelta: 0.001
+						});
+					}
+				}
 			}
 		})();
 
-
-	}, []);
+	}, [location]);
 
 	return (
 		<Provider store={store}>

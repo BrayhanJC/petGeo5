@@ -106,7 +106,10 @@ function UploadImage(props) {
 				maxHeight: 25,
 				quality: 0.4
 			});
-
+			//console.log(result)
+			result['height'] = 440
+			result['width'] = 700
+			//console.log(result)
 			if (result.cancelled) {
 				toastRef.current.show('Haz cerrado la galeria sin seleccionar ninguna imagen', 2000);
 			} else {

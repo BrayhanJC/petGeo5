@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1018003932203",
+    "firebase_url": "https://petgeofinal.firebaseio.com",
+    "project_id": "petgeofinal",
+    "storage_bucket": "petgeofinal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1018003932203:android:9515e76fb4916fb3a7966e",
+        "android_client_info": {
+          "package_name": "com.brayhanjjuanz.petgeocinco"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1018003932203-4kmurpiu4eqj3a04e7o78i041q82e96l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.brayhanjjuanz.petgeocinco",
+            "certificate_hash": "31a3acce6c55419e1ffd7576888f2f05cac91706"
+          }
+        },
+        {
+          "client_id": "1018003932203-2ifjc5skt66k8hcf3jpo336d8embn4ns.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-FyhEJjfA-twZfd20g2eZki4VJ-amdII"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1018003932203-2ifjc5skt66k8hcf3jpo336d8embn4ns.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
