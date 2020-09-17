@@ -49,7 +49,7 @@ function App() {
 			}
 		})();
 
-	}, []);
+	}, [location]);
 
 	return (
 		<Provider store={store}>
