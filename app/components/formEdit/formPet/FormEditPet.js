@@ -179,7 +179,7 @@ function FormEditPet(props) {
 				date={valueDate.date}
 				mode="date"
 				placeholder="select date"
-				format="MMMM DD YYYY"
+				format="DD MM YYYY"
 				confirmBtnText="Confirmar"
 				cancelBtnText="Cancelar"
 				is24Hour={true}

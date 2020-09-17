@@ -104,11 +104,11 @@ function UploadImage(props) {
 				aspect: [ 2, 1.5 ],
 				maxWidth: 50,
 				maxHeight: 25,
-				quality: 0.4
+				quality: 0.7
 			});
 			//console.log(result)
-			result['height'] = 440
-			result['width'] = 700
+			result['height'] = 400
+			result['width'] = 650
 			//console.log(result)
 			if (result.cancelled) {
 				toastRef.current.show('Haz cerrado la galeria sin seleccionar ninguna imagen', 2000);

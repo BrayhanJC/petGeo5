@@ -14,6 +14,7 @@ import { saveCollection } from '../../utils/SaveRecord';
 const widhtScreen = Dimensions.get('window').width;
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
+
 /**
  * Funcion que permite crear una mascota nueva
  * @param {*} props 
@@ -112,6 +113,8 @@ function CreatePetForm(props) {
 					/>
 
 					<Button buttonStyle={stylePetForm.btnCreate} title="Crear Mascota" onPress={addPet} />
+				
+				
 				</View>
 			</ScrollView>
 		</KeyboardAwareScrollView>

@@ -82,9 +82,12 @@ function AvatarMain(props) {
 				aspect: [ 2, 1.5 ],
 				maxWidth: 50,
 				maxHeight: 25,
-				quality: 0.4
+				quality: 0.7
 			});
 
+			result['height'] = 400
+			result['width'] = 650
+			
 			if (result.cancelled) {
 				toastRef.current.show('Haz cerrado la galeria sin seleccionar ninguna imagen', 2000);
 			} else {
@@ -111,8 +114,11 @@ function AvatarMain(props) {
 				aspect: [ 2, 1.5 ],
 				maxWidth: 100,
 				maxHeight: 10,
-				quality: 0.5
+				quality: 0.7
 			});
+
+			result['height'] = 400
+			result['width'] = 650
 
 			if (result.cancelled) {
 				toastRef.current.show('Haz cerrado la galeria sin seleccionar ninguna imagen', 2000);

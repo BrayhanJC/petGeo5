@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { View, TextInput } from 'react-native';
+import { View, TextInput, ScrollView } from 'react-native';
 import { AirbnbRating, Button, Input } from 'react-native-elements';
 import { styleCreateReview } from '../../src/css/CreateReview';
 import Toast from 'react-native-easy-toast';
@@ -120,42 +120,44 @@ const CreateReview = (props) => {
 	};
 
 	return (
-		<View style={styleCreateReview.viewBody}>
-			<View style={styleCreateReview.viewRating}>
-				<AirbnbRating
-					count={5}
-					reviews={[ 'Pésimo', 'Deficiente', 'Normal', 'Muy Bueno', 'Excelente' ]}
-					defaultRating={0}
-					size={30}
-					onFinishRating={(value) => setRating(value)}
-				/>
-			</View>
-			<View style={styleCreateReview.formReview}>
-				<Input
-					placeholder="Titulo"
-					containerStyle={styleCreateReview.input}
-					inputContainerStyle={styleCreateReview.inputForm}
-					onChange={(even) => setTitle(even.nativeEvent.text)}
-				/>
-				<View style={styleCreateReview.textAreaContainer}>
-					<TextInput
-						underlineColorAndroid="transparent"
-						placeholder="Escribe tu comentario..."
-						placeholderTextColor="grey"
-						multiline={true}
-						onChange={(even) => setReview(even.nativeEvent.text)}
+		<ScrollView>
+			<View style={styleCreateReview.viewBody}>
+				<View style={styleCreateReview.viewRating}>
+					<AirbnbRating
+						count={5}
+						reviews={[ 'Pésimo', 'Deficiente', 'Normal', 'Muy Bueno', 'Excelente' ]}
+						defaultRating={0}
+						size={30}
+						onFinishRating={(value) => setRating(value)}
 					/>
 				</View>
-				<Button
-					title="Enviar Comentario"
-					containerStyle={styleCreateReview.btnContainer}
-					buttonStyle={styleCreateReview.btnStyle}
-					onPress={addReview}
-				/>
+				<View style={styleCreateReview.formReview}>
+					<Input
+						placeholder="Titulo"
+						containerStyle={styleCreateReview.input}
+						inputContainerStyle={styleCreateReview.inputForm}
+						onChange={(even) => setTitle(even.nativeEvent.text)}
+					/>
+					<View style={styleCreateReview.textAreaContainer}>
+						<TextInput
+							underlineColorAndroid="transparent"
+							placeholder="Escribe tu comentario..."
+							placeholderTextColor="grey"
+							multiline={true}
+							onChange={(even) => setReview(even.nativeEvent.text)}
+						/>
+					</View>
+					<Button
+						title="Enviar Comentario"
+						containerStyle={styleCreateReview.btnContainer}
+						buttonStyle={styleCreateReview.btnStyle}
+						onPress={addReview}
+					/>
+				</View>
+				<Toast ref={toastRef} position="center" opacity={0.9} />
+				<Loading isVisible={isLoading} text="Enviando Comentario" />
 			</View>
-			<Toast ref={toastRef} position="center" opacity={0.9} />
-			<Loading isVisible={isLoading} text="Enviando Comentario" />
-		</View>
+		</ScrollView>
 	);
 };
 

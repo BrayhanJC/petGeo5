@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { Input } from 'react-native-elements';
 import RNPickerSelect from 'react-native-picker-select';
@@ -6,7 +6,7 @@ import DatePicker from 'react-native-datepicker';
 import { styleCreateForm } from '../../src/css/CreateForm';
 import { RAZA, TYPE_SEX, TYPE_PETS, RAZA_CAT } from '../../utils/Configurations';
 import { pickerStyleView } from '../../src/css/PickerStyle';
-
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 /**
  * Formulario que es utilizado para poder crear la mascota
  * @param {*} props 
@@ -34,6 +34,14 @@ function PetForm(props) {
 		raza = [ { label: 'Otro', value: 'Otro' } ];
 	}
 
+	const [ isDatePickerVisible, setDatePickerVisibility ] = useState(false);
+
+	const hideDatePicker = () => {
+		setDatePickerVisibility(false);
+	};
+	const handleConfirm = (date) => {
+		setValueDate({ date: date });
+	};
 	return (
 		<View>
 			<Input
@@ -165,10 +173,10 @@ function PetForm(props) {
 				date={valueDate.date}
 				mode="date"
 				placeholder="select date"
-				format="MMMM DD YYYY"
+				format="DD MM YYYY"
 				confirmBtnText="Confirmar"
 				cancelBtnText="Cancelar"
-				is24Hour={true}
+				is24Hour={false}
 				customStyles={{
 					dateIcon: {
 						position: 'absolute',
@@ -183,6 +191,13 @@ function PetForm(props) {
 				onDateChange={(date) => {
 					setValueDate({ date: date });
 				}}
+			/>
+
+			<DateTimePickerModal
+				isVisible={isDatePickerVisible}
+				mode="date"
+				onConfirm={handleConfirm}
+				onCancel={hideDatePicker}
 			/>
 		</View>
 	);

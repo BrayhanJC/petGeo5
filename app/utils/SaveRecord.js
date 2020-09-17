@@ -175,7 +175,7 @@ export const listRecords = async (collectionName, setTotalElements, setElements,
  */
 export const listRecordsById = (collectionName, create_uid, setTotalElements, setElements, setStartElement) => {
 	if (create_uid) {
-		db.collection(collectionName).where('create_uid', '==', create_uid).get().then((snap) => {
+		db.collection(collectionName).where("create_uid", "==", create_uid).get().then((snap) => {
 			setTotalElements(snap.size);
 		});
 
@@ -184,7 +184,7 @@ export const listRecordsById = (collectionName, create_uid, setTotalElements, se
 		db
 			.collection(collectionName)
 			.limit(limitRecords)
-			.where('create_uid', '==', create_uid)
+			.where("create_uid", "==", create_uid)
 			.orderBy('create_date', 'desc')
 			.get()
 			.then((response) => {
@@ -320,7 +320,7 @@ export const getInfoByUser = async (collectionName, user_id, setElements, setMod
 	if (user_id) {
 		await db
 			.collection(collectionName)
-			.where('create_uid', '==', user_id)
+			.where("create_uid", "==", user_id)
 			.get()
 			.then((response) => {
 				if (response.doc !== undefined) {
@@ -400,7 +400,7 @@ export const getRecord = async (collectionName, user_id, setElements) => {
 	if (user_id) {
 		await db
 			.collection(collectionName)
-			.where('create_uid', '==', user_id)
+			.where("create_uid", "==", user_id)
 			.get()
 			.then((response) => {
 				response.forEach((doc) => {
@@ -470,7 +470,7 @@ export const updateInfoUserCenter = async (collectionName, user_id, data) => {
 	if (user_id) {
 		await db
 			.collection(collectionName)
-			.where('create_uid', '==', user_id)
+			.where("create_uid", "==", user_id)
 			.get()
 			.then((response) => {
 				response.forEach((doc) => {
@@ -500,7 +500,7 @@ export const isCenter = async (user_id, data) => {
 	if (user_id) {
 		await db
 			.collection('userInfo')
-			.where('create_uid', '==', user_id)
+			.where("create_uid", "==", user_id)
 			.get()
 			.then((response) => {
 				response.forEach((doc) => {
@@ -527,7 +527,7 @@ export const obtenerUsuarios = async (user_id, funcion) => {
 	if (user_id) {
 		await db
 			.collection('userInfo')
-			.where('create_uid', '==', user_id)
+			.where("create_uid", "==", user_id)
 			.get()
 			.then((response) => {
 				funcion(response);
