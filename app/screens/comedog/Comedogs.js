@@ -33,10 +33,15 @@ function Comedogs(props) {
 	const [ location, setLocation ] = useState(null);
 
 	useEffect(() => {
-		(async () => {
-			const user = await firebase.auth().currentUser;
-			setUser(user);
-		})();
+		// (async () => {
+		// 	const user = await firebase.auth().currentUser;
+		// 	setUser(user);
+		// })();
+		
+		firebase.auth().onAuthStateChanged((userInfo) => {
+			setUser(userInfo);
+		});
+
 		(async () => {
 			const resultPermissions = await Permissions.askAsync(Permissions.LOCATION);
 			const statusPermissions = resultPermissions.permissions.location.status;
@@ -59,6 +64,7 @@ function Comedogs(props) {
 			}
 		})();
 	}, []);
+
 
 	useFocusEffect(
 		useCallback(() => {
@@ -129,7 +135,7 @@ function Comedogs(props) {
 				/>
 			)}
 
-			{firebase.auth().currentUser && (
+			{user && (
 				<Icon
 					type="material-community"
 					name="plus"
@@ -140,7 +146,7 @@ function Comedogs(props) {
 				/>
 			)}
 
-			{!firebase.auth().currentUser && (
+			{!user && (
 				<View>
 					<Avatar
 						size="medium"

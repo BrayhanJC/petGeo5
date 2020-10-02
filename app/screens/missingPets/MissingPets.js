@@ -24,13 +24,19 @@ function MissingPets(props) {
 	const [ totalMissingPets, setTotalMissingPets ] = useState(0);
 	const [ startMissingPets, setStartMissingPets ] = useState(null);
 	const [ isLoading, setIsLoading ] = useState(false);
-
+	const [ user, setUser ] = useState(null);
+	
 	//variables para el buscador
 	const [ item, setItem ] = useState([]);
 	const [ search, setSearch ] = useState('');
 
 	const [ location, setLocation ] = useState(null);
 	useEffect(() => {
+
+		firebase.auth().onAuthStateChanged((userInfo) => {
+			setUser(userInfo);
+		});
+
 		(async () => {
 			const resultPermissions = await Permissions.askAsync(Permissions.LOCATION);
 			const statusPermissions = resultPermissions.permissions.location.status;
@@ -116,7 +122,7 @@ function MissingPets(props) {
 				/>
 			)}
 
-			{firebase.auth().currentUser && (
+			{user && (
 				<Icon
 					containerStyle={buttonFormFloating.btnContainer}
 					type="material-community"
@@ -127,7 +133,7 @@ function MissingPets(props) {
 				/>
 			)}
 
-			{!firebase.auth().currentUser && (
+			{!user && (
 				<View>
 					<Avatar
 						size="medium"
