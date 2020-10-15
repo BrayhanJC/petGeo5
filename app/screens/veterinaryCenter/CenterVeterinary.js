@@ -35,8 +35,8 @@ function CenterVeterinary(props) {
 
 	useEffect(() => {
 		(async () => {
-			const resultPermissions = await Permissions.askAsync(Permissions.LOCATION);
-			const statusPermissions = resultPermissions.permissions.location.status;
+			const resultPermissions = await Location.requestPermissionsAsync();
+			const statusPermissions = resultPermissions.status;
 			if (statusPermissions !== 'granted') {
 				toastRef.current.show('Tienes que Aceptar los permisos de localización para crear un Comedog', 3000);
 			} else {

@@ -82,7 +82,7 @@ function AvatarMain(props) {
 				aspect: [ 2, 1.5 ],
 				maxWidth: 50,
 				maxHeight: 25,
-				quality: 0.7
+				quality: 0.9
 			});
 
 			result['height'] = 400
@@ -114,7 +114,7 @@ function AvatarMain(props) {
 				aspect: [ 2, 1.5 ],
 				maxWidth: 100,
 				maxHeight: 10,
-				quality: 0.7
+				quality: 0.9
 			});
 
 			result['height'] = 400

@@ -63,8 +63,10 @@ function InfoUser(props) {
 				aspect: [ 2, 1.5 ],
 				maxWidth: 50,
 				maxHeight: 25,
-				quality: 0.4
+				quality: 0.8
 			});
+			result['height'] = 400
+			result['width'] = 650
 
 			if (result.cancelled) {
 				toastRef.current.show('Haz cerrado la galeria sin seleccionar ninguna imagen', 2000);
@@ -99,8 +101,10 @@ function InfoUser(props) {
 				aspect: [ 2, 1.5 ],
 				maxWidth: 100,
 				maxHeight: 10,
-				quality: 0.5
+				quality: 0.8
 			});
+			result['height'] = 400
+			result['width'] = 650
 
 			if (result.cancelled) {
 				toastRef.current.show('Haz cerrado la galeria sin seleccionar ninguna imagen', 2000);
@@ -129,8 +133,10 @@ function InfoUser(props) {
 				allowsEditing: true,
 				mediaTypes: ImagePicker.MediaTypeOptions.Images,
 				aspect: [ 2, 1 ],
-				quality: 0.5
+				quality: 0.8
 			});
+			result['height'] = 400
+			result['width'] = 650
 
 			if (result.cancelled) {
 				toastRef.current.show('Haz cerrado la seleccion de imagenes');

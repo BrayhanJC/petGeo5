@@ -52,8 +52,8 @@ function LocalizationMap(props) {
 	useEffect(
 		() => {
 			(async () => {
-				const resultPermissions = await Permissions.askAsync(Permissions.LOCATION);
-				const statusPermissions = resultPermissions.permissions.location.status;
+				const resultPermissions = await Location.requestPermissionsAsync();
+				const statusPermissions = resultPermissions.status;
 				//console.log(statusPermissions);
 				if (statusPermissions !== 'granted') {
 					toastRef.current.show(
