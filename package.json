@@ -24,7 +24,7 @@
     "base-64": "^0.1.0",
     "ci": "^1.0.0",
     "expo": "~38.0.8",
-    "expo-cli": "^3.22.1",
+    "expo-cli": "^6.0.8",
     "expo-constants": "^9.1.1",
     "expo-facebook": "^8.1.0",
     "expo-image-picker": "^8.1.0",
